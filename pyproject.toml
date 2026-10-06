@@ -1,0 +1,25 @@
+[project]
+name = "evidenceloop"
+version = "0.1.0"
+description = "Verifiable agent environment and failure-driven post-training data pipeline"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+mac = ["mlx-lm"]
+kaggle = ["vllm", "transformers", "peft", "trl"]
+dev = ["pytest"]
+
+[project.scripts]
+el = "evidenceloop.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
