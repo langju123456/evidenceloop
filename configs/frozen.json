@@ -1,0 +1,44 @@
+{
+  "frozen_at": "2026-10-07",
+  "base_model": "Qwen/Qwen3-1.7B",
+  "generator_version": "gen-0.2.1",
+  "env_version": "env-0.2.1",
+  "verifier_version": "ver-0.1.6",
+  "calibration_reports": [
+    "reports/calibration_qwen3-1.7b_env-0.2.1.md",
+    "reports/calibration_qwen3-4b_env-0.2.1.md"
+  ],
+  "note": "校准在 gen-0.2.0 上进行；gen-0.2.1 只在数据里加了 recal 标记，并新增 E8、E9 两条错误路径（D9）。基座按 D8 的规则定为 1.7B。",
+  "tasks_dir": "data/tasks/gen-0.2.1",
+  "checks": {
+    "no_duplicates_across_splits": true,
+    "ood_templates_isolated": true
+  },
+  "reproducibility": "data/ 不进版本库；题目由生成器确定性生成，重新生成后哈希应与这里一致。test_id 与 test_ood 在阶段三之前保持密封。",
+  "splits": {
+    "train_mining": {
+      "n": 200,
+      "short_tier": 66,
+      "public_sha256": "377601f34b39b374073e9dc5d849806c89a6d3c6ddd9bcde7b1a89246eda3ea7",
+      "private_sha256": "6c136411b93c209e7d9789d101e2ae7f797197656eea127739f9944f3cb517a1"
+    },
+    "validation": {
+      "n": 50,
+      "short_tier": 11,
+      "public_sha256": "68d94938d58423611d4070828a6b64b7e1d68c857234f6dab5f7ede9f783189f",
+      "private_sha256": "38d0a8e96d7d4b3de89f334927c0dbd6f52d4edff730e63bb66c34c04cb7878b"
+    },
+    "test_id": {
+      "n": 150,
+      "short_tier": 39,
+      "public_sha256": "87a0654924bd398c87bcc55dede101ec394ff9c25d90d92491bee4cca9c90a5f",
+      "private_sha256": "34b5b488263b392901b53f92f62ed3d4046119368c844267e858e05837fdebea"
+    },
+    "test_ood": {
+      "n": 150,
+      "short_tier": 0,
+      "public_sha256": "73d801cee5544e4b71bd4d1721a7593a26b7a13c98e7612b2286e7db976270fc",
+      "private_sha256": "aa1d00dccf6d40453c66bfc6cae6ba3112eed82e94fa0a841a0d0c7298094b84"
+    }
+  }
+}
