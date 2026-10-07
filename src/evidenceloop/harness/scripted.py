@@ -37,6 +37,8 @@ CORRUPTIONS = (
     "guess_version",  # skips list_versions and guesses a protocol version
     "extra_wrong_stat",  # correct work plus one statistic nobody asked for, with a made-up value (must fail)
     "all_stats",  # computes and reports all four statistics, all correct (should still pass)
+    "keep_only_ok",  # E8: filters quality_flag == ok instead of applying the rule
+    "inverted_filter",  # E9: keeps exactly the rows the rule says to exclude
 )
 
 
@@ -127,6 +129,10 @@ def next_action(messages: list[dict[str, Any]], corruption: str | None = None, o
     filters = [] if corruption == "skip_filter" else [
         ("filter_rows", {"column": "quality_flag", "op": "not_in", "value": exclude})
     ]
+    if corruption == "keep_only_ok":
+        filters = [("filter_rows", {"column": "quality_flag", "op": "eq", "value": "ok"})]
+    elif corruption == "inverted_filter":
+        filters = [("filter_rows", {"column": "quality_flag", "op": "in", "value": exclude})]
     steps = filters + conversions if order == "filter_first" else conversions + filters
     done = [(tool, obs) for tool, _, obs in hist[start:] if tool in ("filter_rows", "convert_units") and "error" not in obs]
     handle = done[-1][1]["table_ref"] if done else dataset["table_ref"]

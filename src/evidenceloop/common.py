@@ -9,8 +9,8 @@ from typing import Any
 
 getcontext().prec = 28
 
-GENERATOR_VERSION = "gen-0.2.0"
-VERIFIER_VERSION = "ver-0.1.5"
+GENERATOR_VERSION = "gen-0.2.1"
+VERIFIER_VERSION = "ver-0.1.6"
 ENV_VERSION = "env-0.2.1"
 
 # Tolerance used by the verifier: |pred - ref| <= ATOL + RTOL * |ref|

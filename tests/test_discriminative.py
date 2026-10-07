@@ -11,4 +11,4 @@ def test_every_accepted_task_separates_all_error_paths(calibration, ood_pool):
 def test_error_paths_cover_the_knobs(ood_pool):
     pubs, privs, _ = ood_pool
     kinds = {path.split(":")[0] for p in privs.values() for path in p["error_paths"]}
-    assert {"E1", "E2", "E3", "E4", "E5", "E6", "E7"} <= kinds
+    assert {"E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9"} <= kinds

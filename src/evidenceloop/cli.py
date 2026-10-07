@@ -4,6 +4,7 @@
   el run          --tasks data/tasks/calibration.public.jsonl --backend mlx --model Qwen/Qwen3-0.6B --out runs/calib_mlx
   el eval         --traces runs/calib_mlx/traces.jsonl --private data/tasks/calibration.private.jsonl --out runs/calib_mlx/evals.jsonl
   el report baseline --evals runs/calib_mlx/evals.jsonl --names base --out reports/baseline.md
+  el freeze       --tasks-dir data/tasks/gen-0.2.0 --base Qwen/Qwen3-1.7B --calibration reports/calibration_x.md
   el data build   --policy targeted --seed 1 --n 200 --evals runs/mining/evals.jsonl --out data/sft/C1
   el export sft   --records data/sft/B1/records.jsonl data/sft/C1/records.jsonl data/sft/D1/records.jsonl \
                   --names B1 C1 D1 --format trl --seed 1 --out data/sft/export_seed1
@@ -51,6 +52,94 @@ def cmd_tasks_build(args: argparse.Namespace) -> None:
     write_jsonl(os.path.join(args.out, f"{args.split}.private.jsonl"), privates)
     write_jsonl(os.path.join(args.out, f"{args.split}.rejects.jsonl"), rejects)
     print(f"{args.split}: {len(publics)} tasks, {len(rejects)} rejected")
+
+
+FREEZE_SIZES = {"train_mining": 200, "validation": 50, "test_id": 150, "test_ood": 150}
+
+
+def _sha256_file(path: str) -> str:
+    import hashlib
+
+    digest = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for block in iter(lambda: fh.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def cmd_freeze(args: argparse.Namespace) -> None:
+    """Build the official splits once (never overwritten), check them, and record what was frozen."""
+    from datetime import date
+
+    from evidenceloop.common import ENV_VERSION, GENERATOR_VERSION, VERIFIER_VERSION
+    from evidenceloop.tasks.generator import OOD_TEMPLATES, generate_split
+
+    sizes = dict(FREEZE_SIZES)
+    for item in args.sizes or []:
+        split, _, n = item.partition("=")
+        if split not in sizes or not n.isdigit():
+            sys.exit(f"--sizes 的写法是 split=数量，split 取 {', '.join(sizes)}")
+        sizes[split] = int(n)
+    missing = [path for path in args.calibration if not os.path.exists(path)]
+    if missing:
+        sys.exit(f"找不到校准报告 {', '.join(missing)}：冻结要写明是根据哪几份校准定的")
+    os.makedirs(args.tasks_dir, exist_ok=True)
+
+    record: dict[str, Any] = {"splits": {}}
+    keys: dict[str, set[str]] = {}
+    has_calibration = os.path.exists(os.path.join(args.tasks_dir, "calibration.public.jsonl"))
+    for split in (("calibration",) if has_calibration else ()) + tuple(sizes):
+        public = os.path.join(args.tasks_dir, f"{split}.public.jsonl")
+        private = os.path.join(args.tasks_dir, f"{split}.private.jsonl")
+        if split != "calibration" and not os.path.exists(public):
+            publics, privates, rejects = generate_split(split, sizes[split])
+            write_jsonl(public, publics)
+            write_jsonl(private, privates)
+            write_jsonl(os.path.join(args.tasks_dir, f"{split}.rejects.jsonl"), rejects)
+        pubs, privs = _read_jsonl(public), _read_jsonl(private)
+        if not pubs:
+            sys.exit(f"{public} 不存在或为空")
+        if split != "calibration" and len(pubs) != sizes[split]:
+            sys.exit(f"{public} 里有 {len(pubs)} 道题，要求 {sizes[split]} 道；已有的划分不会被覆盖，请换一个目录")
+        if {p["generator_version"] for p in pubs} != {GENERATOR_VERSION}:
+            sys.exit(f"{public} 不是用当前生成器 {GENERATOR_VERSION} 生成的")
+        templates = {p["knobs"]["template"] for p in pubs}
+        if (split == "test_ood") != bool(templates & set(OOD_TEMPLATES)) or (split == "test_ood" and not templates <= set(OOD_TEMPLATES)):
+            sys.exit(f"{split} 的提示模板没有按 OOD 规则隔离：{sorted(templates)}")
+        keys[split] = {p["dedup_key"] for p in privs}
+        record["splits"][split] = {
+            "n": len(pubs),
+            "short_tier": sum(1 for p in pubs if p["knobs"]["units"] == "all_V"),
+            "public_sha256": _sha256_file(public),
+            "private_sha256": _sha256_file(private),
+        }
+    names = list(keys)
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            shared = keys[a] & keys[b]
+            if shared:
+                sys.exit(f"{a} 和 {b} 有 {len(shared)} 道题内容重复，不能冻结")
+
+    record = {
+        "frozen_at": date.today().isoformat(),
+        "base_model": args.base,
+        "generator_version": GENERATOR_VERSION,
+        "env_version": ENV_VERSION,
+        "verifier_version": VERIFIER_VERSION,
+        "calibration_reports": args.calibration,
+        "note": args.note or "",
+        "tasks_dir": args.tasks_dir,
+        "checks": {"no_duplicates_across_splits": True, "ood_templates_isolated": True},
+        "reproducibility": "data/ 不进版本库；题目由生成器确定性生成，重新生成后哈希应与这里一致。test_id 与 test_ood 在阶段三之前保持密封。",
+        **record,
+    }
+    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
+    with open(args.out, "w", encoding="utf-8") as fh:
+        json.dump(record, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    for split, info in record["splits"].items():
+        print(f"{split:13s} {info['n']:4d} 道（简单档 {info['short_tier']}）  {info['public_sha256'][:12]}")
+    print(f"已冻结：基座 {args.base}，{GENERATOR_VERSION} / {ENV_VERSION} / {VERIFIER_VERSION} → {args.out}")
 
 
 def _backend(args: argparse.Namespace):
@@ -195,6 +284,15 @@ def main(argv: list[str] | None = None) -> None:
     report.add_argument("--title", default="EvidenceLoop 基线报告")
     report.add_argument("--out", required=True)
     report.set_defaults(func=cmd_report)
+
+    freeze = sub.add_parser("freeze")
+    freeze.add_argument("--tasks-dir", required=True)
+    freeze.add_argument("--base", required=True, help="the base model chosen from calibration")
+    freeze.add_argument("--calibration", nargs="+", required=True, help="the calibration reports the choice was based on")
+    freeze.add_argument("--note", help="anything a reader of the frozen record must know")
+    freeze.add_argument("--sizes", nargs="*", help="override split sizes, e.g. train_mining=200 test_id=150")
+    freeze.add_argument("--out", default="configs/frozen.json")
+    freeze.set_defaults(func=cmd_freeze)
 
     data = sub.add_parser("data").add_subparsers(dest="action", required=True).add_parser("build")
     data.add_argument("--policy", required=True, choices=["uniform", "targeted", "unfiltered"])

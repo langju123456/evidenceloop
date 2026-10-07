@@ -19,7 +19,11 @@ if ! git diff --quiet HEAD -- "${CODE_PATHS[@]}" || [ -n "$(git ls-files --other
   python -m pytest -q
 fi
 
-git add -A -- README.md LICENSE pyproject.toml .gitignore docs reports scripts src tests
+PATHS=()
+for path in README.md LICENSE pyproject.toml .gitignore configs docs reports scripts src tests; do
+  [ -e "$path" ] && PATHS+=("$path")
+done
+git add -A -- "${PATHS[@]}"
 if git diff --cached --quiet; then
   echo "没有新的改动要提交。"
 else

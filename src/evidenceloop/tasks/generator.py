@@ -134,8 +134,11 @@ def _fmt_raw(raw: Decimal, unit: str, number_format: str) -> str:
 
 def _make_rows(rng: random.Random, knobs: dict[str, Any]) -> list[dict[str, Any]]:
     n = knobs["n_rows"]
-    flags = ["bad", "saturated", "missing", "warn"] + [
-        rng.choices(["ok", "warn", "bad", "saturated", "missing"], weights=[70, 10, 8, 6, 6])[0] for _ in range(n - 4)
+    # "recal" marks a re-calibrated, valid reading that no rule excludes, so "keep only ok rows" is never
+    # a shortcut to the right answer: the rules have to be read (D9).
+    flags = ["bad", "saturated", "missing", "warn", "recal", "recal"] + [
+        rng.choices(["ok", "warn", "bad", "saturated", "missing", "recal"], weights=[64, 10, 8, 6, 6, 6])[0]
+        for _ in range(n - 6)
     ]
     rng.shuffle(flags)
     unit_pool = {"all_V": ["V"], "all_mV": ["mV"], "mixed": ["mV", "V"], "ood_uv": ["mV", "V", "uV"]}[knobs["units"]]
@@ -147,6 +150,8 @@ def _make_rows(rng: random.Random, knobs: dict[str, Any]) -> list[dict[str, Any]
             volts = Decimal(str(round(rng.gauss(1.2, 0.15), 4)))
         elif flag == "warn":
             volts = Decimal(str(round(rng.gauss(1.55, 0.08), 4)))
+        elif flag == "recal":
+            volts = Decimal(str(round(rng.gauss(1.8, 0.06), 4)))
         elif flag == "bad":
             volts = Decimal(str(round(rng.uniform(-3, 9), 4)))
         elif flag == "saturated":

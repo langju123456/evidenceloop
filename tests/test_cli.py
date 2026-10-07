@@ -75,3 +75,33 @@ def test_gitignore_only_excludes_root_level_outputs():
     for name in ("data/", "runs/", ".venv/", "reports/"):
         assert name not in patterns, f"{name} must be anchored as /{name} or not ignored"
     assert (root / "src/evidenceloop/data/build.py").exists()
+
+
+def test_freeze_builds_checks_and_records_the_splits(tmp_path):
+    d = str(tmp_path)
+    tasks = f"{d}/tasks"
+    main(["tasks", "build", "--split", "calibration", "--n", "6", "--out", tasks])
+    open(f"{d}/calibration.md", "w").write("# 校准报告\n")
+    args = ["freeze", "--tasks-dir", tasks, "--base", "Qwen/Qwen3-1.7B", "--calibration", f"{d}/calibration.md",
+            "--sizes", "train_mining=8", "validation=4", "test_id=4", "test_ood=4", "--out", f"{d}/configs/frozen.json"]
+    main(args)
+    first = json.load(open(f"{d}/configs/frozen.json", encoding="utf-8"))
+    assert first["base_model"] == "Qwen/Qwen3-1.7B" and first["checks"]["no_duplicates_across_splits"]
+    assert first["calibration_reports"] == [f"{d}/calibration.md"]
+    assert {s: v["n"] for s, v in first["splits"].items()} == {"calibration": 6, "train_mining": 8, "validation": 4,
+                                                                 "test_id": 4, "test_ood": 4}
+    main(args)  # running it again changes nothing: splits are never regenerated
+    assert json.load(open(f"{d}/configs/frozen.json", encoding="utf-8"))["splits"] == first["splits"]
+
+
+def test_freeze_refuses_a_split_of_the_wrong_size(tmp_path):
+    import pytest
+
+    d = str(tmp_path)
+    tasks = f"{d}/tasks"
+    main(["tasks", "build", "--split", "calibration", "--n", "3", "--out", tasks])
+    main(["tasks", "build", "--split", "validation", "--n", "3", "--out", tasks])
+    open(f"{d}/calibration.md", "w").write("# 校准报告\n")
+    with pytest.raises(SystemExit):
+        main(["freeze", "--tasks-dir", tasks, "--base", "x", "--calibration", f"{d}/calibration.md",
+              "--sizes", "train_mining=3", "validation=5", "test_id=3", "test_ood=3", "--out", f"{d}/frozen.json"])

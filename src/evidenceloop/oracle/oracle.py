@@ -23,6 +23,8 @@ PATH_CATEGORY = {
     "E5": "unit_error",  # converted in the wrong direction (V rows to mV)
     "E6": "filter_error",  # excluded invalid flags but kept missing rows
     "E7": "source_version_error",  # wrong dataset version
+    "E8": "filter_error",  # kept only rows flagged "ok" without reading the rule (seen in 4B calibration, D9)
+    "E9": "filter_error",  # filter written backwards: kept only the rows the rule excludes (D9)
 }
 
 
@@ -101,6 +103,8 @@ def solve(task_private: dict[str, Any]) -> dict[str, Any]:
     for version, other_rows in task_private["dataset_rows"].items():
         if version != req["dataset_version"]:
             paths[f"E7:{version}"] = _stats(_values(other_rows, exclude, "full"), stats)
+    paths["E8"] = _stats(_values([r for r in rows if r["quality_flag"] == "ok"], set(), "full"), stats)
+    paths["E9"] = _stats(_values([r for r in rows if r["quality_flag"] in exclude], set(), "full"), stats)
     return {"reference": reference, "error_paths": {k: v for k, v in paths.items() if v is not None}}
 
 
