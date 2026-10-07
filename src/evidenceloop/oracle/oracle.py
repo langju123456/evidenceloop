@@ -104,6 +104,14 @@ def solve(task_private: dict[str, Any]) -> dict[str, Any]:
     return {"reference": reference, "error_paths": {k: v for k, v in paths.items() if v is not None}}
 
 
+def reference_values(task_private: dict[str, Any], statistics: list[str]) -> dict[str, Decimal]:
+    """The correct value of any statistic on the reference pipeline, asked for or not."""
+    req = task_private["required"]
+    rows = task_private["dataset_rows"][req["dataset_version"]]
+    exclude = set(task_private["protocol_rules"][req["protocol_version"]]["exclude_flags"])
+    return _stats(_values(rows, exclude, "full"), list(statistics)) or {}
+
+
 def path_category(path_id: str) -> str:
     return PATH_CATEGORY[path_id.split(":")[0]]
 

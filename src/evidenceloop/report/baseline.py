@@ -29,7 +29,10 @@ def summarize(evals: list[dict[str, Any]]) -> dict[str, Any]:
         "numeric_failures_matched": len(matched),
         "by_bucket": {b: (sum(v), len(v)) for b, v in sorted(by_bucket.items())},
         "grounding_violations": sum(1 for e in evals if e.get("grounding_violations")),
-        "reply_inconsistent": sum(1 for e in evals if not e["reply"]["consistent"]),
+        "false_claim": sum(1 for e in evals if e["reply"].get("false_claim")),
+        "unreported": sum(1 for e in evals if e["reply"].get("unreported")),
+        "untraced_numbers": sum(1 for e in evals if e.get("numbers_not_from_tools")),
+        "versions": sorted({(e.get("env_version") or "?", e.get("verifier_version") or "?") for e in evals}),
         "mean_turns": sum(e["turns"] or 0 for e in evals) / n if n else 0,
         "modes": Counter(e.get("execution_mode") for e in evals),
     }
@@ -39,6 +42,10 @@ def render_markdown(title: str, runs: dict[str, list[dict[str, Any]]]) -> str:
     lines = [f"# {title}", ""]
     names = list(runs)
     summaries = {name: summarize(evals) for name, evals in runs.items()}
+    for name, s in summaries.items():
+        versions = "；".join(f"环境 {env}，验证器 {ver}" for env, ver in s["versions"])
+        lines.append(f"- {name}：{versions}")
+    lines.append("")
     lines += ["| 指标 | " + " | ".join(names) + " |", "| --- |" + " --- |" * len(names)]
     lines.append("| 成功数/总数 | " + " | ".join(_pct(s["success"], s["n"]) for s in summaries.values()) + " |")
     for check in CHECKS:
@@ -46,7 +53,11 @@ def render_markdown(title: str, runs: dict[str, list[dict[str, Any]]]) -> str:
     lines.append("| 数值失败中可归因到错误路径 | " + " | ".join(
         _pct(s["numeric_failures_matched"], s["numeric_failures"]) for s in summaries.values()) + " |")
     lines.append("| 有未溯源参数的轨迹 | " + " | ".join(_pct(s["grounding_violations"], s["n"]) for s in summaries.values()) + " |")
-    lines.append("| 回复与状态不一致 | " + " | ".join(_pct(s["reply_inconsistent"], s["n"]) for s in summaries.values()) + " |")
+    lines.append("| 报告里有工具没算出过的数 | " + " | ".join(_pct(s["untraced_numbers"], s["n"]) for s in summaries.values()) + " |")
+    lines.append("| 最终回复虚报（没存却说已保存，或没发布却说已发布） | " + " | ".join(
+        _pct(s["false_claim"], s["n"]) for s in summaries.values()) + " |")
+    lines.append("| 最终回复没说明已保存（草稿存了，回复没提） | " + " | ".join(
+        _pct(s["unreported"], s["n"]) for s in summaries.values()) + " |")
     lines.append("| 平均轮数 | " + " | ".join(f"{s['mean_turns']:.1f}" for s in summaries.values()) + " |")
     for name, s in summaries.items():
         lines += ["", f"## {name}：失败类别（主类别）", "", "| 类别 | 数量 |", "| --- | --- |"]

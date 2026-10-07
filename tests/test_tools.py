@@ -31,6 +31,18 @@ def test_filter_is_one_flat_condition_not_code(calibration):
     assert "table_ref" in ok
 
 
+def test_filter_values_must_fit_the_op(calibration):
+    """D7: ne with a list used to keep every row without a word; not_null with a value ignored the value."""
+    env = _env(calibration[0][0])
+    ds_id, _, version = _ids(calibration[0][0])
+    handle = env.call("read_dataset", {"dataset_id": ds_id, "version": version})["table_ref"]
+    for bad in ({"op": "ne", "value": ["bad", "missing"]}, {"op": "eq", "value": {"x": 1}}, {"op": "not_null", "value": "ok"},
+                {"op": "is_null", "value": "missing"}):
+        assert env.call("filter_rows", {"table_ref": handle, "column": "quality_flag", **bad})["error"] == "invalid_predicate", bad
+    assert "table_ref" in env.call("filter_rows", {"table_ref": handle, "column": "quality_flag", "op": "not_null"})
+    assert "table_ref" in env.call("filter_rows", {"table_ref": handle, "column": "quality_flag", "op": "ne", "value": "bad"})
+
+
 def test_json_encoded_lists_are_accepted_but_nothing_looser(calibration):
     """D6: a list sent as a JSON string is the same list; a bare word is not."""
     env = _env(calibration[0][0])

@@ -46,7 +46,7 @@ TOOL_SPECS: dict[str, dict[str, Any]] = {
         "description": (
             "按一个条件筛选表，返回新的表句柄；需要多个条件时连续调用。"
             "op 可选 eq、ne、in、not_in、lt、le、gt、ge、is_null、not_null。"
-            "in 和 not_in 的 value 是列表，is_null 和 not_null 不需要 value。"
+            "in 和 not_in 的 value 是列表，is_null 和 not_null 不带 value，其他 op 的 value 是单个值。"
         ),
         "properties": {
             "table_ref": {"type": "string"},
@@ -216,10 +216,11 @@ def _eval_predicate(pred: Any, row: dict[str, Any]) -> bool:
     if column not in row:
         raise ToolError("invalid_predicate", f"表中没有列 {column}")
     cell = row[column]
-    if op == "is_null":
-        return _cell_is_null(cell)
-    if op == "not_null":
-        return not _cell_is_null(cell)
+    if op in ("is_null", "not_null"):
+        # SQL and pandas reject an operand here; silently ignoring it would hide the mistake
+        if pred.get("value") is not None:
+            raise ToolError("invalid_predicate", f"op {op} 不带 value")
+        return _cell_is_null(cell) if op == "is_null" else not _cell_is_null(cell)
     if "value" not in pred:
         raise ToolError("invalid_predicate", f"op {op} 需要 value")
     target = pred["value"]
@@ -228,6 +229,9 @@ def _eval_predicate(pred: Any, row: dict[str, Any]) -> bool:
             raise ToolError("invalid_predicate", f"op {op} 的 value 必须是列表")
         hit = cell in target
         return hit if op == "in" else not hit
+    if isinstance(target, (list, dict)):
+        # comparing a cell with a list is always "not equal": ne would silently keep every row
+        raise ToolError("invalid_predicate", f"op {op} 的 value 必须是单个值；要匹配多个取值请用 in 或 not_in")
     if op in ("eq", "ne"):
         hit = cell == target
         return hit if op == "eq" else not hit

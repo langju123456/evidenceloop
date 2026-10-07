@@ -30,6 +30,7 @@ def test_pipeline_end_to_end(tmp_path):
           "--out", f"{d}/reports/baseline.md"])
     report = open(f"{d}/reports/baseline.md", encoding="utf-8").read()
     assert "unit_error" in report and "mock" in report
+    assert "最终回复虚报" in report and "报告里有工具没算出过的数" in report and "ver-" in report
 
     for policy, name in (("uniform", "B1"), ("targeted", "C1"), ("unfiltered", "D1")):
         main(["data", "build", "--policy", policy, "--seed", "1", "--n", "20", "--evals", f"{d}/runs/mining/evals.jsonl",

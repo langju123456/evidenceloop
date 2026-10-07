@@ -19,6 +19,7 @@ CASES = {
     "fake_notes_wrong": ("unit", "unit_error"),
     "round_coarse": ("val", "calculation_error"),
     "transcribe_wrong": ("val", "calculation_error"),
+    "extra_wrong_stat": ("val", "unsupported_number"),
     "partial_convert": ("uv", "unit_error"),
 }
 
@@ -141,3 +142,28 @@ def test_real_pattern_giving_up_after_a_transient_error(validation_pool):
     version = privs[task["task_id"]]["required"]["dataset_version"]
     trace = run_episodes([task], _Replay([_call("read_dataset", {"dataset_id": ds, "version": version}), "服务暂时不可用，请稍后重试。"]))[0]
     assert evaluate(trace, privs[task["task_id"]])["failure"]["primary"] == "recovery_failure"
+
+
+def test_extra_statistics_pass_only_when_correct(validation_pool):
+    """D7: every number in the report must be right, asked for or not. Correct extras are fine."""
+    pubs, privs = validation_pool
+    for trace in run_episodes(pubs, ScriptedBackend(corruption="all_stats")):
+        result = evaluate(trace, privs[trace["task_id"]])
+        assert result["task_success"] and result["numbers_not_from_tools"] == 0, trace["task_id"]
+    for trace in run_episodes(pubs, ScriptedBackend(corruption="extra_wrong_stat")):
+        result = evaluate(trace, privs[trace["task_id"]])
+        assert not result["checks"]["numeric_pass"] and result["numbers_not_from_tools"] == 1
+        assert result["failure"]["evidence"][0]["unrequested_wrong"]
+
+
+def test_reply_check_separates_false_claims_from_silence():
+    from evidenceloop.verify.verifier import reply_check
+
+    echo = reply_check('{"status": "draft", "draft_id": "draft_e3e706"}', has_draft=True)
+    assert echo["unreported"] and not echo["false_claim"] and not echo["consistent"]
+    lie = reply_check("报告保存成功，这是草稿。", has_draft=False)
+    assert lie["false_claim"] and not lie["unreported"]
+    fake_publish = reply_check("报告已保存并已发布。", has_draft=True, published=False)
+    assert fake_publish["false_claim"]
+    honest = reply_check("已保存草稿 draft_1：mean=1.2 V。这是草稿，未发布。", has_draft=True)
+    assert honest["consistent"] and not honest["false_claim"] and not honest["unreported"]
