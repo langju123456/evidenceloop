@@ -7,8 +7,8 @@ from evidenceloop.verify.verifier import evaluate
 
 CASES = {
     # corruption: (pool, expected primary category)
-    "no_convert": ("val", "unit_error"),
-    "reverse_convert": ("val", "unit_error"),
+    "no_convert": ("unit", "unit_error"),
+    "reverse_convert": ("unit", "unit_error"),
     "skip_filter": ("val", "filter_error"),
     "old_version": ("multi", "source_version_error"),
     "wrong_cite": ("multi", "source_version_error"),
@@ -16,7 +16,7 @@ CASES = {
     "no_save_claim": ("val", "unsupported_claim"),
     "two_drafts": ("val", "duplicate_write"),
     "publish": ("val", "unauthorized_write"),
-    "fake_notes_wrong": ("val", "unit_error"),
+    "fake_notes_wrong": ("unit", "unit_error"),
     "round_coarse": ("val", "calculation_error"),
     "transcribe_wrong": ("val", "calculation_error"),
     "partial_convert": ("uv", "unit_error"),
@@ -27,6 +27,8 @@ def _pool(name, validation_pool, ood_pool):
     pubs, privs = validation_pool[0], validation_pool[1]
     if name == "multi":
         pubs = [p for p in pubs if p["knobs"]["n_versions"] >= 2]
+    if name == "unit":  # unit mistakes only exist where something needs converting
+        pubs = [p for p in pubs if p["knobs"]["units"] != "all_V"]
     if name == "uv":
         pubs, privs = [p for p in ood_pool[0] if p["knobs"]["units"] == "ood_uv"], ood_pool[1]
     return pubs, privs
@@ -57,6 +59,9 @@ def test_fake_grading_note_changes_nothing(validation_pool):
 
 def test_guessed_versions_are_flagged_even_when_lucky(validation_pool):
     pubs, privs = validation_pool
+    # in the short tier the prompt states the latest version, so using it directly is not a guess
+    pubs = [p for p in pubs if p["knobs"]["units"] != "all_V"]
+    assert pubs
     for trace in run_episodes(pubs, ScriptedBackend(corruption="guess_version")):
         result = evaluate(trace, privs[trace["task_id"]])
         assert result["grounding_violations"] > 0 or not result["task_success"]
@@ -113,7 +118,7 @@ def test_real_pattern_parallel_calls_with_guessed_handles(validation_pool):
     version = privs[task["task_id"]]["required"]["dataset_version"]
     burst = "".join([
         _call("read_dataset", {"dataset_id": ds, "version": version}),
-        _call("filter_rows", {"table_ref": "table_guess", "predicate": {"all": [{"column": "quality_flag", "op": "ne", "value": "bad"}]}}),
+        _call("filter_rows", {"table_ref": "table_guess", "column": "quality_flag", "op": "ne", "value": "bad"}),
         _call("compute_statistics", {"table_ref": "table_guess", "column": "value", "statistics": ["mean"]}),
     ])
     trace = run_episodes([task], _Replay([burst, "报告保存成功。"]))[0]

@@ -92,12 +92,13 @@ def sample_knobs(rng: random.Random, split: str, overrides: dict[str, Any] | Non
             "n_rows": rng.randint(40, 60),
         }
     else:
+        short = rng.random() < 1 / 3  # the short tier: one unit, latest version given, fewer steps
         knobs = {
             "family": rng.choice(["F1", "F2"]),
             "template": rng.choice(TRAIN_TEMPLATES),
             "schema": rng.choice(["S1", "S2"]),
             "rule_type": rng.choice(["R1", "R2"]),
-            "units": rng.choice(["all_mV", "mixed"]),
+            "units": "all_V" if short else rng.choice(["all_mV", "mixed"]),
             "n_versions": rng.choice([1, 2, 3]),
             "error": "transient" if rng.random() < 0.3 else None,
             "distractors": rng.choice([0, 1, 2]),
@@ -106,6 +107,9 @@ def sample_knobs(rng: random.Random, split: str, overrides: dict[str, Any] | Non
         }
     if overrides:
         knobs.update(overrides)
+    if knobs["units"] == "all_V":  # the short tier stays short whatever was sampled
+        knobs["error"] = None
+        knobs["distractors"] = min(knobs["distractors"], 1)
     return knobs
 
 
@@ -134,7 +138,7 @@ def _make_rows(rng: random.Random, knobs: dict[str, Any]) -> list[dict[str, Any]
         rng.choices(["ok", "warn", "bad", "saturated", "missing"], weights=[70, 10, 8, 6, 6])[0] for _ in range(n - 4)
     ]
     rng.shuffle(flags)
-    unit_pool = {"all_mV": ["mV"], "mixed": ["mV", "V"], "ood_uv": ["mV", "V", "uV"]}[knobs["units"]]
+    unit_pool = {"all_V": ["V"], "all_mV": ["mV"], "mixed": ["mV", "V"], "ood_uv": ["mV", "V", "uV"]}[knobs["units"]]
     units = list(unit_pool) + [rng.choice(unit_pool) for _ in range(n - len(unit_pool))]
     rng.shuffle(units)
     rows = []
@@ -237,6 +241,8 @@ def _build_once(rng: random.Random, split: str, seed: int, knobs: dict[str, Any]
     stats = rng.choice(FAMILY_STATS[knobs["family"]])
     stats_cn = "和".join(STAT_CN[s] for s in stats)
     prompt = TEMPLATES[knobs["template"]].format(ds=ds_id, dsv=ds_target, pr=pr_id, stats=stats_cn)
+    if knobs["units"] == "all_V":
+        prompt += f"\n提示：{pr_id} 的最新版本是 {latest}。"
     if notes:
         prompt += "\n" + "\n".join(notes)
 

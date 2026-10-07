@@ -28,6 +28,10 @@ def _identifiers(args: dict[str, Any]) -> list[tuple[str, str, str | None]]:
     if isinstance(args.get("version"), str):
         resource = args.get("dataset_id") or args.get("protocol_id") or args.get("resource_id")
         found.append(("version", args["version"], resource if isinstance(resource, str) else None))
+    for key, owner in (("dataset_version", "dataset_id"), ("protocol_version", "protocol_id")):
+        if isinstance(args.get(key), str):
+            resource = args.get(owner)
+            found.append((key, args[key], resource if isinstance(resource, str) else None))
     report = args.get("report")
     if isinstance(report, dict):
         for part in ("dataset", "protocol"):

@@ -11,11 +11,14 @@ MODEL="${1:-Qwen/Qwen3-0.6B}"
 EXTRA="${2:-}"
 NAME="$(basename "$MODEL" | tr '[:upper:]' '[:lower:]')${EXTRA:+-thinking}"
 ENV_VERSION="$(python -c 'from evidenceloop.common import ENV_VERSION; print(ENV_VERSION)')"
+GEN_VERSION="$(python -c 'from evidenceloop.common import GENERATOR_VERSION; print(GENERATOR_VERSION)')"
+TASKS="data/tasks/${GEN_VERSION}"   # each generator version gets its own task directory
 NAME="${NAME}_${ENV_VERSION}"
 OUT="runs/calib_${NAME}"
-echo "== calibration：60 道题，模型 ${MODEL} ${EXTRA}（可以随时 Ctrl+C，再运行同一条命令会接着跑）=="
-el run --tasks data/tasks/calibration.public.jsonl --backend mlx --model "$MODEL" $EXTRA --out "$OUT" --batch-size 1
-el eval --traces "$OUT/traces.jsonl" --private data/tasks/calibration.private.jsonl --out "$OUT/evals.jsonl"
+echo "== calibration：60 道题（${GEN_VERSION}），模型 ${MODEL} ${EXTRA}（可以随时 Ctrl+C，再运行同一条命令会接着跑）=="
+el tasks build --split calibration --n 60 --out "$TASKS"   # already there: skipped, never overwritten
+el run --tasks "$TASKS/calibration.public.jsonl" --backend mlx --model "$MODEL" $EXTRA --out "$OUT" --batch-size 1
+el eval --traces "$OUT/traces.jsonl" --private "$TASKS/calibration.private.jsonl" --out "$OUT/evals.jsonl"
 el report baseline --evals "$OUT/evals.jsonl" --names "$NAME" --out "reports/calibration_${NAME}.md"
 cat "reports/calibration_${NAME}.md"
 echo

@@ -44,3 +44,31 @@ def test_four_significant_digits_are_accepted_and_one_percent_errors_are_not(cal
                 exact = Decimal(private["reference"][item["statistic"]])
                 item["value"] = format(exact, ".4g") if fmt == ".4g" else str(exact * Decimal("1.01"))
             assert evaluate(altered, private)["checks"]["numeric_pass"] is should_pass, (fmt, trace["task_id"])
+
+
+def test_short_tier_is_short_and_its_hint_counts_as_context(validation_pool):
+    from evidenceloop.verify.grounding import ungrounded_arguments
+
+    pubs, privs = validation_pool
+    short = [p for p in pubs if p["knobs"]["units"] == "all_V"]
+    assert short, "about a third of train-domain tasks should be short"
+    for p in short:
+        latest = privs[p["task_id"]]["required"]["protocol_version"]
+        assert f"最新版本是 {latest}" in p["prompt"]
+        assert p["env_config"]["error_injection"] is None
+    for trace in run_episodes(short, ScriptedBackend()):
+        result = evaluate(trace, privs[trace["task_id"]])
+        assert result["task_success"] and ungrounded_arguments(trace["messages"]) == []
+        assert sum(1 for e in trace["events"] if e["kind"] == "tool_call") <= 7
+    # reading the hinted version straight away, without list_versions, is not a guess
+    for p in short:
+        required = privs[p["task_id"]]["required"]
+        call = {"function": {"name": "read_protocol",
+                             "arguments": {"protocol_id": required["protocol_id"], "version": required["protocol_version"]}}}
+        messages = [{"role": "system", "content": p["system_prompt"]}, {"role": "user", "content": p["prompt"]},
+                    {"role": "assistant", "content": "", "tool_calls": [call]}]
+        assert ungrounded_arguments(messages) == []
+
+
+def test_no_short_tier_in_ood(ood_pool):
+    assert all(p["knobs"]["units"] != "all_V" for p in ood_pool[0])

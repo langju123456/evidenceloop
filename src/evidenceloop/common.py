@@ -9,9 +9,9 @@ from typing import Any
 
 getcontext().prec = 28
 
-GENERATOR_VERSION = "gen-0.1.2"
-VERIFIER_VERSION = "ver-0.1.3"
-ENV_VERSION = "env-0.1.1"
+GENERATOR_VERSION = "gen-0.2.0"
+VERIFIER_VERSION = "ver-0.1.4"
+ENV_VERSION = "env-0.2.0"
 
 # Tolerance used by the verifier: |pred - ref| <= ATOL + RTOL * |ref|
 # Lower bound: the protocol allows reporting 4 significant digits, which can be off by up to 0.05%.

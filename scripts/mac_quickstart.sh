@@ -25,16 +25,17 @@ pip install -q -e ".[dev,mac]" transformers
 echo "== 1/4 测试 =="
 python -m pytest -q
 
-echo "== 2/4 生成任务 =="
-el tasks build --split calibration  --n 60  --out data/tasks
-el tasks build --split train_mining --n 200 --out data/tasks
-el tasks build --split validation   --n 50  --out data/tasks
+echo "== 2/4 生成任务（每个生成器版本一个目录，已有的跳过，不会覆盖）=="
+TASKS="data/tasks/$(python -c 'from evidenceloop.common import GENERATOR_VERSION; print(GENERATOR_VERSION)')"
+el tasks build --split calibration  --n 60  --out "$TASKS"
+el tasks build --split train_mining --n 200 --out "$TASKS"
+el tasks build --split validation   --n 50  --out "$TASKS"
 
 echo "== 3/4 真模型冒烟：5 道题（第一次会下载 Qwen3-0.6B，约 1.2GB；之后用缓存）=="
 rm -rf runs/smoke_mlx   # the smoke run always starts fresh
-el run --tasks data/tasks/calibration.public.jsonl --backend mlx --model Qwen/Qwen3-0.6B \
+el run --tasks "$TASKS/calibration.public.jsonl" --backend mlx --model Qwen/Qwen3-0.6B \
        --out runs/smoke_mlx --limit 5 --batch-size 1
-el eval --traces runs/smoke_mlx/traces.jsonl --private data/tasks/calibration.private.jsonl \
+el eval --traces runs/smoke_mlx/traces.jsonl --private "$TASKS/calibration.private.jsonl" \
         --out runs/smoke_mlx/evals.jsonl
 
 echo "== 4/4 报告 =="

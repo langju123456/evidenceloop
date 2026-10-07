@@ -19,6 +19,9 @@ CAP = 0.30
 TRAIN_BUCKETS = [
     "|".join(parts)
     for parts in itertools.product(("F1", "F2"), ("all_mV", "mixed"), ("v1", "v2-3"), ("noerr", "transient"), ("plain", "sci"))
+] + [
+    "|".join(parts)  # the short tier
+    for parts in itertools.product(("F1", "F2"), ("all_V",), ("v1", "v2-3"), ("noerr",), ("plain", "sci"))
 ]
 
 

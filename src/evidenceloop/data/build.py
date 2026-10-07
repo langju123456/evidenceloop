@@ -28,7 +28,9 @@ D_CORRUPTION_RATIO = 0.25
 
 
 def _corruptions_for(task: dict[str, Any]) -> list[str]:
-    modes = ["no_convert", "no_save_claim"]
+    """Wrong-demo modes that really are wrong for this task. In the short tier every reading is
+    already in V, so skipping the conversion changes nothing; skipping the filter (E1) does."""
+    modes = ["skip_filter" if task["knobs"]["units"] == "all_V" else "no_convert", "no_save_claim"]
     if task["knobs"]["n_versions"] >= 2:
         modes.append("old_version")
     return modes

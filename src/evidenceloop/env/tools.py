@@ -7,6 +7,7 @@ part of a task, so nothing a tool returns can leak the reference answer.
 from __future__ import annotations
 
 import copy
+import json
 import random
 import statistics
 from decimal import Decimal
@@ -43,15 +44,17 @@ TOOL_SPECS: dict[str, dict[str, Any]] = {
     },
     "filter_rows": {
         "description": (
-            "按结构化条件筛选表，返回新的表句柄。predicate 形如 "
-            '{"all": [{"column": "quality_flag", "op": "not_in", "value": ["bad"]}]}，'
-            "op 可用 eq、ne、in、not_in、lt、le、gt、ge、is_null、not_null，组合用 all 或 any。"
+            "按一个条件筛选表，返回新的表句柄；需要多个条件时连续调用。"
+            "op 可选 eq、ne、in、not_in、lt、le、gt、ge、is_null、not_null。"
+            "in 和 not_in 的 value 是列表，is_null 和 not_null 不需要 value。"
         ),
         "properties": {
             "table_ref": {"type": "string"},
-            "predicate": {"type": "object"},
+            "column": {"type": "string"},
+            "op": {"type": "string", "enum": list(_PRED_OPS)},
+            "value": {"description": "比较的值；in、not_in 时是列表"},
         },
-        "required": ["table_ref", "predicate"],
+        "required": ["table_ref", "column", "op"],
     },
     "convert_units": {
         "description": "把 unit 列等于 from_unit 的行换算为 to_unit，返回新的表句柄。支持 V、mV、uV。",
@@ -73,35 +76,24 @@ TOOL_SPECS: dict[str, dict[str, Any]] = {
         "required": ["table_ref", "column", "statistics"],
     },
     "save_draft": {
-        "description": "把报告保存为草稿。相同 draft_key 会覆盖原草稿，不同 draft_key 会新建草稿。",
+        "description": (
+            "把报告保存为草稿。统计量填在对应参数里，只填任务要求的那几个，数值取自 compute_statistics 的返回结果。"
+            "相同 draft_key 会覆盖原草稿，不同 draft_key 会新建草稿。"
+        ),
         "properties": {
-            "report": {
-                "type": "object",
-                "description": "草稿报告",
-                "properties": {
-                    "results": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "statistic": {"type": "string", "enum": ["mean", "max", "min", "median"]},
-                                "value": {"type": "number", "description": "取自 compute_statistics 的返回结果"},
-                                "unit": {"type": "string"},
-                            },
-                            "required": ["statistic", "value", "unit"],
-                        },
-                    },
-                    "dataset": {"type": "object", "properties": {"id": {"type": "string"}, "version": {"type": "string"}},
-                                "required": ["id", "version"]},
-                    "protocol": {"type": "object", "properties": {"id": {"type": "string"}, "version": {"type": "string"}},
-                                 "required": ["id", "version"]},
-                    "notes": {"type": "string"},
-                },
-                "required": ["results", "dataset", "protocol"],
-            },
+            "dataset_id": {"type": "string"},
+            "dataset_version": {"type": "string"},
+            "protocol_id": {"type": "string"},
+            "protocol_version": {"type": "string"},
+            "unit": {"type": "string", "description": "统计量的单位"},
+            "mean": {"type": "number"},
+            "max": {"type": "number"},
+            "min": {"type": "number"},
+            "median": {"type": "number"},
+            "notes": {"type": "string"},
             "draft_key": {"type": "string", "description": "可选。相同 key 覆盖原草稿；不填时默认为 main"},
         },
-        "required": ["report"],
+        "required": ["dataset_id", "dataset_version", "protocol_id", "protocol_version", "unit"],
     },
     "publish_report": {
         "description": "把草稿发布为正式报告。",
@@ -109,9 +101,6 @@ TOOL_SPECS: dict[str, dict[str, Any]] = {
         "required": ["draft_id"],
     },
 }
-
-_PY_TYPES = {"string": str, "object": dict, "array": list}
-
 
 def tool_schemas() -> list[dict[str, Any]]:
     """Tool definitions in the function-calling format chat templates expect."""
@@ -148,7 +137,23 @@ class ToolError(Exception):
         return obs
 
 
-def validate_arguments(name: str, args: Any) -> None:
+def _decode_json_string(value: Any, expected: type) -> Any:
+    """Lists and objects may arrive JSON-encoded as a string (a common, equivalent encoding).
+    Decode once; anything that does not decode to the expected type stays an error."""
+    if isinstance(value, expected):
+        return value
+    if isinstance(value, str):
+        try:
+            decoded = json.loads(value)
+        except json.JSONDecodeError:
+            return None
+        if isinstance(decoded, expected):
+            return decoded
+    return None
+
+
+def normalize_arguments(name: str, args: Any) -> dict[str, Any]:
+    """Check arguments against the tool spec and return them in canonical form."""
     if name not in TOOL_SPECS:
         raise ToolError("unknown_tool", f"没有名为 {name} 的工具")
     if not isinstance(args, dict):
@@ -160,9 +165,34 @@ def validate_arguments(name: str, args: Any) -> None:
     extra = [key for key in args if key not in spec["properties"]]
     if extra:
         raise ToolError("invalid_arguments", f"未知参数：{', '.join(extra)}")
+    out = dict(args)
     for key, prop in spec["properties"].items():
-        if key in args and not isinstance(args[key], _PY_TYPES[prop["type"]]):
-            raise ToolError("invalid_arguments", f"参数 {key} 的类型应为 {prop['type']}")
+        if key not in out or "type" not in prop:
+            continue
+        value, kind = out[key], prop["type"]
+        if kind == "string" and not isinstance(value, str):
+            raise ToolError("invalid_arguments", f"参数 {key} 应为字符串")
+        if kind == "number":
+            if isinstance(value, bool) or not isinstance(value, (int, float, str)):
+                raise ToolError("invalid_arguments", f"参数 {key} 应为数值")
+            try:
+                to_decimal(value)
+            except ValueError as exc:
+                raise ToolError("invalid_arguments", f"参数 {key} 应为数值：{exc}") from exc
+        if kind in ("array", "object"):
+            decoded = _decode_json_string(value, list if kind == "array" else dict)
+            if decoded is None:
+                raise ToolError("invalid_arguments", f"参数 {key} 应为{'列表' if kind == 'array' else '对象'}")
+            out[key] = decoded
+    if "value" in out and isinstance(out["value"], str) and out.get("op") in ("in", "not_in"):
+        decoded = _decode_json_string(out["value"], list)
+        if decoded is not None:
+            out["value"] = decoded
+    return out
+
+
+def validate_arguments(name: str, args: Any) -> None:
+    normalize_arguments(name, args)
 
 
 def _cell_is_null(cell: Any) -> bool:
@@ -233,9 +263,9 @@ class Environment:
     def call(self, name: str, args: Any) -> dict[str, Any]:
         self.step += 1
         try:
-            validate_arguments(name, args)
+            normalized = normalize_arguments(name, args)
             self._maybe_inject_transient(name)
-            result = getattr(self, f"_tool_{name}")(**args)
+            result = getattr(self, f"_tool_{name}")(**normalized)
             status = "ok"
         except ToolError as err:
             result = err.to_observation()
@@ -307,9 +337,12 @@ class Environment:
         meta = protocol["versions"][version]
         return {"protocol_id": protocol_id, "version": version, "effective_date": meta["date"], "text": meta["text"]}
 
-    def _tool_filter_rows(self, table_ref: str, predicate: dict[str, Any]) -> dict[str, Any]:
+    def _tool_filter_rows(self, table_ref: str, column: str, op: str, value: Any = None) -> dict[str, Any]:
         table = self._get_table(table_ref)
-        kept = [copy.deepcopy(row) for row in table["rows"] if _eval_predicate(predicate, row)]
+        condition: dict[str, Any] = {"column": column, "op": op}
+        if value is not None:
+            condition["value"] = value
+        kept = [copy.deepcopy(row) for row in table["rows"] if _eval_predicate(condition, row)]
         handle = self._new_handle(kept, table["columns"], derived=True)
         return {"table_ref": handle, "row_count": len(kept)}
 
@@ -351,8 +384,18 @@ class Environment:
         results = {stat: fmt_number(funcs[stat](values), self.number_format) for stat in statistics}
         return {"table_ref": table_ref, "column": column, "n": len(values), "results": results}
 
-    def _tool_save_draft(self, report: dict[str, Any], draft_key: str = "main") -> dict[str, Any]:
-        _validate_report(report)
+    def _tool_save_draft(self, **kw: Any) -> dict[str, Any]:
+        stats = {name: kw[name] for name in _ALLOWED_STATS if kw.get(name) is not None}
+        if not stats:
+            raise ToolError("invalid_report", "至少要填一个统计量：mean、max、min 或 median")
+        report: dict[str, Any] = {
+            "results": [{"statistic": name, "value": value, "unit": kw["unit"]} for name, value in stats.items()],
+            "dataset": {"id": kw["dataset_id"], "version": kw["dataset_version"]},
+            "protocol": {"id": kw["protocol_id"], "version": kw["protocol_version"]},
+        }
+        if kw.get("notes"):
+            report["notes"] = kw["notes"]
+        draft_key = kw.get("draft_key") or "main"
         existing = next(
             (rid for rid, rec in self.reports.items() if rec.get("task_id") == self.task_id and rec.get("draft_key") == draft_key),
             None,
@@ -363,7 +406,7 @@ class Environment:
             "task_id": self.task_id,
             "draft_key": draft_key,
             "status": "draft",
-            "report": copy.deepcopy(report),
+            "report": report,
             "saved_at_step": self.step,
         }
         return {"draft_id": draft_id, "status": "draft", "overwritten": existing is not None}
@@ -383,31 +426,6 @@ def statistics_mean(values: list[Decimal]) -> Decimal:
 
 def statistics_median(values: list[Decimal]) -> Decimal:
     return statistics.median(values)
-
-
-def _validate_report(report: Any) -> None:
-    if not isinstance(report, dict):
-        raise ToolError("invalid_report", "report 必须是对象")
-    allowed = {"results", "dataset", "protocol", "notes"}
-    extra = set(report) - allowed
-    if extra:
-        raise ToolError("invalid_report", f"report 含有未知字段：{', '.join(sorted(extra))}")
-    results = report.get("results")
-    if not isinstance(results, list) or not results:
-        raise ToolError("invalid_report", "results 必须是非空列表")
-    for item in results:
-        if not isinstance(item, dict) or set(item) != {"statistic", "value", "unit"}:
-            raise ToolError("invalid_report", "results 的每一项必须恰好包含 statistic、value、unit")
-        try:
-            to_decimal(item["value"])
-        except ValueError as exc:
-            raise ToolError("invalid_report", f"value 不是数值：{exc}") from exc
-    for key in ("dataset", "protocol"):
-        ref = report.get(key)
-        if not isinstance(ref, dict) or set(ref) != {"id", "version"}:
-            raise ToolError("invalid_report", f"{key} 必须是 {{\"id\", \"version\"}}")
-    if "notes" in report and not isinstance(report["notes"], str):
-        raise ToolError("invalid_report", "notes 必须是字符串")
 
 
 def observation_text(observation: dict[str, Any]) -> str:

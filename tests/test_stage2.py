@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from evidenceloop.data.build import build_training_set
+from evidenceloop.data.build import _corruptions_for, build_training_set
 from evidenceloop.data.export import EOS, build_manifest, check_prefix_consistency, expand, match_budgets, to_format
 from evidenceloop.data.selection import CAP, FLOOR, TRAIN_BUCKETS, selection_weights
 from evidenceloop.harness.loop import run_episodes
@@ -120,3 +120,14 @@ def test_budget_matching_and_manifest_hash(built):
 def test_canary_never_reaches_exports(built):
     exported = json.dumps([to_format(s, "trl") for r in built["targeted"]["records"] for s in expand(r)], ensure_ascii=False)
     assert "CANARY-" not in exported
+
+
+def test_every_d_corruption_really_breaks_the_demo():
+    """Each wrong-demo mode D can pick must fail the verifier, also in the short tier (nothing to convert there)."""
+    pubs, privs, _ = generate_split("validation", 30)
+    privs = {p["task_id"]: p for p in privs}
+    assert any(p["knobs"]["units"] == "all_V" for p in pubs)
+    for task in pubs:
+        for mode in _corruptions_for(task):
+            trace = run_episodes([task], ScriptedBackend(corruption=mode))[0]
+            assert not evaluate(trace, privs[task["task_id"]])["task_success"], (mode, task["bucket"])

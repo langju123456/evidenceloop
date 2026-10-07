@@ -1,6 +1,6 @@
 [project]
 name = "evidenceloop"
-version = "0.1.0"
+version = "0.2.0"
 description = "Verifiable agent environment and failure-driven post-training data pipeline"
 requires-python = ">=3.10"
 dependencies = []
