@@ -32,7 +32,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from evidenceloop.data.export import EOS, check_prefix_consistency
-from evidenceloop.harness.backends import render_full, render_prompt, weights_fingerprint
+from evidenceloop.harness.backends import check_no_old_torchao, render_full, render_prompt, weights_fingerprint
 
 TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 MAX_SKIPPED = 5
@@ -163,6 +163,7 @@ def prepare(tokenizer: Any, samples: list[dict[str, Any]], max_len: int) -> tupl
 
 
 def train(cfg: TrainConfig) -> dict[str, Any]:
+    check_no_old_torchao()
     import peft
     import torch
     import transformers
@@ -298,6 +299,7 @@ def train(cfg: TrainConfig) -> dict[str, Any]:
 
 def merge(base: str, adapter_dir: str, out: str, dtype: Any) -> None:
     """Fold the adapter into the base weights and save a plain model (W, D11). Runs on the CPU."""
+    check_no_old_torchao()
     from peft import PeftModel
     from transformers import AutoTokenizer
 

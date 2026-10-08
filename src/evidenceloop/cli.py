@@ -274,6 +274,8 @@ def cmd_run(args: argparse.Namespace) -> None:
     from evidenceloop.harness.loop import run_episodes
 
     _require(args.tasks)
+    if args.adapter and args.backend == "hf" and not os.path.exists(os.path.join(args.adapter, "adapter_config.json")):
+        sys.exit(f"{args.adapter} 里没有 adapter_config.json：训练没有跑完，或者 --adapter 路径写错了")
     os.makedirs(args.out, exist_ok=True)
     out_path = os.path.join(args.out, "traces.jsonl")
     existing = _read_jsonl(out_path)

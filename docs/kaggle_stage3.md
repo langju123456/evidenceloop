@@ -16,10 +16,11 @@
 !git clone https://github.com/langju123456/evidenceloop.git
 %cd evidenceloop
 !pip install -q -e ".[kaggle]"
+!pip uninstall -y -q torchao
 !python -c "import torch, transformers, peft; print(torch.__version__, transformers.__version__, peft.__version__, torch.cuda.get_device_name(0))"
 ```
 
-Kaggle 自带 torch 和 transformers。Qwen3 要 transformers 4.51 以上，版本低时上面的安装会顺带升级；peft 缺了也会装上。vLLM 放到第 4 步，在另一个会话里试。如果 D12 定了用 vLLM，以后每个会话都在这里加一行 `!pip install -q vllm==<D12 里记的版本>`。
+Kaggle 自带 torch 和 transformers，还预装了 torchao 0.10：新版 peft 发现旧的 torchao 就报错退出，本项目用不到它，所以直接卸载（训练和推理脚本在它还在时会提示这一步）。Qwen3 要 transformers 4.51 以上，版本低时上面的安装会顺带升级；peft 缺了也会装上。vLLM 放到第 4 步，在另一个会话里试。如果 D12 定了用 vLLM，以后每个会话都在这里加一行 `!pip install -q vllm==<D12 里记的版本>`。
 
 ## 2. 复现冻结的题目，核对哈希
 

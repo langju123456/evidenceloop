@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import re
 from typing import Any
 
 
@@ -172,6 +173,24 @@ class VLLMBackend:
                 "execution_mode": "real_model", **self._fingerprints}
 
 
+def check_no_old_torchao() -> None:
+    """Kaggle ships torchao 0.10; recent peft refuses to run LoRA while an old torchao is installed.
+    Nothing here uses torchao, so say how to remove it instead of failing deep inside peft."""
+    import importlib.metadata
+    import importlib.util
+
+    if importlib.util.find_spec("torchao") is None:
+        return
+    try:
+        version = importlib.metadata.version("torchao")
+    except importlib.metadata.PackageNotFoundError:
+        return
+    if tuple(int(part) for part in re.findall(r"\d+", version)[:2]) >= (0, 16):  # peft accepts these
+        return
+    raise SystemExit(f"装着 torchao {version}，新版 peft 遇到旧 torchao 会报错退出。本项目用不到它，"
+                     "先运行 pip uninstall -y torchao 再重跑。")
+
+
 class HFBackend:
     """Kaggle fallback: plain transformers generate. Greedy, thinking off, left-padded micro-batches sorted
     by prompt length. Decoding drops special tokens like vLLM does (<|im_end|> goes, <tool_call> stays,
@@ -199,6 +218,7 @@ class HFBackend:
         if adapter_path:
             from peft import PeftModel
 
+            check_no_old_torchao()
             net = PeftModel.from_pretrained(net, adapter_path).merge_and_unload()
         self.model = net.to(self.device).eval()
         self._torch = torch
