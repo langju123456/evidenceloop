@@ -478,7 +478,7 @@ def main(argv: list[str] | None = None) -> None:
     wbuild = warmup.add_parser("build")
     wbuild.add_argument("--tasks-dir", required=True, help="the frozen splits, used for the duplicate check")
     wbuild.add_argument("--seed", type=int, default=900)
-    wbuild.add_argument("--doses", type=int, nargs="+", default=[25, 50, 100])
+    wbuild.add_argument("--doses", type=int, nargs="+", default=[10, 25, 50, 100])
     wbuild.add_argument("--out", default="data/warmup")
     wbuild.add_argument("--record", default="configs/warmup.json")
     wbuild.set_defaults(func=cmd_warmup_build)

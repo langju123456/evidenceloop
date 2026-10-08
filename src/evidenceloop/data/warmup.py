@@ -24,7 +24,7 @@ from evidenceloop.tasks.generator import TRAIN_TEMPLATES
 from .build import build_training_set
 from .selection import GROUPS, allocation_shift, group_of, group_weights, is_infra_error, selection_weights
 
-DOSES = (25, 50, 100)
+DOSES = (10, 25, 50, 100)  # 10 is D12's fallback below 25; the larger doses are unchanged
 WARMUP_SEED = 900  # B, C and D use small build seeds (1, 2, 3); 900 keeps the warm-up tasks apart
 FROZEN_SPLITS = ("train_mining", "validation", "test_id", "test_ood")
 TRAIN_MINING_N = 200

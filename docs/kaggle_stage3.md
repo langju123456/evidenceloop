@@ -1,26 +1,39 @@
 # 阶段三在 Kaggle 上怎么跑
 
-这份说明按顺序写，每一步都可以单独重跑。规则来自 D11：先预热，得到有对有错的模型 W，再从 W 出发做 B、C、D。D11 定的评测后端是 vLLM；如果它在 T4 上跑不起来，就改用 transformers 后端，这个改动和训练设置一起写进 D12。D12 提交之前，只做第 1–4 步。
+这份说明按顺序写，每一步都可以单独重跑。规则来自 D11：先预热，得到有对有错的模型 W，再从 W 出发做 B、C、D。按 D12，评测和训练都用 vLLM 的环境（第 1 步），第 4 步的冒烟已经做完，下面从第 5 步接着跑。
 
 ## 0. 准备
 
 - Kaggle 账号先完成手机验证，否则 Notebook 里不能开 GPU，也不能联网。
-- 新建一个 Notebook，右侧设置里：Accelerator 选 GPU T4（选 T4 x2 也行，只用第一张卡），Internet 打开。
+- 新建一个 Notebook，右侧设置里：Accelerator 选 GPU T4（选 T4 x2 也行，只用第一张卡），Internet 打开。新建的 Notebook 默认不带 GPU，不选的话 `nvidia-smi` 找不到，训练会退到 CPU 上。
 - 每周的 GPU 时长有上限，一次会话也有时长上限。会话一停，`/kaggle/working` 里的东西就没了，所以每跑完一步都按第 7 步把结果下载下来，不要攒到最后。
 
 下面的命令都在 Notebook 的代码格里运行，前面加 `!`；切换目录用 `%cd`。
 
 ## 1. 拉代码，装依赖
 
+第一格：
+
 ```
+%cd /kaggle/working
 !git clone https://github.com/langju123456/evidenceloop.git
-%cd evidenceloop
+%cd /kaggle/working/evidenceloop
 !pip install -q -e ".[kaggle]"
-!pip uninstall -y -q torchao
-!python -c "import torch, transformers, peft; print(torch.__version__, transformers.__version__, peft.__version__, torch.cuda.get_device_name(0))"
 ```
 
-Kaggle 自带 torch 和 transformers，还预装了 torchao 0.10：新版 peft 发现旧的 torchao 就报错退出，本项目用不到它，所以直接卸载（训练和推理脚本在它还在时会提示这一步）。Qwen3 要 transformers 4.51 以上，版本低时上面的安装会顺带升级；peft 缺了也会装上。vLLM 放到第 4 步，在另一个会话里试。如果 D12 定了用 vLLM，以后每个会话都在这里加一行 `!pip install -q vllm==<D12 里记的版本>`。
+第二格：
+
+```
+!pip install -q vllm==0.31.0
+!pip uninstall -y -q torchaudio torchao
+!python -c "import torch, torchvision; print(torch.__version__, torchvision.__version__)"
+!python -c "import transformers, peft, vllm; print('导入正常', transformers.__version__, peft.__version__, vllm.__version__)"
+!python -c "import torch; print('GPU', torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+```
+
+装 vLLM 会把 torch 换成 CUDA 13.0 的版本（`+cu130`）。中间那一大段红色的 `dependency conflicts` 是 Kaggle 预装的其他包（RAPIDS、protobuf 等），本项目用不到，不用管。之后要卸载两个预装包：torchao 0.10（新版 peft 遇到旧 torchao 会报错退出）和 torchaudio（按 CUDA 12.8 编译，transformers 一导入就报错）。最后三行要看到两个版本号都带 `+cu130`、"导入正常"、`GPU True Tesla T4`。
+
+先第一格、再第二格，顺序不能反；之后的步骤另起新格。整页点 Run All 之前，确认格子是按这个顺序排的。
 
 ## 2. 复现冻结的题目，核对哈希
 
@@ -36,7 +49,7 @@ Kaggle 自带 torch 和 transformers，还预装了 torchao 0.10：新版 peft �
 !el warmup build --tasks-dir data/tasks/gen-0.2.1
 ```
 
-最后一行要显示"和 configs/warmup.json 一致"。三档数据在 `data/warmup/` 下：`dose25.trl.jsonl`（201 条样本）、`dose50.trl.jsonl`（409 条）、`dose100.trl.jsonl`（816 条）。
+最后一行要显示"和 configs/warmup.json 一致"。四档数据在 `data/warmup/` 下：`dose10.trl.jsonl`（77 条样本，D12 加入）、`dose25.trl.jsonl`（201 条）、`dose50.trl.jsonl`（409 条）、`dose100.trl.jsonl`（816 条）。
 
 再用真实的 Qwen3 模板检查 loss mask 会不会落错地方：
 
@@ -46,81 +59,56 @@ Kaggle 自带 torch 和 transformers，还预装了 torchao 0.10：新版 peft �
 
 要显示 `prefix consistency: 816/816 samples pass`。有任何一条不通过就停下，把输出发给我。
 
-## 4. 冒烟：训三步，考 16 道题
+## 4. 冒烟（已完成）
 
-**4a. 训练三步。**
-
-```
-!python scripts/train_lora.py --base Qwen/Qwen3-1.7B --data data/warmup/dose25.trl.jsonl --out runs/smoke --max-steps 3
-```
-
-看最后打印的汇总：能跑完；每步的 loss 是有限的数；`skipped_steps` 是 fp16 下梯度溢出、被跳过的步数，偶尔一步是正常的，三步都被跳过就把输出发给我；`peak_memory_gb` 是显存峰值。训练中途停下时，到那一步为止的记录在 `runs/smoke/train_log.json` 里。
-
-**4b. transformers 后端考 16 道题（两批，每批 8 道）。**
+在 transformers 和 vLLM 两个后端上各训了 3 步、考了 16 道题，结果和据此定下的设置见 D12。以后换了环境（比如 vLLM 升级）要重做一次时，在第 1–3 步之后运行：
 
 ```
-!el run --backend hf --model Qwen/Qwen3-1.7B --adapter runs/smoke/adapter --tasks data/tasks/gen-0.2.1/validation.public.jsonl --limit 16 --gen-batch 8 --out runs/smoke_hf
-!el eval --traces runs/smoke_hf/traces.jsonl --private data/tasks/gen-0.2.1/validation.private.jsonl --out runs/smoke_hf/evals.jsonl
-!python scripts/peek.py runs/smoke_hf --full | head -80
-```
-
-基座在 validation 上本来就几乎全错，所以"跑完了"说明不了后端对不对，要看模型的原始输出：第一轮应该是 `<tool_call>` 包着的 JSON 工具调用，后面几轮接着调工具。16 道题大多是 parse_error，或者第一轮就直接答完，说明后端有问题，把输出发给我。进度行里有最长输入的 token 数和显存峰值；一批放不进显存时，会自动拆小重试。
-
-**4c. 另开一个会话试 vLLM。** 安装 vLLM 会换掉 torch 和 transformers 的版本，所以不在 4a、4b 的会话里装。先把 4a、4b 的输出存下来，停掉会话（右上角的电源按钮），重新开一个，做完第 1–3 步，然后：
-
-```
-!pip install -q vllm
-!python -c "import vllm, torch, transformers; print(vllm.__version__, torch.__version__, transformers.__version__)"
 !python scripts/train_lora.py --base Qwen/Qwen3-1.7B --data data/warmup/dose25.trl.jsonl --out runs/smoke --max-steps 3
 !el run --backend vllm --model Qwen/Qwen3-1.7B --adapter runs/smoke/adapter --tasks data/tasks/gen-0.2.1/validation.public.jsonl --limit 16 --out runs/smoke_vllm
 !el eval --traces runs/smoke_vllm/traces.jsonl --private data/tasks/gen-0.2.1/validation.private.jsonl --out runs/smoke_vllm/evals.jsonl
 !python scripts/peek.py runs/smoke_vllm --full | head -80
 ```
 
-这样同时验证了：装上 vLLM 之后训练还能跑，vLLM 能在 T4 上带着 adapter 推理。装不上、或者报 GPU 不支持，就记下报错，阶段三用 transformers 后端。
-
-把 4a、4b、4c 的输出（训练汇总、两次 `el run` 的最后几行、`peek` 的输出和报错）发给我。我据此起草 D12，写明：
-
-- 评测后端用哪个、它和 torch、transformers 的版本；阶段三所有评测（包括 A 行）都用这一个。用 transformers 时，`--gen-batch` 也固定为一个值；
-- 训练设置：学习率 1e-4，2 轮，LoRA 秩 16、alpha 32、dropout 0.05，作用在 7 种投影上，每步 16 条样本，预热 5 步，最长 8192 个 token，fp16（损失缩放从 4096 起），预热的训练种子 0（冒烟发现问题就在 D12 里改）；
-- 冒烟时的速度、显存和最长输入；
-- D11 之后，A-ICL 的上下文是加在 A 上还是加在 W 上。
-
-D12 提交以后，才开始第 5 步。
+vLLM 启动时日志很长，`FA2 is only supported on devices with compute capability >= 8` 这类提示是正常的（T4 改用 Triton 注意力）。`el run` 一批跑完才打印进度，中途没有输出不代表卡住。最后的 `BrokenPipeError` 是 `head` 截断输出造成的，不用管。
 
 ## 5. A 行：基座在同一个后端上重考
 
-下面用 `--backend hf` 举例；D12 定的是 vLLM，就换成 `--backend vllm`，并去掉 `--gen-batch`。
-
 ```
-!el run --backend hf --model Qwen/Qwen3-1.7B --tasks data/tasks/gen-0.2.1/train_mining.public.jsonl --gen-batch 8 --out runs/A_train_mining
+!el run --backend vllm --model Qwen/Qwen3-1.7B --tasks data/tasks/gen-0.2.1/train_mining.public.jsonl --out runs/A_train_mining
 !el eval --traces runs/A_train_mining/traces.jsonl --private data/tasks/gen-0.2.1/train_mining.private.jsonl --out runs/A_train_mining/evals.jsonl
-!el run --backend hf --model Qwen/Qwen3-1.7B --tasks data/tasks/gen-0.2.1/validation.public.jsonl --gen-batch 8 --out runs/A_validation
+!el run --backend vllm --model Qwen/Qwen3-1.7B --tasks data/tasks/gen-0.2.1/validation.public.jsonl --out runs/A_validation
 !el eval --traces runs/A_validation/traces.jsonl --private data/tasks/gen-0.2.1/validation.private.jsonl --out runs/A_validation/evals.jsonl
 ```
 
-`el run` 中途断了，再运行同一条命令会接着跑；上次因为运行故障（infra_error）没跑完的题，会自动重跑，原文件留一份 `.bak` 备份。换了模型、权重或设置（包括 `--gen-batch`），它会拒绝往同一个目录里续写。
+按冒烟的速度，train_mining 的 200 道大约 20 分钟，validation 的 50 道大约 5 分钟，每次 `el run` 另加约 3 分钟启动。`el run` 中途断了，再运行同一条命令会接着跑；上次因为运行故障（infra_error）没跑完的题，会自动重跑，原文件留一份 `.bak` 备份。换了模型、权重或设置，它会拒绝往同一个目录里续写。
 
 ## 6. 预热：从 25 道题那一档开始
 
+预热只训 1 轮（`--epochs 1`，D12）。下面的 `N` 是剂量，先用 25：
+
 ```
-!python scripts/train_lora.py --base Qwen/Qwen3-1.7B --data data/warmup/dose25.trl.jsonl --out runs/W25 --merge-out runs/W25/merged
-!el run --backend hf --model runs/W25/merged --tasks data/tasks/gen-0.2.1/train_mining.public.jsonl --gen-batch 8 --out runs/W25_train_mining
-!el eval --traces runs/W25_train_mining/traces.jsonl --private data/tasks/gen-0.2.1/train_mining.private.jsonl --out runs/W25_train_mining/evals.jsonl
-!el warmup check --evals runs/W25_train_mining/evals.jsonl --title "预热达标检查：25 道题" --out reports/warmup_check_W25.md
+!python scripts/train_lora.py --base Qwen/Qwen3-1.7B --data data/warmup/doseN.trl.jsonl --epochs 1 --out runs/WN --merge-out runs/WN/merged
+!el run --backend vllm --model runs/WN/merged --tasks data/tasks/gen-0.2.1/train_mining.public.jsonl --out runs/WN_train_mining
+!el eval --traces runs/WN_train_mining/traces.jsonl --private data/tasks/gen-0.2.1/train_mining.private.jsonl --out runs/WN_train_mining/evals.jsonl
+!el warmup check --evals runs/WN_train_mining/evals.jsonl --title "预热达标检查：N 道题" --out reports/warmup_check_WN.md
 ```
 
-结果看 `reports/warmup_check_W25.md` 里"结论"那一行。检查只接受同一个模型配置在 train_mining 全部 200 道题上的结果；缺题、重复、混了两种配置、或者有运行故障的题，它会直接拒绝并说明原因（有运行故障就先用同一条 `el run` 重跑，再 `el eval`；重跑几次还是同几道题出故障，把输出发给我）。
+结果看 `reports/warmup_check_WN.md` 里"结论"那一行。检查只接受同一个模型配置在 train_mining 全部 200 道题上的结果；缺题、重复、混了两种配置、或者有运行故障的题，它会直接拒绝并说明原因（有运行故障就先用同一条 `el run` 重跑，再 `el eval`；重跑几次还是同几道题出故障，把输出发给我）。
 
-- **达标**：W 就是 W25，停在这一档。再让它考 validation，得到报告里的 W 行：
+按 D12 的顺序换剂量：
 
-  ```
-  !el run --backend hf --model runs/W25/merged --tasks data/tasks/gen-0.2.1/validation.public.jsonl --gen-batch 8 --out runs/W25_validation
-  !el eval --traces runs/W25_validation/traces.jsonl --private data/tasks/gen-0.2.1/validation.private.jsonl --out runs/W25_validation/evals.jsonl
-  ```
+- **25 达标**：W 就是 W25，停在这一档。
+- **25 的成功率高于 80%**：把 N 换成 10 再跑一遍。10 达标就用 W10；不达标就停下来，把两份检查结果发给我。
+- **25 的成功率低于 20%，或者在 20% 到 80% 之间但 C 和 B 拉不开**：把 N 换成 50；还不达标就换成 100。三档都不达标就停下来，把检查结果发给我。
+- 任何情况下都不临时加档。
 
-- **不达标**：同样的四条命令，把 25 换成 50；还不达标就换成 100。
-- **三档都不达标**：停下来，把三份检查结果发给我。按 D11，不临时加档，另记一条决策再定下一步。
+定下 W 以后，让它考 validation，得到报告里的 W 行：
+
+```
+!el run --backend vllm --model runs/WN/merged --tasks data/tasks/gen-0.2.1/validation.public.jsonl --out runs/WN_validation
+!el eval --traces runs/WN_validation/traces.jsonl --private data/tasks/gen-0.2.1/validation.private.jsonl --out runs/WN_validation/evals.jsonl
+```
 
 ## 7. 每跑完一步，把结果带回来
 
@@ -153,4 +141,4 @@ D12 提交以后，才开始第 5 步。
 
 它会核对 adapter 和基座都和训练日志对得上，并打印新模型的指纹；和训练时合并出的指纹一致，就是同一个 W。
 
-B、C、D 的数据从 W 的错题构建，构建时加上 `--exclude-tasks-dir data/tasks/gen-0.2.1 --exclude-records data/warmup/dose100.records.jsonl`，排除冻结划分和全部预热题（三档都是 dose100 的前缀）。C、D 用 `--evals runs/W25_train_mining/evals.jsonl`。题数和训练次序在 W 定下来以后写进决策记录，到时这一步的完整命令再补上。
+B、C、D 的数据从 W 的错题构建，构建时加上 `--exclude-tasks-dir data/tasks/gen-0.2.1 --exclude-records data/warmup/dose100.records.jsonl`，排除冻结划分和全部预热题（四档都是 dose100 的前缀）。C、D 用 `--evals runs/W25_train_mining/evals.jsonl`。题数和训练次序在 W 定下来以后写进决策记录，到时这一步的完整命令再补上。
