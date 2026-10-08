@@ -1,0 +1,45 @@
+{
+  "decision": "D11",
+  "generator_version": "gen-0.2.1",
+  "env_version": "env-0.2.1",
+  "verifier_version": "ver-0.1.6",
+  "policy": "uniform",
+  "seed": 900,
+  "doses": {
+    "25": {
+      "tasks": 25,
+      "samples": 201,
+      "supervised_chars": 37174,
+      "trl_sha256": "53613a22be0118b8b31a1510039e7a636f37090faf42dc9f04068ae02d9ffafd"
+    },
+    "50": {
+      "tasks": 50,
+      "samples": 409,
+      "supervised_chars": 75788,
+      "trl_sha256": "294bfe3d383cfc43e66452b18e3b7da9b22cc575c9e49951a91ef934683dc2b0"
+    },
+    "100": {
+      "tasks": 100,
+      "samples": 816,
+      "supervised_chars": 151596,
+      "trl_sha256": "6f880dbcac8e251f2d890bb165a68f8d2c801a9f2442e207fb872c9dec4b6db2"
+    }
+  },
+  "nested": "小档是大档的前缀：同一串题的前 N 道",
+  "frozen_tasks_dir": "data/tasks/gen-0.2.1",
+  "frozen_splits_checked": {
+    "train_mining": 200,
+    "validation": 50,
+    "test_id": 150,
+    "test_ood": 150
+  },
+  "excluded_frozen_duplicates": 0,
+  "templates": [
+    "T1",
+    "T2",
+    "T3",
+    "T4"
+  ],
+  "reject_counts": {},
+  "reproducibility": "data/ 不进版本库；预热数据由生成器和参考解法确定性生成，重新运行 el warmup build 后哈希应与这里一致。"
+}

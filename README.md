@@ -11,9 +11,9 @@
 | 阶段一：环境、8 个工具、任务生成器、独立 oracle、9 条错误路径、验证器与诊断、对抗测试 | 已实现，66 项测试通过 |
 | 阶段一：真实模型校准（Mac，MLX） | 已完成。env-0.2.1：1.7B 成功 1/60，4B 成功 6/60（[报告](reports/)）；按 D8 事先定好的规则，基座定为 1.7B |
 | 阶段一：正式划分、基线与排行榜 | 已完成。按 D9 堵住出题捷径后（gen-0.2.1）冻结划分，记录在 `configs/frozen.json`；validation 基线：0.6B 0/50，1.7B 0/50，4B 6/50（[排行榜](reports/leaderboard_validation_env-0.2.1.md)）；1.7B 在 train_mining 上 1/200 |
-| 阶段二：B / C / D 三组数据构建、观测溯源检查、去重、谱系、单决策 SFT 导出、预算对齐、manifest | 已实现，测试通过；等阶段一的真实失败作为输入 |
+| 阶段二：B / C / D 三组数据构建、观测溯源检查、去重、谱系、单决策 SFT 导出、预算对齐、manifest | 已实现，测试通过；C、D 按 6 组的合并失败率加权（D11）；等预热模型 W 的真实失败作为输入 |
 | 阶段二：真实 Qwen3 模板的前缀一致性检查 | 脚本已写好（`scripts/check_template.py`） |
-| 阶段三：受控 SFT 实验（Kaggle） | 未开始。先加一轮预热，让模型变得有对有错，再从预热模型出发做 B、C、D 对比；规则事先写在 D11 |
+| 阶段三：受控 SFT 实验（Kaggle） | 训练脚本（`scripts/train_lora.py`）、三档预热数据（记录在 `configs/warmup.json`）、达标检查（`el warmup check`）和 Kaggle 分步说明（[docs/kaggle_stage3.md](docs/kaggle_stage3.md)）已就绪，还没开始训练。先预热，让模型变得有对有错，再从预热模型出发做 B、C、D 对比；规则事先写在 D11 |
 
 ## 真实模型校准：目前看到的
 
@@ -34,14 +34,14 @@
 
 ```bash
 pip install -e ".[dev]"
-python -m pytest -q   # 66 passed
+python -m pytest -q   # 95 passed；没装 torch 的机器上是 91 passed、1 skipped（训练冒烟整组跳过）
 ```
 
-测试覆盖：工具与参数校验（含拆平后的参数，以及 JSON 字符串编码的列表只放宽到等价内容）、30 道冒烟题上 oracle 与参考策略互检（两种合法顺序都判对）、每道题的错误路径都有区分度、16 种错误做法全部被拒且归因正确、伪造"评分已通过"不影响判定、猜版本被溯源检查抓到、canary 不进任何提示词/观测/导出、划分互不重叠、重放确定、B/C/D 的采样与门控、谱系、单决策导出、前缀一致性检查能抓出错误模板、预算对齐、简单档确实更短且提示里给出的版本算作已知上下文、D 组每种错误示范都确实是错的、报告里多出来的统计量只有算对了才放过、回复的虚报和没汇报分开判定、过滤条件的 value 与 op 不匹配时报错、"只留 ok"的捷径和写反的过滤条件都被判错并归因、冻结时检查各划分没有重复题并记录哈希、命令行端到端与断点续跑。
+测试覆盖：工具与参数校验（含拆平后的参数，以及 JSON 字符串编码的列表只放宽到等价内容）、30 道冒烟题上 oracle 与参考策略互检（两种合法顺序都判对）、每道题的错误路径都有区分度、16 种错误做法全部被拒且归因正确、伪造"评分已通过"不影响判定、猜版本被溯源检查抓到、canary 不进任何提示词/观测/导出、划分互不重叠、重放确定、B/C/D 的采样与门控、谱系、单决策导出、前缀一致性检查能抓出错误模板、预算对齐、简单档确实更短且提示里给出的版本算作已知上下文、D 组每种错误示范都确实是错的、报告里多出来的统计量只有算对了才放过、回复的虚报和没汇报分开判定、过滤条件的 value 与 op 不匹配时报错、"只留 ok"的捷径和写反的过滤条件都被判错并归因、冻结时检查各划分没有重复题并记录哈希、重新生成的冻结划分和记录的哈希一致、C 组按 6 组合并失败率加权且各组失败率相同时和 B 完全一样、预热数据和冻结划分没有重复且小档是大档的前缀、达标检查（包括"六组都是 50%"这个漏洞）、达标检查只接受同一配置下完整的 train_mining 结果、B/C/D 构建能排除冻结划分和预热数据里的题、训练时 loss 只落在下一条 assistant 消息上且和库函数算出的 loss 一致、CPU 上用小模型走通训练—合并—对局、合并确实改变了权重且只凭 adapter 能重新合并出指纹相同的 W、显存不够的批次拆小重试且单条放不下时只让那一题记为运行故障、训练中途停下时保留到那一步的日志、输入文件缺失时直接报错、命令行端到端与断点续跑（运行故障的题续跑时重跑）。
 
 ## 在 Mac 上开始
 
-见 `scripts/mac_quickstart.sh`：建任务 → 用 MLX 跑 5 道冒烟题调 harness → 跑完整 calibration → 看报告定难度。定下基座后用 `el freeze` 冻结正式划分（记录写进 `configs/frozen.json`），再用 `scripts/mac_baseline.sh` 跑基线；每完成一步用 `scripts/checkpoint.sh` 提交并推送。
+见 `scripts/mac_quickstart.sh`：建任务 → 用 MLX 跑 5 道冒烟题调 harness → 跑完整 calibration → 看报告定难度。定下基座后用 `el freeze` 冻结正式划分（记录写进 `configs/frozen.json`），再用 `scripts/mac_baseline.sh` 跑基线；每完成一步用 `scripts/checkpoint.sh` 提交并推送。阶段三在 Kaggle 上跑，步骤见 [docs/kaggle_stage3.md](docs/kaggle_stage3.md)。
 
 ## 目录
 
@@ -52,18 +52,21 @@ src/evidenceloop/
   oracle/oracle.py      独立参考实现与错误路径表（不 import 工具代码）
   verify/verifier.py    五项判定、task_success、诊断
   verify/grounding.py   观测溯源检查
-  harness/              严格解析器、批量循环、脚本化参考策略、MLX / vLLM 后端
-  data/                 采样策略、B/C/D 构建、SFT 导出与 manifest
+  harness/              严格解析器、批量循环、脚本化参考策略、MLX / vLLM / transformers 后端
+  data/                 采样策略、B/C/D 构建、预热数据与达标检查、SFT 导出与 manifest
+  train/sft.py          LoRA SFT：loss mask、训练循环、合并成 W
   report/baseline.py    报告（数字全部来自评测记录）
   cli.py                el 命令
-scripts/                Mac 快速开始、校准、基线、阶段性提交推送、真实模板检查、逐题查看轨迹、上传 GitHub
-tests/                  66 项测试
+scripts/                Mac 快速开始、校准、基线、LoRA 训练与合并、阶段性提交推送、真实模板检查、逐题查看轨迹、上传 GitHub
+docs/                   决策记录、Kaggle 分步说明
+tests/                  95 项测试
 ```
 
 ## 更新记录
 
 每次改动的理由见 `docs/decisions.md`。
 
+- **0.2.3（D11 之后）**：C、D 组改为按 6 组（单位档 × 题型）的合并失败率加权；新增 `el warmup build`（三档预热数据，和冻结划分查重，记录种子与哈希）、`el warmup check`（D11 的达标标准）、`el frozen verify`（重新生成冻结划分并核对哈希）；新增 `scripts/train_lora.py`、`scripts/merge_lora.py` 和 transformers 评测后端（vLLM 在 T4 上跑不了时用，显存不够时自动拆小批次）；`el run` 续跑时重跑运行故障（infra_error）的题；`el data build` 可以排除冻结划分和预热数据里的题；训练日志记 git commit、显存峰值、基座、adapter 和合并模型的指纹，每条轨迹里带同样的指纹；`el` 的输入文件不存在时直接报错（以前会当成空文件）；构建记录里加上去重键，方便事后核对。题目、环境、验证器都不变。
 - **0.2.2 补充**：根据一份外部代码审查，更正四处表述，另自查更正一处（D10），不改代码；加入冻结后的基线与排行榜（`reports/`）。
 - **0.2.2（env-0.2.1 校准之后）**：数据加入任何规则都不排除的有效标记 recal，堵住"只留 ok 行"的捷径；错误路径表新增 E8（只留 ok）、E9（条件写反）；新增 `el freeze`（生成并检查正式划分，记录版本与哈希）和 `scripts/mac_baseline.sh`。生成器 gen-0.2.1，验证器 ver-0.1.6，环境不变（env-0.2.1）。
 - **0.2.1（env-0.2.0 校准之后）**：报告里的每个数都要对，多填且填错的统计量记为 unsupported_number；报告新增"报告里有工具没算出过的数"；"回复与状态不一致"拆成虚报和没汇报两项；过滤条件的 value 与 op 不匹配时报错；报告开头写明环境和验证器版本；新增 `scripts/checkpoint.sh`，每完成一步就提交并推送。环境 env-0.2.1，验证器 ver-0.1.5，题目不变（gen-0.2.0）。

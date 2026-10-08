@@ -8,6 +8,9 @@
   el data build   --policy targeted --seed 1 --n 200 --evals runs/mining/evals.jsonl --out data/sft/C1
   el export sft   --records data/sft/B1/records.jsonl data/sft/C1/records.jsonl data/sft/D1/records.jsonl \
                   --names B1 C1 D1 --format trl --seed 1 --out data/sft/export_seed1
+  el frozen verify --tasks-dir data/tasks/gen-0.2.1
+  el warmup build --tasks-dir data/tasks/gen-0.2.1 --out data/warmup
+  el warmup check --evals runs/W25_train_mining/evals.jsonl --out reports/warmup_check_W25.md
 
 `run` never opens a private file: the model side of the pipeline cannot see answers.
 """
@@ -21,7 +24,7 @@ import sys
 import time
 from typing import Any
 
-from evidenceloop.data.export import build_manifest, expand, match_budgets, to_format, write_jsonl
+from evidenceloop.data.export import build_manifest, expand, match_budgets, supervised_size, to_format, write_jsonl
 
 
 def _read_jsonl(path: str) -> list[dict[str, Any]]:
@@ -29,6 +32,13 @@ def _read_jsonl(path: str) -> list[dict[str, Any]]:
         return []
     with open(path, encoding="utf-8") as fh:
         return [json.loads(line) for line in fh if line.strip()]
+
+
+def _require(*paths: str) -> None:
+    """Inputs must exist: a missing file would otherwise read as empty and give an empty result."""
+    missing = [path for path in paths if not os.path.exists(path)]
+    if missing:
+        sys.exit(f"找不到 {', '.join(missing)}")
 
 
 def _append_jsonl(path: str, rows: list[dict[str, Any]]) -> None:
@@ -142,6 +152,105 @@ def cmd_freeze(args: argparse.Namespace) -> None:
     print(f"已冻结：基座 {args.base}，{GENERATOR_VERSION} / {ENV_VERSION} / {VERIFIER_VERSION} → {args.out}")
 
 
+def cmd_frozen_verify(args: argparse.Namespace) -> None:
+    """Regenerate any missing frozen split files and check them against configs/frozen.json (on Kaggle,
+    or any fresh clone: data/ is not in the repo). Existing files are never overwritten."""
+    from evidenceloop.common import GENERATOR_VERSION
+    from evidenceloop.tasks.generator import generate_split
+
+    with open(args.record, encoding="utf-8") as fh:
+        record = json.load(fh)
+    if record["generator_version"] != GENERATOR_VERSION:
+        sys.exit(f"冻结记录是 {record['generator_version']}，当前生成器是 {GENERATOR_VERSION}，不能核对")
+    tasks_dir = args.tasks_dir or record["tasks_dir"]
+    os.makedirs(tasks_dir, exist_ok=True)
+    bad = []
+    for split, info in record["splits"].items():
+        public = os.path.join(tasks_dir, f"{split}.public.jsonl")
+        private = os.path.join(tasks_dir, f"{split}.private.jsonl")
+        if not os.path.exists(public):
+            publics, privates, rejects = generate_split(split, info["n"])
+            write_jsonl(public, publics)
+            write_jsonl(private, privates)
+            write_jsonl(os.path.join(tasks_dir, f"{split}.rejects.jsonl"), rejects)
+        same = _sha256_file(public) == info["public_sha256"] and _sha256_file(private) == info["private_sha256"]
+        print(f"{split:13s} {'一致' if same else '不一致'}")
+        if not same:
+            bad.append(split)
+    if bad:
+        sys.exit(f"{', '.join(bad)} 和冻结记录对不上，不能继续")
+    print(f"四个划分都和 {args.record} 一致")
+
+
+def cmd_warmup_build(args: argparse.Namespace) -> None:
+    """D11: build the warm-up doses once, record seeds and hashes; on a second machine, check them."""
+    from evidenceloop.common import ENV_VERSION, GENERATOR_VERSION, VERIFIER_VERSION
+    from evidenceloop.data.warmup import build_warmup
+
+    result = build_warmup(args.tasks_dir, args.seed, tuple(args.doses))
+    built = result["built"]
+    os.makedirs(args.out, exist_ok=True)
+    doses = {}
+    for dose, records in result["doses"].items():
+        samples = [s for r in records for s in expand(r)]
+        write_jsonl(os.path.join(args.out, f"dose{dose}.records.jsonl"), records)
+        trl_path = os.path.join(args.out, f"dose{dose}.trl.jsonl")
+        write_jsonl(trl_path, [to_format(s, "trl") for s in samples])
+        doses[str(dose)] = {"tasks": len(records), "samples": len(samples),
+                            "supervised_chars": sum(supervised_size(s) for s in samples),
+                            "trl_sha256": _sha256_file(trl_path)}
+    write_jsonl(os.path.join(args.out, "rejects.jsonl"), built["rejects"])
+    record = {
+        "decision": "D11",
+        "generator_version": GENERATOR_VERSION,
+        "env_version": ENV_VERSION,
+        "verifier_version": VERIFIER_VERSION,
+        "policy": "uniform",
+        "seed": args.seed,
+        "doses": doses,
+        "nested": "小档是大档的前缀：同一串题的前 N 道",
+        "frozen_tasks_dir": args.tasks_dir,
+        "frozen_splits_checked": result["frozen_splits"],
+        "excluded_frozen_duplicates": result["excluded_frozen_duplicates"],
+        "templates": result["templates"],
+        "reject_counts": built["reject_counts"],
+        "reproducibility": "data/ 不进版本库；预热数据由生成器和参考解法确定性生成，重新运行 el warmup build 后哈希应与这里一致。",
+    }
+    for dose, info in doses.items():
+        print(f"dose {dose:>3s}: {info['tasks']} 道题，{info['samples']} 条样本，{info['trl_sha256'][:12]}")
+    print(f"和冻结划分重复而剔除的题：{result['excluded_frozen_duplicates']}")
+    if os.path.exists(args.record):
+        with open(args.record, encoding="utf-8") as fh:
+            old = json.load(fh)
+        diffs = [d for d in old["doses"] if doses.get(d, {}).get("trl_sha256") != old["doses"][d]["trl_sha256"]]
+        diffs += [k for k in ("seed", "generator_version", "env_version", "verifier_version") if old.get(k) != record[k]]
+        if diffs:
+            sys.exit(f"和 {args.record} 对不上：{', '.join(diffs)}（记录不会被覆盖）")
+        print(f"和 {args.record} 一致")
+        return
+    os.makedirs(os.path.dirname(args.record) or ".", exist_ok=True)
+    with open(args.record, "w", encoding="utf-8") as fh:
+        json.dump(record, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    print(f"记录写入 {args.record}")
+
+
+def cmd_warmup_check(args: argparse.Namespace) -> None:
+    from evidenceloop.data.warmup import check_warmup, render_check
+
+    _require(args.evals)
+    try:
+        result = check_warmup(_read_jsonl(args.evals), expected_n=args.expected_n)
+    except ValueError as err:
+        sys.exit(f"不能做达标检查：{err}")
+    text = render_check(result, args.title)
+    print(text)
+    if args.out:
+        os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
+        with open(args.out, "w", encoding="utf-8") as fh:
+            fh.write(text)
+
+
 def _backend(args: argparse.Namespace):
     if args.backend == "scripted":
         from evidenceloop.harness.scripted import ScriptedBackend
@@ -149,42 +258,68 @@ def _backend(args: argparse.Namespace):
     if args.backend == "mlx":
         from evidenceloop.harness.backends import MLXBackend
         return MLXBackend(args.model, adapter_path=args.adapter, max_tokens=args.max_tokens, thinking=args.thinking)
+    if args.backend == "hf":
+        if args.thinking:
+            sys.exit("hf 后端只跑不开 thinking 的贪心解码")
+        from evidenceloop.harness.backends import HFBackend
+        return HFBackend(args.model, adapter_path=args.adapter, max_tokens=args.max_tokens, gen_batch=args.gen_batch)
     from evidenceloop.harness.backends import VLLMBackend
     return VLLMBackend(args.model, lora_path=args.adapter, dtype=args.dtype, max_tokens=args.max_tokens,
                        tensor_parallel_size=args.tp, thinking=args.thinking)
 
 
 def cmd_run(args: argparse.Namespace) -> None:
+    """Resumable: tasks already in traces.jsonl are skipped, except infra_error ones (the backend crashed,
+    e.g. out of memory), which are run again; the old file is kept as a backup first."""
     from evidenceloop.harness.loop import run_episodes
 
+    _require(args.tasks)
     os.makedirs(args.out, exist_ok=True)
     out_path = os.path.join(args.out, "traces.jsonl")
     existing = _read_jsonl(out_path)
-    done = {t["task_id"] for t in existing}
+    kept = [t for t in existing if t.get("termination") != "infra_error"]
+    redo = len(existing) - len(kept)
+    done = {t["task_id"] for t in kept}
     tasks = [t for t in _read_jsonl(args.tasks) if t["task_id"] not in done]
     if args.limit:
         tasks = tasks[: max(0, args.limit - len(done))]
-    print(f"{len(done)} already done, {len(tasks)} to run")
+    print(f"{len(done)} already done, {len(tasks)} to run" + (f"（其中 {redo} 道上次是运行故障，重跑）" if redo else ""))
     backend = _backend(args)
     from evidenceloop.common import ENV_VERSION, content_hash
     config_hash = content_hash({"backend": backend.describe(), "max_turns": args.max_turns})
-    stale = [t for t in existing if t.get("env_version") != ENV_VERSION or t.get("inference_config_hash") != config_hash]
+    stale = [t for t in kept if t.get("env_version") != ENV_VERSION or t.get("inference_config_hash") != config_hash]
     if stale:
-        sys.exit(f"{args.out} 里有 {len(stale)} 条轨迹来自不同的环境版本或模型配置，不能接着跑。请换一个 --out 目录。")
+        sys.exit(f"{args.out} 里有 {len(stale)} 条轨迹来自不同的环境版本或模型配置（换了模型、权重或设置），"
+                 "不能接着跑。请换一个 --out 目录。")
+    if redo:
+        import shutil
+
+        backup = f"{out_path}.{time.strftime('%Y%m%d-%H%M%S')}.bak"
+        shutil.copyfile(out_path, backup)
+        write_jsonl(out_path + ".tmp", kept)
+        os.replace(out_path + ".tmp", out_path)  # atomic: an interruption leaves either the old file or the new one
+        print(f"原文件备份在 {backup}")
     began = time.time()
+    failed = 0
     for start in range(0, len(tasks), args.batch_size):
         batch = tasks[start:start + args.batch_size]
         traces = run_episodes(batch, backend, max_turns=args.max_turns, attempt_seed=args.attempt_seed)
         _append_jsonl(out_path, traces)  # every batch is durable: an interrupted run resumes here
+        failed += sum(1 for t in traces if t["termination"] == "infra_error")
         done_now = start + len(batch)
         elapsed = time.time() - began
         eta = elapsed / done_now * (len(tasks) - done_now)
-        print(f"  {done_now}/{len(tasks)}  已用 {elapsed / 60:.1f} 分钟，预计还要 {eta / 60:.1f} 分钟", flush=True)
+        note = backend.status() if hasattr(backend, "status") else ""
+        print(f"  {done_now}/{len(tasks)}  已用 {elapsed / 60:.1f} 分钟，预计还要 {eta / 60:.1f} 分钟"
+              + (f"  {note}" if note else "") + (f"  运行故障 {failed} 道" if failed else ""), flush=True)
+    if failed:
+        print(f"有 {failed} 道是运行故障（infra_error）。再运行同一条命令，只重跑这些题。")
 
 
 def cmd_eval(args: argparse.Namespace) -> None:
     from evidenceloop.verify.verifier import evaluate
 
+    _require(args.traces, args.private)
     privates = {p["task_id"]: p for p in _read_jsonl(args.private)}
     traces = _read_jsonl(args.traces)
     known = [t for t in traces if t["task_id"] in privates]
@@ -198,6 +333,7 @@ def cmd_eval(args: argparse.Namespace) -> None:
 def cmd_report(args: argparse.Namespace) -> None:
     from evidenceloop.report.baseline import render_markdown
 
+    _require(*args.evals)
     names = args.names or [os.path.basename(os.path.dirname(p)) for p in args.evals]
     runs = {name: _read_jsonl(path) for name, path in zip(names, args.evals)}
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
@@ -207,21 +343,47 @@ def cmd_report(args: argparse.Namespace) -> None:
 
 
 def cmd_data_build(args: argparse.Namespace) -> None:
+    """Stage 3 builds pass --exclude-tasks-dir (the frozen splits) and --exclude-records (the warm-up data),
+    so no training task repeats an evaluation task or a task W was already trained on."""
     from evidenceloop.data.build import build_training_set
+    from evidenceloop.data.warmup import frozen_dedup_keys
 
+    if args.evals:
+        _require(args.evals)
     evals = _read_jsonl(args.evals) if args.evals else None
     if args.policy != "uniform" and not evals:
         sys.exit("targeted and unfiltered need --evals from train_mining")
-    built = build_training_set(args.policy, args.seed, args.n, evals)
+    exclude: set[str] = set()
+    sources: dict[str, int] = {}
+    if args.exclude_tasks_dir:
+        try:
+            frozen = frozen_dedup_keys(args.exclude_tasks_dir)
+        except FileNotFoundError as err:
+            sys.exit(str(err))
+        for split, keys in frozen.items():
+            exclude |= keys
+            sources[split] = len(keys)
+    for path in args.exclude_records or []:
+        if not os.path.exists(path):
+            sys.exit(f"找不到 {path}")
+        keys = {r["dedup_key"] for r in _read_jsonl(path) if r.get("dedup_key")}
+        if not keys:
+            sys.exit(f"{path} 里没有 dedup_key（用当前版本的 el warmup build / el data build 重新生成）")
+        exclude |= keys
+        sources[path] = len(keys)
+    built = build_training_set(args.policy, args.seed, args.n, evals, exclude_keys=exclude or None)
     os.makedirs(args.out, exist_ok=True)
     write_jsonl(os.path.join(args.out, "records.jsonl"), built["records"])
     write_jsonl(os.path.join(args.out, "rejects.jsonl"), built["rejects"])
+    meta = {k: built[k] for k in ("policy", "seed", "weights", "reject_counts", "corrupted")}
+    meta["excluded_from"] = sources
     with open(os.path.join(args.out, "build.json"), "w", encoding="utf-8") as fh:
-        json.dump({k: built[k] for k in ("policy", "seed", "weights", "reject_counts", "corrupted")}, fh, ensure_ascii=False, indent=2)
+        json.dump(meta, fh, ensure_ascii=False, indent=2)
     print(f"{args.policy}: {len(built['records'])} trajectories, rejects {built['reject_counts']}, corrupted {built['corrupted']}")
 
 
 def cmd_export(args: argparse.Namespace) -> None:
+    _require(*args.records)
     names = args.names or [os.path.basename(os.path.dirname(p)) for p in args.records]
     built_meta, sets = {}, {}
     for name, path in zip(names, args.records):
@@ -256,7 +418,7 @@ def main(argv: list[str] | None = None) -> None:
 
     run = sub.add_parser("run")
     run.add_argument("--tasks", required=True)
-    run.add_argument("--backend", required=True, choices=["scripted", "mlx", "vllm"])
+    run.add_argument("--backend", required=True, choices=["scripted", "mlx", "vllm", "hf"])
     run.add_argument("--model")
     run.add_argument("--adapter")
     run.add_argument("--corruption")
@@ -269,6 +431,7 @@ def main(argv: list[str] | None = None) -> None:
     run.add_argument("--attempt-seed", type=int, default=0)
     run.add_argument("--dtype", default="half")
     run.add_argument("--tp", type=int, default=1)
+    run.add_argument("--gen-batch", type=int, default=8, help="hf backend: prompts per generate call")
     run.add_argument("--thinking", action="store_true", help="Qwen3 thinking mode (sampled, larger token budget)")
     run.set_defaults(func=cmd_run)
 
@@ -299,8 +462,30 @@ def main(argv: list[str] | None = None) -> None:
     data.add_argument("--seed", type=int, required=True)
     data.add_argument("--n", type=int, required=True)
     data.add_argument("--evals")
+    data.add_argument("--exclude-tasks-dir", help="drop tasks whose content matches a frozen split in this directory")
+    data.add_argument("--exclude-records", nargs="+", help="drop tasks already in these records files (the warm-up data)")
     data.add_argument("--out", required=True)
     data.set_defaults(func=cmd_data_build)
+
+    frozen = sub.add_parser("frozen").add_subparsers(dest="action", required=True).add_parser("verify")
+    frozen.add_argument("--record", default="configs/frozen.json")
+    frozen.add_argument("--tasks-dir", help="defaults to the tasks_dir in the record")
+    frozen.set_defaults(func=cmd_frozen_verify)
+
+    warmup = sub.add_parser("warmup").add_subparsers(dest="action", required=True)
+    wbuild = warmup.add_parser("build")
+    wbuild.add_argument("--tasks-dir", required=True, help="the frozen splits, used for the duplicate check")
+    wbuild.add_argument("--seed", type=int, default=900)
+    wbuild.add_argument("--doses", type=int, nargs="+", default=[25, 50, 100])
+    wbuild.add_argument("--out", default="data/warmup")
+    wbuild.add_argument("--record", default="configs/warmup.json")
+    wbuild.set_defaults(func=cmd_warmup_build)
+    wcheck = warmup.add_parser("check")
+    wcheck.add_argument("--evals", required=True, help="W's evals on all 200 train_mining tasks")
+    wcheck.add_argument("--expected-n", type=int, default=FREEZE_SIZES["train_mining"])
+    wcheck.add_argument("--title", default="预热达标检查（D11）")
+    wcheck.add_argument("--out")
+    wcheck.set_defaults(func=cmd_warmup_check)
 
     export = sub.add_parser("export").add_subparsers(dest="action", required=True).add_parser("sft")
     export.add_argument("--records", nargs="+", required=True)

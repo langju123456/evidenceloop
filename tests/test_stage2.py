@@ -4,7 +4,7 @@ import pytest
 
 from evidenceloop.data.build import _corruptions_for, build_training_set
 from evidenceloop.data.export import EOS, build_manifest, check_prefix_consistency, expand, match_budgets, to_format
-from evidenceloop.data.selection import CAP, FLOOR, TRAIN_BUCKETS, selection_weights
+from evidenceloop.data.selection import CAP, FLOOR, TRAIN_BUCKETS, group_of, selection_weights
 from evidenceloop.harness.loop import run_episodes
 from evidenceloop.harness.scripted import ScriptedBackend
 from evidenceloop.tasks.generator import generate_split
@@ -41,11 +41,13 @@ def test_weights(mining_evals):
 
 
 def test_schema_dominated_failures_are_discounted():
-    evals = [{"task_id": f"t{i}", "bucket": TRAIN_BUCKETS[i % 2], "task_success": False,
+    a, b = TRAIN_BUCKETS[0], TRAIN_BUCKETS[8]  # all_mV|F1 and mixed|F1: weights are pooled per group (D11)
+    assert group_of(a) != group_of(b)
+    evals = [{"task_id": f"t{i}", "bucket": a if i % 2 == 0 else b, "task_success": False,
               "failure": {"primary": "schema_error" if i % 2 == 0 else "unit_error"}} for i in range(4)]
-    evals += [{"task_id": "t9", "bucket": TRAIN_BUCKETS[0], "task_success": False, "failure": {"primary": "schema_error"}}]
+    evals += [{"task_id": "t9", "bucket": a, "task_success": False, "failure": {"primary": "schema_error"}}]
     weights = selection_weights("targeted", evals)
-    assert weights[TRAIN_BUCKETS[1]] > weights[TRAIN_BUCKETS[0]]
+    assert weights[b] > weights[a]
 
 
 def test_c_and_d_share_tasks_and_differ_only_in_the_gate(built):

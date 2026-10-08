@@ -13,7 +13,9 @@ DEFAULT_MAX_TURNS = 12
 
 
 class Backend(Protocol):
-    def generate_batch(self, batch: list[list[dict[str, Any]]], tools: list[dict[str, Any]]) -> list[str]: ...
+    def generate_batch(self, batch: list[list[dict[str, Any]]], tools: list[dict[str, Any]]) -> list[str | None]:
+        """One output per conversation; None when the backend could not run that one prompt."""
+        ...
 
     def describe(self) -> dict[str, Any]: ...
 
@@ -53,6 +55,10 @@ def run_episodes(tasks: list[dict[str, Any]], backend: Backend, max_turns: int =
                 ep.events.append({"turn": turn, "kind": "infra_error", "detail": repr(exc)})
             break
         for ep, text in zip(active, outputs):
+            if text is None:  # this prompt alone could not be run (e.g. out of memory); the others go on
+                ep.termination = "infra_error"
+                ep.events.append({"turn": turn, "kind": "infra_error", "detail": "backend returned no output"})
+                continue
             ep.turns = turn
             ep.raw_outputs.append(text)
             parsed = parse_assistant_output(text)

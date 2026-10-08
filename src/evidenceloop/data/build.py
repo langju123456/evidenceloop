@@ -3,10 +3,11 @@
 uniform (B)    : uniform bucket sampling, verified demos only
 targeted (C)   : failure-weighted sampling, verified demos only
 unfiltered (D) : the same tasks as C (same seed), but a fixed share of demos replaced by wrong
-                 ones and no verification gate. D and C differ only in the gate.
+                 ones and no verification gate (the "controlled wrong-data" group, D10).
 
 Every record keeps its lineage: which bucket it was drawn for and which train_mining failures
-made that bucket heavy.
+made that bucket's group heavy. exclude_keys holds the dedup keys of tasks that must not be trained on
+(the frozen splits, the warm-up data); a matching task is dropped with reason "excluded".
 """
 
 from __future__ import annotations
@@ -22,7 +23,7 @@ from evidenceloop.tasks.generator import RejectedTask, generate_task
 from evidenceloop.verify.grounding import ungrounded_arguments
 from evidenceloop.verify.verifier import evaluate
 
-from .selection import TRAIN_BUCKETS, failure_stats, knobs_for_bucket, selection_weights
+from .selection import TRAIN_BUCKETS, failure_stats, group_of, knobs_for_bucket, selection_weights
 
 D_CORRUPTION_RATIO = 0.25
 
@@ -37,7 +38,8 @@ def _corruptions_for(task: dict[str, Any]) -> list[str]:
 
 
 def build_training_set(policy: str, seed: int, n_tasks: int, evals: list[dict[str, Any]] | None = None,
-                       corruption_ratio: float = D_CORRUPTION_RATIO) -> dict[str, Any]:
+                       corruption_ratio: float = D_CORRUPTION_RATIO,
+                       exclude_keys: set[str] | None = None) -> dict[str, Any]:
     if policy not in ("uniform", "targeted", "unfiltered"):
         raise ValueError(policy)
     weights = selection_weights(policy, evals)
@@ -60,6 +62,9 @@ def build_training_set(policy: str, seed: int, n_tasks: int, evals: list[dict[st
             continue
         if private["dedup_key"] in seen_keys:
             rejects.append({"task_id": public["task_id"], "reason": "duplicate"})
+            continue
+        if exclude_keys and private["dedup_key"] in exclude_keys:
+            rejects.append({"task_id": public["task_id"], "reason": "excluded"})
             continue
         seen_keys.add(private["dedup_key"])
         public["selection"] = {"policy": sampling_policy, "bucket": bucket, "weight": round(weights[bucket], 6)}
@@ -98,9 +103,10 @@ def build_training_set(policy: str, seed: int, n_tasks: int, evals: list[dict[st
             rejects.append({"task_id": tid, "reason": "ungrounded"})
             continue
         bucket = task["selection"]["bucket"]
-        source_failures = stats["buckets"].get(bucket, {}).get("task_ids", [])[:5] if sampling_policy == "targeted" else []
+        source_failures = stats["groups"].get(group_of(bucket), {}).get("task_ids", [])[:5] if sampling_policy == "targeted" else []
         records.append({
             "task_id": tid,
+            "dedup_key": privates[tid]["dedup_key"],
             "policy": policy,
             "bucket": bucket,
             "recipe_id": task["recipe_id"],

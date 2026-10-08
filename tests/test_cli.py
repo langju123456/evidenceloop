@@ -56,6 +56,66 @@ def test_run_refuses_to_mix_configs_in_one_directory(tmp_path):
     assert len(_lines(f"{d}/runs/a/traces.jsonl")) == 4
 
 
+def test_infra_errors_are_run_again_and_the_old_file_is_kept(tmp_path):
+    d = str(tmp_path)
+    main(["tasks", "build", "--split", "calibration", "--n", "4", "--out", f"{d}/tasks"])
+    tasks = f"{d}/tasks/calibration.public.jsonl"
+    main(["run", "--tasks", tasks, "--backend", "scripted", "--out", f"{d}/runs/a"])
+    path = f"{d}/runs/a/traces.jsonl"
+    traces = _lines(path)
+    crashed = dict(traces[1], termination="infra_error", raw_outputs=[], messages=traces[1]["messages"][:2],
+                   events=[{"turn": 1, "kind": "infra_error", "detail": "OutOfMemoryError()"}])
+    with open(path, "w", encoding="utf-8") as fh:
+        for t in (traces[0], crashed, traces[2], traces[3]):
+            fh.write(json.dumps(t, ensure_ascii=False) + "\n")
+    main(["run", "--tasks", tasks, "--backend", "scripted", "--out", f"{d}/runs/a"])
+    after = _lines(path)
+    assert sorted(t["task_id"] for t in after) == sorted(t["task_id"] for t in traces)
+    assert all(t["termination"] != "infra_error" for t in after)
+    rerun = next(t for t in after if t["task_id"] == traces[1]["task_id"])
+    assert rerun["raw_outputs"] == traces[1]["raw_outputs"]
+    backups = [name for name in os.listdir(f"{d}/runs/a") if name.endswith(".bak")]
+    assert len(backups) == 1
+    assert [t["termination"] for t in _lines(f"{d}/runs/a/{backups[0]}")].count("infra_error") == 1
+
+
+def test_a_prompt_the_backend_cannot_run_ends_only_its_own_episode():
+    from evidenceloop.harness.loop import run_episodes
+    from evidenceloop.harness.scripted import ScriptedBackend
+    from evidenceloop.tasks.generator import generate_split
+
+    tasks = generate_split("validation", 3)[0]
+    scripted = ScriptedBackend()
+
+    class OneDoesNotFit:  # like HFBackend when a single prompt runs out of GPU memory
+        def generate_batch(self, batch, tools):
+            outputs = scripted.generate_batch(batch, tools)
+            return [None if messages[1]["content"] == tasks[1]["prompt"] else out for messages, out in zip(batch, outputs)]
+
+        def describe(self):
+            return {"backend": "test", "execution_mode": "mock"}
+
+    traces = run_episodes(tasks, OneDoesNotFit())
+    assert [t["termination"] for t in traces] == ["final_answer", "infra_error", "final_answer"]
+    assert traces[1]["events"][-1]["kind"] == "infra_error"
+    assert traces[0]["messages"] == run_episodes(tasks[:1], scripted)[0]["messages"], "the others are untouched"
+
+
+def test_missing_inputs_stop_with_an_error_instead_of_giving_empty_results(tmp_path):
+    import pytest
+
+    d = str(tmp_path)
+    for args in (["eval", "--traces", f"{d}/no.jsonl", "--private", f"{d}/no.jsonl", "--out", f"{d}/e.jsonl"],
+                 ["report", "baseline", "--evals", f"{d}/no.jsonl", "--out", f"{d}/r.md"],
+                 ["data", "build", "--policy", "targeted", "--seed", "1", "--n", "2", "--evals", f"{d}/no.jsonl",
+                  "--out", f"{d}/C1"],
+                 ["export", "sft", "--records", f"{d}/no.jsonl", "--format", "trl", "--out", f"{d}/x"],
+                 ["run", "--tasks", f"{d}/no.jsonl", "--backend", "scripted", "--out", f"{d}/runs"]):
+        with pytest.raises(SystemExit):
+            main(args)
+    assert not os.path.exists(f"{d}/r.md") and not os.path.exists(f"{d}/e.jsonl")
+
+
 def test_task_build_never_overwrites_silently(tmp_path):
     d = str(tmp_path)
     main(["tasks", "build", "--split", "calibration", "--n", "3", "--out", f"{d}/tasks"])
