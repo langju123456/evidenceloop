@@ -116,6 +116,20 @@ def test_missing_inputs_stop_with_an_error_instead_of_giving_empty_results(tmp_p
     assert not os.path.exists(f"{d}/r.md") and not os.path.exists(f"{d}/e.jsonl")
 
 
+def test_an_incomplete_adapter_directory_stops_before_any_backend_starts(tmp_path):
+    import pytest
+
+    d = str(tmp_path)
+    main(["tasks", "build", "--split", "calibration", "--n", "2", "--out", f"{d}/tasks"])
+    tasks = f"{d}/tasks/calibration.public.jsonl"
+    os.makedirs(f"{d}/adapter")  # training stopped before adapter_config.json was written
+    for backend in ("hf", "vllm"):
+        with pytest.raises(SystemExit, match="adapter_config.json"):
+            main(["run", "--tasks", tasks, "--backend", backend, "--model", "x", "--adapter", f"{d}/adapter",
+                  "--out", f"{d}/runs/{backend}"])
+        assert not os.path.exists(f"{d}/runs/{backend}")
+
+
 def test_task_build_never_overwrites_silently(tmp_path):
     d = str(tmp_path)
     main(["tasks", "build", "--split", "calibration", "--n", "3", "--out", f"{d}/tasks"])

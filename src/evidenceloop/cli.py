@@ -274,6 +274,9 @@ def cmd_run(args: argparse.Namespace) -> None:
     from evidenceloop.harness.loop import run_episodes
 
     _require(args.tasks)
+    # checked before the backend starts: vLLM takes minutes to start, then would fail every task as infra_error
+    if args.adapter and args.backend in ("hf", "vllm") and not os.path.exists(os.path.join(args.adapter, "adapter_config.json")):
+        sys.exit(f"{args.adapter} 里没有 adapter_config.json：训练没有跑完，或者 --adapter 路径写错了")
     os.makedirs(args.out, exist_ok=True)
     out_path = os.path.join(args.out, "traces.jsonl")
     existing = _read_jsonl(out_path)
@@ -476,7 +479,7 @@ def main(argv: list[str] | None = None) -> None:
     wbuild = warmup.add_parser("build")
     wbuild.add_argument("--tasks-dir", required=True, help="the frozen splits, used for the duplicate check")
     wbuild.add_argument("--seed", type=int, default=900)
-    wbuild.add_argument("--doses", type=int, nargs="+", default=[25, 50, 100])
+    wbuild.add_argument("--doses", type=int, nargs="+", default=[10, 25, 50, 100])
     wbuild.add_argument("--out", default="data/warmup")
     wbuild.add_argument("--record", default="configs/warmup.json")
     wbuild.set_defaults(func=cmd_warmup_build)

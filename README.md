@@ -13,7 +13,7 @@
 | 阶段一：正式划分、基线与排行榜 | 已完成。按 D9 堵住出题捷径后（gen-0.2.1）冻结划分，记录在 `configs/frozen.json`；validation 基线：0.6B 0/50，1.7B 0/50，4B 6/50（[排行榜](reports/leaderboard_validation_env-0.2.1.md)）；1.7B 在 train_mining 上 1/200 |
 | 阶段二：B / C / D 三组数据构建、观测溯源检查、去重、谱系、单决策 SFT 导出、预算对齐、manifest | 已实现，测试通过；C、D 按 6 组的合并失败率加权（D11）；等预热模型 W 的真实失败作为输入 |
 | 阶段二：真实 Qwen3 模板的前缀一致性检查 | 脚本已写好（`scripts/check_template.py`） |
-| 阶段三：受控 SFT 实验（Kaggle） | 训练脚本（`scripts/train_lora.py`）、三档预热数据（记录在 `configs/warmup.json`）、达标检查（`el warmup check`）和 Kaggle 分步说明（[docs/kaggle_stage3.md](docs/kaggle_stage3.md)）已就绪，还没开始训练。先预热，让模型变得有对有错，再从预热模型出发做 B、C、D 对比；规则事先写在 D11 |
+| 阶段三：受控 SFT 实验（Kaggle） | 训练脚本（`scripts/train_lora.py`）、四档预热数据（10、25、50、100 道，记录在 `configs/warmup.json`；10 道这一档由 D12 加入）、达标检查（`el warmup check`）和 Kaggle 分步说明（[docs/kaggle_stage3.md](docs/kaggle_stage3.md)）已就绪，冒烟已在 Kaggle T4 上跑通（transformers 和 vLLM 两个后端），据此定下后端、环境和训练设置（D12）；正式预热还没开始；A 行先判定，已达标就不预热，否则剂量从 10 往上试（D12）。先预热，让模型变得有对有错，再从预热模型出发做 B、C、D 对比；规则事先写在 D11、D12 |
 
 ## 真实模型校准：目前看到的
 

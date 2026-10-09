@@ -1,11 +1,17 @@
 {
-  "decision": "D11",
+  "decision": "D11（10 道这一档由 D12 加入）",
   "generator_version": "gen-0.2.1",
   "env_version": "env-0.2.1",
   "verifier_version": "ver-0.1.6",
   "policy": "uniform",
   "seed": 900,
   "doses": {
+    "10": {
+      "tasks": 10,
+      "samples": 77,
+      "supervised_chars": 14164,
+      "trl_sha256": "e92549b5c376e694b33d7a120b6fa1a0cfa30ebbdf751eefa4628960ffdc3e5a"
+    },
     "25": {
       "tasks": 25,
       "samples": 201,
