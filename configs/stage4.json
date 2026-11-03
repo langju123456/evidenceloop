@@ -1,0 +1,204 @@
+{
+  "decision": "D14",
+  "generator_version": "gen-0.2.1",
+  "env_version": "env-0.2.1",
+  "verifier_version": "ver-0.1.6",
+  "start": "W25（D13）",
+  "n_tasks": 100,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "corruption_ratio": 0.25,
+  "icl_k": 1,
+  "mining": {
+    "success": 131,
+    "n": 200,
+    "shift": 0.159295,
+    "groups": {
+      "all_V|F1": {
+        "success": 30,
+        "n": 31
+      },
+      "all_V|F2": {
+        "success": 31,
+        "n": 35
+      },
+      "all_mV|F1": {
+        "success": 18,
+        "n": 34
+      },
+      "all_mV|F2": {
+        "success": 14,
+        "n": 36
+      },
+      "mixed|F1": {
+        "success": 21,
+        "n": 36
+      },
+      "mixed|F2": {
+        "success": 17,
+        "n": 28
+      }
+    }
+  },
+  "excluded_from": {
+    "train_mining": 200,
+    "validation": 50,
+    "test_id": 150,
+    "test_ood": 150,
+    "warmup": 100
+  },
+  "per_seed": {
+    "1": {
+      "arms": {
+        "B": {
+          "tasks": 100,
+          "corrupted": 0,
+          "samples_built": 818,
+          "reject_counts": {}
+        },
+        "C": {
+          "tasks": 100,
+          "corrupted": 0,
+          "samples_built": 837,
+          "reject_counts": {}
+        },
+        "D": {
+          "tasks": 100,
+          "corrupted": 25,
+          "samples_built": 814,
+          "reject_counts": {}
+        }
+      },
+      "samples_per_arm": 814,
+      "optimizer_steps": 51,
+      "supervised_chars": {
+        "B1": 151169,
+        "C1": 151088,
+        "D1": 149778
+      },
+      "trl_sha256": {
+        "B1": "c16e2edfb720fb47eda72a6e6b75552d1c4864da64687105b2d5f35ed54ea240",
+        "C1": "a4bfc983596ca123e5c3e9c48a393455960b4e52c68ec5de6131f26bd81727f8",
+        "D1": "f2f7de28607292aa291f74f65dcc1b14a4956b92110da90ed4f6e240cc0ae24e"
+      },
+      "icl": {
+        "demo_task_ids": [
+          "t_8295e8e840e3"
+        ],
+        "demo_buckets": [
+          "F1|all_V|v1|noerr|sci"
+        ],
+        "demo_position_in_C": [
+          1
+        ],
+        "tasks_sha256": "197a87b6a660fdf7c5d9c23b65d3a028a7e9a5f0a99f4842164b4cfda06db66c"
+      }
+    },
+    "2": {
+      "arms": {
+        "B": {
+          "tasks": 100,
+          "corrupted": 0,
+          "samples_built": 818,
+          "reject_counts": {}
+        },
+        "C": {
+          "tasks": 100,
+          "corrupted": 0,
+          "samples_built": 849,
+          "reject_counts": {}
+        },
+        "D": {
+          "tasks": 100,
+          "corrupted": 25,
+          "samples_built": 828,
+          "reject_counts": {}
+        }
+      },
+      "samples_per_arm": 818,
+      "optimizer_steps": 52,
+      "supervised_chars": {
+        "B2": 151949,
+        "C2": 152191,
+        "D2": 150903
+      },
+      "trl_sha256": {
+        "B2": "153bf76435e69dd00d26fc0cebafa9b1856115b5eddbc824f7c0b0148a2334f9",
+        "C2": "d35b3d57e1a24ee3da9e8f5ce4c87ff72ea39b012e1e0d036315d69f8315fe8f",
+        "D2": "487e6108b64587696f90ce6551a4b02b6540df225f159ec6052cae23fcb14f5a"
+      },
+      "icl": {
+        "demo_task_ids": [
+          "t_c6796cc3e758"
+        ],
+        "demo_buckets": [
+          "F2|all_mV|v2-3|noerr|plain"
+        ],
+        "demo_position_in_C": [
+          0
+        ],
+        "tasks_sha256": "5aa4c6532ee5cdf95e9085c67dbc51d24637a4432331c01a0a0fdb066ea03f1f"
+      }
+    },
+    "3": {
+      "arms": {
+        "B": {
+          "tasks": 100,
+          "corrupted": 0,
+          "samples_built": 815,
+          "reject_counts": {}
+        },
+        "C": {
+          "tasks": 100,
+          "corrupted": 0,
+          "samples_built": 848,
+          "reject_counts": {}
+        },
+        "D": {
+          "tasks": 100,
+          "corrupted": 25,
+          "samples_built": 827,
+          "reject_counts": {}
+        }
+      },
+      "samples_per_arm": 815,
+      "optimizer_steps": 51,
+      "supervised_chars": {
+        "B3": 151444,
+        "C3": 151659,
+        "D3": 149841
+      },
+      "trl_sha256": {
+        "B3": "dab009743dea13384e8c21e0019e40aa256c328606bf2e8c43d889a3ba638df9",
+        "C3": "f36742975b77cd46eb81b9d5eb471a49f7ee19c0d80e2655f939fe17436246bc",
+        "D3": "9fbe91506ef1d4d98cf9e46be466e095e41aa732e3634f1d6304a9623a33aa41"
+      },
+      "icl": {
+        "demo_task_ids": [
+          "t_66a6082f078e"
+        ],
+        "demo_buckets": [
+          "F2|all_mV|v1|transient|plain"
+        ],
+        "demo_position_in_C": [
+          0
+        ],
+        "tasks_sha256": "e3edb86e051ac60259770d308d630cf2d5db0f29cb92be751c0f92be940d44ff"
+      }
+    }
+  },
+  "eval_files": {
+    "eval.public.jsonl": {
+      "tasks": 350,
+      "sha256": "df49abb733a1f1737d0e0580943823ed4814e689e2a29c2233aad789c109cede"
+    },
+    "test.public.jsonl": {
+      "tasks": 300,
+      "sha256": "a50da7dc7304e4c0a9f900008efb65b07c8268991652e6865a7b69eb2be18c09"
+    }
+  },
+  "reproducibility": "data/ 不进版本库；el stage4 build 由生成器、参考解法和 W25 在 train_mining 上的分组结果确定性生成，重新运行后哈希应与这里一致。"
+}

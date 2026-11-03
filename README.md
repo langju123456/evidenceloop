@@ -13,7 +13,8 @@
 | 阶段一：正式划分、基线与排行榜 | 已完成。按 D9 堵住出题捷径后（gen-0.2.1）冻结划分，记录在 `configs/frozen.json`；validation 基线：0.6B 0/50，1.7B 0/50，4B 6/50（[排行榜](reports/leaderboard_validation_env-0.2.1.md)）；1.7B 在 train_mining 上 1/200 |
 | 阶段二：B / C / D 三组数据构建、观测溯源检查、去重、谱系、单决策 SFT 导出、预算对齐、manifest | 已实现，测试通过；C、D 按 6 组的合并失败率加权（D11）；等预热模型 W 的真实失败作为输入 |
 | 阶段二：真实 Qwen3 模板的前缀一致性检查 | 脚本已写好（`scripts/check_template.py`） |
-| 阶段三：受控 SFT 实验（Kaggle） | A 行和预热已跑完（2026-11-03，`scripts/kaggle_stage3.sh` 按 D11、D12 一次跑完，D13）：A 在 train_mining 上 1/200，不达标；预热 10 道 80/200，成功率达标但 C 与 B 的分配差 0.076 不到 0.10；预热 25 道 131/200、分配差 0.159，达标，**W = W25**。validation：A 0/50，W25 33/50（[train_mining 报告](reports/stage3_train_mining.md)、[validation 报告](reports/stage3_validation.md)）。下一步是 B、C、D：题数和训练次序先写进决策记录，再跑 |
+| 阶段三：A 行与预热（Kaggle） | A 行和预热已跑完（2026-11-03，`scripts/kaggle_stage3.sh` 按 D11、D12 一次跑完，D13）：A 在 train_mining 上 1/200，不达标；预热 10 道 80/200，成功率达标但 C 与 B 的分配差 0.076 不到 0.10；预热 25 道 131/200、分配差 0.159，达标，**W = W25**。validation：A 0/50，W25 33/50（[train_mining 报告](reports/stage3_train_mining.md)、[validation 报告](reports/stage3_validation.md)）。B、C、D 从这里起记为阶段四（D14） |
+| 阶段四：B、C、D 对比与测试集评测（Kaggle） | 已准备好，还没跑。规则先写进 D14：从 W25 出发，B、C、D 各 3 个种子、每组 100 道题，每个种子内对齐样本数，9 个 LoRA 全部训完再评测；对照 W25+ICL（C 的一条示范放进上下文）；主结论看 test_id 上的 C 对 B。数据已在 CPU 上构建并记进 `configs/stage4.json`，一键脚本 `scripts/kaggle_stage4.sh`，说明见 [docs/kaggle_stage4.md](docs/kaggle_stage4.md) |
 
 ## 真实模型校准：目前看到的
 
@@ -34,14 +35,14 @@
 
 ```bash
 pip install -e ".[dev]"
-python -m pytest -q   # 95 passed；没装 torch 的机器上是 91 passed、1 skipped（训练冒烟整组跳过）
+python -m pytest -q   # 没装 torch 的机器上是 104 passed、1 skipped（训练冒烟那一组 4 项要 torch，整组跳过）
 ```
 
-测试覆盖：工具与参数校验（含拆平后的参数，以及 JSON 字符串编码的列表只放宽到等价内容）、30 道冒烟题上 oracle 与参考策略互检（两种合法顺序都判对）、每道题的错误路径都有区分度、16 种错误做法全部被拒且归因正确、伪造"评分已通过"不影响判定、猜版本被溯源检查抓到、canary 不进任何提示词/观测/导出、划分互不重叠、重放确定、B/C/D 的采样与门控、谱系、单决策导出、前缀一致性检查能抓出错误模板、预算对齐、简单档确实更短且提示里给出的版本算作已知上下文、D 组每种错误示范都确实是错的、报告里多出来的统计量只有算对了才放过、回复的虚报和没汇报分开判定、过滤条件的 value 与 op 不匹配时报错、"只留 ok"的捷径和写反的过滤条件都被判错并归因、冻结时检查各划分没有重复题并记录哈希、重新生成的冻结划分和记录的哈希一致、C 组按 6 组合并失败率加权且各组失败率相同时和 B 完全一样、预热数据和冻结划分没有重复且小档是大档的前缀、达标检查（包括"六组都是 50%"这个漏洞）、达标检查只接受同一配置下完整的 train_mining 结果、B/C/D 构建能排除冻结划分和预热数据里的题、训练时 loss 只落在下一条 assistant 消息上且和库函数算出的 loss 一致、CPU 上用小模型走通训练—合并—对局、合并确实改变了权重且只凭 adapter 能重新合并出指纹相同的 W、显存不够的批次拆小重试且单条放不下时只让那一题记为运行故障、训练中途停下时保留到那一步的日志、输入文件缺失时直接报错、命令行端到端与断点续跑（运行故障的题续跑时重跑）。
+测试覆盖：工具与参数校验（含拆平后的参数，以及 JSON 字符串编码的列表只放宽到等价内容）、30 道冒烟题上 oracle 与参考策略互检（两种合法顺序都判对）、每道题的错误路径都有区分度、16 种错误做法全部被拒且归因正确、伪造"评分已通过"不影响判定、猜版本被溯源检查抓到、canary 不进任何提示词/观测/导出、划分互不重叠、重放确定、B/C/D 的采样与门控、谱系、单决策导出、前缀一致性检查能抓出错误模板、预算对齐、简单档确实更短且提示里给出的版本算作已知上下文、D 组每种错误示范都确实是错的、报告里多出来的统计量只有算对了才放过、回复的虚报和没汇报分开判定、过滤条件的 value 与 op 不匹配时报错、"只留 ok"的捷径和写反的过滤条件都被判错并归因、冻结时检查各划分没有重复题并记录哈希、重新生成的冻结划分和记录的哈希一致、C 组按 6 组合并失败率加权且各组失败率相同时和 B 完全一样、预热数据和冻结划分没有重复且小档是大档的前缀、达标检查（包括"六组都是 50%"这个漏洞）、达标检查只接受同一配置下完整的 train_mining 结果、B/C/D 构建能排除冻结划分和预热数据里的题、训练时 loss 只落在下一条 assistant 消息上且和库函数算出的 loss 一致、CPU 上用小模型走通训练—合并—对局、合并确实改变了权重且只凭 adapter 能重新合并出指纹相同的 W、显存不够的批次拆小重试且单条放不下时只让那一题记为运行故障、训练中途停下时保留到那一步的日志、输入文件缺失时直接报错、命令行端到端与断点续跑（运行故障的题续跑时重跑）、阶段四（D14）的数据只取决于 W25 的分组表且和 `el data build` 加 `el export sft` 逐字节相同、B/C/D 的题数和 D 恰好 25% 错误示范的检查、记录被改动时拒绝、W25+ICL 只改系统提示且验证器的判定和诊断不受影响、配对对比的判定规则（只算完整的行、种子不足不判定、自助区间固定种子）。
 
 ## 在 Mac 上开始
 
-见 `scripts/mac_quickstart.sh`：建任务 → 用 MLX 跑 5 道冒烟题调 harness → 跑完整 calibration → 看报告定难度。定下基座后用 `el freeze` 冻结正式划分（记录写进 `configs/frozen.json`），再用 `scripts/mac_baseline.sh` 跑基线；每完成一步用 `scripts/checkpoint.sh` 提交并推送。阶段三在 Kaggle 上跑，步骤见 [docs/kaggle_stage3.md](docs/kaggle_stage3.md)。
+见 `scripts/mac_quickstart.sh`：建任务 → 用 MLX 跑 5 道冒烟题调 harness → 跑完整 calibration → 看报告定难度。定下基座后用 `el freeze` 冻结正式划分（记录写进 `configs/frozen.json`），再用 `scripts/mac_baseline.sh` 跑基线；每完成一步用 `scripts/checkpoint.sh` 提交并推送。阶段三在 Kaggle 上跑，步骤见 [docs/kaggle_stage3.md](docs/kaggle_stage3.md)；阶段四见 [docs/kaggle_stage4.md](docs/kaggle_stage4.md)。
 
 ## 目录
 
@@ -53,19 +54,20 @@ src/evidenceloop/
   verify/verifier.py    五项判定、task_success、诊断
   verify/grounding.py   观测溯源检查
   harness/              严格解析器、批量循环、脚本化参考策略、MLX / vLLM / transformers 后端
-  data/                 采样策略、B/C/D 构建、预热数据与达标检查、SFT 导出与 manifest
+  data/                 采样策略、B/C/D 构建、预热数据与达标检查、SFT 导出与 manifest、阶段四的数据与 W+ICL 的题
   train/sft.py          LoRA SFT：loss mask、训练循环、合并成 W
-  report/baseline.py    报告（数字全部来自评测记录）
+  report/               报告与阶段四的配对对比（数字全部来自评测记录）
   cli.py                el 命令
-scripts/                Mac 快速开始、校准、基线、LoRA 训练与合并、阶段性提交推送、真实模板检查、逐题查看轨迹、上传 GitHub
+scripts/                Mac 快速开始、校准、基线、LoRA 训练与合并、Kaggle 阶段三和阶段四的一键脚本、阶段性提交推送、真实模板检查、逐题查看轨迹、上传 GitHub
 docs/                   决策记录、Kaggle 分步说明
-tests/                  95 项测试
+tests/                  108 项测试
 ```
 
 ## 更新记录
 
 每次改动的理由见 `docs/decisions.md`。
 
+- **0.2.4（D14）**：新增 `el stage4 build`（一次生成阶段四 B、C、D 各 3 个种子的数据、每个种子内对齐、评测题和 W25+ICL 的题，第一次记进 `configs/stage4.json`，以后每次核对）和 `el stage4 compare`（按题配对的对比和 D14 的判定）；`scripts/kaggle_stage4.sh` 和 `docs/kaggle_stage4.md`，脚本带没有 GPU 时的预演和 600 分钟的上限；`el data build`、`el export sft` 写文件的部分抽成共用函数，行为不变。题目、环境、验证器、harness 都不变。
 - **0.2.3（D11 之后）**：C、D 组改为按 6 组（单位档 × 题型）的合并失败率加权；新增 `el warmup build`（三档预热数据，和冻结划分查重，记录种子与哈希）、`el warmup check`（D11 的达标标准）、`el frozen verify`（重新生成冻结划分并核对哈希）；新增 `scripts/train_lora.py`、`scripts/merge_lora.py` 和 transformers 评测后端（vLLM 在 T4 上跑不了时用，显存不够时自动拆小批次）；`el run` 续跑时重跑运行故障（infra_error）的题；`el data build` 可以排除冻结划分和预热数据里的题；训练日志记 git commit、显存峰值、基座、adapter 和合并模型的指纹，每条轨迹里带同样的指纹；`el` 的输入文件不存在时直接报错（以前会当成空文件）；构建记录里加上去重键，方便事后核对。题目、环境、验证器都不变。
 - **0.2.2 补充**：根据一份外部代码审查，更正四处表述，另自查更正一处（D10），不改代码；加入冻结后的基线与排行榜（`reports/`）。
 - **0.2.2（env-0.2.1 校准之后）**：数据加入任何规则都不排除的有效标记 recal，堵住"只留 ok 行"的捷径；错误路径表新增 E8（只留 ok）、E9（条件写反）；新增 `el freeze`（生成并检查正式划分，记录版本与哈希）和 `scripts/mac_baseline.sh`。生成器 gen-0.2.1，验证器 ver-0.1.6，环境不变（env-0.2.1）。

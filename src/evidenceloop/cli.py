@@ -11,6 +11,10 @@
   el frozen verify --tasks-dir data/tasks/gen-0.2.1
   el warmup build --tasks-dir data/tasks/gen-0.2.1 --out data/warmup
   el warmup check --evals runs/W25_train_mining/evals.jsonl --out reports/warmup_check_W25.md
+  el stage4 build --evals runs/W25_train_mining/evals.jsonl --tasks-dir data/tasks/gen-0.2.1 \
+                  --warmup-records data/warmup/dose100.records.jsonl
+  el stage4 compare --split test_id --row W=runs/W25_stage4/evals_test_id.jsonl \
+                  --row B:1=runs/B1_stage4/evals_test_id.jsonl --row C:1=runs/C1_stage4/evals_test_id.jsonl ... --out x.md
 
 `run` never opens a private file: the model side of the pipeline cannot see answers.
 """
@@ -375,14 +379,29 @@ def cmd_data_build(args: argparse.Namespace) -> None:
         exclude |= keys
         sources[path] = len(keys)
     built = build_training_set(args.policy, args.seed, args.n, evals, exclude_keys=exclude or None)
-    os.makedirs(args.out, exist_ok=True)
-    write_jsonl(os.path.join(args.out, "records.jsonl"), built["records"])
-    write_jsonl(os.path.join(args.out, "rejects.jsonl"), built["rejects"])
+    _write_build(built, args.out, sources)
+    print(f"{args.policy}: {len(built['records'])} trajectories, rejects {built['reject_counts']}, corrupted {built['corrupted']}")
+
+
+def _write_build(built: dict[str, Any], out: str, sources: dict[str, int]) -> None:
+    """What el data build writes; el stage4 build writes the same files."""
+    os.makedirs(out, exist_ok=True)
+    write_jsonl(os.path.join(out, "records.jsonl"), built["records"])
+    write_jsonl(os.path.join(out, "rejects.jsonl"), built["rejects"])
     meta = {k: built[k] for k in ("policy", "seed", "weights", "reject_counts", "corrupted")}
     meta["excluded_from"] = sources
-    with open(os.path.join(args.out, "build.json"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(out, "build.json"), "w", encoding="utf-8") as fh:
         json.dump(meta, fh, ensure_ascii=False, indent=2)
-    print(f"{args.policy}: {len(built['records'])} trajectories, rejects {built['reject_counts']}, corrupted {built['corrupted']}")
+
+
+def _write_export(matched: dict[str, Any], built_meta: dict[str, dict[str, Any]], fmt: str, out: str) -> None:
+    """What el export sft writes; el stage4 build writes the same files."""
+    os.makedirs(out, exist_ok=True)
+    for name, samples in matched["samples"].items():
+        write_jsonl(os.path.join(out, f"{name}.{fmt}.jsonl"), [to_format(s, fmt) for s in samples])
+        manifest = build_manifest(name, built_meta[name], samples, fmt)
+        with open(os.path.join(out, f"{name}.manifest.json"), "w", encoding="utf-8") as fh:
+            json.dump(manifest, fh, ensure_ascii=False, indent=2)
 
 
 def cmd_export(args: argparse.Namespace) -> None:
@@ -398,16 +417,107 @@ def cmd_export(args: argparse.Namespace) -> None:
         sets[name] = [s for r in records for s in expand(r)]
     matched = match_budgets(sets, args.seed) if len(sets) > 1 else {"samples": sets, "within_tolerance": True,
                                                                        "n_per_group": len(next(iter(sets.values())))}
-    os.makedirs(args.out, exist_ok=True)
-    for name, samples in matched["samples"].items():
-        write_jsonl(os.path.join(args.out, f"{name}.{args.format}.jsonl"), [to_format(s, args.format) for s in samples])
-        manifest = build_manifest(name, built_meta[name], samples, args.format)
-        with open(os.path.join(args.out, f"{name}.manifest.json"), "w", encoding="utf-8") as fh:
-            json.dump(manifest, fh, ensure_ascii=False, indent=2)
+    _write_export(matched, built_meta, args.format, args.out)
     print(f"{matched['n_per_group']} samples per group; supervised size within 5%: {matched['within_tolerance']}")
 
 
+def cmd_stage4_build(args: argparse.Namespace) -> None:
+    """D14: B, C, D for every seed, aligned per seed, the evaluation task files and the W+ICL task files; recorded in
+    configs/stage4.json the first time, checked against it on every later run (as el warmup build does)."""
+    from evidenceloop.data import stage4
+    from evidenceloop.data.warmup import frozen_dedup_keys
+
+    if bool(args.evals) == bool(args.mining_report):
+        sys.exit("--evals（W25 在 train_mining 上的评测）和 --mining-report（只用于没有 GPU 的预演）给一个")
+    source = args.evals or args.mining_report
+    _require(source, args.warmup_records)
+    try:
+        evals = _read_jsonl(args.evals) if args.evals else stage4.evals_from_check_report(args.mining_report)
+        mining = stage4.mining_summary(evals)
+        frozen = frozen_dedup_keys(args.tasks_dir)
+    except (ValueError, FileNotFoundError) as err:
+        sys.exit(f"不能构建阶段四的数据：{err}")
+    warm = {r["dedup_key"] for r in _read_jsonl(args.warmup_records) if r.get("dedup_key")}
+    if not warm:
+        sys.exit(f"{args.warmup_records} 里没有 dedup_key")
+    exclude = set().union(*frozen.values()) | warm
+    sources = {**{split: len(keys) for split, keys in frozen.items()}, args.warmup_records: len(warm)}
+
+    files: dict[str, dict[str, Any]] = {}
+
+    def keep(rel: str, rows: list[dict[str, Any]]) -> None:
+        path = os.path.join(args.out, rel)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        write_jsonl(path, rows)
+        files[rel] = {"tasks": len(rows), "sha256": _sha256_file(path)}
+
+    eval_tasks = {split: _read_jsonl(os.path.join(args.tasks_dir, f"{split}.public.jsonl")) for split in stage4.EVAL_SPLITS}
+    keep("eval.public.jsonl", [t for split in stage4.EVAL_SPLITS for t in eval_tasks[split]])
+    keep("test.public.jsonl", eval_tasks["test_id"] + eval_tasks["test_ood"])
+
+    seeds, icl = {}, {}
+    for seed in args.seeds:
+        try:
+            result = stage4.build_seed(seed, args.n, evals, exclude)
+        except ValueError as err:
+            sys.exit(f"种子 {seed}：{err}")
+        built_meta = {}
+        for arm in stage4.ARMS:
+            built = result["built"][arm]
+            _write_build(built, os.path.join(args.out, f"{arm}{seed}"), sources)
+            built_meta[f"{arm}{seed}"] = {k: built[k] for k in ("policy", "seed", "weights", "reject_counts", "corrupted")}
+        _write_export(result["matched"], built_meta, "trl", os.path.join(args.out, f"export_s{seed}"))
+        for name in result["matched"]["samples"]:
+            rel = f"export_s{seed}/{name}.trl.jsonl"
+            files[rel] = {"sha256": _sha256_file(os.path.join(args.out, rel))}
+        demos = stage4.pick_demos(result["built"]["C"]["records"], [t for ts in eval_tasks.values() for t in ts])
+        rel = f"icl{seed}.test_id.public.jsonl"
+        keep(rel, stage4.icl_tasks(eval_tasks["test_id"], demos))
+        icl[seed] = {"demo_task_ids": [d["task_id"] for d in demos], "demo_buckets": [d["bucket"] for d in demos],
+                     "demo_position_in_C": [result["built"]["C"]["records"].index(d) for d in demos],
+                     "tasks_sha256": files.pop(rel)["sha256"]}
+        seeds[seed] = result
+        counts = ", ".join(f"{a}{seed} {len(result['built'][a]['records'])} 道" for a in stage4.ARMS)
+        print(f"种子 {seed}：{counts}（D 错误示范 {result['built']['D']['corrupted']} 道），"
+              f"对齐后每组 {result['matched']['n_per_group']} 条样本，W+ICL 的示范 {icl[seed]['demo_task_ids'][0]}")
+    excluded = {**{split: len(keys) for split, keys in frozen.items()}, "warmup": len(warm)}
+    record = stage4.stage4_record(mining, seeds, excluded, files, icl, args.n)
+    if os.path.exists(args.record):
+        with open(args.record, encoding="utf-8") as fh:
+            old = json.load(fh)
+        diffs = stage4.record_diffs(old, record)
+        if diffs:
+            sys.exit(f"和 {args.record} 对不上：{', '.join(diffs[:8])}（记录不会被覆盖）")
+        print(f"和 {args.record} 一致")
+        return
+    os.makedirs(os.path.dirname(args.record) or ".", exist_ok=True)
+    with open(args.record, "w", encoding="utf-8") as fh:
+        json.dump(record, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    print(f"记录写入 {args.record}")
+
+
+def cmd_stage4_compare(args: argparse.Namespace) -> None:
+    from evidenceloop.report.compare import render
+
+    rows: dict[str, dict[Any, list[dict[str, Any]] | None]] = {}
+    for spec in args.row:
+        name, sep, path = spec.partition("=")
+        arm, _, seed = name.partition(":")
+        if not sep or not arm or (seed and not seed.isdigit()):
+            sys.exit(f"--row 的写法是 组=文件 或 组:种子=文件，收到 {spec}")
+        rows.setdefault(arm, {})[int(seed) if seed else None] = _read_jsonl(path) if os.path.exists(path) else None
+    expected = args.expected_n or FREEZE_SIZES[args.split]
+    text = render(args.split, rows, expected, args.title, args.resamples)
+    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
+    with open(args.out, "w", encoding="utf-8") as fh:
+        fh.write(text)
+    print(text)
+
+
 def main(argv: list[str] | None = None) -> None:
+    from evidenceloop.data.stage4 import N_TASKS, SEEDS
+
     parser = argparse.ArgumentParser(prog="el")
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -489,6 +599,26 @@ def main(argv: list[str] | None = None) -> None:
     wcheck.add_argument("--title", default="预热达标检查（D11）")
     wcheck.add_argument("--out")
     wcheck.set_defaults(func=cmd_warmup_check)
+
+    stage4_cmd = sub.add_parser("stage4").add_subparsers(dest="action", required=True)
+    s4build = stage4_cmd.add_parser("build", help="D14: B/C/D data, alignment, evaluation and W+ICL task files")
+    s4build.add_argument("--evals", help="W25's evals on all of train_mining (D13)")
+    s4build.add_argument("--mining-report", help="CPU dry run only: the per-group table of a warm-up check report")
+    s4build.add_argument("--tasks-dir", required=True, help="the frozen splits")
+    s4build.add_argument("--warmup-records", required=True, help="every warm-up task (dose100.records.jsonl)")
+    s4build.add_argument("--seeds", type=int, nargs="+", default=list(SEEDS))
+    s4build.add_argument("--n", type=int, default=N_TASKS)
+    s4build.add_argument("--out", default="data/stage4")
+    s4build.add_argument("--record", default="configs/stage4.json")
+    s4build.set_defaults(func=cmd_stage4_build)
+    s4cmp = stage4_cmd.add_parser("compare", help="D14's paired comparisons and verdicts on one split")
+    s4cmp.add_argument("--split", required=True, choices=["validation", "test_id", "test_ood"])
+    s4cmp.add_argument("--row", action="append", required=True, help="ARM=evals.jsonl or ARM:SEED=evals.jsonl")
+    s4cmp.add_argument("--expected-n", type=int, default=0)
+    s4cmp.add_argument("--resamples", type=int, default=10_000)
+    s4cmp.add_argument("--title")
+    s4cmp.add_argument("--out", required=True)
+    s4cmp.set_defaults(func=cmd_stage4_compare)
 
     export = sub.add_parser("export").add_subparsers(dest="action", required=True).add_parser("sft")
     export.add_argument("--records", nargs="+", required=True)
