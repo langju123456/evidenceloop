@@ -2,6 +2,17 @@
 
 这份说明按顺序写，每一步都可以单独重跑。规则来自 D11：先预热，得到有对有错的模型 W，再从 W 出发做 B、C、D。按 D12，评测和训练都用 vLLM 的环境（第 1 步），第 4 步的冒烟已经做完，下面从第 5 步接着跑。
 
+## 一键跑法（推荐）
+
+第 1–3、5、6、7 步已经写进 `scripts/kaggle_stage3.sh`，判定规则完全照 D11、D12：A 达标就不预热；否则按 10 → 25 → 50 → 100 预热，取第一个达标的一档；四档都不达标就停下。Notebook 只要一格，Accelerator 选 GPU T4、Internet 打开，然后 Save Version → Save & Run All，关掉页面也会在后台跑完：
+
+```
+!git clone -q https://github.com/langju123456/evidenceloop.git /kaggle/working/evidenceloop
+!bash /kaggle/working/evidenceloop/scripts/kaggle_stage3.sh
+```
+
+进度和结论在 Output 的 `STATUS.md`，结果在 `stage3_results.zip`（不含几 GB 的合并模型，adapter 在里面）。下面是分步做法，排查问题时用。
+
 ## 0. 准备
 
 - Kaggle 账号先完成手机验证，否则 Notebook 里不能开 GPU，也不能联网。
