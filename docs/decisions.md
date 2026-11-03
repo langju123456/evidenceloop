@@ -139,3 +139,16 @@
 - transformers 后端的设置也记下，以后要换回时用：`--gen-batch 8`。
 - 合并前修订（2026-10-10，A 行和正式预热都还没跑）：剂量顺序由"先试 25、高于 80% 再试 10"改为从 10 往上试，完全符合 D11 的字面，最小的达标剂量也给 B、C、D 留下最多的错误；补上 A 行已达标时的处理；把"失败大多是不熟悉流程"改为待 A 行验证的推测。
 - 还没定的：D11 留下的"A-ICL 的上下文加在 A 上还是 W 上"。目前代码里没有 A-ICL，等 W 定下来、写 B、C、D 的题数和训练次序时一起决定。
+
+
+## D13 阶段三 A 行与预热的结果：W = W25（2026-11-03）
+
+- 怎么跑的：Kaggle T4 上一次跑完 `scripts/kaggle_stage3.sh`（代码 92a6083），判定规则只用 D11、D12 事先写下的，没有临时判断。环境 vllm 0.31.0、torch 2.13.0+cu130、transformers 5.17.0、peft 0.21.2。冻结划分和预热数据的哈希都核对一致，真实模板 816/816 通过。整次运行约 75 分钟。
+- A 行（基座 1.7B，vLLM）：train_mining 1/200，validation 0/50。达标检查不达标（成功率 0.5%，分配差 0.003）。所以 D12 那条"失败大多是不熟悉流程、几条示范就能纠正"的推测，前半句在同一后端上得到确认：基座在 vLLM 上也几乎全错，冒烟里的提升来自训练，不是来自后端不同。
+- 预热 10 道（77 条样本，5 步）：train_mining 80/200（40.0%），成功率在 20%–80% 之内，但 C 和 B 的分配只差 0.076，不到 0.10，不达标。
+- 预热 25 道（201 条样本，13 步）：train_mining 131/200（65.5%），分配差 0.159，达标。按"取第一个达标的一档"，W = W25，没有再试 50、100。W25 在 validation 上 33/50。
+- 失败类别变了，和 D11 的预期一致：A 的主类别以 dependency_error（65）、filter_error（44）、schema_error（42）为主；W25 剩下的是 unit_error（32）、source_version_error（22）、filter_error（10），流程和格式类的错误基本消失（未溯源参数 84 → 2，回复没说明已保存 122 → 0）。留给 B、C、D 的是单位换算和找对规则版本这两类真正要研究的错误。
+- 分组上，W25 在 all_V 两组几乎全对（30/31、31/35），C 组因此把题量从 all_V 移向 all_mV 和 mixed，这正是分配差超过 0.10 的来源。
+- 结果文件：`reports/warmup_check_A.md`、`warmup_check_W10.md`、`warmup_check_W25.md`、`stage3_train_mining.md`、`stage3_validation.md`；W25 的 adapter 和全部轨迹、评测在 Kaggle notebook evidenceloop-stage3 的输出 `stage3_results.zip` 里（合并模型没有保存，按第 8 步用 adapter 重新合并）。
+- 还没定、下一步要先写下的：B、C、D 的题数和训练次序，以及 D11 留下的 A-ICL 加在 A 上还是 W 上。
+
