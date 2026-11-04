@@ -14,7 +14,7 @@
 | 阶段二：B / C / D 三组数据构建、观测溯源检查、去重、谱系、单决策 SFT 导出、预算对齐、manifest | 已实现，测试通过；C、D 按 6 组的合并失败率加权（D11）；等预热模型 W 的真实失败作为输入 |
 | 阶段二：真实 Qwen3 模板的前缀一致性检查 | 脚本已写好（`scripts/check_template.py`） |
 | 阶段三：A 行与预热（Kaggle） | A 行和预热已跑完（2026-11-03，`scripts/kaggle_stage3.sh` 按 D11、D12 一次跑完，D13）：A 在 train_mining 上 1/200，不达标；预热 10 道 80/200，成功率达标但 C 与 B 的分配差 0.076 不到 0.10；预热 25 道 131/200、分配差 0.159，达标，**W = W25**。validation：A 0/50，W25 33/50（[train_mining 报告](reports/stage3_train_mining.md)、[validation 报告](reports/stage3_validation.md)）。B、C、D 从这里起记为阶段四（D14） |
-| 阶段四：B、C、D 对比与测试集评测（Kaggle） | 已准备好，还没跑。规则先写进 D14：从 W25 出发，B、C、D 各 3 个种子、每组 100 道题，每个种子内对齐样本数，9 个 LoRA 全部训完再评测；对照 W25+ICL（C 的一条示范放进上下文）；主结论看 test_id 上的 C 对 B。数据已在 CPU 上构建并记进 `configs/stage4.json`，一键脚本 `scripts/kaggle_stage4.sh`，说明见 [docs/kaggle_stage4.md](docs/kaggle_stage4.md) |
+| 阶段四：B、C、D 对比与测试集评测（Kaggle） | 已跑完（2026-11-04，两次会话，D15）。test_id 成功率：W25 66.7%，B 93.6%，C 99.6%，D 90.0%。**H1（C 对 B）分不出**：平均 +6.0 个百分点、区间 [+3.6, +8.7]，但种子 1 打平，不满足事先定的"每个种子都赢"。**H2（C 对 D）C 更好**：+9.6 [+7.1, +12.0]。**H3（C 对 W25+ICL）照规则记 C 更好，但对照组本身坏了**：W25+ICL 只有 1.3%，比起点 W25 还低 65 个百分点，像是照抄了上下文里的示范，不能当作"参数比上下文好"的证据。C 在 test_id 上接近满分，这组题已经不够难。报告在 Kaggle notebook evidenceloop-stage4 的输出里 |
 
 ## 真实模型校准：目前看到的
 
