@@ -232,4 +232,5 @@
 - 失败去了哪里：C 三个种子合计只错 2 道（unit_error 1、filter_error 1）；B 错 29 道，其中 unit_error 27；D 错 45 道，unit_error 41。D13 说留给 B、C、D 的是单位换算和找对规则版本两类错误，结果是单位换算这一类，均匀选题和混入错误示范的组还剩得最多。
 - 只作描述、不下结论的划分（D14）：test_ood 上 A 0/150，W25 22/150，B 45 / 20 / 29，C 49 / 48 / 34，D 19 / 34 / 58；validation 上 B 50 / 44 / 48，C 三个种子都是 50/50，D 40 / 50 / 50。test_ood 上种子间差得很大（D 从 19 到 58），不拿来比较组别。
 - 结果文件：全部报告（`reports/stage4_compare_test_id.md`、`stage4_compare_validation.md`、`stage4_compare_test_ood.md`、`stage4_test_id.md`、`stage4_validation.md`、`stage4_test_ood.md`）、9 个 adapter、训练日志、全部轨迹和评测，在 Kaggle notebook evidenceloop-stage4 第 2 版的输出 `stage4_results.zip` 里；本条的数字抄自该版的 `STATUS.md`、`stage4_compare_test_id.md` 和 `stage4_test_id.md`，报告文件本身还没提交进仓库。
-- 还没做的：逐条看 W25+ICL 的轨迹，确认是不是照抄示范；如果是，H3 需要一个新的、事先写下的对照设计（比如示范用和考题不同的数值、或者放成对话消息），另记决策，这次的 H3 结果保留不改。
+- 核实（2026-11-05，看了 ICL2 的第一条轨迹 t_4d6ec73eb2fe）：模型在第一条回复里一口气写出 list_versions、read_protocol、read_dataset 三个工具调用，并且**自己编出了每个调用的 `<tool_response>`**（版本列表、规则全文、数据预览都是它写的），最后跟着一个没写完的调用；harness 只能解析出一个无效调用，返回 `invalid_tool_call`。也就是说，示范是把"调用 + 返回结果"作为一整段文字放进系统提示的，模型学到的是"把整段对局连同工具结果一起写出来"，而不是"调用工具、等结果"。这和上面的统计一致（轮数少、报告里的数不是工具算的、主失败是 dependency_error / schema_error）。只细看了这一条，其余是统计推断。
+- 所以 H3 这次测的是"这种示范写法会让 1.7B 模型自己编工具结果"，不是上下文学习本身的效果。要回答 H3，需要一个新的、事先写下的对照设计（示范放成真正的多轮消息、工具结果用 tool 角色，或者示范和考题用不同的数值），另记决策；这次的 H3 结果保留不改。
