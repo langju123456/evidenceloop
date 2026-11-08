@@ -10,11 +10,11 @@
 | --- | --- |
 | 阶段一：环境、8 个工具、任务生成器、独立 oracle、9 条错误路径、验证器与诊断、对抗测试 | 已实现，66 项测试通过 |
 | 阶段一：真实模型校准（Mac，MLX） | 已完成。env-0.2.1：1.7B 成功 1/60，4B 成功 6/60（[报告](reports/)）；按 D8 事先定好的规则，基座定为 1.7B |
-| 阶段一：正式划分、基线与排行榜 | 已完成。按 D9 堵住出题捷径后（gen-0.2.1）冻结划分，记录在 `configs/frozen.json`；validation 基线：0.6B 0/50，1.7B 0/50，4B 6/50（[排行榜](reports/leaderboard_validation_env-0.2.1.md)）；1.7B 在 train_mining 上 1/200 |
+| 阶段一：正式划分、基线与排行榜 | 已完成。按 D9 堵住出题捷径后（gen-0.2.1）冻结划分，共 550 道：train_mining 200、validation 50、test_id 150、test_ood 150（`el freeze`），记录在 `configs/frozen.json`；validation 基线：0.6B 0/50，1.7B 0/50，4B 6/50（[排行榜](reports/leaderboard_validation_env-0.2.1.md)）；1.7B 在 train_mining 上 1/200 |
 | 阶段二：B / C / D 三组数据构建、观测溯源检查、去重、谱系、单决策 SFT 导出、预算对齐、manifest | 已实现，测试通过；C、D 按 6 组的合并失败率加权（D11）；等预热模型 W 的真实失败作为输入 |
 | 阶段二：真实 Qwen3 模板的前缀一致性检查 | 脚本已写好（`scripts/check_template.py`） |
 | 阶段三：A 行与预热（Kaggle） | A 行和预热已跑完（2026-11-03，`scripts/kaggle_stage3.sh` 按 D11、D12 一次跑完，D13）：A 在 train_mining 上 1/200，不达标；预热 10 道 80/200，成功率达标但 C 与 B 的分配差 0.076 不到 0.10；预热 25 道 131/200、分配差 0.159，达标，**W = W25**。validation：A 0/50，W25 33/50（[train_mining 报告](reports/stage3_train_mining.md)、[validation 报告](reports/stage3_validation.md)）。B、C、D 从这里起记为阶段四（D14） |
-| 阶段四：B、C、D 对比与测试集评测（Kaggle） | 已跑完（2026-11-04，两次会话，D15）。test_id 成功率：W25 66.7%，B 93.6%，C 99.6%，D 90.0%。**H1（C 对 B）分不出**：平均 +6.0 个百分点、区间 [+3.6, +8.7]，但种子 1 打平，不满足事先定的"每个种子都赢"。**H2（C 对 D）C 更好**：+9.6 [+7.1, +12.0]。**H3（C 对 W25+ICL）照规则记 C 更好，但对照组本身坏了**：W25+ICL 只有 1.3%，比起点 W25 还低 65 个百分点，像是照抄了上下文里的示范，不能当作"参数比上下文好"的证据。C 在 test_id 上接近满分，这组题已经不够难。报告在 Kaggle notebook evidenceloop-stage4 的输出里 |
+| 阶段四：B、C、D 对比与测试集评测（Kaggle） | 已跑完（2026-11-04，一块 T4，两次会话，D15）。B、C、D 各 3 个种子，共 9 个 LoRA，都从 W25 出发、互相独立（D14）。test_id 成功率：W25 66.7%，B 93.6%，C 99.6%，D 90.0%。**H1（C 对 B）分不出**：平均 +6.0 个百分点、区间 [+3.6, +8.7]，但种子 1 打平，不满足事先定的"每个种子都赢"。**H2（C 对 D）C 更好**：+9.6 [+7.1, +12.0]。**H3（C 对 W25+ICL）照规则记 C 更好，但对照组本身坏了**：W25+ICL 只有 1.3%，比起点 W25 还低 65 个百分点，像是照抄了上下文里的示范，不能当作"参数比上下文好"的证据。C 在 test_id 上接近满分，这组题已经不够难。报告在 Kaggle notebook evidenceloop-stage4 的输出里 |
 
 ## 真实模型校准：目前看到的
 
