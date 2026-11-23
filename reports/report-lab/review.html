@@ -7,7 +7,7 @@ h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin
 .tag{border:1px solid;padding:2px 7px;border-radius:6px;font-size:13px}.pass{color:#185d41}.fail{color:#9b3224}.unknown{color:#775713}
 summary{cursor:pointer;padding:5px 0;overflow-wrap:anywhere}pre{background:#eef3ef;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace}
 blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history>details{border-top:1px solid #ccd9d2;padding:8px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#holdout">跨公司留出结果</a><a href="#revisions">Oracle 改稿</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
+</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#holdout">跨公司留出结果</a><a href="#revisions">Oracle 改稿</a><a href="#sft">真实微调对照</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
 <p><label>关联本地原年报 <input id="pdf" type="file" accept="application/pdf" multiple></label><br>
 <span id="pdf-status" class="muted" role="status">选取原 PDF 后可从表格页码打开原页。文件只在本浏览器读取。</span></p>
 <h2 id="trial">给同一模型补上列头后，哪些题答对了？</h2><p>forgeflow-qwen3-8b-ctx16k:latest · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p><div class='scroll'><table><thead><tr><th scope='col'>输入条件</th><th scope='col'>核准 / 总题数</th><th scope='col'>待核实</th><th scope='col'>相对仅数值行修好</th><th scope='col'>退化</th></tr></thead><tbody><tr><td>仅数值行</td><td>0 / 4</td><td>0</td><td>—</td><td>—</td></tr><tr><td>同样的行＋列头</td><td>1 / 4</td><td>1</td><td>catl.annual</td><td>—</td></tr><tr><td>人工选行＋列头</td><td>2 / 4</td><td>0</td><td>catl.annual、catl.q4</td><td>—</td></tr></tbody></table></div><section class='case'><h3>宁德时代 2025 年经营活动产生的现金流量净额是多少？</h3><p class='muted'>catl.annual · catl_2025_annual_zh.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>经营活动产生的现金流量净额</td><td>2025年</td><td>133219982 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第一季度</td><td>32868257 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第二季度</td><td>25818809 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第三季度</td><td>21973364 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第四季度</td><td>52559552 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr></tbody></table></div><pre>c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>abstained</p><p>年报摘录中未明确给出2025年的具体数值，仅提供了2024年及以前的数据和部分对比信息。</p><p>引用页 [11, 12] · 数值 — · 出处 —</p><p>11480 ms · token 253 入 / 71 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年经营活动产生的现金流量净额是多少？
@@ -6246,7 +6246,1842 @@ Total revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998</pr
     &quot;eval_duration&quot;: 697040000
   },
   &quot;latency_ms&quot;: 7688
-}</pre></details></td></tr></tbody></table></div><h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2><p><a href="#apple-delivery">查看 Apple 批准稿与错收旧版的对照</a></p><h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。评分逐项核对宁德时代年报第 11 页。2022 年超出该表列示范围，保留为待核实。</p><div class='scroll'><table><thead><tr><th scope='col'>用户问题</th><th scope='col'>产品回答</th><th scope='col'>核验</th><th scope='col'>出处</th><th scope='col'>毫秒</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>宁德时代 2025 年经营活动产生的现金流量净额是多少？</td><td>宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。</td><td><span class="tag pass">已核准</span></td><td><a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a>、<a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="30" target="_blank" rel="noopener noreferrer">第 30 页</a></td><td>945.1</td><td><details><summary>查看问答回执</summary><pre>{
+}</pre></details></td></tr></tbody></table></div><h2 id='sft'>真实微调改变了哪些改稿决定？</h2><p>32 条示范，64 次更新，两个新公司 18 份脚本委托。未达替换门槛。打开各题可查原始模型记录。</p><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>留出核准</th><th scope='col'>全词表首选命中</th><th scope='col'>对原模型修好／退化</th></tr></thead><tbody><tr><td>原模型</td><td>4/18</td><td>4</td><td>0／0</td></tr><tr><td>原模型加规则</td><td>4/18</td><td>4</td><td>0／0</td></tr><tr><td>训练后重载 LoRA</td><td>1/18</td><td>1</td><td>1／4</td></tr></tbody></table></div><p>A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。</p><details><summary>tencent-01 · 定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？</summary><pre>[
+  &quot;定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？&quot;
+]</pre><p>参考动作 A · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-01&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 177,
+  &quot;scores&quot;: [
+    23.0,
+    25.125,
+    22.0,
+    20.25,
+    24.625,
+    26.875
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0851
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-01&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 223,
+  &quot;scores&quot;: [
+    22.125,
+    23.5,
+    21.375,
+    19.75,
+    23.375,
+    25.25
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1083
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>B</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-01&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 177,
+  &quot;scores&quot;: [
+    16.875,
+    18.125,
+    18.125,
+    18.0,
+    16.5,
+    16.5
+  ],
+  &quot;full_vocab_top&quot;: 33,
+  &quot;seconds&quot;: 0.087
+}</pre><pre>{
+  &quot;action&quot;: &quot;compute&quot;,
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;contribution&quot;,
+  &quot;page&quot;: &quot;8&quot;,
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ]
+  },
+  &quot;numerator&quot;: &quot;50113&quot;,
+  &quot;denominator&quot;: &quot;91509&quot;,
+  &quot;value&quot;: &quot;54.76&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-02 · 表中显示该板块在公司收入增减里所占比例。</summary><pre>[
+  &quot;下一期用 2025 年。&quot;,
+  &quot;表中显示该板块在公司收入增减里所占比例。&quot;
+]</pre><p>参考动作 B · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-02&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：下一期用 2025 年。\n分析师：表中显示该板块在公司收入增减里所占比例。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 182,
+  &quot;scores&quot;: [
+    23.25,
+    23.0,
+    21.875,
+    22.75,
+    24.0,
+    26.875
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0845
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-02&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：下一期用 2025 年。\n分析师：表中显示该板块在公司收入增减里所占比例。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 228,
+  &quot;scores&quot;: [
+    21.375,
+    21.375,
+    20.5,
+    21.375,
+    22.625,
+    24.625
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1139
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-02&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：下一期用 2025 年。\n分析师：表中显示该板块在公司收入增减里所占比例。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 182,
+  &quot;scores&quot;: [
+    16.875,
+    18.0,
+    18.125,
+    18.0,
+    16.0,
+    16.5
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0876
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-03 · 按我的口径：取 2025 年，比较板块自己与上年。</summary><pre>[
+  &quot;刚才有人要换指标。&quot;,
+  &quot;按我的口径：取 2025 年，比较板块自己与上年。&quot;
+]</pre><p>参考动作 A · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-03&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：刚才有人要换指标。\n分析师：按我的口径：取 2025 年，比较板块自己与上年。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 181,
+  &quot;scores&quot;: [
+    23.0,
+    22.5,
+    24.5,
+    20.125,
+    24.25,
+    26.875
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0851
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-03&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：刚才有人要换指标。\n分析师：按我的口径：取 2025 年，比较板块自己与上年。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 227,
+  &quot;scores&quot;: [
+    21.875,
+    21.75,
+    22.875,
+    19.5,
+    23.125,
+    25.125
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1138
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-03&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：刚才有人要换指标。\n分析师：按我的口径：取 2025 年，比较板块自己与上年。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 181,
+  &quot;scores&quot;: [
+    16.75,
+    17.875,
+    18.125,
+    17.75,
+    16.125,
+    16.375
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0869
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-04 · 分母别用这块业务的上年额，改用同年全公司的收入差额。</summary><pre>[
+  &quot;分母别用这块业务的上年额，改用同年全公司的收入差额。&quot;
+]</pre><p>参考动作 B · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-04&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：分母别用这块业务的上年额，改用同年全公司的收入差额。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 173,
+  &quot;scores&quot;: [
+    24.5,
+    22.875,
+    22.0,
+    20.375,
+    24.75,
+    27.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0992
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-04&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：分母别用这块业务的上年额，改用同年全公司的收入差额。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 219,
+  &quot;scores&quot;: [
+    23.375,
+    22.25,
+    21.5,
+    19.75,
+    23.5,
+    25.25
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1082
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-04&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：分母别用这块业务的上年额，改用同年全公司的收入差额。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 173,
+  &quot;scores&quot;: [
+    16.875,
+    17.875,
+    18.125,
+    17.875,
+    16.5,
+    16.375
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0875
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-05 · 这条仅供备查，照最初的表单交。</summary><pre>[
+  &quot;草拟时有人提过上年自身增幅。&quot;,
+  &quot;这条仅供备查，照最初的表单交。&quot;
+]</pre><p>参考动作 B · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-05&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：草拟时有人提过上年自身增幅。\n分析师：这条仅供备查，照最初的表单交。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 177,
+  &quot;scores&quot;: [
+    23.375,
+    25.125,
+    22.0,
+    20.375,
+    24.875,
+    27.125
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0843
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-05&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：草拟时有人提过上年自身增幅。\n分析师：这条仅供备查，照最初的表单交。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 223,
+  &quot;scores&quot;: [
+    22.125,
+    23.25,
+    21.125,
+    19.75,
+    23.375,
+    25.125
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1084
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-05&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：草拟时有人提过上年自身增幅。\n分析师：这条仅供备查，照最初的表单交。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 177,
+  &quot;scores&quot;: [
+    17.0,
+    18.125,
+    18.25,
+    18.0,
+    16.625,
+    16.5
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0872
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-06 · 贡献的提议取消，改为相较去年的板块增长百分数。</summary><pre>[
+  &quot;先切换到 2025。&quot;,
+  &quot;贡献的提议取消，改为相较去年的板块增长百分数。&quot;
+]</pre><p>参考动作 A · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-06&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：先切换到 2025。\n分析师：贡献的提议取消，改为相较去年的板块增长百分数。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 179,
+  &quot;scores&quot;: [
+    22.625,
+    22.5,
+    21.625,
+    22.0,
+    23.5,
+    26.375
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.085
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-06&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：先切换到 2025。\n分析师：贡献的提议取消，改为相较去年的板块增长百分数。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 225,
+  &quot;scores&quot;: [
+    21.375,
+    21.5,
+    20.625,
+    21.125,
+    22.375,
+    24.375
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1139
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-06&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：先切换到 2025。\n分析师：贡献的提议取消，改为相较去年的板块增长百分数。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 179,
+  &quot;scores&quot;: [
+    16.875,
+    18.0,
+    18.125,
+    18.0,
+    16.25,
+    16.5
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0873
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-07 · 就算可以算，也请把这一版挂起，收到签字我再叫你出数。</summary><pre>[
+  &quot;就算可以算，也请把这一版挂起，收到签字我再叫你出数。&quot;
+]</pre><p>参考动作 E · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-07&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：就算可以算，也请把这一版挂起，收到签字我再叫你出数。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 175,
+  &quot;scores&quot;: [
+    24.125,
+    22.5,
+    21.375,
+    20.25,
+    25.375,
+    26.875
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0836
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-07&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：就算可以算，也请把这一版挂起，收到签字我再叫你出数。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 221,
+  &quot;scores&quot;: [
+    23.125,
+    21.875,
+    21.125,
+    19.75,
+    23.5,
+    25.125
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1084
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-07&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：就算可以算，也请把这一版挂起，收到签字我再叫你出数。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 175,
+  &quot;scores&quot;: [
+    16.75,
+    17.75,
+    18.0,
+    17.75,
+    16.75,
+    16.25
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0872
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-08 · 委员会指定 FY2022，分母用其上一年，请按现有原表交付。</summary><pre>[
+  &quot;委员会指定 FY2022，分母用其上一年，请按现有原表交付。&quot;
+]</pre><p>参考动作 F · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-08&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：委员会指定 FY2022，分母用其上一年，请按现有原表交付。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 175,
+  &quot;scores&quot;: [
+    23.125,
+    24.5,
+    21.75,
+    20.375,
+    24.75,
+    26.875
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0869
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-08&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：委员会指定 FY2022，分母用其上一年，请按现有原表交付。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 221,
+  &quot;scores&quot;: [
+    21.875,
+    22.875,
+    20.875,
+    19.5,
+    23.0,
+    25.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1096
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-08&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：委员会指定 FY2022，分母用其上一年，请按现有原表交付。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 175,
+  &quot;scores&quot;: [
+    16.875,
+    18.0,
+    18.125,
+    17.875,
+    16.5,
+    16.5
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0877
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-01 · 经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。</summary><pre>[
+  &quot;经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。&quot;
+]</pre><p>参考动作 A · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-01&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 205,
+  &quot;scores&quot;: [
+    22.875,
+    22.625,
+    22.0,
+    22.0,
+    24.25,
+    26.5
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1358
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-01&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 251,
+  &quot;scores&quot;: [
+    21.5,
+    21.25,
+    20.75,
+    20.5,
+    22.875,
+    24.375
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1159
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-01&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 205,
+  &quot;scores&quot;: [
+    16.5,
+    17.625,
+    17.75,
+    17.5,
+    16.125,
+    16.125
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.1094
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-02 · 汇报年份保留，求公司收入差额中有多少比例由该子项解释。</summary><pre>[
+  &quot;汇报年份保留，求公司收入差额中有多少比例由该子项解释。&quot;
+]</pre><p>参考动作 B · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-02&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：汇报年份保留，求公司收入差额中有多少比例由该子项解释。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 203,
+  &quot;scores&quot;: [
+    23.75,
+    22.375,
+    21.625,
+    20.0,
+    24.0,
+    26.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1058
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-02&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：汇报年份保留，求公司收入差额中有多少比例由该子项解释。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 249,
+  &quot;scores&quot;: [
+    22.125,
+    21.25,
+    20.625,
+    19.0,
+    22.25,
+    24.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1154
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-02&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：汇报年份保留，求公司收入差额中有多少比例由该子项解释。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 203,
+  &quot;scores&quot;: [
+    16.5,
+    17.5,
+    17.625,
+    17.375,
+    16.25,
+    16.125
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.1084
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-03 · 撤掉这个建议，已送审的两项内容全部保留。</summary><pre>[
+  &quot;上年也是个选择。&quot;,
+  &quot;撤掉这个建议，已送审的两项内容全部保留。&quot;
+]</pre><p>参考动作 B · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-03&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：上年也是个选择。\n分析师：撤掉这个建议，已送审的两项内容全部保留。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 205,
+  &quot;scores&quot;: [
+    22.75,
+    23.75,
+    21.625,
+    20.25,
+    24.875,
+    26.125
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1062
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-03&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：上年也是个选择。\n分析师：撤掉这个建议，已送审的两项内容全部保留。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 251,
+  &quot;scores&quot;: [
+    21.25,
+    21.875,
+    20.375,
+    18.875,
+    22.625,
+    24.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.116
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-03&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：上年也是个选择。\n分析师：撤掉这个建议，已送审的两项内容全部保留。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 205,
+  &quot;scores&quot;: [
+    16.375,
+    17.5,
+    17.625,
+    17.25,
+    16.5,
+    16.0
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.1085
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-04 · 不再用原先的期间，定在 2025 年，对自身基期列做除法。</summary><pre>[
+  &quot;不再用原先的期间，定在 2025 年，对自身基期列做除法。&quot;
+]</pre><p>参考动作 A · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-04&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 C。\n分析师：不再用原先的期间，定在 2025 年，对自身基期列做除法。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 209,
+  &quot;scores&quot;: [
+    23.125,
+    22.5,
+    24.25,
+    20.125,
+    23.625,
+    27.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.117
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-04&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 C。\n分析师：不再用原先的期间，定在 2025 年，对自身基期列做除法。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 255,
+  &quot;scores&quot;: [
+    21.0,
+    20.375,
+    21.25,
+    18.375,
+    21.5,
+    24.125
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1183
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-04&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 C。\n分析师：不再用原先的期间，定在 2025 年，对自身基期列做除法。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 209,
+  &quot;scores&quot;: [
+    16.5,
+    17.75,
+    17.875,
+    17.625,
+    15.8125,
+    16.25
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.1119
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-05 · 年份更新为最新一列，计算口径照送审要求。</summary><pre>[
+  &quot;年份更新为最新一列，计算口径照送审要求。&quot;
+]</pre><p>参考动作 B · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-05&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：年份更新为最新一列，计算口径照送审要求。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 199,
+  &quot;scores&quot;: [
+    22.125,
+    21.875,
+    21.25,
+    22.0,
+    23.125,
+    25.5
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1075
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-05&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：年份更新为最新一列，计算口径照送审要求。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 245,
+  &quot;scores&quot;: [
+    20.625,
+    20.625,
+    20.125,
+    20.25,
+    21.625,
+    23.5
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1164
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag pass">已核准</span></td><td>B</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-05&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：年份更新为最新一列，计算口径照送审要求。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 199,
+  &quot;scores&quot;: [
+    16.25,
+    17.5,
+    17.5,
+    17.375,
+    15.875,
+    16.125
+  ],
+  &quot;full_vocab_top&quot;: 33,
+  &quot;seconds&quot;: 0.1092
+}</pre><pre>{
+  &quot;action&quot;: &quot;compute&quot;,
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;contribution&quot;,
+  &quot;page&quot;: &quot;107&quot;,
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ]
+  },
+  &quot;numerator&quot;: &quot;-223796897.18&quot;,
+  &quot;denominator&quot;: &quot;-2061049761.55&quot;,
+  &quot;value&quot;: &quot;10.86&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-06 · 这次先用自身去年金额作分母，期间维持。</summary><pre>[
+  &quot;可以讨论它对全局的影响。&quot;,
+  &quot;这次先用自身去年金额作分母，期间维持。&quot;
+]</pre><p>参考动作 A · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-06&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：可以讨论它对全局的影响。\n分析师：这次先用自身去年金额作分母，期间维持。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 206,
+  &quot;scores&quot;: [
+    23.25,
+    24.125,
+    21.75,
+    20.375,
+    24.375,
+    26.375
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1072
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-06&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：可以讨论它对全局的影响。\n分析师：这次先用自身去年金额作分母，期间维持。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 252,
+  &quot;scores&quot;: [
+    21.375,
+    21.75,
+    20.125,
+    18.75,
+    22.625,
+    24.125
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1306
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>B</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-06&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：可以讨论它对全局的影响。\n分析师：这次先用自身去年金额作分母，期间维持。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 206,
+  &quot;scores&quot;: [
+    16.375,
+    17.5,
+    17.5,
+    17.375,
+    16.125,
+    16.0
+  ],
+  &quot;full_vocab_top&quot;: 33,
+  &quot;seconds&quot;: 0.1085
+}</pre><pre>{
+  &quot;action&quot;: &quot;compute&quot;,
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;contribution&quot;,
+  &quot;page&quot;: &quot;107&quot;,
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ]
+  },
+  &quot;numerator&quot;: &quot;-223796897.18&quot;,
+  &quot;denominator&quot;: &quot;-2061049761.55&quot;,
+  &quot;value&quot;: &quot;10.86&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-07 · 收到我下一条确认前，先别让这笔数出现在材料里。</summary><pre>[
+  &quot;收到我下一条确认前，先别让这笔数出现在材料里。&quot;
+]</pre><p>参考动作 E · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-07&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：收到我下一条确认前，先别让这笔数出现在材料里。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 200,
+  &quot;scores&quot;: [
+    22.75,
+    23.75,
+    21.625,
+    20.25,
+    24.75,
+    26.375
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1062
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag fail">未通过</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-07&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：收到我下一条确认前，先别让这笔数出现在材料里。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 246,
+  &quot;scores&quot;: [
+    21.5,
+    22.375,
+    20.75,
+    19.25,
+    23.125,
+    24.5
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1162
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-07&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：收到我下一条确认前，先别让这笔数出现在材料里。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 200,
+  &quot;scores&quot;: [
+    16.25,
+    17.5,
+    17.625,
+    17.375,
+    16.375,
+    16.125
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.1088
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-08 · 会议只接受 2021 年的同比，只能引用屏幕上的表格。</summary><pre>[
+  &quot;会议只接受 2021 年的同比，只能引用屏幕上的表格。&quot;
+]</pre><p>参考动作 F · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-08&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：会议只接受 2021 年的同比，只能引用屏幕上的表格。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 203,
+  &quot;scores&quot;: [
+    24.125,
+    22.625,
+    21.75,
+    20.125,
+    24.875,
+    26.5
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1073
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-08&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：会议只接受 2021 年的同比，只能引用屏幕上的表格。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 249,
+  &quot;scores&quot;: [
+    22.125,
+    21.0,
+    20.375,
+    18.75,
+    22.375,
+    23.875
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1164
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-08&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：会议只接受 2021 年的同比，只能引用屏幕上的表格。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 203,
+  &quot;scores&quot;: [
+    16.5,
+    17.5,
+    17.625,
+    17.375,
+    16.375,
+    16.125
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.1087
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>tencent-09 · 把分析迁到表里的较早一年，改看这一年该板块本身的同比。</summary><pre>[
+  &quot;把分析迁到表里的较早一年，改看这一年该板块本身的同比。&quot;
+]</pre><p>参考动作 F · 原表 <a data-hash="2a7547168077c3d9994af673125e77612e8656bc0f17ad189371d7e4088f4e98" data-page="9" target="_blank" rel="noopener noreferrer">第 9 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-09&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：把分析迁到表里的较早一年，改看这一年该板块本身的同比。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 172,
+  &quot;scores&quot;: [
+    23.0,
+    24.75,
+    22.125,
+    20.5,
+    24.125,
+    26.625
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.0866
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-09&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：把分析迁到表里的较早一年，改看这一年该板块本身的同比。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 218,
+  &quot;scores&quot;: [
+    21.625,
+    22.875,
+    20.875,
+    19.5,
+    22.625,
+    24.375
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1094
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>C</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;tencent-09&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：把分析迁到表里的较早一年，改看这一年该板块本身的同比。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 172,
+  &quot;scores&quot;: [
+    16.75,
+    17.875,
+    18.0,
+    17.75,
+    16.25,
+    16.375
+  ],
+  &quot;full_vocab_top&quot;: 34,
+  &quot;seconds&quot;: 0.0865
+}</pre><pre>{
+  &quot;action&quot;: &quot;invalid_calculation&quot;,
+  &quot;error&quot;: &quot;unknown or missing cell&quot;
+}</pre></details></td></tr></tbody></table></div></details><details><summary>moutai-09 · 不采纳，仍按原财年，保留原计算定义。</summary><pre>[
+  &quot;有人希望看当年。&quot;,
+  &quot;不采纳，仍按原财年，保留原计算定义。&quot;
+]</pre><p>参考动作 F · 原表 <a data-hash="474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288" data-page="107" target="_blank" rel="noopener noreferrer">第 107 页</a></p><div class='scroll'><table><thead><tr><th scope='col'>策略</th><th scope='col'>核准</th><th scope='col'>动作</th><th scope='col'>复核</th></tr></thead><tbody><tr><td>原模型</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-09&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;base&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：有人希望看当年。\n分析师：不采纳，仍按原财年，保留原计算定义。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 205,
+  &quot;scores&quot;: [
+    22.625,
+    22.125,
+    21.5,
+    22.0,
+    24.25,
+    26.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1065
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>原模型加规则</td><td><span class="tag pass">已核准</span></td><td>F</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-09&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;coached&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: null,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。先分别追踪用户最终确认的年份、指标；提案被否决时恢复原项；用户叫停优先。同比用前一年分项收入，贡献用公司总收入净变化，两年数值都要存在。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：有人希望看当年。\n分析师：不采纳，仍按原财年，保留原计算定义。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 251,
+  &quot;scores&quot;: [
+    21.25,
+    20.75,
+    20.125,
+    20.375,
+    22.5,
+    24.0
+  ],
+  &quot;full_vocab_top&quot;: 37,
+  &quot;seconds&quot;: 0.1155
+}</pre><pre>{
+  &quot;action&quot;: &quot;hold&quot;,
+  &quot;reason&quot;: &quot;missing_evidence&quot;
+}</pre></details></td></tr><tr><td>训练后重载 LoRA</td><td><span class="tag fail">未通过</span></td><td>B</td><td><details><summary>模型输入、候选分数和工具回执</summary><pre>{
+  &quot;case_id&quot;: &quot;moutai-09&quot;,
+  &quot;split&quot;: &quot;holdout&quot;,
+  &quot;arm&quot;: &quot;lora&quot;,
+  &quot;freeze&quot;: &quot;7592787c847230094e9217aac8bb36287d274a04&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;base_sha256&quot;: &quot;f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b&quot;,
+  &quot;adapter_sha256&quot;: &quot;2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;role&quot;: &quot;system&quot;,
+      &quot;content&quot;: &quot;请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。&quot;
+    },
+    {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;content&quot;: &quot;贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：有人希望看当年。\n分析师：不采纳，仍按原财年，保留原计算定义。&quot;
+    }
+  ],
+  &quot;input_tokens&quot;: 205,
+  &quot;scores&quot;: [
+    16.25,
+    17.5,
+    17.5,
+    17.375,
+    16.125,
+    16.0
+  ],
+  &quot;full_vocab_top&quot;: 33,
+  &quot;seconds&quot;: 0.1095
+}</pre><pre>{
+  &quot;action&quot;: &quot;compute&quot;,
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;contribution&quot;,
+  &quot;page&quot;: &quot;107&quot;,
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ]
+  },
+  &quot;numerator&quot;: &quot;-223796897.18&quot;,
+  &quot;denominator&quot;: &quot;-2061049761.55&quot;,
+  &quot;value&quot;: &quot;10.86&quot;
+}</pre></details></td></tr></tbody></table></div></details><h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2><p><a href="#apple-delivery">查看 Apple 批准稿与错收旧版的对照</a></p><h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。评分逐项核对宁德时代年报第 11 页。2022 年超出该表列示范围，保留为待核实。</p><div class='scroll'><table><thead><tr><th scope='col'>用户问题</th><th scope='col'>产品回答</th><th scope='col'>核验</th><th scope='col'>出处</th><th scope='col'>毫秒</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>宁德时代 2025 年经营活动产生的现金流量净额是多少？</td><td>宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。</td><td><span class="tag pass">已核准</span></td><td><a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a>、<a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="30" target="_blank" rel="noopener noreferrer">第 30 页</a></td><td>945.1</td><td><details><summary>查看问答回执</summary><pre>{
   &quot;run_id&quot;: &quot;forgeflow/e195a0a2f764/annual-cash/2025&quot;,
   &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
   &quot;case_id&quot;: &quot;catl.fy2025.cash&quot;,

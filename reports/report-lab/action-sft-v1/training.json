@@ -1,0 +1,402 @@
+{
+  "freeze": "7592787c847230094e9217aac8bb36287d274a04",
+  "base_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "steps": [
+    {
+      "epoch": 1,
+      "case_id": "dell-11",
+      "loss": 3.7312979698181152,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-14",
+      "loss": 1.2979302406311035,
+      "input_tokens": 192
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-02",
+      "loss": 3.260655164718628,
+      "input_tokens": 192
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-15",
+      "loss": 1.8140106201171875,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-04",
+      "loss": 4.2242584228515625,
+      "input_tokens": 196
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-06",
+      "loss": 2.1852028369903564,
+      "input_tokens": 194
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-05",
+      "loss": 1.935140609741211,
+      "input_tokens": 185
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-08",
+      "loss": 4.407401084899902,
+      "input_tokens": 183
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-04",
+      "loss": 0.5728819966316223,
+      "input_tokens": 195
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-09",
+      "loss": 2.8107430934906006,
+      "input_tokens": 194
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-06",
+      "loss": 0.32437053322792053,
+      "input_tokens": 193
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-02",
+      "loss": 6.736781120300293,
+      "input_tokens": 193
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-07",
+      "loss": 1.0100576877593994,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-16",
+      "loss": 5.259420394897461,
+      "input_tokens": 187
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-10",
+      "loss": 6.390977382659912,
+      "input_tokens": 183
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-08",
+      "loss": 0.7891082167625427,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-12",
+      "loss": 3.202068567276001,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-15",
+      "loss": 2.7738285064697266,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-09",
+      "loss": 1.2021472454071045,
+      "input_tokens": 195
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-07",
+      "loss": 1.4284015893936157,
+      "input_tokens": 185
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-05",
+      "loss": 4.230286121368408,
+      "input_tokens": 186
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-12",
+      "loss": 1.3273429870605469,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-01",
+      "loss": 2.4850385189056396,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-13",
+      "loss": 2.684631109237671,
+      "input_tokens": 185
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-14",
+      "loss": 2.9584641456604004,
+      "input_tokens": 193
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-10",
+      "loss": 1.172959327697754,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-16",
+      "loss": 2.35365629196167,
+      "input_tokens": 186
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-01",
+      "loss": 2.138716220855713,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 1,
+      "case_id": "dell-03",
+      "loss": 1.9498050212860107,
+      "input_tokens": 191
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-11",
+      "loss": 2.1730756759643555,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-13",
+      "loss": 0.6898906826972961,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 1,
+      "case_id": "cisco-03",
+      "loss": 1.5450774431228638,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-04",
+      "loss": 2.55181884765625,
+      "input_tokens": 196
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-01",
+      "loss": 1.214221477508545,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-01",
+      "loss": 1.0181125402450562,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-02",
+      "loss": 0.907274067401886,
+      "input_tokens": 193
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-10",
+      "loss": 2.8071978092193604,
+      "input_tokens": 183
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-15",
+      "loss": 3.410524845123291,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-05",
+      "loss": 1.9767355918884277,
+      "input_tokens": 186
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-09",
+      "loss": 6.112213134765625,
+      "input_tokens": 195
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-13",
+      "loss": 2.2809903621673584,
+      "input_tokens": 185
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-02",
+      "loss": 0.8157691359519958,
+      "input_tokens": 192
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-05",
+      "loss": 1.783149003982544,
+      "input_tokens": 185
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-14",
+      "loss": 2.3586275577545166,
+      "input_tokens": 193
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-11",
+      "loss": 2.0124731063842773,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-08",
+      "loss": 2.5904688835144043,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-13",
+      "loss": 1.2267836332321167,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-12",
+      "loss": 1.7821606397628784,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-16",
+      "loss": 2.565763473510742,
+      "input_tokens": 187
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-16",
+      "loss": 2.454812526702881,
+      "input_tokens": 186
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-11",
+      "loss": 1.58526611328125,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-10",
+      "loss": 1.5807620286941528,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-07",
+      "loss": 2.2760798931121826,
+      "input_tokens": 184
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-09",
+      "loss": 2.241596221923828,
+      "input_tokens": 194
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-15",
+      "loss": 1.409420371055603,
+      "input_tokens": 189
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-14",
+      "loss": 1.647092580795288,
+      "input_tokens": 192
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-08",
+      "loss": 1.816182017326355,
+      "input_tokens": 183
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-07",
+      "loss": 1.5489835739135742,
+      "input_tokens": 185
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-04",
+      "loss": 3.89935040473938,
+      "input_tokens": 195
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-06",
+      "loss": 3.091644763946533,
+      "input_tokens": 194
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-06",
+      "loss": 2.5749950408935547,
+      "input_tokens": 193
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-12",
+      "loss": 1.4756412506103516,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 2,
+      "case_id": "cisco-03",
+      "loss": 2.949873447418213,
+      "input_tokens": 190
+    },
+    {
+      "epoch": 2,
+      "case_id": "dell-03",
+      "loss": 2.8849425315856934,
+      "input_tokens": 191
+    }
+  ],
+  "seed": 23,
+  "trainable_parameters": 81920,
+  "largest_abs_B": 0.0313958041369915,
+  "seconds": 9.679,
+  "peak_memory_bytes": 1584973446,
+  "adapter_sha256": "2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de",
+  "runtime": {
+    "device": "Apple M4",
+    "mlx": "0.32.3",
+    "mlx-lm": "0.32.0",
+    "transformers": "5.18.0"
+  }
+}

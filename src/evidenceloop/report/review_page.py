@@ -4,7 +4,7 @@ import json
 from html import escape
 from pathlib import Path
 
-from evidenceloop.report import calculation, issuer_holdout, peer_runs, revisions
+from evidenceloop.report import action_sft, calculation, issuer_holdout, peer_runs, revisions
 from evidenceloop.report.annual import compare, digest, read_json, read_lines
 from evidenceloop.report.evidence_trials import ARMS, summarize
 
@@ -242,6 +242,40 @@ def revision_section(folder):
             + comparison + "".join(cards))
 
 
+def sft_section(folder):
+    archive = folder / "action-sft-v1"
+    if not (archive / "results.json").exists():
+        return ""
+    result = read_json(archive / "results.json")
+    sources = read_json(action_sft.DATA / "sources.json")
+    if action_sft.summarize(archive, sources, result["freeze"]) != result:
+        raise ValueError("SFT report and replay differ")
+    arms = {"base": "原模型", "coached": "原模型加规则", "lora": "训练后重载 LoRA"}
+    held = result["summary"]["holdout"]
+    grid = table(["做法", "留出核准", "全词表首选命中", "对原模型修好／退化"], [
+        [label, f'{held[a]["passed"]}/{held[a]["n"]}', str(held[a]["unconstrained"]),
+         f'{len(held[a]["fixed"])}／{len(held[a]["lost"])}'] for a, label in arms.items()])
+    traces = {(r["arm"], r["case_id"]): r for r in read_lines(archive / "predictions.jsonl")}
+    records = {(r["arm"], r["case_id"]): r for r in result["rows"]}
+    cards = []
+    for task in action_sft.examples("holdout"):
+        cid = task["case_id"]
+        source = sources[task["document"]]
+        rows = []
+        for arm, label in arms.items():
+            rec = records[arm, cid]
+            rows.append([label, badge("pass" if rec["passed"] else "fail"), esc(rec["choice"]),
+                         details("模型输入、候选分数和工具回执", pre(traces[arm, cid]) + pre(rec["receipt"]))])
+        body = (pre(task["turns"]) + "<p>参考动作 " + esc(task["gold"]) + " · 原表 "
+                + page_ref(source["pdf_sha256"], source["physical_page"]) + "</p>"
+                + table(["策略", "核准", "动作", "复核"], rows))
+        cards.append(details(f"{cid} · {task['turns'][-1]}", body))
+    verdict = "达到扩大复验门槛" if result["gate_passed"] else "未达替换门槛"
+    return ("<h2 id='sft'>真实微调改变了哪些改稿决定？</h2>"
+            f"<p>32 条示范，64 次更新，两个新公司 18 份脚本委托。{verdict}。打开各题可查原始模型记录。</p>"
+            + grid + "<p>" + esc(action_sft.OPTIONS) + "</p>" + "".join(cards))
+
+
 def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_review: Path, calc_log: Path, peers: Path):
     facts = read_json(dataset / "sources.json")
     cases = read_json(dataset / "cases.json")
@@ -286,11 +320,14 @@ def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_rev
                    [[esc(ARM_NAMES[a]),f"{t['pass']} / {t['n']}",str(t["unknown"]),
                      esc("、".join(t['fixed']) or "—"),esc("、".join(t['lost']) or "—")]
                     for a,t in trial["summaries"].items()])
+    sft = sft_section(peers.parent)
     revision = revision_section(peers.parent)
     holdout = holdout_section(peers.parent)
     link = '<a href="#holdout">跨公司留出结果</a>' if holdout else ""
     if revision:
         link += '<a href="#revisions">Oracle 改稿</a>'
+    if sft:
+        link += '<a href="#sft">真实微调对照</a>'
     return """<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>年报逐题评测 · EvidenceLoop</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f8faf9;color:#182823;font:16px/1.6 Inter,system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:36px clamp(16px,4vw,55px)}
@@ -307,7 +344,7 @@ blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history
         f"<p>{esc(trial['model'][0])} · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。"
         "模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p>" + counts + "".join(blocks)
         + calculation_section(calc_prompts, calc_review, calc_log)
-        + holdout + revision + peer_section(peers)
+        + holdout + revision + sft + peer_section(peers)
         + "<h2 id='archive'>同一回答在四种评分方法下的结果</h2><p>历史模型回执和脚本构造对照分别标出。"
         "证据不足保留为待核实。标注由 Codex 比照原表完成，尚无独立人工复核。</p><div class='history'>"
         + "".join(observations_html) + "</div></main>" + PDF_SCRIPT + "</html>\n")

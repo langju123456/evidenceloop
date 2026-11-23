@@ -21,3 +21,16 @@ def test_frozen_financial_references_and_missing_year():
     assert sft.execute("C", sources["tencent"])["action"] == "invalid_calculation"
     assert sft.execute("D", sources["moutai"])["action"] == "invalid_calculation"
     assert sft.execute("E", {}) != sft.execute("F", {})
+
+
+def test_trained_archive_replays_including_refusals_and_returned_wrong_year():
+    folder = sft.ROOT / "reports/report-lab/action-sft-v1"
+    report = sft.read_json(folder / "results.json")
+    replay = sft.summarize(folder, sft.read_json(sft.DATA / "sources.json"), report["freeze"])
+    assert replay == report
+    attempts = [r for r in replay["rows"] if r["arm"] == "lora" and r["split"] == "holdout"]
+    assert len(attempts) == 18 and not replay["gate_passed"]
+    pair = {r["case_id"]: r for r in attempts if r["case_id"] in {"moutai-05", "moutai-09"}}
+    assert pair["moutai-05"]["passed"] and not pair["moutai-09"]["passed"]
+    assert pair["moutai-05"]["receipt"] == pair["moutai-09"]["receipt"]
+    assert pair["moutai-09"]["receipt"]["value"] == "10.86"
