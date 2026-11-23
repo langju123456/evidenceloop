@@ -1,0 +1,43 @@
+{
+  "split": "issuer_holdout_v1",
+  "development_commit": "6a1adcda2d2b305cedc57308942a9294829b73ae",
+  "model": [
+    "forgeflow-qwen3-8b-ctx16k:latest",
+    "7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5",
+    "0.32.1"
+  ],
+  "documents": {
+    "dell": {
+      "issuer": "Dell Technologies Inc.",
+      "accession": "0001571996-25-000034",
+      "source": "https://www.sec.gov/Archives/edgar/data/1571996/000157199625000034/dell-20250131.htm",
+      "printed_page": 77,
+      "period_end": [
+        "2025-01-31",
+        "2024-02-02",
+        "2023-02-03"
+      ],
+      "row_scope": "Net revenue / Services, Total net revenue",
+      "unit": "USD million",
+      "pdf_source": "https://investors.delltechnologies.com/_assets/_68d5f5cb646dff05d81f360ff6dc8916/delltechnologies/db/3572/34587/file/Fiscal_Year_2025_Annual_Report_on_Form_10-K.FINAL_.pdf",
+      "pdf_sha256": "cb701ce3fcddf1b3fb18a0055226f63a05d57f93114de758822558512729dd7e",
+      "pdf_physical_page": 77
+    },
+    "cisco": {
+      "issuer": "Cisco Systems, Inc.",
+      "accession": "0000858877-25-000111",
+      "source": "https://www.sec.gov/Archives/edgar/data/858877/000085887725000111/csco-20250726.htm",
+      "printed_page": 57,
+      "period_end": [
+        "2025-07-26",
+        "2024-07-27",
+        "2023-07-29"
+      ],
+      "row_scope": "Revenue / Services, Total revenue",
+      "unit": "USD million",
+      "pdf_source": "https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf",
+      "pdf_sha256": "85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb",
+      "pdf_physical_page": 75
+    }
+  }
+}

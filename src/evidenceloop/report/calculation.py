@@ -20,8 +20,10 @@ SCHEMAS = {
 
 def messages(item, arm):
     cells = item["cells"]
-    lines = ["第 26 页，Products and Services Performance，单位百万美元。"]
-    for prefix, title in (("S", "Services"), ("T", "Total net sales")):
+    page = item.get("page", 26)
+    title = item.get("table", "Products and Services Performance")
+    lines = [f"第 {page} 页，{title}，单位百万美元。"]
+    for prefix, title in (("S", "Services"), ("T", item.get("total_row", "Total net sales"))):
         lines.append(title + " | " + " | ".join(
             f"FY20{y} [{prefix}{y}] {cells[prefix + y]}" for y in ("25", "24", "23")))
     return [{"role":"system", "content":"只用给定证据，只输出一个 JSON 对象。" + SCHEMAS[arm]},
@@ -70,13 +72,13 @@ def run_command(args):
     run_paired(args, ARMS, messages)
 
 
-def summarize(prompts, review, log):
+def summarize(prompts, review, log, *, split="public_dev", freeze=None):
     tasks = {i["case_id"]:i for i in read_json(prompts)}
     expected = read_json(review)
     if set(expected) != set(tasks):
         raise ValueError("tasks do not match review")
     rows = []
-    records, config = checked_archive(prompts, log, ARMS, messages)
+    records, config = checked_archive(prompts, log, ARMS, messages, split=split, freeze=freeze)
     for r in records:
         cid, arm = r["case_id"], r["arm"]
         resp = r.get("response", {})
@@ -91,7 +93,7 @@ def summarize(prompts, review, log):
                 receipt = calculate(arm, decision, tasks[cid]["cells"])
                 citations = decision.get("pages")
                 supported = (isinstance(citations,list) and all(type(p) is int for p in citations)
-                             and set(citations) == {26})
+                             and set(citations) == {tasks[cid].get("page", 26)})
                 verdict = "pass" if Decimal(receipt["value"]) == Decimal(expected[cid]) and supported else "fail"
             except (KeyError, TypeError, ValueError, InvalidOperation) as exc:
                 reason, verdict = str(exc), "fail"
@@ -105,7 +107,7 @@ def summarize(prompts, review, log):
         summaries[arm] = {"n":len(group),"pass":sum(r["verdict"]=="pass" for r in group),
                           "fixed":[r["case_id"] for r in group if base[r["case_id"]]!="pass" and r["verdict"]=="pass"],
                           "lost":[r["case_id"] for r in group if base[r["case_id"]]=="pass" and r["verdict"]!="pass"]}
-    return {"model":list(config),"split":"public_dev","raw_sha256":digest(log),"gold_sha256":digest(review),
+    return {"model":list(config),"split":split,"raw_sha256":digest(log),"gold_sha256":digest(review),
             "summaries":summaries,"rows":rows}
 
 

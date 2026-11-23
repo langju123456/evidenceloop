@@ -1,0 +1,130 @@
+[
+  {
+    "case_id": "dell.2025.growth",
+    "document": "dell",
+    "question": "请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 77,
+    "table": "Consolidated Statements of Income",
+    "total_row": "Total net revenue",
+    "cells": {
+      "S25": "24147",
+      "S24": "24072",
+      "S23": "23051",
+      "T25": "95567",
+      "T24": "88425",
+      "T23": "102301"
+    }
+  },
+  {
+    "case_id": "dell.2025.contribution",
+    "document": "dell",
+    "question": "请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 77,
+    "table": "Consolidated Statements of Income",
+    "total_row": "Total net revenue",
+    "cells": {
+      "S25": "24147",
+      "S24": "24072",
+      "S23": "23051",
+      "T25": "95567",
+      "T24": "88425",
+      "T23": "102301"
+    }
+  },
+  {
+    "case_id": "dell.2024.growth",
+    "document": "dell",
+    "question": "请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 77,
+    "table": "Consolidated Statements of Income",
+    "total_row": "Total net revenue",
+    "cells": {
+      "S25": "24147",
+      "S24": "24072",
+      "S23": "23051",
+      "T25": "95567",
+      "T24": "88425",
+      "T23": "102301"
+    }
+  },
+  {
+    "case_id": "dell.2024.contribution",
+    "document": "dell",
+    "question": "请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 77,
+    "table": "Consolidated Statements of Income",
+    "total_row": "Total net revenue",
+    "cells": {
+      "S25": "24147",
+      "S24": "24072",
+      "S23": "23051",
+      "T25": "95567",
+      "T24": "88425",
+      "T23": "102301"
+    }
+  },
+  {
+    "case_id": "cisco.2025.growth",
+    "document": "cisco",
+    "question": "请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 57,
+    "table": "Consolidated Statements of Operations",
+    "total_row": "Total revenue",
+    "cells": {
+      "S25": "15046",
+      "S24": "14550",
+      "S23": "13856",
+      "T25": "56654",
+      "T24": "53803",
+      "T23": "56998"
+    }
+  },
+  {
+    "case_id": "cisco.2025.contribution",
+    "document": "cisco",
+    "question": "请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 57,
+    "table": "Consolidated Statements of Operations",
+    "total_row": "Total revenue",
+    "cells": {
+      "S25": "15046",
+      "S24": "14550",
+      "S23": "13856",
+      "T25": "56654",
+      "T24": "53803",
+      "T23": "56998"
+    }
+  },
+  {
+    "case_id": "cisco.2024.growth",
+    "document": "cisco",
+    "question": "请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 57,
+    "table": "Consolidated Statements of Operations",
+    "total_row": "Total revenue",
+    "cells": {
+      "S25": "15046",
+      "S24": "14550",
+      "S23": "13856",
+      "T25": "56654",
+      "T24": "53803",
+      "T23": "56998"
+    }
+  },
+  {
+    "case_id": "cisco.2024.contribution",
+    "document": "cisco",
+    "question": "请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。",
+    "page": 57,
+    "table": "Consolidated Statements of Operations",
+    "total_row": "Total revenue",
+    "cells": {
+      "S25": "15046",
+      "S24": "14550",
+      "S23": "13856",
+      "T25": "56654",
+      "T24": "53803",
+      "T23": "56998"
+    }
+  }
+]

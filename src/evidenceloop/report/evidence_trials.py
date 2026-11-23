@@ -33,12 +33,14 @@ def messages(item, arm):
     return [{"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt}]
 
 
-def run_paired(args, arms, build_messages):
+def run_paired(args, arms, build_messages, *, split="public_dev", freeze=None, required_model=None):
     model = args.model
     installed = {m["name"]: m["digest"] for m in request("tags")["models"]}
     if model not in installed:
         raise ValueError("choose an exact installed model tag; this experiment does not download weights")
     version = request("version")["version"]
+    if required_model and (model, installed[model], version) != required_model:
+        raise ValueError("installed inference stack differs from the frozen protocol")
     dataset = Path(args.prompts)
     items = read_json(dataset)
     out = Path(args.out)
@@ -50,11 +52,13 @@ def run_paired(args, arms, build_messages):
                 payload = {"model": model, "stream": False, "think": False, "format": "json",
                            "options": OPTIONS, "messages": build_messages(item, arm)}
                 row = {"schema_version": 1, "case_id": item["case_id"], "arm": arm,
-                       "run_id": f"{item['case_id']}--{arm}", "attempt": 1, "split": "public_dev",
+                       "run_id": f"{item['case_id']}--{arm}", "attempt": 1, "split": split,
                        "source_kind": "local_model", "document": item["document"],
                        "document_input": "curated_public_excerpts", "prompt_file_sha256": fingerprint,
                        "model_digest": installed[model], "ollama_version": version, "request": payload,
                        "tool_actions": [], "cost": {"external_charge_usd": 0, "energy_cost": None}}
+                if freeze is not None:
+                    row["freeze_commit"] = freeze
                 start = time.monotonic()
                 try:
                     row["response"] = request("chat", payload)
@@ -90,7 +94,7 @@ def parse_response(row):
         return "invalid", None
 
 
-def checked_archive(prompts, log, arms, build_messages):
+def checked_archive(prompts, log, arms, build_messages, *, split="public_dev", freeze=None):
     items = read_json(prompts)
     cases = {item["case_id"]: item for item in items}
     if not cases or len(cases) != len(items):
@@ -114,7 +118,7 @@ def checked_archive(prompts, log, arms, build_messages):
         if (row["prompt_file_sha256"] != fingerprint or row["document"] != item["document"]
                 or req != expected_request or row["run_id"] != f"{cid}--{arm}"
                 or row["source_kind"] != "local_model" or row["attempt"] != 1
-                or row["split"] != "public_dev" or row["schema_version"] != 1
+                or row["split"] != split or row.get("freeze_commit") != freeze or row["schema_version"] != 1
                 or ("response" in row) == ("error" in row)
                 or ("response" in row and row["response"].get("model") != req["model"])):
             raise ValueError(f"changed experiment conditions: {key}")

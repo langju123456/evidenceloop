@@ -589,6 +589,15 @@ def main(argv: list[str] | None = None) -> None:
     calc_score.add_argument("--prompts", default=calculation.PROMPTS)
     calc_score.add_argument("--review", default=calculation.REVIEW)
     calc_score.set_defaults(func=calculation.summary_command)
+    from evidenceloop.report import issuer_holdout
+
+    hold_run = report_actions.add_parser("run-issuer-holdout", help="run the frozen cross-document comparison")
+    hold_run.add_argument("--out", required=True)
+    hold_score = report_actions.add_parser("score-issuer-holdout", help="score the frozen cross-document trial")
+    hold_score.add_argument("--log", required=True)
+    for hold_parser in (hold_run, hold_score):
+        hold_parser.add_argument("--freeze", required=True, help="full preregistration commit SHA")
+        hold_parser.set_defaults(func=issuer_holdout.command)
     from evidenceloop.report import review_page
 
     view = report_actions.add_parser("review-page", help="render an offline report with paired evidence")
