@@ -4,7 +4,7 @@ import json
 from html import escape
 from pathlib import Path
 
-from evidenceloop.report import calculation, issuer_holdout, peer_runs
+from evidenceloop.report import calculation, issuer_holdout, peer_runs, revisions
 from evidenceloop.report.annual import compare, digest, read_json, read_lines
 from evidenceloop.report.evidence_trials import ARMS, summarize
 
@@ -199,6 +199,49 @@ def holdout_section(folder):
             + "".join(cards))
 
 
+def revision_section(folder):
+    result_path = folder / "oracle-revision-results-v1.json"
+    if not result_path.exists():
+        return ""
+    result = read_json(result_path)
+    raw_path = folder / "oracle-revision-trials-v1.jsonl"
+    if digest(raw_path) != result["raw_sha256"] or digest(revisions.SOURCE) != result["source_sha256"]:
+        raise ValueError("revision report and its archived evidence differ")
+    raw = {r["run_id"]: r for r in read_lines(raw_path)}
+    names = {"last": "只读末条／重填", "history": "完整历史／重填", "patch": "完整历史／局部修改"}
+    totals = result["summary"]
+    comparison = table(["做法", "计算通过", "暂停通过", "待核", "相对完整重填修好／退化"], [
+        [name, f'{totals[a]["compute_pass"]}/6', f'{totals[a]["hold_pass"]}/2', str(totals[a]["unknown"]),
+         f'{len(totals[a]["fixed_vs_history"])}／{len(totals[a]["lost_vs_history"])}'] for a, name in names.items()])
+    tasks = read_json(revisions.QUESTIONS)
+    if digest(revisions.QUESTIONS) != next(iter(raw.values()))["prompt_file_sha256"]:
+        raise ValueError("revision report and questions differ")
+    metric_names = {"yoy_growth": "服务收入同比", "share_of_change": "服务对收入净增额的贡献"}
+    recommendation = "局部修改达到采用门槛" if result["patch_gate"] else "保留完整历史重填作为对照，局部修改未达替换门槛"
+    cards = []
+    for task in tasks:
+        cid = task["case_id"]
+        rows = [r for r in result["rows"] if r["case_id"] == cid]
+        lines = []
+        for row in rows:
+            actual = row["executed"] or {}
+            receipt = actual.get("receipt")
+            if receipt:
+                answer = f'FY{actual["year"]} · {metric_names[actual["metric"]]} {receipt["value"]}%'
+            else:
+                answer = {"user_paused": "按用户要求暂停", "missing_evidence": "证据缺期，暂停"}.get(actual.get("reason"), "无有效决定")
+            lines.append([names[row["arm"]], badge(row["verdict"]), esc(answer),
+                          details("查看修订动作与依据", pre(row) + pre(raw[row["run_id"]]))])
+        gold = rows[0]["reference"]
+        cards.append(f'<h3>{esc(gold["scenario"])}</h3>' + details("原始选项及历次修改",
+                     pre(task["initial"]) + pre(task["turns"])) + table(["做法", "判断", "实际交付", "记录"], lines))
+    return ("<h2 id='revisions'>改年份、换指标，最终交付听哪一句？</h2>"
+            f"<p>{recommendation}。八份脚本委托，每种做法各采一次本机模型首答。独立人工复核 0 份。</p>"
+            "<p>展开可核对原始选项、每次修改和实际计算的分母。"
+            f"<a href='{esc(read_json(revisions.SOURCE)['url'])}'>Oracle FY2025 年报原表，印刷页 65</a></p>"
+            + comparison + "".join(cards))
+
+
 def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_review: Path, calc_log: Path, peers: Path):
     facts = read_json(dataset / "sources.json")
     cases = read_json(dataset / "cases.json")
@@ -243,8 +286,11 @@ def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_rev
                    [[esc(ARM_NAMES[a]),f"{t['pass']} / {t['n']}",str(t["unknown"]),
                      esc("、".join(t['fixed']) or "—"),esc("、".join(t['lost']) or "—")]
                     for a,t in trial["summaries"].items()])
+    revision = revision_section(peers.parent)
     holdout = holdout_section(peers.parent)
     link = '<a href="#holdout">跨公司留出结果</a>' if holdout else ""
+    if revision:
+        link += '<a href="#revisions">Oracle 改稿</a>'
     return """<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>年报逐题评测 · EvidenceLoop</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f8faf9;color:#182823;font:16px/1.6 Inter,system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:36px clamp(16px,4vw,55px)}
@@ -261,7 +307,7 @@ blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history
         f"<p>{esc(trial['model'][0])} · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。"
         "模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p>" + counts + "".join(blocks)
         + calculation_section(calc_prompts, calc_review, calc_log)
-        + holdout + peer_section(peers)
+        + holdout + revision + peer_section(peers)
         + "<h2 id='archive'>同一回答在四种评分方法下的结果</h2><p>历史模型回执和脚本构造对照分别标出。"
         "证据不足保留为待核实。标注由 Codex 比照原表完成，尚无独立人工复核。</p><div class='history'>"
         + "".join(observations_html) + "</div></main>" + PDF_SCRIPT + "</html>\n")

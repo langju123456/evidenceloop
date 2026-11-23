@@ -1,0 +1,641 @@
+{
+  "start_utc": "2026-11-23T16:05:15.399121+00:00",
+  "end_utc": "2026-11-23T16:07:40.205248+00:00",
+  "exit": 0,
+  "quiet_seconds_before_launch": 20,
+  "checks_during_batch": 135,
+  "poll_interval_seconds": 1,
+  "other_activity_observations": [
+    {
+      "at_utc": "2026-11-23T16:05:25.124467+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:26.174956+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:05:27.223341+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:28.280111+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:29.335102+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:30.393188+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:31.494577+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:05:32.554238+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:33.604113+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:34.791837+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:35.855774+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:05:36.944390+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:37.999634+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:39.066883+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:40.151284+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:05:41.299460+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:42.489480+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:43.542791+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:44.604914+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:45.664314+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:46.726631+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:47.773712+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:05:48.843781+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:49.902213+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:50.963736+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:52.035229+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:05:53.088864+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:54.153302+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:55.204645+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:05:56.255190+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:57.322009+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:58.382739+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:05:59.442714+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:00.501968+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:01.567384+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:02.627539+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:03.696707+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:04.748827+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:05.810602+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:06.942171+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:08.039977+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:09.094665+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:10.189184+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:11.255931+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:12.307219+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:13.369075+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:14.423156+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:15.493685+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:16.562698+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:17.608901+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:18.662376+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:19.730925+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:20.799103+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:21.857747+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:22.931082+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:24.016075+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:25.151309+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:26.224123+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:27.296739+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:28.370287+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:29.437688+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:30.505610+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:31.627251+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:32.699327+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:33.770911+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:34.843398+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:35.902893+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:36.974835+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:38.047126+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:39.099730+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:40.186407+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:41.259204+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:42.375471+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:43.434265+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:44.482735+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:45.672699+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:46.732928+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:47.790000+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:48.862831+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:49.935791+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:50.996872+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:52.065687+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:53.140811+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:06:54.208480+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:55.336250+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:56.409876+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:57.482012+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:58.548978+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:06:59.623997+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:00.694670+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:07:01.746162+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:02.820194+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:03.893025+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:04.961308+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:06.012731+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:07.059623+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:08.101373+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:07:09.160931+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:10.229579+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:11.277858+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:12.329456+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:13.411500+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:14.625595+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:15.716948+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:07:16.800810+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:17.878089+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:18.927938+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:20.001982+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:07:21.058661+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:22.111621+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:23.165405+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:24.231948+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:25.295574+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:07:26.365823+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:27.440741+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:28.502304+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:29.578799+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:30.652764+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:31.718214+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    },
+    {
+      "at_utc": "2026-11-23T16:07:32.789483+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:33.862724+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:34.931148+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:36.008551+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:37.056613+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:38.127504+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": false
+    },
+    {
+      "at_utc": "2026-11-23T16:07:39.199982+00:00",
+      "horizon_batch_observed": true,
+      "external_socket_change": true
+    }
+  ],
+  "measurement": "Local macOS process names and changes to established TCP client byte counters at 127.0.0.1:11434, excluding this run. Sampling cannot rule out activity between checks."
+}

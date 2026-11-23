@@ -40,3 +40,20 @@ def test_patch_executes_against_saved_form_and_checks_the_actual_denominator():
 def test_hold_does_not_accept_a_hidden_calculation():
     with pytest.raises(ValueError, match="invalid hold"):
         rev.execute({"action":"hold", "reason":"user_paused", "value":12}, "history", {}, {})
+
+
+def test_archived_actions_replay_to_the_checked_in_report():
+    folder = rev.ROOT / "reports/report-lab"
+    result = rev.read_json(folder / "oracle-revision-results-v1.json")
+    logfile = folder / "oracle-revision-trials-v1.jsonl"
+    records, model = rev.checked_archive(rev.QUESTIONS, logfile, rev.ARMS, rev.messages,
+                                         split=rev.SPLIT, freeze=result["freeze_commit"])
+    gold = rev.read_json(rev.REFERENCE)
+    cases = {q["case_id"]: q for q in rev.read_json(rev.QUESTIONS)}
+    cells = rev.read_json(rev.SOURCE)["cells"]
+    assert model == rev.MODEL and len(records) == 24
+    assert result["raw_sha256"] == rev.digest(logfile)
+    assert [rev.evaluate(r, cases[r["case_id"]], gold[r["case_id"]], cells) for r in records] == result["rows"]
+    for totals in result["summary"].values():
+        assert totals["pass"] + totals["fail"] + totals["unknown"] == totals["n"] == 8
+        assert totals["pass"] == totals["compute_pass"] + totals["hold_pass"]

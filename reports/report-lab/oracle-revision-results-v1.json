@@ -1,0 +1,1216 @@
+{
+  "freeze_commit": "7cd44d608a22dcda15ed4689bb06382b8ce40da6",
+  "raw_sha256": "f713d3cb3ccb58295852dcb2a6c8f54e9c2d5aa4012f1489e127c1300c4b603b",
+  "source_sha256": "a0b630b61cd19a4f5d4407fe9a7d6f2dad5026684d1149a4d1654f0820153cc8",
+  "split": "oracle_revision_probe_v1",
+  "model": [
+    "forgeflow-qwen3-8b-ctx16k:latest",
+    "7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5",
+    "0.32.1"
+  ],
+  "independent_human_reviews": 0,
+  "patch_gate": false,
+  "summary": {
+    "last": {
+      "n": 8,
+      "pass": 5,
+      "fail": 3,
+      "unknown": 0,
+      "compute_pass": 3,
+      "hold_pass": 2,
+      "fixed_vs_history": [],
+      "lost_vs_history": [],
+      "model_request_ms": 47747,
+      "input_tokens": 2194,
+      "output_tokens": 168
+    },
+    "history": {
+      "n": 8,
+      "pass": 5,
+      "fail": 3,
+      "unknown": 0,
+      "compute_pass": 3,
+      "hold_pass": 2,
+      "fixed_vs_history": [],
+      "lost_vs_history": [],
+      "model_request_ms": 46255,
+      "input_tokens": 2241,
+      "output_tokens": 168
+    },
+    "patch": {
+      "n": 8,
+      "pass": 5,
+      "fail": 3,
+      "unknown": 0,
+      "compute_pass": 3,
+      "hold_pass": 2,
+      "fixed_vs_history": [
+        "revision-04"
+      ],
+      "lost_vs_history": [
+        "revision-06"
+      ],
+      "model_request_ms": 50485,
+      "input_tokens": 2417,
+      "output_tokens": 200
+    }
+  },
+  "rows": [
+    {
+      "case_id": "revision-01",
+      "arm": "last",
+      "run_id": "revision-01--last",
+      "reference": {
+        "scenario": "只改年份",
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "yoy_growth",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "yoy_growth",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 7656,
+      "input_tokens": 272,
+      "output_tokens": 24,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-01",
+      "arm": "history",
+      "run_id": "revision-01--history",
+      "reference": {
+        "scenario": "只改年份",
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "yoy_growth",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "yoy_growth",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 1457,
+      "input_tokens": 272,
+      "output_tokens": 24,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-01",
+      "arm": "patch",
+      "run_id": "revision-01--patch",
+      "reference": {
+        "scenario": "只改年份",
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "changes": {
+          "year": 2024
+        },
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "year": 2024,
+            "metric": "yoy_growth",
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 2225,
+      "input_tokens": 294,
+      "output_tokens": 20,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-02",
+      "arm": "history",
+      "run_id": "revision-02--history",
+      "reference": {
+        "scenario": "反向改年",
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "numerator": "-198",
+        "denominator": "4438",
+        "value": "-4.46",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "share_of_change",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "share_of_change",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "share_of_change",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "3007",
+          "value": "-5.42"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": false,
+        "citation": true,
+        "numerator": false,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 5863,
+      "input_tokens": 268,
+      "output_tokens": 24,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-02",
+      "arm": "patch",
+      "run_id": "revision-02--patch",
+      "reference": {
+        "scenario": "反向改年",
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "numerator": "-198",
+        "denominator": "4438",
+        "value": "-4.46",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "changes": {
+          "year": 2025,
+          "metric": "yoy_growth"
+        },
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "year": 2025,
+            "metric": "yoy_growth",
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "5431",
+          "value": "-3.65"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": false,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 4342,
+      "input_tokens": 290,
+      "output_tokens": 26,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-02",
+      "arm": "last",
+      "run_id": "revision-02--last",
+      "reference": {
+        "scenario": "反向改年",
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "numerator": "-198",
+        "denominator": "4438",
+        "value": "-4.46",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "share_of_change",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "share_of_change",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "share_of_change",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "3007",
+          "value": "-5.42"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": false,
+        "citation": true,
+        "numerator": false,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 4273,
+      "input_tokens": 268,
+      "output_tokens": 24,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-03",
+      "arm": "patch",
+      "run_id": "revision-03--patch",
+      "reference": {
+        "scenario": "只改指标",
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "numerator": "-198",
+        "denominator": "4438",
+        "value": "-4.46",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "changes": {
+          "metric": "share_of_change"
+        },
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "year": 2025,
+            "metric": "share_of_change",
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "4438",
+          "value": "-4.46"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 8612,
+      "input_tokens": 296,
+      "output_tokens": 34,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-03",
+      "arm": "last",
+      "run_id": "revision-03--last",
+      "reference": {
+        "scenario": "只改指标",
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "numerator": "-198",
+        "denominator": "4438",
+        "value": "-4.46",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "share_of_change",
+        "year": 2025,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "share_of_change",
+            "year": 2025,
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "4438",
+          "value": "-4.46"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 2801,
+      "input_tokens": 274,
+      "output_tokens": 24,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-03",
+      "arm": "history",
+      "run_id": "revision-03--history",
+      "reference": {
+        "scenario": "只改指标",
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "numerator": "-198",
+        "denominator": "4438",
+        "value": "-4.46",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "share_of_change",
+        "year": 2025,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "share_of_change",
+            "year": 2025,
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "4438",
+          "value": "-4.46"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 3812,
+      "input_tokens": 274,
+      "output_tokens": 24,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-04",
+      "arm": "last",
+      "run_id": "revision-04--last",
+      "reference": {
+        "scenario": "第二次改口沿用中间年份",
+        "action": "compute",
+        "year": 2025,
+        "metric": "yoy_growth",
+        "numerator": "-198",
+        "denominator": "5431",
+        "value": "-3.65",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "yoy_growth",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "yoy_growth",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": false,
+        "citation": true,
+        "numerator": false,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 4565,
+      "input_tokens": 275,
+      "output_tokens": 24,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-04",
+      "arm": "history",
+      "run_id": "revision-04--history",
+      "reference": {
+        "scenario": "第二次改口沿用中间年份",
+        "action": "compute",
+        "year": 2025,
+        "metric": "yoy_growth",
+        "numerator": "-198",
+        "denominator": "5431",
+        "value": "-3.65",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "yoy_growth",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "yoy_growth",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": false,
+        "citation": true,
+        "numerator": false,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 8123,
+      "input_tokens": 286,
+      "output_tokens": 24,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-04",
+      "arm": "patch",
+      "run_id": "revision-04--patch",
+      "reference": {
+        "scenario": "第二次改口沿用中间年份",
+        "action": "compute",
+        "year": 2025,
+        "metric": "yoy_growth",
+        "numerator": "-198",
+        "denominator": "5431",
+        "value": "-3.65",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "changes": {
+          "year": 2025,
+          "metric": "yoy_growth"
+        },
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "year": 2025,
+            "metric": "yoy_growth",
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "5431",
+          "value": "-3.65"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 8645,
+      "input_tokens": 308,
+      "output_tokens": 26,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-05",
+      "arm": "history",
+      "run_id": "revision-05--history",
+      "reference": {
+        "scenario": "只撤回指标",
+        "action": "compute",
+        "year": 2024,
+        "metric": "share_of_change",
+        "numerator": "-163",
+        "denominator": "3007",
+        "value": "-5.42",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "share_of_change",
+        "year": 2025,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "share_of_change",
+            "year": 2025,
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "4438",
+          "value": "-4.46"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": false,
+        "citation": true,
+        "numerator": false,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 7042,
+      "input_tokens": 294,
+      "output_tokens": 24,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-05",
+      "arm": "patch",
+      "run_id": "revision-05--patch",
+      "reference": {
+        "scenario": "只撤回指标",
+        "action": "compute",
+        "year": 2024,
+        "metric": "share_of_change",
+        "numerator": "-163",
+        "denominator": "3007",
+        "value": "-5.42",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "changes": {
+          "year": 2024,
+          "metric": "yoy_growth"
+        },
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "year": 2024,
+            "metric": "yoy_growth",
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": false,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 7450,
+      "input_tokens": 316,
+      "output_tokens": 26,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-05",
+      "arm": "last",
+      "run_id": "revision-05--last",
+      "reference": {
+        "scenario": "只撤回指标",
+        "action": "compute",
+        "year": 2024,
+        "metric": "share_of_change",
+        "numerator": "-163",
+        "denominator": "3007",
+        "value": "-5.42",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "share_of_change",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "share_of_change",
+        "year": 2025,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "share_of_change",
+            "year": 2025,
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "4438",
+          "value": "-4.46"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": false,
+        "citation": true,
+        "numerator": false,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 6534,
+      "input_tokens": 279,
+      "output_tokens": 24,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-06",
+      "arm": "patch",
+      "run_id": "revision-06--patch",
+      "reference": {
+        "scenario": "保留原稿",
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "changes": {
+          "year": 2025,
+          "metric": "yoy_growth"
+        },
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "year": 2025,
+            "metric": "yoy_growth",
+            "series": "Services"
+          },
+          "numerator": "-198",
+          "denominator": "5431",
+          "value": "-3.65"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": false,
+        "citation": true,
+        "numerator": false,
+        "denominator": false,
+        "value": false
+      },
+      "latency_ms": 8388,
+      "input_tokens": 314,
+      "output_tokens": 44,
+      "verdict": "fail"
+    },
+    {
+      "case_id": "revision-06",
+      "arm": "last",
+      "run_id": "revision-06--last",
+      "reference": {
+        "scenario": "保留原稿",
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "yoy_growth",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "yoy_growth",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 7314,
+      "input_tokens": 278,
+      "output_tokens": 24,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-06",
+      "arm": "history",
+      "run_id": "revision-06--history",
+      "reference": {
+        "scenario": "保留原稿",
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91",
+        "page": 65
+      },
+      "decision": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "yoy_growth",
+        "pages": [
+          65
+        ]
+      },
+      "executed": {
+        "action": "compute",
+        "metric": "yoy_growth",
+        "year": 2024,
+        "pages": [
+          65
+        ],
+        "receipt": {
+          "tool": "metric_tool",
+          "arguments": {
+            "metric": "yoy_growth",
+            "year": 2024,
+            "series": "Services"
+          },
+          "numerator": "-163",
+          "denominator": "5594",
+          "value": "-2.91"
+        }
+      },
+      "checks": {
+        "action": true,
+        "metric": true,
+        "year": true,
+        "citation": true,
+        "numerator": true,
+        "denominator": true,
+        "value": true
+      },
+      "latency_ms": 7509,
+      "input_tokens": 292,
+      "output_tokens": 24,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-07",
+      "arm": "last",
+      "run_id": "revision-07--last",
+      "reference": {
+        "scenario": "同比缺 FY2022",
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "decision": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "executed": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "checks": {
+        "action": true,
+        "reason": true
+      },
+      "latency_ms": 6916,
+      "input_tokens": 276,
+      "output_tokens": 12,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-07",
+      "arm": "history",
+      "run_id": "revision-07--history",
+      "reference": {
+        "scenario": "同比缺 FY2022",
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "decision": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "executed": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "checks": {
+        "action": true,
+        "reason": true
+      },
+      "latency_ms": 6946,
+      "input_tokens": 276,
+      "output_tokens": 12,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-07",
+      "arm": "patch",
+      "run_id": "revision-07--patch",
+      "reference": {
+        "scenario": "同比缺 FY2022",
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "decision": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "executed": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "checks": {
+        "action": true,
+        "reason": true
+      },
+      "latency_ms": 4519,
+      "input_tokens": 298,
+      "output_tokens": 12,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-08",
+      "arm": "history",
+      "run_id": "revision-08--history",
+      "reference": {
+        "scenario": "用户暂停",
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "decision": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "executed": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "checks": {
+        "action": true,
+        "reason": true
+      },
+      "latency_ms": 5503,
+      "input_tokens": 279,
+      "output_tokens": 12,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-08",
+      "arm": "patch",
+      "run_id": "revision-08--patch",
+      "reference": {
+        "scenario": "用户暂停",
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "decision": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "executed": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "checks": {
+        "action": true,
+        "reason": true
+      },
+      "latency_ms": 6304,
+      "input_tokens": 301,
+      "output_tokens": 12,
+      "verdict": "pass"
+    },
+    {
+      "case_id": "revision-08",
+      "arm": "last",
+      "run_id": "revision-08--last",
+      "reference": {
+        "scenario": "用户暂停",
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "decision": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "executed": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "checks": {
+        "action": true,
+        "reason": true
+      },
+      "latency_ms": 7688,
+      "input_tokens": 272,
+      "output_tokens": 12,
+      "verdict": "pass"
+    }
+  ]
+}

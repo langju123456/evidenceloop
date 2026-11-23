@@ -7,7 +7,7 @@ h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin
 .tag{border:1px solid;padding:2px 7px;border-radius:6px;font-size:13px}.pass{color:#185d41}.fail{color:#9b3224}.unknown{color:#775713}
 summary{cursor:pointer;padding:5px 0;overflow-wrap:anywhere}pre{background:#eef3ef;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace}
 blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history>details{border-top:1px solid #ccd9d2;padding:8px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#holdout">跨公司留出结果</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
+</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#holdout">跨公司留出结果</a><a href="#revisions">Oracle 改稿</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
 <p><label>关联本地原年报 <input id="pdf" type="file" accept="application/pdf" multiple></label><br>
 <span id="pdf-status" class="muted" role="status">选取原 PDF 后可从表格页码打开原页。文件只在本浏览器读取。</span></p>
 <h2 id="trial">给同一模型补上列头后，哪些题答对了？</h2><p>forgeflow-qwen3-8b-ctx16k:latest · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p><div class='scroll'><table><thead><tr><th scope='col'>输入条件</th><th scope='col'>核准 / 总题数</th><th scope='col'>待核实</th><th scope='col'>相对仅数值行修好</th><th scope='col'>退化</th></tr></thead><tbody><tr><td>仅数值行</td><td>0 / 4</td><td>0</td><td>—</td><td>—</td></tr><tr><td>同样的行＋列头</td><td>1 / 4</td><td>1</td><td>catl.annual</td><td>—</td></tr><tr><td>人工选行＋列头</td><td>2 / 4</td><td>0</td><td>catl.annual、catl.q4</td><td>—</td></tr></tbody></table></div><section class='case'><h3>宁德时代 2025 年经营活动产生的现金流量净额是多少？</h3><p class='muted'>catl.annual · catl_2025_annual_zh.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>经营活动产生的现金流量净额</td><td>2025年</td><td>133219982 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第一季度</td><td>32868257 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第二季度</td><td>25818809 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第三季度</td><td>21973364 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第四季度</td><td>52559552 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr></tbody></table></div><pre>c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>abstained</p><p>年报摘录中未明确给出2025年的具体数值，仅提供了2024年及以前的数据和部分对比信息。</p><p>引用页 [11, 12] · 数值 — · 出处 —</p><p>11480 ms · token 253 入 / 71 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年经营活动产生的现金流量净额是多少？
@@ -3678,6 +3678,2574 @@ Total revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998</pr
     &quot;eval_duration&quot;: 1513507000
   },
   &quot;latency_ms&quot;: 4258
+}</pre></details></td></tr></tbody></table></div><h2 id='revisions'>改年份、换指标，最终交付听哪一句？</h2><p>保留完整历史重填作为对照，局部修改未达替换门槛。八份脚本委托，每种做法各采一次本机模型首答。独立人工复核 0 份。</p><p>展开可核对原始选项、每次修改和实际计算的分母。<a href='https://www.sec.gov/Archives/edgar/data/1341439/000095017025087926/orcl-20250531.htm'>Oracle FY2025 年报原表，印刷页 65</a></p><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>计算通过</th><th scope='col'>暂停通过</th><th scope='col'>待核</th><th scope='col'>相对完整重填修好／退化</th></tr></thead><tbody><tr><td>只读末条／重填</td><td>3/6</td><td>2/2</td><td>0</td><td>0／0</td></tr><tr><td>完整历史／重填</td><td>3/6</td><td>2/2</td><td>0</td><td>0／0</td></tr><tr><td>完整历史／局部修改</td><td>3/6</td><td>2/2</td><td>0</td><td>1／1</td></tr></tbody></table></div><h3>只改年份</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;yoy_growth&quot;
+}</pre><pre>[
+  &quot;年份改为 FY2024，指标照旧。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>只读末条／重填</td><td><span class="tag pass">已核准</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-01&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-01--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只改年份&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;5594&quot;,
+    &quot;value&quot;: &quot;-2.91&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 7656,
+  &quot;input_tokens&quot;: 272,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-01&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-01--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：年份改为 FY2024，指标照旧。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:23.172007Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7651011708,
+    &quot;load_duration&quot;: 4464182292,
+    &quot;prompt_eval_count&quot;: 272,
+    &quot;prompt_eval_duration&quot;: 1531865000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1643664000
+  },
+  &quot;latency_ms&quot;: 7656
+}</pre></details></td></tr><tr><td>完整历史／重填</td><td><span class="tag pass">已核准</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-01&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-01--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只改年份&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;5594&quot;,
+    &quot;value&quot;: &quot;-2.91&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 1457,
+  &quot;input_tokens&quot;: 272,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-01&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-01--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：年份改为 FY2024，指标照旧。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:24.630157Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 1447725042,
+    &quot;load_duration&quot;: 119645042,
+    &quot;prompt_eval_count&quot;: 272,
+    &quot;prompt_eval_duration&quot;: 61516000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1262561000
+  },
+  &quot;latency_ms&quot;: 1457
+}</pre></details></td></tr><tr><td>完整历史／局部修改</td><td><span class="tag pass">已核准</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-01&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-01--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只改年份&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;5594&quot;,
+    &quot;value&quot;: &quot;-2.91&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;changes&quot;: {
+      &quot;year&quot;: 2024
+    },
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;year&quot;: 2024,
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 2225,
+  &quot;input_tokens&quot;: 294,
+  &quot;output_tokens&quot;: 20,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-01&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-01--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：年份改为 FY2024，指标照旧。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:26.855685Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{\&quot;year\&quot;:2024},\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 2220452250,
+    &quot;load_duration&quot;: 88826583,
+    &quot;prompt_eval_count&quot;: 294,
+    &quot;prompt_eval_duration&quot;: 1084790000,
+    &quot;eval_count&quot;: 20,
+    &quot;eval_duration&quot;: 1042744999
+  },
+  &quot;latency_ms&quot;: 2225
+}</pre></details></td></tr></tbody></table></div><h3>反向改年</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2024,
+  &quot;metric&quot;: &quot;share_of_change&quot;
+}</pre><pre>[
+  &quot;用下一财年，贡献口径保持。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>完整历史／重填</td><td><span class="tag fail">未通过</span></td><td>FY2024 · 服务对收入净增额的贡献 -5.42%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-02&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-02--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;反向改年&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;4438&quot;,
+    &quot;value&quot;: &quot;-4.46&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;share_of_change&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;3007&quot;,
+      &quot;value&quot;: &quot;-5.42&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: false,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: false,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 5863,
+  &quot;input_tokens&quot;: 268,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-02&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-02--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：用下一财年，贡献口径保持。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:32.71896Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;share_of_change\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5857433417,
+    &quot;load_duration&quot;: 93854375,
+    &quot;prompt_eval_count&quot;: 268,
+    &quot;prompt_eval_duration&quot;: 352628000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1426190000
+  },
+  &quot;latency_ms&quot;: 5863
+}</pre></details></td></tr><tr><td>完整历史／局部修改</td><td><span class="tag fail">未通过</span></td><td>FY2025 · 服务收入同比 -3.65%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-02&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-02--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;反向改年&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;4438&quot;,
+    &quot;value&quot;: &quot;-4.46&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;changes&quot;: {
+      &quot;year&quot;: 2025,
+      &quot;metric&quot;: &quot;yoy_growth&quot;
+    },
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;year&quot;: 2025,
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;5431&quot;,
+      &quot;value&quot;: &quot;-3.65&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: false,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 4342,
+  &quot;input_tokens&quot;: 290,
+  &quot;output_tokens&quot;: 26,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-02&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-02--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：用下一财年，贡献口径保持。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:37.061071Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{\&quot;year\&quot;:2025,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;},\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4334983708,
+    &quot;load_duration&quot;: 118497166,
+    &quot;prompt_eval_count&quot;: 290,
+    &quot;prompt_eval_duration&quot;: 368286000,
+    &quot;eval_count&quot;: 26,
+    &quot;eval_duration&quot;: 1526327000
+  },
+  &quot;latency_ms&quot;: 4342
+}</pre></details></td></tr><tr><td>只读末条／重填</td><td><span class="tag fail">未通过</span></td><td>FY2024 · 服务对收入净增额的贡献 -5.42%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-02&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-02--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;反向改年&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;4438&quot;,
+    &quot;value&quot;: &quot;-4.46&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;share_of_change&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;3007&quot;,
+      &quot;value&quot;: &quot;-5.42&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: false,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: false,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 4273,
+  &quot;input_tokens&quot;: 268,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-02&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-02--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：用下一财年，贡献口径保持。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:41.334871Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;share_of_change\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4263158000,
+    &quot;load_duration&quot;: 185395333,
+    &quot;prompt_eval_count&quot;: 268,
+    &quot;prompt_eval_duration&quot;: 66616000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1472064000
+  },
+  &quot;latency_ms&quot;: 4273
+}</pre></details></td></tr></tbody></table></div><h3>只改指标</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;yoy_growth&quot;
+}</pre><pre>[
+  &quot;汇报改为服务收入变动占公司收入变动的比例，年份不动。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>完整历史／局部修改</td><td><span class="tag pass">已核准</span></td><td>FY2025 · 服务对收入净增额的贡献 -4.46%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-03&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-03--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只改指标&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;4438&quot;,
+    &quot;value&quot;: &quot;-4.46&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;changes&quot;: {
+      &quot;metric&quot;: &quot;share_of_change&quot;
+    },
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;year&quot;: 2025,
+        &quot;metric&quot;: &quot;share_of_change&quot;,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;4438&quot;,
+      &quot;value&quot;: &quot;-4.46&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 8612,
+  &quot;input_tokens&quot;: 296,
+  &quot;output_tokens&quot;: 34,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-03&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-03--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：汇报改为服务收入变动占公司收入变动的比例，年份不动。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:49.947906Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;action\&quot;: \&quot;compute\&quot;,\n  \&quot;changes\&quot;: {\n    \&quot;metric\&quot;: \&quot;share_of_change\&quot;\n  },\n  \&quot;pages\&quot;: [65]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 8600860833,
+    &quot;load_duration&quot;: 718424041,
+    &quot;prompt_eval_count&quot;: 296,
+    &quot;prompt_eval_duration&quot;: 373292000,
+    &quot;eval_count&quot;: 34,
+    &quot;eval_duration&quot;: 1857736000
+  },
+  &quot;latency_ms&quot;: 8612
+}</pre></details></td></tr><tr><td>只读末条／重填</td><td><span class="tag pass">已核准</span></td><td>FY2025 · 服务对收入净增额的贡献 -4.46%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-03&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-03--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只改指标&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;4438&quot;,
+    &quot;value&quot;: &quot;-4.46&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;share_of_change&quot;,
+        &quot;year&quot;: 2025,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;4438&quot;,
+      &quot;value&quot;: &quot;-4.46&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 2801,
+  &quot;input_tokens&quot;: 274,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-03&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-03--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：汇报改为服务收入变动占公司收入变动的比例，年份不动。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:52.749344Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2025,\&quot;metric\&quot;:\&quot;share_of_change\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 2795743667,
+    &quot;load_duration&quot;: 98846583,
+    &quot;prompt_eval_count&quot;: 274,
+    &quot;prompt_eval_duration&quot;: 373498000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1313470000
+  },
+  &quot;latency_ms&quot;: 2801
+}</pre></details></td></tr><tr><td>完整历史／重填</td><td><span class="tag pass">已核准</span></td><td>FY2025 · 服务对收入净增额的贡献 -4.46%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-03&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-03--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只改指标&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;4438&quot;,
+    &quot;value&quot;: &quot;-4.46&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;share_of_change&quot;,
+        &quot;year&quot;: 2025,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;4438&quot;,
+      &quot;value&quot;: &quot;-4.46&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 3812,
+  &quot;input_tokens&quot;: 274,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-03&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-03--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：汇报改为服务收入变动占公司收入变动的比例，年份不动。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:05:56.561251Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2025,\&quot;metric\&quot;:\&quot;share_of_change\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 3805086500,
+    &quot;load_duration&quot;: 124327250,
+    &quot;prompt_eval_count&quot;: 274,
+    &quot;prompt_eval_duration&quot;: 60345000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1310787000
+  },
+  &quot;latency_ms&quot;: 3812
+}</pre></details></td></tr></tbody></table></div><h3>第二次改口沿用中间年份</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2024,
+  &quot;metric&quot;: &quot;share_of_change&quot;
+}</pre><pre>[
+  &quot;先挪到 FY2025。&quot;,
+  &quot;这页改为看服务收入同比，沿用刚才定的年份。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>只读末条／重填</td><td><span class="tag fail">未通过</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-04&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-04--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;第二次改口沿用中间年份&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;5431&quot;,
+    &quot;value&quot;: &quot;-3.65&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: false,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: false,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 4565,
+  &quot;input_tokens&quot;: 275,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-04&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-04--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：这页改为看服务收入同比，沿用刚才定的年份。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:01.126497Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4555481959,
+    &quot;load_duration&quot;: 184488750,
+    &quot;prompt_eval_count&quot;: 275,
+    &quot;prompt_eval_duration&quot;: 389344000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1328485000
+  },
+  &quot;latency_ms&quot;: 4565
+}</pre></details></td></tr><tr><td>完整历史／重填</td><td><span class="tag fail">未通过</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-04&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-04--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;第二次改口沿用中间年份&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;5431&quot;,
+    &quot;value&quot;: &quot;-3.65&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: false,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: false,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 8123,
+  &quot;input_tokens&quot;: 286,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-04&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-04--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：先挪到 FY2025。\n分析师：这页改为看服务收入同比，沿用刚才定的年份。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:09.250366Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 8110704125,
+    &quot;load_duration&quot;: 108122583,
+    &quot;prompt_eval_count&quot;: 286,
+    &quot;prompt_eval_duration&quot;: 399246000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1397959000
+  },
+  &quot;latency_ms&quot;: 8123
+}</pre></details></td></tr><tr><td>完整历史／局部修改</td><td><span class="tag pass">已核准</span></td><td>FY2025 · 服务收入同比 -3.65%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-04&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-04--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;第二次改口沿用中间年份&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-198&quot;,
+    &quot;denominator&quot;: &quot;5431&quot;,
+    &quot;value&quot;: &quot;-3.65&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;changes&quot;: {
+      &quot;year&quot;: 2025,
+      &quot;metric&quot;: &quot;yoy_growth&quot;
+    },
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;year&quot;: 2025,
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;5431&quot;,
+      &quot;value&quot;: &quot;-3.65&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 8645,
+  &quot;input_tokens&quot;: 308,
+  &quot;output_tokens&quot;: 26,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-04&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-04--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：先挪到 FY2025。\n分析师：这页改为看服务收入同比，沿用刚才定的年份。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:17.896323Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{\&quot;year\&quot;:2025,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;},\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 8638215875,
+    &quot;load_duration&quot;: 119416792,
+    &quot;prompt_eval_count&quot;: 308,
+    &quot;prompt_eval_duration&quot;: 409858000,
+    &quot;eval_count&quot;: 26,
+    &quot;eval_duration&quot;: 1442473000
+  },
+  &quot;latency_ms&quot;: 8645
+}</pre></details></td></tr></tbody></table></div><h3>只撤回指标</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;share_of_change&quot;
+}</pre><pre>[
+  &quot;改用 FY2024，先换为同比。&quot;,
+  &quot;年份按刚才的，指标撤回刚才的改动，恢复送审前的指标。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>完整历史／重填</td><td><span class="tag fail">未通过</span></td><td>FY2025 · 服务对收入净增额的贡献 -4.46%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-05&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-05--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只撤回指标&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;3007&quot;,
+    &quot;value&quot;: &quot;-5.42&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;share_of_change&quot;,
+        &quot;year&quot;: 2025,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;4438&quot;,
+      &quot;value&quot;: &quot;-4.46&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: false,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: false,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 7042,
+  &quot;input_tokens&quot;: 294,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-05&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-05--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：改用 FY2024，先换为同比。\n分析师：年份按刚才的，指标撤回刚才的改动，恢复送审前的指标。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:24.93895Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2025,\&quot;metric\&quot;:\&quot;share_of_change\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7028812875,
+    &quot;load_duration&quot;: 113441791,
+    &quot;prompt_eval_count&quot;: 294,
+    &quot;prompt_eval_duration&quot;: 404292000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1389765000
+  },
+  &quot;latency_ms&quot;: 7042
+}</pre></details></td></tr><tr><td>完整历史／局部修改</td><td><span class="tag fail">未通过</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-05&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-05--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只撤回指标&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;3007&quot;,
+    &quot;value&quot;: &quot;-5.42&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;changes&quot;: {
+      &quot;year&quot;: 2024,
+      &quot;metric&quot;: &quot;yoy_growth&quot;
+    },
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;year&quot;: 2024,
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: false,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 7450,
+  &quot;input_tokens&quot;: 316,
+  &quot;output_tokens&quot;: 26,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-05&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-05--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：改用 FY2024，先换为同比。\n分析师：年份按刚才的，指标撤回刚才的改动，恢复送审前的指标。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:32.389338Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;},\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7443304167,
+    &quot;load_duration&quot;: 223789584,
+    &quot;prompt_eval_count&quot;: 316,
+    &quot;prompt_eval_duration&quot;: 410913000,
+    &quot;eval_count&quot;: 26,
+    &quot;eval_duration&quot;: 1484522000
+  },
+  &quot;latency_ms&quot;: 7450
+}</pre></details></td></tr><tr><td>只读末条／重填</td><td><span class="tag fail">未通过</span></td><td>FY2025 · 服务对收入净增额的贡献 -4.46%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-05&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-05--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;只撤回指标&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;3007&quot;,
+    &quot;value&quot;: &quot;-5.42&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;share_of_change&quot;,
+        &quot;year&quot;: 2025,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;4438&quot;,
+      &quot;value&quot;: &quot;-4.46&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: false,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: false,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 6534,
+  &quot;input_tokens&quot;: 279,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-05&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-05--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：年份按刚才的，指标撤回刚才的改动，恢复送审前的指标。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:38.923343Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2025,\&quot;metric\&quot;:\&quot;share_of_change\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6521363583,
+    &quot;load_duration&quot;: 112612833,
+    &quot;prompt_eval_count&quot;: 279,
+    &quot;prompt_eval_duration&quot;: 393966000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1325812000
+  },
+  &quot;latency_ms&quot;: 6534
+}</pre></details></td></tr></tbody></table></div><h3>保留原稿</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2024,
+  &quot;metric&quot;: &quot;yoy_growth&quot;
+}</pre><pre>[
+  &quot;有人建议用 FY2025 的贡献率。&quot;,
+  &quot;上条只是同事的备选，定稿维持原版的年份和指标。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>完整历史／局部修改</td><td><span class="tag fail">未通过</span></td><td>FY2025 · 服务收入同比 -3.65%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-06&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-06--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;保留原稿&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;5594&quot;,
+    &quot;value&quot;: &quot;-2.91&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;changes&quot;: {
+      &quot;year&quot;: 2025,
+      &quot;metric&quot;: &quot;yoy_growth&quot;
+    },
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2025,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;year&quot;: 2025,
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-198&quot;,
+      &quot;denominator&quot;: &quot;5431&quot;,
+      &quot;value&quot;: &quot;-3.65&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: false,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: false,
+    &quot;denominator&quot;: false,
+    &quot;value&quot;: false
+  },
+  &quot;latency_ms&quot;: 8388,
+  &quot;input_tokens&quot;: 314,
+  &quot;output_tokens&quot;: 44,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-06&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-06--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：有人建议用 FY2025 的贡献率。\n分析师：上条只是同事的备选，定稿维持原版的年份和指标。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:47.311868Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;action\&quot;: \&quot;compute\&quot;,\n  \&quot;changes\&quot;: {\n    \&quot;year\&quot;: 2025,\n    \&quot;metric\&quot;: \&quot;yoy_growth\&quot;\n  },\n  \&quot;pages\&quot;: [65]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 8374640334,
+    &quot;load_duration&quot;: 107676167,
+    &quot;prompt_eval_count&quot;: 314,
+    &quot;prompt_eval_duration&quot;: 422611000,
+    &quot;eval_count&quot;: 44,
+    &quot;eval_duration&quot;: 2787209000
+  },
+  &quot;latency_ms&quot;: 8388
+}</pre></details></td></tr><tr><td>只读末条／重填</td><td><span class="tag pass">已核准</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-06&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-06--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;保留原稿&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;5594&quot;,
+    &quot;value&quot;: &quot;-2.91&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 7314,
+  &quot;input_tokens&quot;: 278,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-06&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-06--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：上条只是同事的备选，定稿维持原版的年份和指标。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:06:54.62627Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7307158375,
+    &quot;load_duration&quot;: 120736958,
+    &quot;prompt_eval_count&quot;: 278,
+    &quot;prompt_eval_duration&quot;: 610749000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1384580000
+  },
+  &quot;latency_ms&quot;: 7314
+}</pre></details></td></tr><tr><td>完整历史／重填</td><td><span class="tag pass">已核准</span></td><td>FY2024 · 服务收入同比 -2.91%</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-06&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-06--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;保留原稿&quot;,
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;numerator&quot;: &quot;-163&quot;,
+    &quot;denominator&quot;: &quot;5594&quot;,
+    &quot;value&quot;: &quot;-2.91&quot;,
+    &quot;page&quot;: 65
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;year&quot;: 2024,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;pages&quot;: [
+      65
+    ]
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;compute&quot;,
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      65
+    ],
+    &quot;receipt&quot;: {
+      &quot;tool&quot;: &quot;metric_tool&quot;,
+      &quot;arguments&quot;: {
+        &quot;metric&quot;: &quot;yoy_growth&quot;,
+        &quot;year&quot;: 2024,
+        &quot;series&quot;: &quot;Services&quot;
+      },
+      &quot;numerator&quot;: &quot;-163&quot;,
+      &quot;denominator&quot;: &quot;5594&quot;,
+      &quot;value&quot;: &quot;-2.91&quot;
+    }
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;metric&quot;: true,
+    &quot;year&quot;: true,
+    &quot;citation&quot;: true,
+    &quot;numerator&quot;: true,
+    &quot;denominator&quot;: true,
+    &quot;value&quot;: true
+  },
+  &quot;latency_ms&quot;: 7509,
+  &quot;input_tokens&quot;: 292,
+  &quot;output_tokens&quot;: 24,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-06&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-06--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：有人建议用 FY2025 的贡献率。\n分析师：上条只是同事的备选，定稿维持原版的年份和指标。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:07:02.135132Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:2024,\&quot;metric\&quot;:\&quot;yoy_growth\&quot;,\&quot;pages\&quot;:[65]}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7502818000,
+    &quot;load_duration&quot;: 134979833,
+    &quot;prompt_eval_count&quot;: 292,
+    &quot;prompt_eval_duration&quot;: 509756000,
+    &quot;eval_count&quot;: 24,
+    &quot;eval_duration&quot;: 1479183000
+  },
+  &quot;latency_ms&quot;: 7509
+}</pre></details></td></tr></tbody></table></div><h3>同比缺 FY2022</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2025,
+  &quot;metric&quot;: &quot;share_of_change&quot;
+}</pre><pre>[
+  &quot;只需要 FY2023 的同比，不能用别的年份顶替。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>只读末条／重填</td><td><span class="tag pass">已核准</span></td><td>证据缺期，暂停</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-07&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-07--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;同比缺 FY2022&quot;,
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;reason&quot;: true
+  },
+  &quot;latency_ms&quot;: 6916,
+  &quot;input_tokens&quot;: 276,
+  &quot;output_tokens&quot;: 12,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-07&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-07--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：只需要 FY2023 的同比，不能用别的年份顶替。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:07:09.050458Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;missing_evidence\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6907057209,
+    &quot;load_duration&quot;: 103670334,
+    &quot;prompt_eval_count&quot;: 276,
+    &quot;prompt_eval_duration&quot;: 560346000,
+    &quot;eval_count&quot;: 12,
+    &quot;eval_duration&quot;: 731869000
+  },
+  &quot;latency_ms&quot;: 6916
+}</pre></details></td></tr><tr><td>完整历史／重填</td><td><span class="tag pass">已核准</span></td><td>证据缺期，暂停</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-07&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-07--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;同比缺 FY2022&quot;,
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;reason&quot;: true
+  },
+  &quot;latency_ms&quot;: 6946,
+  &quot;input_tokens&quot;: 276,
+  &quot;output_tokens&quot;: 12,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-07&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-07--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：只需要 FY2023 的同比，不能用别的年份顶替。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:07:15.998778Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;missing_evidence\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6933272333,
+    &quot;load_duration&quot;: 92963250,
+    &quot;prompt_eval_count&quot;: 276,
+    &quot;prompt_eval_duration&quot;: 75345000,
+    &quot;eval_count&quot;: 12,
+    &quot;eval_duration&quot;: 747739000
+  },
+  &quot;latency_ms&quot;: 6946
+}</pre></details></td></tr><tr><td>完整历史／局部修改</td><td><span class="tag pass">已核准</span></td><td>证据缺期，暂停</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-07&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-07--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;同比缺 FY2022&quot;,
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;missing_evidence&quot;
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;reason&quot;: true
+  },
+  &quot;latency_ms&quot;: 4519,
+  &quot;input_tokens&quot;: 298,
+  &quot;output_tokens&quot;: 12,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-07&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-07--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2025, \&quot;metric\&quot;: \&quot;share_of_change\&quot;}\n分析师：只需要 FY2023 的同比，不能用别的年份顶替。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:07:20.518043Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;missing_evidence\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4506107417,
+    &quot;load_duration&quot;: 193964459,
+    &quot;prompt_eval_count&quot;: 298,
+    &quot;prompt_eval_duration&quot;: 507238000,
+    &quot;eval_count&quot;: 12,
+    &quot;eval_duration&quot;: 740666000
+  },
+  &quot;latency_ms&quot;: 4519
+}</pre></details></td></tr></tbody></table></div><h3>用户暂停</h3><details><summary>原始选项及历次修改</summary><pre>{
+  &quot;year&quot;: 2024,
+  &quot;metric&quot;: &quot;yoy_growth&quot;
+}</pre><pre>[
+  &quot;先看看改为贡献。&quot;,
+  &quot;先暂停出数，等我确认年份再交。&quot;
+]</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判断</th><th scope='col'>实际交付</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>完整历史／重填</td><td><span class="tag pass">已核准</span></td><td>按用户要求暂停</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-08&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-08--history&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;用户暂停&quot;,
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;reason&quot;: true
+  },
+  &quot;latency_ms&quot;: 5503,
+  &quot;input_tokens&quot;: 279,
+  &quot;output_tokens&quot;: 12,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-08&quot;,
+  &quot;arm&quot;: &quot;history&quot;,
+  &quot;run_id&quot;: &quot;revision-08--history&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：先看看改为贡献。\n分析师：先暂停出数，等我确认年份再交。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:07:26.021722Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5491902417,
+    &quot;load_duration&quot;: 95388459,
+    &quot;prompt_eval_count&quot;: 279,
+    &quot;prompt_eval_duration&quot;: 699125000,
+    &quot;eval_count&quot;: 12,
+    &quot;eval_duration&quot;: 795153000
+  },
+  &quot;latency_ms&quot;: 5503
+}</pre></details></td></tr><tr><td>完整历史／局部修改</td><td><span class="tag pass">已核准</span></td><td>按用户要求暂停</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-08&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-08--patch&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;用户暂停&quot;,
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;reason&quot;: true
+  },
+  &quot;latency_ms&quot;: 6304,
+  &quot;input_tokens&quot;: 301,
+  &quot;output_tokens&quot;: 12,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-08&quot;,
+  &quot;arm&quot;: &quot;patch&quot;,
+  &quot;run_id&quot;: &quot;revision-08--patch&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;changes\&quot;:{...},\&quot;pages\&quot;:[印刷页码]}。changes 只放相对送审前需要改变的 year（整数）或 metric（指标英文名），未变时可用空对象。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：先看看改为贡献。\n分析师：先暂停出数，等我确认年份再交。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:07:32.326129Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6292611458,
+    &quot;load_duration&quot;: 101777500,
+    &quot;prompt_eval_count&quot;: 301,
+    &quot;prompt_eval_duration&quot;: 617956000,
+    &quot;eval_count&quot;: 12,
+    &quot;eval_duration&quot;: 826873000
+  },
+  &quot;latency_ms&quot;: 6304
+}</pre></details></td></tr><tr><td>只读末条／重填</td><td><span class="tag pass">已核准</span></td><td>按用户要求暂停</td><td><details><summary>查看修订动作与依据</summary><pre>{
+  &quot;case_id&quot;: &quot;revision-08&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-08--last&quot;,
+  &quot;reference&quot;: {
+    &quot;scenario&quot;: &quot;用户暂停&quot;,
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;decision&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;executed&quot;: {
+    &quot;action&quot;: &quot;hold&quot;,
+    &quot;reason&quot;: &quot;user_paused&quot;
+  },
+  &quot;checks&quot;: {
+    &quot;action&quot;: true,
+    &quot;reason&quot;: true
+  },
+  &quot;latency_ms&quot;: 7688,
+  &quot;input_tokens&quot;: 272,
+  &quot;output_tokens&quot;: 12,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;revision-08&quot;,
+  &quot;arm&quot;: &quot;last&quot;,
+  &quot;run_id&quot;: &quot;revision-08--last&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;oracle_revision_probe_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;oracle-fy2025&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;7e61a3c1ebc4518619317698ede5c4a10b6a15e2538e266fbc8b050ab6157f65&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;根据可见的送审前表单与分析师后续消息交出当前最终决定。只处理 Services 收入。yoy_growth 是服务收入同比，share_of_change 是服务收入净变动占公司总收入净变动。需要相邻两年的原表金额。百分数由程序计算。只输出一个 JSON 对象。如果用户叫停或证据缺期，只输出 {\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused 或 missing_evidence\&quot;}。如果可算，输出 {\&quot;action\&quot;:\&quot;compute\&quot;,\&quot;year\&quot;:财年整数,\&quot;metric\&quot;:\&quot;指标英文名\&quot;,\&quot;pages\&quot;:[印刷页码]}。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Oracle Corporation FY2025 Consolidated Statements of Operations，印刷页 65，单位百万美元。\n财年 | FY2025 | FY2024 | FY2023\nServices | 5233 | 5431 | 5594\nTotal revenues | 57399 | 52961 | 49954\n送审前表单：{\&quot;year\&quot;: 2024, \&quot;metric\&quot;: \&quot;yoy_growth\&quot;}\n分析师：先暂停出数，等我确认年份再交。&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;7cd44d608a22dcda15ed4689bb06382b8ce40da6&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T16:07:40.014395Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;action\&quot;:\&quot;hold\&quot;,\&quot;reason\&quot;:\&quot;user_paused\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7681981917,
+    &quot;load_duration&quot;: 91289208,
+    &quot;prompt_eval_count&quot;: 272,
+    &quot;prompt_eval_duration&quot;: 299219000,
+    &quot;eval_count&quot;: 12,
+    &quot;eval_duration&quot;: 697040000
+  },
+  &quot;latency_ms&quot;: 7688
 }</pre></details></td></tr></tbody></table></div><h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2><p><a href="#apple-delivery">查看 Apple 批准稿与错收旧版的对照</a></p><h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。评分逐项核对宁德时代年报第 11 页。2022 年超出该表列示范围，保留为待核实。</p><div class='scroll'><table><thead><tr><th scope='col'>用户问题</th><th scope='col'>产品回答</th><th scope='col'>核验</th><th scope='col'>出处</th><th scope='col'>毫秒</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>宁德时代 2025 年经营活动产生的现金流量净额是多少？</td><td>宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。</td><td><span class="tag pass">已核准</span></td><td><a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a>、<a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="30" target="_blank" rel="noopener noreferrer">第 30 页</a></td><td>945.1</td><td><details><summary>查看问答回执</summary><pre>{
   &quot;run_id&quot;: &quot;forgeflow/e195a0a2f764/annual-cash/2025&quot;,
   &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
