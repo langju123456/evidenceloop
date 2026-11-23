@@ -1,0 +1,432 @@
+{
+  "split": "public_dev",
+  "raw_sha256": "94d2edf884daca2def914f502be5affa4a46be95ce65851ef31b32c2bde96712",
+  "model": [
+    "forgeflow-qwen3-8b-ctx16k:latest",
+    "7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5",
+    "0.32.1"
+  ],
+  "summaries": {
+    "row": {
+      "n": 4,
+      "pass": 0,
+      "unknown": 0,
+      "fixed": [],
+      "lost": []
+    },
+    "header": {
+      "n": 4,
+      "pass": 1,
+      "unknown": 1,
+      "fixed": [
+        "catl.annual"
+      ],
+      "lost": []
+    },
+    "selected": {
+      "n": 4,
+      "pass": 2,
+      "unknown": 0,
+      "fixed": [
+        "catl.annual",
+        "catl.q4"
+      ],
+      "lost": []
+    }
+  },
+  "rows": [
+    {
+      "run_id": "catl.annual--row",
+      "case_id": "catl.annual",
+      "arm": "row",
+      "state": "abstained",
+      "reply": {
+        "status": "unknown",
+        "value": "",
+        "unit": "千元",
+        "pages": [
+          11,
+          12
+        ],
+        "explanation": "年报摘录中未明确给出2025年的具体数值，仅提供了2024年及以前的数据和部分对比信息。"
+      },
+      "checks": null,
+      "verdict": "fail",
+      "latency_ms": 11480,
+      "input_tokens": 253,
+      "output_tokens": 71
+    },
+    {
+      "run_id": "catl.annual--header",
+      "case_id": "catl.annual",
+      "arm": "header",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "133219982",
+        "unit": "千元",
+        "pages": [
+          11
+        ],
+        "explanation": "直接从表格中获取 2025 年经营活动产生的现金流量净额数值。"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "pass",
+          "value_unit": "pass",
+          "value_pages": "pass"
+        },
+        "checks": {
+          "value_unit": "pass",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "133219982",
+        "unit": "千元"
+      },
+      "verdict": "pass",
+      "latency_ms": 5522,
+      "input_tokens": 318,
+      "output_tokens": 67
+    },
+    {
+      "run_id": "catl.annual--selected",
+      "case_id": "catl.annual",
+      "arm": "selected",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "133219982",
+        "unit": "千元",
+        "pages": [
+          11
+        ],
+        "explanation": "直接从表格中获取2025年经营活动产生的现金流量净额数值"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "pass",
+          "value_unit": "pass",
+          "value_pages": "pass"
+        },
+        "checks": {
+          "value_unit": "pass",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "133219982",
+        "unit": "千元"
+      },
+      "verdict": "pass",
+      "latency_ms": 3163,
+      "input_tokens": 223,
+      "output_tokens": 48
+    },
+    {
+      "run_id": "catl.q4--header",
+      "case_id": "catl.q4",
+      "arm": "header",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "52559552",
+        "unit": "千元",
+        "pages": [
+          12
+        ],
+        "explanation": "第四季度经营活动产生的现金流量净额直接给出，单位为千元。"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "pass",
+          "value_unit": "pass",
+          "value_pages": "unknown"
+        },
+        "checks": {
+          "value_unit": "pass",
+          "page_support": "unknown",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "52559552",
+        "unit": "千元"
+      },
+      "verdict": "unknown",
+      "latency_ms": 5383,
+      "input_tokens": 320,
+      "output_tokens": 61
+    },
+    {
+      "run_id": "catl.q4--selected",
+      "case_id": "catl.q4",
+      "arm": "selected",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "52559552",
+        "unit": "千元",
+        "pages": [
+          11,
+          12
+        ],
+        "explanation": "第四季度经营活动产生的现金流量净额直接给出，数值为52,559,552千元。"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "pass",
+          "value_unit": "pass",
+          "value_pages": "pass"
+        },
+        "checks": {
+          "value_unit": "pass",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "52559552",
+        "unit": "千元"
+      },
+      "verdict": "pass",
+      "latency_ms": 5488,
+      "input_tokens": 225,
+      "output_tokens": 75
+    },
+    {
+      "run_id": "catl.q4--row",
+      "case_id": "catl.q4",
+      "arm": "row",
+      "state": "abstained",
+      "reply": {
+        "status": "unknown",
+        "value": "",
+        "unit": "千元",
+        "pages": [
+          11,
+          12
+        ],
+        "explanation": "无法从证据确认2025年第四季度的经营活动现金流量净额，摘录中未明确给出该季度的数据。"
+      },
+      "checks": null,
+      "verdict": "fail",
+      "latency_ms": 5656,
+      "input_tokens": 255,
+      "output_tokens": 52
+    },
+    {
+      "run_id": "apple.growth--selected",
+      "case_id": "apple.growth",
+      "arm": "selected",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "14.00",
+        "unit": "%",
+        "pages": [
+          26
+        ],
+        "explanation": "2025年服务收入同比增长率为14%，直接从摘录中获取。"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "fail",
+          "value_unit": "fail",
+          "value_pages": "fail"
+        },
+        "checks": {
+          "value_unit": "fail",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "13.51",
+        "unit": "%"
+      },
+      "verdict": "fail",
+      "latency_ms": 6735,
+      "input_tokens": 201,
+      "output_tokens": 61
+    },
+    {
+      "run_id": "apple.growth--row",
+      "case_id": "apple.growth",
+      "arm": "row",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "14.00",
+        "unit": "%",
+        "pages": [
+          26
+        ],
+        "explanation": "服务收入同比增速直接给出为14%"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "fail",
+          "value_unit": "fail",
+          "value_pages": "fail"
+        },
+        "checks": {
+          "value_unit": "fail",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "13.51",
+        "unit": "%"
+      },
+      "verdict": "fail",
+      "latency_ms": 6126,
+      "input_tokens": 217,
+      "output_tokens": 51
+    },
+    {
+      "run_id": "apple.growth--header",
+      "case_id": "apple.growth",
+      "arm": "header",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "14.00",
+        "unit": "%",
+        "pages": [
+          26
+        ],
+        "explanation": "服务收入同比增速直接从摘录中获取，为14%。"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "fail",
+          "value_unit": "fail",
+          "value_pages": "fail"
+        },
+        "checks": {
+          "value_unit": "fail",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "13.51",
+        "unit": "%"
+      },
+      "verdict": "fail",
+      "latency_ms": 6498,
+      "input_tokens": 247,
+      "output_tokens": 58
+    },
+    {
+      "run_id": "apple.contribution--row",
+      "case_id": "apple.contribution",
+      "arm": "row",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "14.29",
+        "unit": "%",
+        "pages": [
+          26
+        ],
+        "explanation": "服务收入增加额为109,158 - 85,200 = 23,958千元，总净销售额增加额为416,161 - 383,285 = 32,876千元，计算得23,958 / 32,876 * 100 = 14.29%"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "fail",
+          "value_unit": "fail",
+          "value_pages": "fail"
+        },
+        "checks": {
+          "value_unit": "fail",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "51.70",
+        "unit": "%"
+      },
+      "verdict": "fail",
+      "latency_ms": 14611,
+      "input_tokens": 224,
+      "output_tokens": 132
+    },
+    {
+      "run_id": "apple.contribution--header",
+      "case_id": "apple.contribution",
+      "arm": "header",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "24.45",
+        "unit": "%",
+        "pages": [
+          26
+        ],
+        "explanation": "服务收入增加额为109,158 - 96,169 = 12,989千元，总净销售额增加额为416,161 - 391,035 = 25,126千元，计算得12,989 / 25,126 * 100 = 24.45%"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "fail",
+          "value_unit": "fail",
+          "value_pages": "fail"
+        },
+        "checks": {
+          "value_unit": "fail",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "51.70",
+        "unit": "%"
+      },
+      "verdict": "fail",
+      "latency_ms": 20752,
+      "input_tokens": 254,
+      "output_tokens": 132
+    },
+    {
+      "run_id": "apple.contribution--selected",
+      "case_id": "apple.contribution",
+      "arm": "selected",
+      "state": "answered",
+      "reply": {
+        "status": "answered",
+        "value": "24.38",
+        "unit": "%",
+        "pages": [
+          26
+        ],
+        "explanation": "服务收入增加额为109,158 - 96,169 = 12,989千元，总净销售额增加额为416,161 - 391,035 = 25,126千元，计算得12,989 / 25,126 * 100 = 24.38%"
+      },
+      "checks": {
+        "scores": {
+          "cited": "pass",
+          "printed": "fail",
+          "value_unit": "fail",
+          "value_pages": "fail"
+        },
+        "checks": {
+          "value_unit": "fail",
+          "page_support": "pass",
+          "evidence_read": "available",
+          "explicit_cell": "not_supplied"
+        },
+        "expected": "51.70",
+        "unit": "%"
+      },
+      "verdict": "fail",
+      "latency_ms": 24358,
+      "input_tokens": 254,
+      "output_tokens": 132
+    }
+  ]
+}

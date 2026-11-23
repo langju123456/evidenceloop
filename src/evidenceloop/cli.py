@@ -565,6 +565,18 @@ def main(argv: list[str] | None = None) -> None:
     verify_report.add_argument("--pdf-dir", required=True)
     verify_report.add_argument("--archive", required=True)
     verify_report.set_defaults(func=verify_command)
+    from evidenceloop.report import evidence_trials
+
+    trial = report_actions.add_parser("run-evidence", help="run paired prompts on an installed local Ollama tag")
+    trial.add_argument("--model", required=True)
+    trial.add_argument("--prompts", default=evidence_trials.DATASET)
+    trial.add_argument("--out", required=True, help="new JSONL archive path; never overwrites")
+    trial.set_defaults(func=evidence_trials.run_command)
+    summary = report_actions.add_parser("score-evidence", help="score all arms from saved responses offline")
+    summary.add_argument("--prompts", default=evidence_trials.DATASET)
+    summary.add_argument("--dataset", default="benchmarks/report_dev/v1")
+    summary.add_argument("--log", required=True)
+    summary.set_defaults(func=evidence_trials.summary_command)
     report = report_actions.add_parser("baseline")
     report.add_argument("--evals", nargs="+", required=True)
     report.add_argument("--names", nargs="+")
