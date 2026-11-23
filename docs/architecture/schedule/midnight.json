@@ -48,6 +48,8 @@
         "label": "冻结已完成实验与证据边界",
         "resource": "human",
         "hours": 1.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [],
         "start": "2026-11-24T09:00:00",
         "end": "2026-11-24T19:30:00",
@@ -59,6 +61,8 @@
         "label": "整理复跑入口、架构图和演示材料",
         "resource": "agent",
         "hours": 3,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_facts"
         ],
@@ -72,6 +76,8 @@
         "label": "亲自走一次演示并写口头解释",
         "resource": "human",
         "hours": 1.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_docs"
         ],
@@ -85,6 +91,8 @@
         "label": "修正演示发现的问题",
         "resource": "agent",
         "hours": 2,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_walkthrough"
         ],
@@ -98,6 +106,8 @@
         "label": "最终验收与面试问答复盘",
         "resource": "human",
         "hours": 1,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_polish"
         ],
@@ -155,6 +165,8 @@
         "label": "冻结已完成实验与证据边界",
         "resource": "human",
         "hours": 2.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [],
         "start": "2026-11-24T09:00:00",
         "end": "2026-11-25T09:30:00",
@@ -166,6 +178,8 @@
         "label": "整理复跑入口、架构图和演示材料",
         "resource": "agent",
         "hours": 5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_facts"
         ],
@@ -179,6 +193,8 @@
         "label": "亲自走一次演示并写口头解释",
         "resource": "human",
         "hours": 2.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_docs"
         ],
@@ -192,6 +208,8 @@
         "label": "修正演示发现的问题",
         "resource": "agent",
         "hours": 4,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_walkthrough"
         ],
@@ -205,6 +223,8 @@
         "label": "最终验收与面试问答复盘",
         "resource": "human",
         "hours": 2,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
         "depends": [
           "review_polish"
         ],
