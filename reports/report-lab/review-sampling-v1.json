@@ -1,0 +1,64 @@
+{
+  "seed": "report-review-v1",
+  "budget_per_method": 4,
+  "population": 14,
+  "review_source": "existing_codex_dev_labels",
+  "selections": {
+    "arrival": {
+      "ids": [
+        "e1df2a4553e44125befe1d3fe973d529",
+        "dc3647af187e40a18d9f0d0109888fd4",
+        "annual-correct",
+        "annual-from-quarters"
+      ],
+      "n": 4,
+      "questions": 2,
+      "archived": 2,
+      "pass": 3,
+      "fail": 1,
+      "unknown": 0
+    },
+    "shuffle": {
+      "ids": [
+        "q4-correct",
+        "annual-wrong-unread",
+        "dc3647af187e40a18d9f0d0109888fd4",
+        "apple-growth-ok"
+      ],
+      "n": 4,
+      "questions": 4,
+      "archived": 1,
+      "pass": 3,
+      "fail": 1,
+      "unknown": 0
+    },
+    "by_question": {
+      "ids": [
+        "apple-foreign-citation",
+        "dc3647af187e40a18d9f0d0109888fd4",
+        "apple-growth-ok",
+        "q4-correct"
+      ],
+      "n": 4,
+      "questions": 4,
+      "archived": 1,
+      "pass": 3,
+      "fail": 1,
+      "unknown": 0
+    },
+    "disagreement": {
+      "ids": [
+        "annual-wrong-unread",
+        "apple-foreign-citation",
+        "annual-unread",
+        "e1df2a4553e44125befe1d3fe973d529"
+      ],
+      "n": 4,
+      "questions": 2,
+      "archived": 1,
+      "pass": 0,
+      "fail": 3,
+      "unknown": 1
+    }
+  }
+}

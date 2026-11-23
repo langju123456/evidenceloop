@@ -607,6 +607,21 @@ def main(argv: list[str] | None = None) -> None:
     peers.add_argument("--forge-repo", required=True)
     peers.add_argument("--horizon-repo", required=True)
     peers.set_defaults(func=peer_runs.command)
+    from evidenceloop.report import blind_review
+
+    blind = report_actions.add_parser("blind-review", help="create an offline blinded annotation form")
+    blind.add_argument("--out", required=True)
+    blind.add_argument("--key-file", help="coordinator-only packet mapping; omit for public practice")
+    key = report_actions.add_parser("review-key", help="issue an exclusive private packet mapping")
+    key.add_argument("--out", required=True)
+    pick = report_actions.add_parser("sample-review", help="compare sampling policies on fixed public observations")
+    pick.add_argument("--budget", type=int, default=4)
+    returned = report_actions.add_parser("reconcile-review", help="check a returned annotation file")
+    returned.add_argument("--submission", required=True)
+    returned.add_argument("--key-file", help="use the original coordinator-only packet mapping")
+    for review_parser in (blind, pick, returned, key):
+        review_parser.add_argument("--dataset", default="benchmarks/report_dev/v1")
+        review_parser.set_defaults(func=blind_review.command)
     report = report_actions.add_parser("baseline")
     report.add_argument("--evals", nargs="+", required=True)
     report.add_argument("--names", nargs="+")
