@@ -29,4 +29,4 @@ cmp /tmp/report-peer-runs.json reports/report-lab/peer-runs-v1.json
 PYTHONPATH=src python3 -m evidenceloop.cli report review-page --out /tmp/report-review.html
 ```
 
-导入从提交读取原始字节，记录 SHA-256 和定位链接；每个来源有单独的派生运行编号，原始任务号、评估编号和来源各占独立字段。问答阶段没有交付产物指纹，收件实验中的内容由场景预置。两者共享业务事实，本次跨项目贯通运行数为 0。下一步由 ForgeFlow 实际产生带共享运行编号、版本和指纹的稿件，再由 HorizonBench 对同一份稿件验收；EvidenceLoop 才能统计整份委托是否成功。
+导入从提交读取原始字节，记录 SHA-256 和定位链接；每个来源有单独的派生运行编号，原始任务号、评估编号和来源各占独立字段。问答阶段没有交付产物指纹，收件实验中的内容由场景预置。两者共享业务事实，本次跨项目贯通运行数为 0。另一个 [Apple 案例](08-apple-delivery.md) 已完成同一实际稿件与离线模拟收件的关联。两个案例分开报告。

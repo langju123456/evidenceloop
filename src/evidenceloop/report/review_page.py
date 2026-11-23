@@ -79,6 +79,45 @@ STRATEGY_NAMES = {"assume_success": "超时就记成功", "wait_for_human": "等
 FAULT_NAMES = {"ack": "正常回执", "request_lost": "请求丢失", "receipt_lost_crash": "已收件、回执丢失并中断"}
 
 
+WORLD_NAMES = {"approved_v2_once": "恰好收到批准版 v2", "returned_v1_once": "错收退回版 v1",
+               "inbox_empty": "收件箱为空", "approved_v2_twice": "重复收到批准版", "approval_corrupted": "审批记录被改动"}
+
+
+def apple_delivery_section(linked):
+    revisions = []
+    for revision in linked["revisions"]:
+        revisions.append([esc(revision["version"]), esc(revision["question"]), esc(revision["answer"]),
+                          esc(" → ".join(event["kind"] for event in revision["events"])),
+                          details("查原件和查询编号", pre(revision))])
+    by_world = {(r["world"], r["reader"]): r for r in linked["simulated_receipt_matrix"]}
+    scenarios = []
+    for world in WORLD_NAMES:
+        readings = [by_world[world, reader] for reader in peer_runs.READERS]
+        received = readings[0]["receipt_summary"]
+        receipts = "、".join("v" + esc(r["version"]) for r in received) or "无"
+        verdicts = []
+        for r in readings:
+            if r["false_accept"]:
+                label = "误放"
+            elif r["accepted"]:
+                label = "签收"
+            else:
+                label = "拒收"
+            verdicts.append(esc(label))
+        scenarios.append([WORLD_NAMES[world], receipts, *verdicts, details("查这组收件回执", pre(readings))])
+    returned_reason = next(e["memo"] for e in linked["revisions"][0]["events"] if e["kind"] == "returned")
+    return ("<h2 id='apple-delivery'>Apple 报告交付的是审阅人批准的那一版吗？</h2>"
+            "<p>同一个本地草稿经两次产品查询完成修订。脚本扮演作者和审阅者，第二版获批并产生本地回执。</p>"
+            + "<blockquote>" + esc(returned_reason) + "</blockquote>"
+            + table(["版本", "查询", "原答", "本地状态变更", "证据"], revisions)
+            + "<p>HorizonBench 读取这两版原件，在五种模拟收件情形中比较四种核验方式。"
+              "正常签收和错收旧版都只有一份收件；核对批准版本和内容指纹才能把它们区分开。</p>"
+            + table(["模拟收件情形", "收到的版本", "只看本地交付", "只核上游审批", "只数收件", "完整核对", "原始判定"], scenarios)
+            + details("查看案例、草稿编号及上游文件指纹", pre({k: linked[k] for k in
+                      ("case_id", "draft_id", "product_commit", "environment_commit", "review_index", "matrix_ref")}))
+            + "<p>20 格来自同一草稿的五个模拟世界。生产收件与实时跨服务调用仍待验证。</p>")
+
+
 def peer_section(archive):
     data = read_json(archive)
     if data["schema_version"] != "report-receipts/1" or data["joint_product_environment_runs"] != 0:
@@ -99,14 +138,16 @@ def peer_section(archive):
             cells.append(badge(r["verdict"]) + f' · 收到 {int(r["checks"]["target_receipts"])} 份'
                          + details("收件与恢复记录", pre(r)))
         matrix.append([esc(STRATEGY_NAMES[strategy]), *cells])
-    return ("<h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2>"
-            "<h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。"
+    jump = '<p><a href="#apple-delivery">查看 Apple 批准稿与错收旧版的对照</a></p>' if "apple_delivery" in data else ""
+    return ("<h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2>" + jump
+            + "<h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。"
             "评分逐项核对宁德时代年报第 11 页。2022 年超出该表列示范围，保留为待核实。</p>"
             + table(["用户问题", "产品回答", "核验", "出处", "毫秒", "记录"], qa)
             + "<h3>HorizonBench 的独立收件结果</h3><p>同一份报告在三种交付情形下运行四种策略。"
             "外部收件方由本地数据库模拟，进程中断有实测退出码。展开可查本机状态、收件编号和内容指纹。</p>"
             + table(["处理策略"] + [FAULT_NAMES[f] for f in peer_runs.FAULTS], matrix)
-            + "<p>两个实验共享业务案例。上游没有贯通这两批记录的运行编号，完整跨项目交付次数尚待实测。</p>")
+            + "<p>两个实验共享业务案例。上游没有贯通这两批记录的运行编号，完整跨项目交付次数尚待实测。</p>"
+            + (apple_delivery_section(data["apple_delivery"]) if "apple_delivery" in data else ""))
 
 
 def holdout_section(folder):

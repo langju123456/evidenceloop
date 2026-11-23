@@ -27,6 +27,7 @@ def test_review_page_uses_stored_archives_and_escapes_untrusted_content():
     assert "收到 2 份" in page and "产品与收件回执" in page
     assert "跨公司留出结果" in page and "印刷页 57" in page and "印刷页 77" in page
     assert page.count("查看动作和核验记录") == 24
+    assert "错收退回版 v1" in page and page.count("查这组收件回执") == 5
     parsed = Count()
     parsed.feed(page)
     assert parsed.case_count == 4

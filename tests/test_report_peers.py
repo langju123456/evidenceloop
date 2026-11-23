@@ -51,3 +51,25 @@ def test_reject_incomplete_matrix_and_contradictory_process(monkeypatch):
     with pytest.raises(ValueError, match="conflicting"):
         check_fixture([dict(strategy="assume_success", fault="ack", success=True, target_receipts=1,
                             local_status="completed", infrastructure_ok=True, process_measured=False, initial_returncode=0)])
+
+
+def test_two_queries_and_one_draft_link_the_approved_and_stale_simulated_receipts():
+    apple = json.loads(ARCHIVE.read_text())["apple_delivery"]
+    assert apple["matrix_ref"]["sha256"] == peer_runs.MATRIX_SHA
+    first, approved = apple["revisions"]
+    assert first["run_id"] != approved["run_id"] and approved["parent_digest"] == first["revision_digest"]
+    assert first["local_receipt"] is None and approved["local_receipt"]
+    assert first["state"] == "returned" and approved["state"] == "delivered"
+    rows = apple["simulated_receipt_matrix"]
+    digests = {str(r["version"]): r["inbox_payload_digest"] for r in apple["revisions"]}
+    peer_runs.validate_matrix(rows, digests)
+    original = next(r for r in rows if r["world"] == "approved_v2_once" and r["reader"] == "full_reconcile")
+    stale = [r for r in rows if r["world"] == "returned_v1_once"]
+    assert original["accepted"] and original["receipt_summary"][0]["digest"] == digests["2"]
+    assert all(r["receipt_summary"][0]["digest"] == digests["1"] for r in stale)
+    assert [r["reader"] for r in stale if r["false_accept"]] == ["local_delivered", "upstream_chain", "inbox_count"]
+    assert next(r for r in stale if r["reader"] == "full_reconcile")["accepted"] is False
+    with pytest.raises(ValueError, match="one result"):
+        peer_runs.validate_matrix(rows[:-1] + rows[:1], digests)
+    with pytest.raises(ValueError, match="archived revision"):
+        peer_runs.validate_matrix(rows, {"1": digests["2"], "2": digests["1"]})

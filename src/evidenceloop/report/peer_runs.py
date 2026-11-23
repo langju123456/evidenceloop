@@ -123,6 +123,85 @@ def horizon_rows(repo):
     return rows
 
 
+FORGE_REVIEW = "b74c8bb439658d1530a762391e13ae1861bd8968"
+HB_DELIVERY = "afe78553a9f55780e7232646b80c22fa8a51ed38"
+DELIVERY_MATRIX = "reports/forgeflow-delivery/matrix.json"
+MATRIX_SHA = "73c1e309d9ec7b010ee27abfd4333d32590d3224efdc7d3b2350a1528593ec43"
+WORLDS = ("approved_v2_once", "inbox_empty", "approved_v2_twice", "returned_v1_once", "approval_corrupted")
+READERS = ("local_delivered", "upstream_chain", "inbox_count", "full_reconcile")
+
+
+def canonical_digest(value):
+    encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def validate_matrix(rows, version_digests):
+    pairs = {(r["world"], r["reader"]) for r in rows}
+    if len(rows) != len(WORLDS) * len(READERS) or pairs != {(w, r) for w in WORLDS for r in READERS}:
+        raise ValueError("expected one result for each world and reader")
+    for row in rows:
+        for receipt in row["receipt_summary"]:
+            if receipt["version"] not in version_digests or receipt["digest"] != version_digests[receipt["version"]]:
+                raise ValueError("receipt does not belong to the archived revision")
+
+
+def linked_delivery(forge, horizon):
+    matrix, matrix_ref = committed(horizon, HB_DELIVERY, DELIVERY_MATRIX, "horizon-bench")
+    upstream = matrix["upstream"]
+    if matrix_ref["sha256"] != MATRIX_SHA or upstream["source_commit"] != FORGE_REVIEW:
+        raise ValueError("unexpected delivery matrix or upstream commit")
+    prefix = "preparation/annual-report-workbench/"
+    index, index_ref = committed(forge, FORGE_REVIEW, prefix + "review-dev.json", "forgeflow")
+    if (index_ref["sha256"] != upstream["review_sha256"]
+            or any(index[k] != upstream[k] for k in ("case_id", "draft_id", "versions", "tool_run_ids", "local_receipt"))):
+        raise ValueError("delivery matrix points to a different review")
+    asks = [call["run_id"] for call in index["calls"] if call["path"] == "/reports/ask" and call["http"] == 200]
+    entries = index["versions"]
+    if ([r["version"] for r in entries] != [1, 2] or [r["run_id"] for r in entries] != asks
+            or len(set(asks)) != 2 or asks != upstream["tool_run_ids"]):
+        raise ValueError("expected both revision queries")
+    refs = {ref["file"]: ref["sha256"] for ref in index["artifact_refs"]}
+    revisions = []
+    for entry in entries:
+        version = entry["version"]
+        filename = f"apple-review-v{version}.json"
+        export, ref = committed(forge, FORGE_REVIEW, prefix + filename, "forgeflow")
+        payload = export["payload"]
+        evidence = payload["evidence"]
+        revision = canonical_digest(payload)
+        previous = revisions[-1]["revision_digest"] if revisions else None
+        if (ref["sha256"] != refs[filename] or revision != export["digest"] or revision != entry["revision_digest"]
+                or revision != upstream[f"v{version}"] or payload["version"] != version or payload["parent_digest"] != previous
+                or payload["draft_id"] != index["draft_id"] or evidence["case_id"] != index["case_id"]
+                or evidence["run_id"] != entry["run_id"]):
+            raise ValueError("revision does not match the product query or draft")
+        events = export["events"]
+        expected_events = ["saved", "submitted", "returned"] if version == 1 else ["saved", "submitted", "approved", "delivered"]
+        if ([e["kind"] for e in events] != expected_events or export["state"] != expected_events[-1]
+                or any((e["digest"], e["version"], e["draft"]) != (revision, version, index["draft_id"]) for e in events)):
+            raise ValueError("events do not refer to the same revision")
+        receipt = canonical_digest(events[-1]) if version == 2 else None
+        if export["local_receipt"] != receipt or (version == 2 and receipt != upstream["local_receipt"]):
+            raise ValueError("wrong local delivery receipt")
+        revisions.append({
+            "version": version, "run_id": evidence["run_id"], "question": evidence["question"],
+            "answer": evidence["answer"], "citations": [{"page": c["page"], "id": c["id"]} for c in evidence["citations"]],
+            "revision_digest": revision, "parent_digest": previous, "state": export["state"],
+            "inbox_payload_digest": canonical_digest({"payload": payload, "version": str(version)}),
+            "local_receipt": receipt, "events": events, "artifact_ref": ref,
+        })
+    if revisions[-1]["inbox_payload_digest"] != upstream["payload_digest"]:
+        raise ValueError("approved payload differs from the matrix")
+    validate_matrix(matrix["rows"], {str(r["version"]): r["inbox_payload_digest"] for r in revisions})
+    return {
+        "case_id": index["case_id"], "draft_id": index["draft_id"], "product_commit": FORGE_REVIEW,
+        "environment_commit": HB_DELIVERY, "review_index": index_ref, "matrix_ref": matrix_ref,
+        "product_driver": index["driver"], "model_calls": index["model_calls"],
+        "revisions": revisions, "simulated_receipt_matrix": matrix["rows"],
+    }
+
+
 def import_peers(forge, horizon):
     ff = forge_rows(forge)
     hb = horizon_rows(horizon)
@@ -137,7 +216,7 @@ def import_peers(forge, horizon):
     return {
         "schema_version": "report-receipts/1", "split": "public_dev", "joint_product_environment_runs": 0,
         "forge_qa": {**{v: sum(r["verdict"] == v for r in ff) for v in ("pass", "fail", "unknown")}, "n": len(ff)},
-        "horizon_paired": pairs, "rows": ff + hb,
+        "horizon_paired": pairs, "rows": ff + hb, "apple_delivery": linked_delivery(forge, horizon),
     }
 
 
