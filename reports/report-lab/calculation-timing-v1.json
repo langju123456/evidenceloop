@@ -1,0 +1,37 @@
+{
+  "measurement": "single offline local replay, excluding model and disk I/O",
+  "rows": [
+    {
+      "run_id": "apple.2025.growth--cells",
+      "duration_ns": 39875
+    },
+    {
+      "run_id": "apple.2025.growth--metric_tool",
+      "duration_ns": 10542
+    },
+    {
+      "run_id": "apple.2025.contribution--cells",
+      "duration_ns": 6833
+    },
+    {
+      "run_id": "apple.2025.contribution--metric_tool",
+      "duration_ns": 5958
+    },
+    {
+      "run_id": "apple.2024.growth--metric_tool",
+      "duration_ns": 4583
+    },
+    {
+      "run_id": "apple.2024.growth--cells",
+      "duration_ns": 4500
+    },
+    {
+      "run_id": "apple.2024.contribution--cells",
+      "duration_ns": 4125
+    },
+    {
+      "run_id": "apple.2024.contribution--metric_tool",
+      "duration_ns": 3875
+    }
+  ]
+}

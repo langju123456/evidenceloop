@@ -33,7 +33,7 @@ def messages(item, arm):
     return [{"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt}]
 
 
-def run_command(args):
+def run_paired(args, arms, build_messages):
     model = args.model
     installed = {m["name"]: m["digest"] for m in request("tags")["models"]}
     if model not in installed:
@@ -45,10 +45,10 @@ def run_command(args):
     fingerprint = digest(dataset)
     with out.open("x", encoding="utf-8") as stream:
         for index, item in enumerate(items):
-            rotation = index % len(ARMS)
-            for arm in ARMS[rotation:] + ARMS[:rotation]:
+            rotation = index % len(arms)
+            for arm in arms[rotation:] + arms[:rotation]:
                 payload = {"model": model, "stream": False, "think": False, "format": "json",
-                           "options": OPTIONS, "messages": messages(item, arm)}
+                           "options": OPTIONS, "messages": build_messages(item, arm)}
                 row = {"schema_version": 1, "case_id": item["case_id"], "arm": arm,
                        "run_id": f"{item['case_id']}--{arm}", "attempt": 1, "split": "public_dev",
                        "source_kind": "local_model", "document": item["document"],
@@ -64,6 +64,10 @@ def run_command(args):
                 stream.write(json.dumps(row, ensure_ascii=False) + "\n")
                 stream.flush()
                 os.fsync(stream.fileno())
+
+
+def run_command(args):
+    run_paired(args, ARMS, messages)
 
 
 def parse_response(row):
@@ -86,27 +90,46 @@ def parse_response(row):
         return "invalid", None
 
 
-def summarize(prompts, path, reference_dir):
+def checked_archive(prompts, log, arms, build_messages):
     items = read_json(prompts)
-    case_by_id = {i["case_id"]: i for i in items}
-    expected = {(i["case_id"], arm) for i in items for arm in ARMS}
-    cases = read_json(reference_dir / "cases.json")
-    sources = read_json(reference_dir / "sources.json")
+    cases = {item["case_id"]: item for item in items}
+    if not cases or len(cases) != len(items):
+        raise ValueError("empty or duplicate public cases")
+    expected = {(cid, arm) for cid in cases for arm in arms}
+    fingerprint = digest(prompts)
     seen = set()
     configs = set()
-    rows = []
-    for raw in read_lines(path):
-        key = (raw["case_id"], raw["arm"])
+    records = read_lines(log)
+    for row in records:
+        cid, arm = row["case_id"], row["arm"]
+        key = (cid, arm)
         if key not in expected or key in seen:
             raise ValueError(f"unexpected or duplicate pair: {key}")
         seen.add(key)
-        item = case_by_id[key[0]]
-        req = raw["request"]
-        configs.add((req["model"], raw["model_digest"], raw["ollama_version"]))
-        if (raw["prompt_file_sha256"] != digest(prompts) or raw["document"] != item["document"]
-                or req["messages"] != messages(item, key[1]) or req["options"] != OPTIONS
-                or req.get("think") is not False or req.get("format") != "json"):
+        item = cases[cid]
+        req = row["request"]
+        configs.add((req["model"], row["model_digest"], row["ollama_version"]))
+        expected_request = {"model":req["model"], "stream":False, "think":False, "format":"json",
+                            "options":OPTIONS, "messages":build_messages(item, arm)}
+        if (row["prompt_file_sha256"] != fingerprint or row["document"] != item["document"]
+                or req != expected_request or row["run_id"] != f"{cid}--{arm}"
+                or row["source_kind"] != "local_model" or row["attempt"] != 1
+                or row["split"] != "public_dev" or row["schema_version"] != 1
+                or ("response" in row) == ("error" in row)
+                or ("response" in row and row["response"].get("model") != req["model"])):
             raise ValueError(f"changed experiment conditions: {key}")
+    if seen != expected or len(configs) != 1:
+        raise ValueError("incomplete or unmatched experiment")
+    return records, next(iter(configs))
+
+
+def summarize(prompts, path, reference_dir):
+    cases = read_json(reference_dir / "cases.json")
+    sources = read_json(reference_dir / "sources.json")
+    records, config = checked_archive(prompts, path, ARMS, messages)
+    rows = []
+    for raw in records:
+        key = (raw["case_id"], raw["arm"])
         state, content = parse_response(raw)
         verdict = "unknown" if state == "infra_error" else "fail"
         checks = None
@@ -119,8 +142,6 @@ def summarize(prompts, path, reference_dir):
         rows.append({"run_id":raw["run_id"], "case_id":key[0], "arm":key[1], "state":state,
                      "reply":content, "checks":checks, "verdict":verdict, "latency_ms":raw["latency_ms"],
                      "input_tokens":resp.get("prompt_eval_count"), "output_tokens":resp.get("eval_count")})
-    if seen != expected or len(configs) != 1:
-        raise ValueError("incomplete or unmatched experiment")
     by_key = {(r["case_id"],r["arm"]):r for r in rows}
     summaries = {}
     for arm in ARMS:
@@ -132,7 +153,7 @@ def summarize(prompts, path, reference_dir):
                      and by_key[r["case_id"], "row"]["verdict"] != "pass"],
             "lost":[r["case_id"] for r in subset if r["verdict"] != "pass"
                     and by_key[r["case_id"], "row"]["verdict"] == "pass"]}
-    return {"split":"public_dev", "raw_sha256":digest(path), "model":list(next(iter(configs))),
+    return {"split":"public_dev", "raw_sha256":digest(path), "model":list(config),
             "summaries":summaries, "rows":rows}
 
 

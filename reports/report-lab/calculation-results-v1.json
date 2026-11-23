@@ -1,0 +1,426 @@
+{
+  "model": [
+    "forgeflow-qwen3-8b-ctx16k:latest",
+    "7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5",
+    "0.32.1"
+  ],
+  "split": "public_dev",
+  "raw_sha256": "23ec0d0229611415b6e136a8a6fa9566cd2ffd591fc44948a849ca8fd9e93273",
+  "gold_sha256": "1d7087cc7abb5a67a77f939f2fd0d3273a3787572255ef7d34fc90eb2c40c3e3",
+  "summaries": {
+    "direct": {
+      "n": 4,
+      "pass": 1,
+      "fixed": [],
+      "lost": []
+    },
+    "cells": {
+      "n": 4,
+      "pass": 2,
+      "fixed": [
+        "apple.2025.contribution",
+        "apple.2024.growth"
+      ],
+      "lost": [
+        "apple.2025.growth"
+      ]
+    },
+    "metric_tool": {
+      "n": 4,
+      "pass": 3,
+      "fixed": [
+        "apple.2025.contribution",
+        "apple.2024.growth"
+      ],
+      "lost": []
+    }
+  },
+  "rows": [
+    {
+      "case_id": "apple.2025.growth",
+      "arm": "direct",
+      "run_id": "apple.2025.growth--direct",
+      "decision": {
+        "value": 13.51,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "13.51"
+      },
+      "expected": "13.51",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 5260,
+      "input_tokens": 226,
+      "output_tokens": 22
+    },
+    {
+      "case_id": "apple.2025.growth",
+      "arm": "cells",
+      "run_id": "apple.2025.growth--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "S24",
+          "S23"
+        ],
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24",
+            "S23"
+          ],
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "10969",
+        "value": "118.42"
+      },
+      "expected": "13.51",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 11703,
+      "input_tokens": 264,
+      "output_tokens": 41
+    },
+    {
+      "case_id": "apple.2025.growth",
+      "arm": "metric_tool",
+      "run_id": "apple.2025.growth--metric_tool",
+      "decision": {
+        "metric": "yoy_growth",
+        "series": "Services",
+        "year": 2025,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "yoy_growth",
+          "series": "Services",
+          "year": 2025,
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "96169",
+        "value": "13.51"
+      },
+      "expected": "13.51",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7008,
+      "input_tokens": 263,
+      "output_tokens": 37
+    },
+    {
+      "case_id": "apple.2025.contribution",
+      "arm": "cells",
+      "run_id": "apple.2025.contribution--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "T25",
+          "T24"
+        ],
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ],
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "25126",
+        "value": "51.70"
+      },
+      "expected": "51.70",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7382,
+      "input_tokens": 272,
+      "output_tokens": 41
+    },
+    {
+      "case_id": "apple.2025.contribution",
+      "arm": "metric_tool",
+      "run_id": "apple.2025.contribution--metric_tool",
+      "decision": {
+        "metric": "share_of_change",
+        "series": "Services",
+        "year": 2025,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "share_of_change",
+          "series": "Services",
+          "year": 2025,
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "25126",
+        "value": "51.70"
+      },
+      "expected": "51.70",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7515,
+      "input_tokens": 271,
+      "output_tokens": 37
+    },
+    {
+      "case_id": "apple.2025.contribution",
+      "arm": "direct",
+      "run_id": "apple.2025.contribution--direct",
+      "decision": {
+        "value": 26.35,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "26.35"
+      },
+      "expected": "51.70",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 5287,
+      "input_tokens": 234,
+      "output_tokens": 22
+    },
+    {
+      "case_id": "apple.2024.growth",
+      "arm": "metric_tool",
+      "run_id": "apple.2024.growth--metric_tool",
+      "decision": {
+        "metric": "yoy_growth",
+        "series": "Services",
+        "year": 2024,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "yoy_growth",
+          "series": "Services",
+          "year": 2024,
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "expected": "12.87",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 6263,
+      "input_tokens": 263,
+      "output_tokens": 37
+    },
+    {
+      "case_id": "apple.2024.growth",
+      "arm": "direct",
+      "run_id": "apple.2024.growth--direct",
+      "decision": {
+        "value": 13.51,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "13.51"
+      },
+      "expected": "12.87",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 4532,
+      "input_tokens": 226,
+      "output_tokens": 22
+    },
+    {
+      "case_id": "apple.2024.growth",
+      "arm": "cells",
+      "run_id": "apple.2024.growth--cells",
+      "decision": {
+        "numerator": [
+          "S24",
+          "S23"
+        ],
+        "denominator": [
+          "S23"
+        ],
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ],
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "expected": "12.87",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 6035,
+      "input_tokens": 264,
+      "output_tokens": 36
+    },
+    {
+      "case_id": "apple.2024.contribution",
+      "arm": "direct",
+      "run_id": "apple.2024.contribution--direct",
+      "decision": {
+        "value": 28.35,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "28.35"
+      },
+      "expected": "141.54",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 4315,
+      "input_tokens": 234,
+      "output_tokens": 22
+    },
+    {
+      "case_id": "apple.2024.contribution",
+      "arm": "cells",
+      "run_id": "apple.2024.contribution--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "T25",
+          "T24"
+        ],
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ],
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "25126",
+        "value": "51.70"
+      },
+      "expected": "141.54",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 6855,
+      "input_tokens": 272,
+      "output_tokens": 41
+    },
+    {
+      "case_id": "apple.2024.contribution",
+      "arm": "metric_tool",
+      "run_id": "apple.2024.contribution--metric_tool",
+      "decision": {
+        "metric": "share_of_change",
+        "series": "Services",
+        "year": 2025,
+        "pages": [
+          26
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "share_of_change",
+          "series": "Services",
+          "year": 2025,
+          "pages": [
+            26
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "25126",
+        "value": "51.70"
+      },
+      "expected": "141.54",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 6799,
+      "input_tokens": 271,
+      "output_tokens": 37
+    }
+  ]
+}

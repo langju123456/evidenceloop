@@ -577,6 +577,18 @@ def main(argv: list[str] | None = None) -> None:
     summary.add_argument("--dataset", default="benchmarks/report_dev/v1")
     summary.add_argument("--log", required=True)
     summary.set_defaults(func=evidence_trials.summary_command)
+    from evidenceloop.report import calculation
+
+    calc = report_actions.add_parser("run-calculation", help="collect paired local model decisions")
+    calc.add_argument("--model", required=True)
+    calc.add_argument("--prompts", default=calculation.PROMPTS)
+    calc.add_argument("--out", required=True)
+    calc.set_defaults(func=calculation.run_command)
+    calc_score = report_actions.add_parser("score-calculation", help="execute candidate calculations and compare")
+    calc_score.add_argument("--log", required=True)
+    calc_score.add_argument("--prompts", default=calculation.PROMPTS)
+    calc_score.add_argument("--review", default=calculation.REVIEW)
+    calc_score.set_defaults(func=calculation.summary_command)
     report = report_actions.add_parser("baseline")
     report.add_argument("--evals", nargs="+", required=True)
     report.add_argument("--names", nargs="+")
