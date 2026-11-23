@@ -1,13 +1,13 @@
 <!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>年报逐题评测 · EvidenceLoop</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f8faf9;color:#182823;font:16px/1.6 Inter,system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:36px clamp(16px,4vw,55px)}
-h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin-top:2em}h3,h4{margin:.4em 0}.muted{color:#4b6259}a,summary{color:#146148}nav{display:flex;gap:1.4em}section.case{padding:24px 0;border-top:1px solid #bbcbc4}
+h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin-top:2em}h3,h4{margin:.4em 0}.muted{color:#4b6259}a,summary{color:#146148}nav{display:flex;flex-wrap:wrap;gap:.4em 1.4em}section.case{padding:24px 0;border-top:1px solid #bbcbc4}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}article{background:white;padding:14px;border:1px solid #ccd9d2;border-radius:9px;min-width:0}article p{font-size:14px}.num{font:600 19px ui-monospace,monospace;color:#184439}
 .scroll{overflow:auto}table{border-collapse:collapse;background:white;width:100%;font-size:14px}td,th{padding:8px 12px;text-align:left;border-bottom:1px solid #d4ded8}
 .tag{border:1px solid;padding:2px 7px;border-radius:6px;font-size:13px}.pass{color:#185d41}.fail{color:#9b3224}.unknown{color:#775713}
 summary{cursor:pointer;padding:5px 0;overflow-wrap:anywhere}pre{background:#eef3ef;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace}
 blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history>details{border-top:1px solid #ccd9d2;padding:8px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#archive">评分依据</a></nav>
+</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
 <p><label>关联本地原年报 <input id="pdf" type="file" accept="application/pdf" multiple></label><br>
 <span id="pdf-status" class="muted" role="status">选取原 PDF 后可从表格页码打开原页。文件只在本浏览器读取。</span></p>
 <h2 id="trial">给同一模型补上列头后，哪些题答对了？</h2><p>forgeflow-qwen3-8b-ctx16k:latest · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p><div class='scroll'><table><thead><tr><th scope='col'>输入条件</th><th scope='col'>核准 / 总题数</th><th scope='col'>待核实</th><th scope='col'>相对仅数值行修好</th><th scope='col'>退化</th></tr></thead><tbody><tr><td>仅数值行</td><td>0 / 4</td><td>0</td><td>—</td><td>—</td></tr><tr><td>同样的行＋列头</td><td>1 / 4</td><td>1</td><td>catl.annual</td><td>—</td></tr><tr><td>人工选行＋列头</td><td>2 / 4</td><td>0</td><td>catl.annual、catl.q4</td><td>—</td></tr></tbody></table></div><section class='case'><h3>宁德时代 2025 年经营活动产生的现金流量净额是多少？</h3><p class='muted'>catl.annual · catl_2025_annual_zh.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>经营活动产生的现金流量净额</td><td>2025年</td><td>133219982 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第一季度</td><td>32868257 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第二季度</td><td>25818809 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第三季度</td><td>21973364 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第四季度</td><td>52559552 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr></tbody></table></div><pre>c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>abstained</p><p>年报摘录中未明确给出2025年的具体数值，仅提供了2024年及以前的数据和部分对比信息。</p><p>引用页 [11, 12] · 数值 — · 出处 —</p><p>11480 ms · token 253 入 / 71 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年经营活动产生的现金流量净额是多少？
@@ -1663,7 +1663,846 @@ p26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285</pre>
     &quot;eval_duration&quot;: 4218308000
   },
   &quot;latency_ms&quot;: 6799
-}</pre></details></td></tr></tbody></table></div><h2 id='archive'>同一回答在四种评分方法下的结果</h2><p>历史模型回执和脚本构造对照分别标出。证据不足保留为待核实。标注由 Codex 比照原表完成，尚无独立人工复核。</p><div class='history'><details><summary>历史模型 · catl.annual · 宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。</blockquote><p>开发标注：第 12 页的第四季度值冒充全年。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+}</pre></details></td></tr></tbody></table></div><h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2><h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。评分逐项核对宁德时代年报第 11 页。2022 年超出该表列示范围，保留为待核实。</p><div class='scroll'><table><thead><tr><th scope='col'>用户问题</th><th scope='col'>产品回答</th><th scope='col'>核验</th><th scope='col'>出处</th><th scope='col'>毫秒</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>宁德时代 2025 年经营活动产生的现金流量净额是多少？</td><td>宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。</td><td><span class="tag pass">已核准</span></td><td><a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a>、<a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="30" target="_blank" rel="noopener noreferrer">第 30 页</a></td><td>945.1</td><td><details><summary>查看问答回执</summary><pre>{
+  &quot;run_id&quot;: &quot;forgeflow/e195a0a2f764/annual-cash/2025&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.fy2025.cash&quot;,
+  &quot;producer_case_id&quot;: &quot;catl-operating-cash-period-dev&quot;,
+  &quot;task_id&quot;: null,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;ForgeFlow&quot;,
+  &quot;source_kind&quot;: &quot;real_product_route_deterministic_tool&quot;,
+  &quot;producer_commit&quot;: &quot;e195a0a2f764d30e2d1b5be8a131ceeef95d4b71&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9&quot;,
+  &quot;index_version&quot;: &quot;aab60dee89fcd7fb&quot;,
+  &quot;tool_version&quot;: &quot;annual-cash-v1&quot;,
+  &quot;transport&quot;: &quot;FastAPI TestClient&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/forgeflow/blob/e195a0a2f764d30e2d1b5be8a131ceeef95d4b71/preparation/annual-report-workbench/annual-cash-dev.json&quot;,
+      &quot;sha256&quot;: &quot;1a60a36314c2695a6e310680a6ff998a1f93c15fad57bf39086b69438b150f1f&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;ANSWERED&quot;,
+  &quot;latency_ms&quot;: 945.1,
+  &quot;cost&quot;: {
+    &quot;bundle_external_cost&quot;: 0,
+    &quot;bundle_model_calls&quot;: 0
+  },
+  &quot;question&quot;: &quot;宁德时代 2025 年经营活动产生的现金流量净额是多少？&quot;,
+  &quot;answer&quot;: &quot;宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;id&quot;: &quot;catl_2025_annual_zh#p11-t1&quot;,
+      &quot;page&quot;: 11,
+      &quot;bbox&quot;: [
+        56.8,
+        330.5,
+        538.4,
+        609.0
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;catl_2025_annual_zh#p30-t3&quot;,
+      &quot;page&quot;: 30,
+      &quot;bbox&quot;: [
+        56.8,
+        397.9,
+        538.4,
+        587.4
+      ]
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;matches_annual_value_unit&quot;: true,
+    &quot;cites_annual_table&quot;: true,
+    &quot;safe_abstention&quot;: false
+  },
+  &quot;reference_value_thousand_cny&quot;: 133219982,
+  &quot;reason&quot;: &quot;annual_value_unit_and_source&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td></tr><tr><td>宁德时代 2024 年经营活动产生的现金流量净额是多少？</td><td>宁德时代 2024 年全年经营活动产生的现金流量净额为 96,990,345 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2024年”列。</td><td><span class="tag pass">已核准</span></td><td><a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a>、<a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="30" target="_blank" rel="noopener noreferrer">第 30 页</a></td><td>426.5</td><td><details><summary>查看问答回执</summary><pre>{
+  &quot;run_id&quot;: &quot;forgeflow/e195a0a2f764/annual-cash/2024&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.fy2024.cash&quot;,
+  &quot;producer_case_id&quot;: &quot;catl-operating-cash-period-dev&quot;,
+  &quot;task_id&quot;: null,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;ForgeFlow&quot;,
+  &quot;source_kind&quot;: &quot;real_product_route_deterministic_tool&quot;,
+  &quot;producer_commit&quot;: &quot;e195a0a2f764d30e2d1b5be8a131ceeef95d4b71&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9&quot;,
+  &quot;index_version&quot;: &quot;aab60dee89fcd7fb&quot;,
+  &quot;tool_version&quot;: &quot;annual-cash-v1&quot;,
+  &quot;transport&quot;: &quot;FastAPI TestClient&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/forgeflow/blob/e195a0a2f764d30e2d1b5be8a131ceeef95d4b71/preparation/annual-report-workbench/annual-cash-dev.json&quot;,
+      &quot;sha256&quot;: &quot;1a60a36314c2695a6e310680a6ff998a1f93c15fad57bf39086b69438b150f1f&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;ANSWERED&quot;,
+  &quot;latency_ms&quot;: 426.5,
+  &quot;cost&quot;: {
+    &quot;bundle_external_cost&quot;: 0,
+    &quot;bundle_model_calls&quot;: 0
+  },
+  &quot;question&quot;: &quot;宁德时代 2024 年经营活动产生的现金流量净额是多少？&quot;,
+  &quot;answer&quot;: &quot;宁德时代 2024 年全年经营活动产生的现金流量净额为 96,990,345 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2024年”列。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;id&quot;: &quot;catl_2025_annual_zh#p11-t1&quot;,
+      &quot;page&quot;: 11,
+      &quot;bbox&quot;: [
+        56.8,
+        330.5,
+        538.4,
+        609.0
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;catl_2025_annual_zh#p30-t3&quot;,
+      &quot;page&quot;: 30,
+      &quot;bbox&quot;: [
+        56.8,
+        397.9,
+        538.4,
+        587.4
+      ]
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;matches_annual_value_unit&quot;: true,
+    &quot;cites_annual_table&quot;: true,
+    &quot;safe_abstention&quot;: false
+  },
+  &quot;reference_value_thousand_cny&quot;: 96990345,
+  &quot;reason&quot;: &quot;annual_value_unit_and_source&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td></tr><tr><td>宁德时代 2023 年经营活动产生的现金流量净额是多少？</td><td>宁德时代 2023 年全年经营活动产生的现金流量净额为 92,826,124 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2023年”列。</td><td><span class="tag pass">已核准</span></td><td><a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a></td><td>634.2</td><td><details><summary>查看问答回执</summary><pre>{
+  &quot;run_id&quot;: &quot;forgeflow/e195a0a2f764/annual-cash/2023&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.fy2023.cash&quot;,
+  &quot;producer_case_id&quot;: &quot;catl-operating-cash-period-dev&quot;,
+  &quot;task_id&quot;: null,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;ForgeFlow&quot;,
+  &quot;source_kind&quot;: &quot;real_product_route_deterministic_tool&quot;,
+  &quot;producer_commit&quot;: &quot;e195a0a2f764d30e2d1b5be8a131ceeef95d4b71&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9&quot;,
+  &quot;index_version&quot;: &quot;aab60dee89fcd7fb&quot;,
+  &quot;tool_version&quot;: &quot;annual-cash-v1&quot;,
+  &quot;transport&quot;: &quot;FastAPI TestClient&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/forgeflow/blob/e195a0a2f764d30e2d1b5be8a131ceeef95d4b71/preparation/annual-report-workbench/annual-cash-dev.json&quot;,
+      &quot;sha256&quot;: &quot;1a60a36314c2695a6e310680a6ff998a1f93c15fad57bf39086b69438b150f1f&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;ANSWERED&quot;,
+  &quot;latency_ms&quot;: 634.2,
+  &quot;cost&quot;: {
+    &quot;bundle_external_cost&quot;: 0,
+    &quot;bundle_model_calls&quot;: 0
+  },
+  &quot;question&quot;: &quot;宁德时代 2023 年经营活动产生的现金流量净额是多少？&quot;,
+  &quot;answer&quot;: &quot;宁德时代 2023 年全年经营活动产生的现金流量净额为 92,826,124 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2023年”列。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;id&quot;: &quot;catl_2025_annual_zh#p11-t1&quot;,
+      &quot;page&quot;: 11,
+      &quot;bbox&quot;: [
+        56.8,
+        330.5,
+        538.4,
+        609.0
+      ]
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;matches_annual_value_unit&quot;: true,
+    &quot;cites_annual_table&quot;: true,
+    &quot;safe_abstention&quot;: false
+  },
+  &quot;reference_value_thousand_cny&quot;: 92826124,
+  &quot;reason&quot;: &quot;annual_value_unit_and_source&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td></tr><tr><td>宁德时代 2022 年经营活动产生的现金流量净额是多少？</td><td>待核对：当前可用证据无法确定该年度金额。请核对年度列表头、人民币单位和原表。</td><td><span class="tag unknown">待核实</span></td><td>—</td><td>706.7</td><td><details><summary>查看问答回执</summary><pre>{
+  &quot;run_id&quot;: &quot;forgeflow/e195a0a2f764/annual-cash/2022&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.fy2022.cash&quot;,
+  &quot;producer_case_id&quot;: &quot;catl-operating-cash-period-dev&quot;,
+  &quot;task_id&quot;: null,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;ForgeFlow&quot;,
+  &quot;source_kind&quot;: &quot;real_product_route_deterministic_tool&quot;,
+  &quot;producer_commit&quot;: &quot;e195a0a2f764d30e2d1b5be8a131ceeef95d4b71&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9&quot;,
+  &quot;index_version&quot;: &quot;aab60dee89fcd7fb&quot;,
+  &quot;tool_version&quot;: &quot;annual-cash-v1&quot;,
+  &quot;transport&quot;: &quot;FastAPI TestClient&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/forgeflow/blob/e195a0a2f764d30e2d1b5be8a131ceeef95d4b71/preparation/annual-report-workbench/annual-cash-dev.json&quot;,
+      &quot;sha256&quot;: &quot;1a60a36314c2695a6e310680a6ff998a1f93c15fad57bf39086b69438b150f1f&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;PERIOD_UNVERIFIED&quot;,
+  &quot;latency_ms&quot;: 706.7,
+  &quot;cost&quot;: {
+    &quot;bundle_external_cost&quot;: 0,
+    &quot;bundle_model_calls&quot;: 0
+  },
+  &quot;question&quot;: &quot;宁德时代 2022 年经营活动产生的现金流量净额是多少？&quot;,
+  &quot;answer&quot;: &quot;待核对：当前可用证据无法确定该年度金额。请核对年度列表头、人民币单位和原表。&quot;,
+  &quot;citations&quot;: [],
+  &quot;checks&quot;: {
+    &quot;matches_annual_value_unit&quot;: null,
+    &quot;cites_annual_table&quot;: false,
+    &quot;safe_abstention&quot;: true
+  },
+  &quot;reference_value_thousand_cny&quot;: null,
+  &quot;reason&quot;: &quot;period_absent&quot;,
+  &quot;verdict&quot;: &quot;unknown&quot;
+}</pre></details></td></tr></tbody></table></div><h3>HorizonBench 的独立收件结果</h3><p>同一份报告在三种交付情形下运行四种策略。外部收件方由本地数据库模拟，进程中断有实测退出码。展开可查本机状态、收件编号和内容指纹。</p><div class='scroll'><table><thead><tr><th scope='col'>处理策略</th><th scope='col'>正常回执</th><th scope='col'>请求丢失</th><th scope='col'>已收件、回执丢失并中断</th></tr></thead><tbody><tr><td>超时就记成功</td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/assume_success--ack&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.ack&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;assume_success&quot;,
+  &quot;fault&quot;: &quot;ack&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;ack_received&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/assume_success--ack/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;96535a10c74256255a1118796d81e708a8db256e2e96be83c62beb240b62e385&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/assume_success--ack/process.json&quot;,
+      &quot;sha256&quot;: &quot;850b12389f6fa39d0c3cc507fb31955d0d3a304421dc8fd7bdb51c91dbf075ba&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td><td><span class="tag fail">未通过</span> · 收到 0 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/assume_success--request_lost&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.request_lost&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;assume_success&quot;,
+  &quot;fault&quot;: &quot;request_lost&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;simulated_timeout_before_inbox&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;timeout_assumed_success&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/assume_success--request_lost/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;d2c163a9467c5b9330b249e3e3e319ab9669c6bd9efd277456c41562d37a4e88&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/assume_success--request_lost/process.json&quot;,
+      &quot;sha256&quot;: &quot;a3753826711cf2d8b0680b8e3d0805e852ec5c6e2a2df36d97319902fedd9496&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: false,
+    &quot;target_receipts&quot;: 0,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [],
+  &quot;reason&quot;: &quot;receipt_local_or_infrastructure_failed&quot;,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre></details></td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/assume_success--receipt_lost_crash&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.receipt_lost_crash&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;assume_success&quot;,
+  &quot;fault&quot;: &quot;receipt_lost_crash&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;timeout_assumed_success&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/assume_success--receipt_lost_crash/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;2c21a577ee56940f764aae3e2a8d449567c7ffff864346a23659e962cf8b5ab2&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/assume_success--receipt_lost_crash/process.json&quot;,
+      &quot;sha256&quot;: &quot;7f1b38e641369c2b85fb1e38e980b67e07692495e97d5b6b23091faef004f9a6&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: true,
+    &quot;process_exit&quot;: -9,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td></tr><tr><td>等待人工处理</td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/wait_for_human--ack&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.ack&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;wait_for_human&quot;,
+  &quot;fault&quot;: &quot;ack&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;ack_received&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/wait_for_human--ack/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;0110274bcc6201a7a196b8f8a3212d02729693253251a8bf65caaf5e7b930735&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/wait_for_human--ack/process.json&quot;,
+      &quot;sha256&quot;: &quot;850b12389f6fa39d0c3cc507fb31955d0d3a304421dc8fd7bdb51c91dbf075ba&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td><td><span class="tag fail">未通过</span> · 收到 0 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/wait_for_human--request_lost&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.request_lost&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;wait_for_human&quot;,
+  &quot;fault&quot;: &quot;request_lost&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;simulated_timeout_before_inbox&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;timeout_waiting_for_human&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/wait_for_human--request_lost/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;526a60089b29e560af61f4716822f4598ff6c5067c03c70c06ff6b5ec99718bd&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/wait_for_human--request_lost/process.json&quot;,
+      &quot;sha256&quot;: &quot;a3753826711cf2d8b0680b8e3d0805e852ec5c6e2a2df36d97319902fedd9496&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;pending_human&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: false,
+    &quot;target_receipts&quot;: 0,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [],
+  &quot;reason&quot;: &quot;receipt_local_or_infrastructure_failed&quot;,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre></details></td><td><span class="tag fail">未通过</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/wait_for_human--receipt_lost_crash&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.receipt_lost_crash&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;wait_for_human&quot;,
+  &quot;fault&quot;: &quot;receipt_lost_crash&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;timeout_waiting_for_human&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/wait_for_human--receipt_lost_crash/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;2a514cf95cf3baf69544b5966c9c4a52ee684cba70b2c31e6d9de5748e43cc49&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/wait_for_human--receipt_lost_crash/process.json&quot;,
+      &quot;sha256&quot;: &quot;7f1b38e641369c2b85fb1e38e980b67e07692495e97d5b6b23091faef004f9a6&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;pending_human&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: true,
+    &quot;process_exit&quot;: -9,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;receipt_local_or_infrastructure_failed&quot;,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre></details></td></tr><tr><td>换新编号重试</td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/retry_new_key--ack&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.ack&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;retry_new_key&quot;,
+  &quot;fault&quot;: &quot;ack&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;ack_received&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/retry_new_key--ack/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;7ae56fc5a45b5bf79bafa81e54bdad02519f18d5b13117de6952121e24fe38e1&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/retry_new_key--ack/process.json&quot;,
+      &quot;sha256&quot;: &quot;850b12389f6fa39d0c3cc507fb31955d0d3a304421dc8fd7bdb51c91dbf075ba&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/retry_new_key--request_lost&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.request_lost&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;retry_new_key&quot;,
+  &quot;fault&quot;: &quot;request_lost&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;simulated_timeout_before_inbox&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;timeout_retried_with_new_key&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/retry_new_key--request_lost/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;f42e31523e84b5764e5ea8a064ca7a3eb1e7d33af9e0297ea6cd87ce7dc85a05&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/retry_new_key--request_lost/process.json&quot;,
+      &quot;sha256&quot;: &quot;a3753826711cf2d8b0680b8e3d0805e852ec5c6e2a2df36d97319902fedd9496&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001-retry-2&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td><td><span class="tag fail">未通过</span> · 收到 2 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/retry_new_key--receipt_lost_crash&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.receipt_lost_crash&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;retry_new_key&quot;,
+  &quot;fault&quot;: &quot;receipt_lost_crash&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;timeout_retried_with_new_key&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/retry_new_key--receipt_lost_crash/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;92ac37c5ce82f35327c10acb47d3b522040ddd004ccae3639866bfc72fe65348&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/retry_new_key--receipt_lost_crash/process.json&quot;,
+      &quot;sha256&quot;: &quot;7f1b38e641369c2b85fb1e38e980b67e07692495e97d5b6b23091faef004f9a6&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: false,
+    &quot;target_receipts&quot;: 2,
+    &quot;process_measured&quot;: true,
+    &quot;process_exit&quot;: -9,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    },
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001-retry-2&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;receipt_local_or_infrastructure_failed&quot;,
+  &quot;verdict&quot;: &quot;fail&quot;
+}</pre></details></td></tr><tr><td>按原编号查收并补送</td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/reconcile_original_key--ack&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.ack&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;reconcile_original_key&quot;,
+  &quot;fault&quot;: &quot;ack&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;ack_received&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/reconcile_original_key--ack/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;dca14a1c3e265f104b882fe99ce4f7affedc5f2d5bf97bd7146af098cd760492&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/reconcile_original_key--ack/process.json&quot;,
+      &quot;sha256&quot;: &quot;850b12389f6fa39d0c3cc507fb31955d0d3a304421dc8fd7bdb51c91dbf075ba&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/reconcile_original_key--request_lost&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.request_lost&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;reconcile_original_key&quot;,
+  &quot;fault&quot;: &quot;request_lost&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;simulated_timeout_before_inbox&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;reconcile_absent_then_resend_original&quot;,
+    &quot;reconcile_confirmed&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/reconcile_original_key--request_lost/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;8b65f0ea2a192328a3d5f349a152d9b803f10184774a5f84d0fed8756dc749dd&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/reconcile_original_key--request_lost/process.json&quot;,
+      &quot;sha256&quot;: &quot;a3753826711cf2d8b0680b8e3d0805e852ec5c6e2a2df36d97319902fedd9496&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: false,
+    &quot;process_exit&quot;: 0,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td><td><span class="tag pass">已核准</span> · 收到 1 份<details><summary>收件与恢复记录</summary><pre>{
+  &quot;run_id&quot;: &quot;horizon/c69eb0ef2a32/reconcile_original_key--receipt_lost_crash&quot;,
+  &quot;id_origin&quot;: &quot;derived_from_archive&quot;,
+  &quot;case_id&quot;: &quot;catl.receipt.receipt_lost_crash&quot;,
+  &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source&quot;: &quot;HorizonBench&quot;,
+  &quot;source_kind&quot;: &quot;scripted_strategy_local_environment&quot;,
+  &quot;producer_commit&quot;: &quot;c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88&quot;,
+  &quot;model&quot;: null,
+  &quot;data_version&quot;: &quot;D001/c69eb0ef2a32&quot;,
+  &quot;strategy&quot;: &quot;reconcile_original_key&quot;,
+  &quot;fault&quot;: &quot;receipt_lost_crash&quot;,
+  &quot;tool_actions&quot;: null,
+  &quot;environment_events&quot;: [
+    &quot;send_original&quot;,
+    &quot;timeout_observed_after_restart&quot;,
+    &quot;reconcile_found_valid_original&quot;,
+    &quot;reconcile_confirmed&quot;
+  ],
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/manifest.json&quot;,
+      &quot;sha256&quot;: &quot;8fb30ceb739e8b3152ca9759a77ddf16e1bafcd103dc6bddee0b827bdbb30038&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/reconcile_original_key--receipt_lost_crash/verdict.json&quot;,
+      &quot;sha256&quot;: &quot;f9e7beb4f83c3da561e4bda239ece85887bc64dde0ab699a3daa941cbb0deb52&quot;
+    },
+    {
+      &quot;ref&quot;: &quot;https://github.com/langju123456/horizon-bench/blob/c69eb0ef2a32a45eef8057ab7ebd3065e8cc7f88/reports/receipt-experiment/reconcile_original_key--receipt_lost_crash/process.json&quot;,
+      &quot;sha256&quot;: &quot;7f1b38e641369c2b85fb1e38e980b67e07692495e97d5b6b23091faef004f9a6&quot;
+    }
+  ],
+  &quot;terminal_state&quot;: &quot;completed&quot;,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null,
+  &quot;checks&quot;: {
+    &quot;independent_accepted&quot;: true,
+    &quot;target_receipts&quot;: 1,
+    &quot;process_measured&quot;: true,
+    &quot;process_exit&quot;: -9,
+    &quot;infrastructure_ok&quot;: true
+  },
+  &quot;delivered_artifacts&quot;: [
+    {
+      &quot;task_id&quot;: &quot;catl-fy2025-cfo-receipt&quot;,
+      &quot;idem_key&quot;: &quot;delivery-001&quot;,
+      &quot;version&quot;: &quot;catl-fy2025-cfo-v1&quot;,
+      &quot;digest&quot;: &quot;eedd9faa939cdcf6d469a3ed784890f381d96abf6cb5c1892f966b9d459a5aec&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;one_valid_receipt_and_local_completed&quot;,
+  &quot;verdict&quot;: &quot;pass&quot;
+}</pre></details></td></tr></tbody></table></div><p>两个实验共享业务案例。上游没有贯通这两批记录的运行编号，完整跨项目交付次数尚待实测。</p><h2 id='archive'>同一回答在四种评分方法下的结果</h2><p>历史模型回执和脚本构造对照分别标出。证据不足保留为待核实。标注由 Codex 比照原表完成，尚无独立人工复核。</p><div class='history'><details><summary>历史模型 · catl.annual · 宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。</blockquote><p>开发标注：第 12 页的第四季度值冒充全年。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
   &quot;run_id&quot;: &quot;e1df2a4553e44125befe1d3fe973d529&quot;,
   &quot;case_id&quot;: &quot;catl.annual&quot;,
   &quot;attempt&quot;: 1,

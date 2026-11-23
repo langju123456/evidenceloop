@@ -21,8 +21,10 @@ def test_review_page_uses_stored_archives_and_escapes_untrusted_content():
     logs = root / "reports/report-lab"
     page = review_page.render(root / "benchmarks/report_dev/v1", root / evidence_trials.DATASET,
                               logs / "evidence-trials-v1.jsonl", root / calculation.PROMPTS,
-                              root / calculation.REVIEW, logs / "calculation-trials-v1.jsonl")
+                              root / calculation.REVIEW, logs / "calculation-trials-v1.jsonl",
+                              logs / "peer-runs-v1.json")
     assert page == (logs / "review.html").read_text()
+    assert "收到 2 份" in page and "产品与收件回执" in page
     parsed = Count()
     parsed.feed(page)
     assert parsed.case_count == 4

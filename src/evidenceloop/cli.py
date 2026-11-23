@@ -598,8 +598,15 @@ def main(argv: list[str] | None = None) -> None:
     view.add_argument("--calc-prompts", default=calculation.PROMPTS)
     view.add_argument("--calc-review", default=calculation.REVIEW)
     view.add_argument("--calc-log", default="reports/report-lab/calculation-trials-v1.jsonl")
+    view.add_argument("--peers", default="reports/report-lab/peer-runs-v1.json")
     view.add_argument("--out", required=True)
     view.set_defaults(func=review_page.command)
+    from evidenceloop.report import peer_runs
+
+    peers = report_actions.add_parser("import-peer-runs", help="read and normalize pinned public producer archives")
+    peers.add_argument("--forge-repo", required=True)
+    peers.add_argument("--horizon-repo", required=True)
+    peers.set_defaults(func=peer_runs.command)
     report = report_actions.add_parser("baseline")
     report.add_argument("--evals", nargs="+", required=True)
     report.add_argument("--names", nargs="+")

@@ -4,7 +4,7 @@ import json
 from html import escape
 from pathlib import Path
 
-from evidenceloop.report import calculation
+from evidenceloop.report import calculation, peer_runs
 from evidenceloop.report.annual import compare, read_json, read_lines
 from evidenceloop.report.evidence_trials import ARMS, summarize
 
@@ -74,7 +74,42 @@ def calculation_section(prompts, review, log):
             + summary + "".join(cards))
 
 
-def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_review: Path, calc_log: Path):
+STRATEGY_NAMES = {"assume_success": "超时就记成功", "wait_for_human": "等待人工处理",
+                  "retry_new_key": "换新编号重试", "reconcile_original_key": "按原编号查收并补送"}
+FAULT_NAMES = {"ack": "正常回执", "request_lost": "请求丢失", "receipt_lost_crash": "已收件、回执丢失并中断"}
+
+
+def peer_section(archive):
+    data = read_json(archive)
+    if data["schema_version"] != "report-receipts/1" or data["joint_product_environment_runs"] != 0:
+        raise ValueError("expected separate historical development runs")
+    qa = []
+    for r in data["rows"]:
+        if r["source"] != "ForgeFlow":
+            continue
+        pages = "、".join(page_ref(r["data_version"], c["page"]) for c in r["citations"])
+        qa.append([esc(r["question"]), esc(r["answer"]), badge(r["verdict"]), pages or "—",
+                   esc(r["latency_ms"]), details("查看问答回执", pre(r))])
+    records = {(r["strategy"], r["fault"]): r for r in data["rows"] if r["source"] == "HorizonBench"}
+    matrix = []
+    for strategy in peer_runs.STRATEGIES:
+        cells = []
+        for fault in peer_runs.FAULTS:
+            r = records[strategy, fault]
+            cells.append(badge(r["verdict"]) + f' · 收到 {int(r["checks"]["target_receipts"])} 份'
+                         + details("收件与恢复记录", pre(r)))
+        matrix.append([esc(STRATEGY_NAMES[strategy]), *cells])
+    return ("<h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2>"
+            "<h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。"
+            "评分逐项核对宁德时代年报第 11 页。2022 年超出该表列示范围，保留为待核实。</p>"
+            + table(["用户问题", "产品回答", "核验", "出处", "毫秒", "记录"], qa)
+            + "<h3>HorizonBench 的独立收件结果</h3><p>同一份报告在三种交付情形下运行四种策略。"
+            "外部收件方由本地数据库模拟，进程中断有实测退出码。展开可查本机状态、收件编号和内容指纹。</p>"
+            + table(["处理策略"] + [FAULT_NAMES[f] for f in peer_runs.FAULTS], matrix)
+            + "<p>两个实验共享业务案例。上游没有贯通这两批记录的运行编号，完整跨项目交付次数尚待实测。</p>")
+
+
+def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_review: Path, calc_log: Path, peers: Path):
     facts = read_json(dataset / "sources.json")
     cases = read_json(dataset / "cases.json")
     observations = read_lines(dataset / "observations.jsonl")
@@ -121,19 +156,20 @@ def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_rev
     return """<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>年报逐题评测 · EvidenceLoop</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f8faf9;color:#182823;font:16px/1.6 Inter,system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:36px clamp(16px,4vw,55px)}
-h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin-top:2em}h3,h4{margin:.4em 0}.muted{color:#4b6259}a,summary{color:#146148}nav{display:flex;gap:1.4em}section.case{padding:24px 0;border-top:1px solid #bbcbc4}
+h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin-top:2em}h3,h4{margin:.4em 0}.muted{color:#4b6259}a,summary{color:#146148}nav{display:flex;flex-wrap:wrap;gap:.4em 1.4em}section.case{padding:24px 0;border-top:1px solid #bbcbc4}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}article{background:white;padding:14px;border:1px solid #ccd9d2;border-radius:9px;min-width:0}article p{font-size:14px}.num{font:600 19px ui-monospace,monospace;color:#184439}
 .scroll{overflow:auto}table{border-collapse:collapse;background:white;width:100%;font-size:14px}td,th{padding:8px 12px;text-align:left;border-bottom:1px solid #d4ded8}
 .tag{border:1px solid;padding:2px 7px;border-radius:6px;font-size:13px}.pass{color:#185d41}.fail{color:#9b3224}.unknown{color:#775713}
 summary{cursor:pointer;padding:5px 0;overflow-wrap:anywhere}pre{background:#eef3ef;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace}
 blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history>details{border-top:1px solid #ccd9d2;padding:8px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#archive">评分依据</a></nav>
+</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
 <p><label>关联本地原年报 <input id="pdf" type="file" accept="application/pdf" multiple></label><br>
 <span id="pdf-status" class="muted" role="status">选取原 PDF 后可从表格页码打开原页。文件只在本浏览器读取。</span></p>
 <h2 id="trial">给同一模型补上列头后，哪些题答对了？</h2>""" + (
         f"<p>{esc(trial['model'][0])} · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。"
         "模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p>" + counts + "".join(blocks)
         + calculation_section(calc_prompts, calc_review, calc_log)
+        + peer_section(peers)
         + "<h2 id='archive'>同一回答在四种评分方法下的结果</h2><p>历史模型回执和脚本构造对照分别标出。"
         "证据不足保留为待核实。标注由 Codex 比照原表完成，尚无独立人工复核。</p><div class='history'>"
         + "".join(observations_html) + "</div></main>" + PDF_SCRIPT + "</html>\n")
@@ -165,5 +201,5 @@ picker.addEventListener('change', async () => {
 
 def command(args):
     page = render(Path(args.dataset), Path(args.prompts), Path(args.log),
-                  Path(args.calc_prompts), Path(args.calc_review), Path(args.calc_log))
+                  Path(args.calc_prompts), Path(args.calc_review), Path(args.calc_log), Path(args.peers))
     Path(args.out).write_text(page, encoding="utf-8")
