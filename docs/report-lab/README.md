@@ -32,3 +32,9 @@ PYTHONPATH=src python3 -m evidenceloop.cli report verify-sources --pdf-dir ~/cod
 已完成 [D17 同一真实模型的三臂证据实验](02-evidence.md)：宁德时代全年题通过补表头得到修复，Apple 贡献率在已写对分子和分母的情况下算错。下一步以相同公开问题检验确定性计算的收益与剩余选式错误。
 
 [D18 选择计算工具的真实对照](03-calculation.md)已完成。直接回答 1/4，显式选原格运行 2/4，选业务工具和年份运行 3/4。剩余确定错误是把 2024 当成 2025。下一轮应在跨公司新委托检验年份约束及退化，实际应用和审阅状态通过共享接口补齐。
+
+## 离线逐题查看
+
+直接用浏览器打开[逐题对照页](../../reports/report-lab/review.html)。在 GitHub 网页上先下载 HTML 到本机。它包含 24 次本机真实推理与 14 条评分观察，数值、来源、输入、原始响应和计算动作可各自展开。用页面上的文件选择器选原年报，浏览器会核对 SHA-256 后启用相应页码；文件不出本机。没有 PDF 也能核对冻结的原表摘录。后端的新稿件是否获批或交付仍需 HorizonBench 的独立记录。
+
+重新生成：`PYTHONPATH=src python3 -m evidenceloop.cli report review-page --out reports/report-lab/review.html`。已用独立临时 Chrome 配置验证展开原表、关联正确 PDF、拒绝不同版本、跳转计算对照及 390 像素宽视口；外部请求和页面错误均为零。以上是脚本操作的浏览器功能验收，尚无真实用户体验测量。

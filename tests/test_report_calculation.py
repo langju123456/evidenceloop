@@ -35,3 +35,25 @@ def test_stored_tool_receipts_replay_exactly():
                                    logs / "calculation-trials-v1.jsonl")
     assert result == json.loads((logs / "calculation-results-v1.json").read_text())
     assert result["summaries"]["cells"]["lost"] == ["apple.2025.growth"]
+
+
+@pytest.mark.parametrize("tamper", ["run_id","model","missing_response"])
+def test_calculation_refuses_altered_archive(tmp_path, tamper):
+    import json
+    from pathlib import Path
+    from evidenceloop.report import calculation
+
+    root = Path(__file__).resolve().parents[1]
+    lines = (root / "reports/report-lab/calculation-trials-v1.jsonl").read_text().splitlines()
+    row = json.loads(lines[0])
+    if tamper == "run_id":
+        row["run_id"] = "wrong-attempt"
+    elif tamper == "model":
+        row["response"]["model"] = "other-model"
+    else:
+        del row["response"]
+    lines[0] = json.dumps(row)
+    archive = tmp_path / "edited.jsonl"
+    archive.write_text("\n".join(lines))
+    with pytest.raises(ValueError, match="changed experiment"):
+        calculation.summarize(root / calculation.PROMPTS, root / calculation.REVIEW, archive)

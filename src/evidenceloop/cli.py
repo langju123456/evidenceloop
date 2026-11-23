@@ -589,6 +589,17 @@ def main(argv: list[str] | None = None) -> None:
     calc_score.add_argument("--prompts", default=calculation.PROMPTS)
     calc_score.add_argument("--review", default=calculation.REVIEW)
     calc_score.set_defaults(func=calculation.summary_command)
+    from evidenceloop.report import review_page
+
+    view = report_actions.add_parser("review-page", help="render an offline report with paired evidence")
+    view.add_argument("--dataset", default="benchmarks/report_dev/v1")
+    view.add_argument("--prompts", default=evidence_trials.DATASET)
+    view.add_argument("--log", default="reports/report-lab/evidence-trials-v1.jsonl")
+    view.add_argument("--calc-prompts", default=calculation.PROMPTS)
+    view.add_argument("--calc-review", default=calculation.REVIEW)
+    view.add_argument("--calc-log", default="reports/report-lab/calculation-trials-v1.jsonl")
+    view.add_argument("--out", required=True)
+    view.set_defaults(func=review_page.command)
     report = report_actions.add_parser("baseline")
     report.add_argument("--evals", nargs="+", required=True)
     report.add_argument("--names", nargs="+")

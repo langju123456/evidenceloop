@@ -1,0 +1,2031 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>年报逐题评测 · EvidenceLoop</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f8faf9;color:#182823;font:16px/1.6 Inter,system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:36px clamp(16px,4vw,55px)}
+h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin-top:2em}h3,h4{margin:.4em 0}.muted{color:#4b6259}a,summary{color:#146148}nav{display:flex;gap:1.4em}section.case{padding:24px 0;border-top:1px solid #bbcbc4}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}article{background:white;padding:14px;border:1px solid #ccd9d2;border-radius:9px;min-width:0}article p{font-size:14px}.num{font:600 19px ui-monospace,monospace;color:#184439}
+.scroll{overflow:auto}table{border-collapse:collapse;background:white;width:100%;font-size:14px}td,th{padding:8px 12px;text-align:left;border-bottom:1px solid #d4ded8}
+.tag{border:1px solid;padding:2px 7px;border-radius:6px;font-size:13px}.pass{color:#185d41}.fail{color:#9b3224}.unknown{color:#775713}
+summary{cursor:pointer;padding:5px 0;overflow-wrap:anywhere}pre{background:#eef3ef;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace}
+blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history>details{border-top:1px solid #ccd9d2;padding:8px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#archive">评分依据</a></nav>
+<p><label>关联本地原年报 <input id="pdf" type="file" accept="application/pdf" multiple></label><br>
+<span id="pdf-status" class="muted" role="status">选取原 PDF 后可从表格页码打开原页。文件只在本浏览器读取。</span></p>
+<h2 id="trial">给同一模型补上列头后，哪些题答对了？</h2><p>forgeflow-qwen3-8b-ctx16k:latest · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p><div class='scroll'><table><thead><tr><th scope='col'>输入条件</th><th scope='col'>核准 / 总题数</th><th scope='col'>待核实</th><th scope='col'>相对仅数值行修好</th><th scope='col'>退化</th></tr></thead><tbody><tr><td>仅数值行</td><td>0 / 4</td><td>0</td><td>—</td><td>—</td></tr><tr><td>同样的行＋列头</td><td>1 / 4</td><td>1</td><td>catl.annual</td><td>—</td></tr><tr><td>人工选行＋列头</td><td>2 / 4</td><td>0</td><td>catl.annual、catl.q4</td><td>—</td></tr></tbody></table></div><section class='case'><h3>宁德时代 2025 年经营活动产生的现金流量净额是多少？</h3><p class='muted'>catl.annual · catl_2025_annual_zh.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>经营活动产生的现金流量净额</td><td>2025年</td><td>133219982 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第一季度</td><td>32868257 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第二季度</td><td>25818809 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第三季度</td><td>21973364 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第四季度</td><td>52559552 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr></tbody></table></div><pre>c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>abstained</p><p>年报摘录中未明确给出2025年的具体数值，仅提供了2024年及以前的数据和部分对比信息。</p><p>引用页 [11, 12] · 数值 — · 出处 —</p><p>11480 ms · token 253 入 / 71 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年经营活动产生的现金流量净额是多少？
+
+年报摘录：
+p11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124
+p12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;arm&quot;: &quot;row&quot;,
+  &quot;run_id&quot;: &quot;catl.annual--row&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;catl&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;宁德时代 2025 年经营活动产生的现金流量净额是多少？\n\n年报摘录：\np11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124\np12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:37:24.926051Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;unknown\&quot;,\n  \&quot;value\&quot;: \&quot;\&quot;,\n  \&quot;unit\&quot;: \&quot;千元\&quot;,\n  \&quot;pages\&quot;: [11, 12],\n  \&quot;explanation\&quot;: \&quot;年报摘录中未明确给出2025年的具体数值，仅提供了2024年及以前的数据和部分对比信息。\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 11467120458,
+    &quot;load_duration&quot;: 5732993833,
+    &quot;prompt_eval_count&quot;: 253,
+    &quot;prompt_eval_duration&quot;: 1513446000,
+    &quot;eval_count&quot;: 71,
+    &quot;eval_duration&quot;: 4207880000
+  },
+  &quot;latency_ms&quot;: 11480
+}</pre></details></article><article><h4>同样的行＋列头</h4><span class="tag pass">已核准</span><p class='num'>133219982 千元</p><p>直接从表格中获取 2025 年经营活动产生的现金流量净额数值。</p><p>引用页 [11] · 数值 pass · 出处 pass</p><p>5522 ms · token 318 入 / 67 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年经营活动产生的现金流量净额是多少？
+
+年报摘录：
+p11 项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年
+p11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124
+p11 分季度主要财务指标：项目 | 第一季度 | 第二季度 | 第三季度 | 第四季度（数值续于 p12）
+p12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;arm&quot;: &quot;header&quot;,
+  &quot;run_id&quot;: &quot;catl.annual--header&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;catl&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;宁德时代 2025 年经营活动产生的现金流量净额是多少？\n\n年报摘录：\np11 项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年\np11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124\np11 分季度主要财务指标：项目 | 第一季度 | 第二季度 | 第三季度 | 第四季度（数值续于 p12）\np12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:37:30.456212Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;133219982\&quot;,\n  \&quot;unit\&quot;: \&quot;千元\&quot;,\n  \&quot;pages\&quot;: [11],\n  \&quot;explanation\&quot;: \&quot;直接从表格中获取 2025 年经营活动产生的现金流量净额数值。\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5504241875,
+    &quot;load_duration&quot;: 163109542,
+    &quot;prompt_eval_count&quot;: 318,
+    &quot;prompt_eval_duration&quot;: 1401275000,
+    &quot;eval_count&quot;: 67,
+    &quot;eval_duration&quot;: 3931325000
+  },
+  &quot;latency_ms&quot;: 5522
+}</pre></details></article><article><h4>人工选行＋列头</h4><span class="tag pass">已核准</span><p class='num'>133219982 千元</p><p>直接从表格中获取2025年经营活动产生的现金流量净额数值</p><p>引用页 [11] · 数值 pass · 出处 pass</p><p>3163 ms · token 223 入 / 48 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年经营活动产生的现金流量净额是多少？
+
+年报摘录：
+p11 项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年
+p11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;arm&quot;: &quot;selected&quot;,
+  &quot;run_id&quot;: &quot;catl.annual--selected&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;catl&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;宁德时代 2025 年经营活动产生的现金流量净额是多少？\n\n年报摘录：\np11 项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年\np11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:37:33.619476Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;status\&quot;:\&quot;answered\&quot;,\&quot;value\&quot;:\&quot;133219982\&quot;,\&quot;unit\&quot;:\&quot;千元\&quot;,\&quot;pages\&quot;:[11],\&quot;explanation\&quot;:\&quot;直接从表格中获取2025年经营活动产生的现金流量净额数值\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 3150764708,
+    &quot;load_duration&quot;: 148709750,
+    &quot;prompt_eval_count&quot;: 223,
+    &quot;prompt_eval_duration&quot;: 206525000,
+    &quot;eval_count&quot;: 48,
+    &quot;eval_duration&quot;: 2790610000
+  },
+  &quot;latency_ms&quot;: 3163
+}</pre></details></article></div></section><section class='case'><h3>宁德时代 2025 年第四季度的经营活动现金流量净额是多少？</h3><p class='muted'>catl.q4 · catl_2025_annual_zh.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>经营活动产生的现金流量净额</td><td>第四季度</td><td>52559552 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr></tbody></table></div><pre>c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>abstained</p><p>无法从证据确认2025年第四季度的经营活动现金流量净额，摘录中未明确给出该季度的数据。</p><p>引用页 [11, 12] · 数值 — · 出处 —</p><p>5656 ms · token 255 入 / 52 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年第四季度的经营活动现金流量净额是多少？
+
+年报摘录：
+p11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124
+p12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;catl.q4&quot;,
+  &quot;arm&quot;: &quot;row&quot;,
+  &quot;run_id&quot;: &quot;catl.q4--row&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;catl&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;宁德时代 2025 年第四季度的经营活动现金流量净额是多少？\n\n年报摘录：\np11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124\np12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:37:50.130944Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\&quot;status\&quot;:\&quot;unknown\&quot;,\&quot;value\&quot;:\&quot;\&quot;,\&quot;unit\&quot;:\&quot;千元\&quot;,\&quot;pages\&quot;:[11,12],\&quot;explanation\&quot;:\&quot;无法从证据确认2025年第四季度的经营活动现金流量净额，摘录中未明确给出该季度的数据。\&quot;}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5625031125,
+    &quot;load_duration&quot;: 199730500,
+    &quot;prompt_eval_count&quot;: 255,
+    &quot;prompt_eval_duration&quot;: 1091154000,
+    &quot;eval_count&quot;: 52,
+    &quot;eval_duration&quot;: 4284365000
+  },
+  &quot;latency_ms&quot;: 5656
+}</pre></details></article><article><h4>同样的行＋列头</h4><span class="tag unknown">待核实</span><p class='num'>52559552 千元</p><p>第四季度经营活动产生的现金流量净额直接给出，单位为千元。</p><p>引用页 [12] · 数值 pass · 出处 unknown</p><p>5383 ms · token 320 入 / 61 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年第四季度的经营活动现金流量净额是多少？
+
+年报摘录：
+p11 项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年
+p11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124
+p11 分季度主要财务指标：项目 | 第一季度 | 第二季度 | 第三季度 | 第四季度（数值续于 p12）
+p12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;catl.q4&quot;,
+  &quot;arm&quot;: &quot;header&quot;,
+  &quot;run_id&quot;: &quot;catl.q4--header&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;catl&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;宁德时代 2025 年第四季度的经营活动现金流量净额是多少？\n\n年报摘录：\np11 项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年\np11 经营活动产生的现金流量净额（千元） | 133,219,982 | 96,990,345 | 37.35% | 92,826,124\np11 分季度主要财务指标：项目 | 第一季度 | 第二季度 | 第三季度 | 第四季度（数值续于 p12）\np12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:37:39.002386Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;52559552\&quot;,\n  \&quot;unit\&quot;: \&quot;千元\&quot;,\n  \&quot;pages\&quot;: [12],\n  \&quot;explanation\&quot;: \&quot;第四季度经营活动产生的现金流量净额直接给出，单位为千元。\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5369374667,
+    &quot;load_duration&quot;: 178042125,
+    &quot;prompt_eval_count&quot;: 320,
+    &quot;prompt_eval_duration&quot;: 1468090000,
+    &quot;eval_count&quot;: 61,
+    &quot;eval_duration&quot;: 3714033000
+  },
+  &quot;latency_ms&quot;: 5383
+}</pre></details></article><article><h4>人工选行＋列头</h4><span class="tag pass">已核准</span><p class='num'>52559552 千元</p><p>第四季度经营活动产生的现金流量净额直接给出，数值为52,559,552千元。</p><p>引用页 [11, 12] · 数值 pass · 出处 pass</p><p>5488 ms · token 225 入 / 75 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年第四季度的经营活动现金流量净额是多少？
+
+年报摘录：
+p11 分季度主要财务指标：项目 | 第一季度 | 第二季度 | 第三季度 | 第四季度（数值续于 p12）
+p12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;catl.q4&quot;,
+  &quot;arm&quot;: &quot;selected&quot;,
+  &quot;run_id&quot;: &quot;catl.q4--selected&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;catl&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;宁德时代 2025 年第四季度的经营活动现金流量净额是多少？\n\n年报摘录：\np11 分季度主要财务指标：项目 | 第一季度 | 第二季度 | 第三季度 | 第四季度（数值续于 p12）\np12 经营活动产生的现金流量净额（千元） | 32,868,257 | 25,818,809 | 21,973,364 | 52,559,552&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:37:44.490807Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;52559552\&quot;,\n  \&quot;unit\&quot;: \&quot;千元\&quot;,\n  \&quot;pages\&quot;: [11, 12],\n  \&quot;explanation\&quot;: \&quot;第四季度经营活动产生的现金流量净额直接给出，数值为52,559,552千元。\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5474541208,
+    &quot;load_duration&quot;: 175088416,
+    &quot;prompt_eval_count&quot;: 225,
+    &quot;prompt_eval_duration&quot;: 815754000,
+    &quot;eval_count&quot;: 75,
+    &quot;eval_duration&quot;: 4473676000
+  },
+  &quot;latency_ms&quot;: 5488
+}</pre></details></article></div></section><section class='case'><h3>Apple FY2025 服务收入同比增速，保留两位小数。</h3><p class='muted'>apple.growth · apple_fy2025_10k_en.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>Services</td><td>2025</td><td>109158 USD million</td><td>表头 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a> · 数值 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a></td></tr><tr><td>Services</td><td>2024</td><td>96169 USD million</td><td>表头 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a> · 数值 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a></td></tr></tbody></table></div><pre>3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>14.00 %</p><p>服务收入同比增速直接给出为14%</p><p>引用页 [26] · 数值 fail · 出处 pass</p><p>6126 ms · token 217 入 / 51 出</p><details><summary>查看模型可见的摘录</summary><pre>Apple FY2025 服务收入同比增速，保留两位小数。
+
+年报摘录：
+p26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200
+p26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.growth&quot;,
+  &quot;arm&quot;: &quot;row&quot;,
+  &quot;run_id&quot;: &quot;apple.growth--row&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Apple FY2025 服务收入同比增速，保留两位小数。\n\n年报摘录：\np26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200\np26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:38:03.006523Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;14.00\&quot;,\n  \&quot;unit\&quot;: \&quot;%\&quot;,\n  \&quot;pages\&quot;: [26],\n  \&quot;explanation\&quot;: \&quot;服务收入同比增速直接给出为14%\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6076776250,
+    &quot;load_duration&quot;: 802947959,
+    &quot;prompt_eval_count&quot;: 217,
+    &quot;prompt_eval_duration&quot;: 952056000,
+    &quot;eval_count&quot;: 51,
+    &quot;eval_duration&quot;: 4276383000
+  },
+  &quot;latency_ms&quot;: 6126
+}</pre></details></article><article><h4>同样的行＋列头</h4><span class="tag fail">未通过</span><p class='num'>14.00 %</p><p>服务收入同比增速直接从摘录中获取，为14%。</p><p>引用页 [26] · 数值 fail · 出处 pass</p><p>6498 ms · token 247 入 / 58 出</p><details><summary>查看模型可见的摘录</summary><pre>Apple FY2025 服务收入同比增速，保留两位小数。
+
+年报摘录：
+p26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023
+p26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200
+p26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.growth&quot;,
+  &quot;arm&quot;: &quot;header&quot;,
+  &quot;run_id&quot;: &quot;apple.growth--header&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Apple FY2025 服务收入同比增速，保留两位小数。\n\n年报摘录：\np26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023\np26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200\np26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:38:09.50733Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;14.00\&quot;,\n  \&quot;unit\&quot;: \&quot;%\&quot;,\n  \&quot;pages\&quot;: [26],\n  \&quot;explanation\&quot;: \&quot;服务收入同比增速直接从摘录中获取，为14%。\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6469769167,
+    &quot;load_duration&quot;: 445300250,
+    &quot;prompt_eval_count&quot;: 247,
+    &quot;prompt_eval_duration&quot;: 518638000,
+    &quot;eval_count&quot;: 58,
+    &quot;eval_duration&quot;: 5482713000
+  },
+  &quot;latency_ms&quot;: 6498
+}</pre></details></article><article><h4>人工选行＋列头</h4><span class="tag fail">未通过</span><p class='num'>14.00 %</p><p>2025年服务收入同比增长率为14%，直接从摘录中获取。</p><p>引用页 [26] · 数值 fail · 出处 pass</p><p>6735 ms · token 201 入 / 61 出</p><details><summary>查看模型可见的摘录</summary><pre>Apple FY2025 服务收入同比增速，保留两位小数。
+
+年报摘录：
+p26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023
+p26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.growth&quot;,
+  &quot;arm&quot;: &quot;selected&quot;,
+  &quot;run_id&quot;: &quot;apple.growth--selected&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Apple FY2025 服务收入同比增速，保留两位小数。\n\n年报摘录：\np26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023\np26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:37:56.882368Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;14.00\&quot;,\n  \&quot;unit\&quot;: \&quot;%\&quot;,\n  \&quot;pages\&quot;: [26],\n  \&quot;explanation\&quot;: \&quot;2025年服务收入同比增长率为14%，直接从摘录中获取。\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6713305458,
+    &quot;load_duration&quot;: 687322750,
+    &quot;prompt_eval_count&quot;: 201,
+    &quot;prompt_eval_duration&quot;: 891287000,
+    &quot;eval_count&quot;: 61,
+    &quot;eval_duration&quot;: 5100406000
+  },
+  &quot;latency_ms&quot;: 6735
+}</pre></details></article></div></section><section class='case'><h3>Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。</h3><p class='muted'>apple.contribution · apple_fy2025_10k_en.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>Services</td><td>2025</td><td>109158 USD million</td><td>表头 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a> · 数值 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a></td></tr><tr><td>Services</td><td>2024</td><td>96169 USD million</td><td>表头 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a> · 数值 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a></td></tr><tr><td>Total net sales</td><td>2025</td><td>416161 USD million</td><td>表头 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a> · 数值 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a></td></tr><tr><td>Total net sales</td><td>2024</td><td>391035 USD million</td><td>表头 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a> · 数值 <a data-hash="3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de" data-page="26" target="_blank" rel="noopener noreferrer">第 26 页</a></td></tr></tbody></table></div><pre>3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>14.29 %</p><p>服务收入增加额为109,158 - 85,200 = 23,958千元，总净销售额增加额为416,161 - 383,285 = 32,876千元，计算得23,958 / 32,876 * 100 = 14.29%</p><p>引用页 [26] · 数值 fail · 出处 pass</p><p>14611 ms · token 224 入 / 132 出</p><details><summary>查看模型可见的摘录</summary><pre>Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。
+
+年报摘录：
+p26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200
+p26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.contribution&quot;,
+  &quot;arm&quot;: &quot;row&quot;,
+  &quot;run_id&quot;: &quot;apple.contribution--row&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。\n\n年报摘录：\np26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200\np26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:38:24.116679Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;14.29\&quot;,\n  \&quot;unit\&quot;: \&quot;%\&quot;,\n  \&quot;pages\&quot;: [26],\n  \&quot;explanation\&quot;: \&quot;服务收入增加额为109,158 - 85,200 = 23,958千元，总净销售额增加额为416,161 - 383,285 = 32,876千元，计算得23,958 / 32,876 * 100 = 14.29%\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 14584481834,
+    &quot;load_duration&quot;: 443234375,
+    &quot;prompt_eval_count&quot;: 224,
+    &quot;prompt_eval_duration&quot;: 969723000,
+    &quot;eval_count&quot;: 132,
+    &quot;eval_duration&quot;: 13156841000
+  },
+  &quot;latency_ms&quot;: 14611
+}</pre></details></article><article><h4>同样的行＋列头</h4><span class="tag fail">未通过</span><p class='num'>24.45 %</p><p>服务收入增加额为109,158 - 96,169 = 12,989千元，总净销售额增加额为416,161 - 391,035 = 25,126千元，计算得12,989 / 25,126 * 100 = 24.45%</p><p>引用页 [26] · 数值 fail · 出处 pass</p><p>20752 ms · token 254 入 / 132 出</p><details><summary>查看模型可见的摘录</summary><pre>Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。
+
+年报摘录：
+p26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023
+p26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200
+p26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.contribution&quot;,
+  &quot;arm&quot;: &quot;header&quot;,
+  &quot;run_id&quot;: &quot;apple.contribution--header&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。\n\n年报摘录：\np26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023\np26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200\np26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:38:44.87028Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;24.45\&quot;,\n  \&quot;unit\&quot;: \&quot;%\&quot;,\n  \&quot;pages\&quot;: [26],\n  \&quot;explanation\&quot;: \&quot;服务收入增加额为109,158 - 96,169 = 12,989千元，总净销售额增加额为416,161 - 391,035 = 25,126千元，计算得12,989 / 25,126 * 100 = 24.45%\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 20701614875,
+    &quot;load_duration&quot;: 596154625,
+    &quot;prompt_eval_count&quot;: 254,
+    &quot;prompt_eval_duration&quot;: 1700694000,
+    &quot;eval_count&quot;: 132,
+    &quot;eval_duration&quot;: 18377892000
+  },
+  &quot;latency_ms&quot;: 20752
+}</pre></details></article><article><h4>人工选行＋列头</h4><span class="tag fail">未通过</span><p class='num'>24.38 %</p><p>服务收入增加额为109,158 - 96,169 = 12,989千元，总净销售额增加额为416,161 - 391,035 = 25,126千元，计算得12,989 / 25,126 * 100 = 24.38%</p><p>引用页 [26] · 数值 fail · 出处 pass</p><p>24358 ms · token 254 入 / 132 出</p><details><summary>查看模型可见的摘录</summary><pre>Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。
+
+年报摘录：
+p26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023
+p26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200
+p26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285</pre></details><details><summary>输入、原始响应与运行记录</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.contribution&quot;,
+  &quot;arm&quot;: &quot;selected&quot;,
+  &quot;run_id&quot;: &quot;apple.contribution--selected&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只使用本题所给年报摘录作答。无法从证据确认时状态写 unknown。只输出 JSON，格式为 {\&quot;status\&quot;:\&quot;answered 或 unknown\&quot;,\&quot;value\&quot;:\&quot;数值或空串\&quot;,\&quot;unit\&quot;:\&quot;千元或%或空串\&quot;,\&quot;pages\&quot;:[页码整数],\&quot;explanation\&quot;:\&quot;一句话说明取值或分母\&quot;}。百分数用百分比数值，不含百分号，按题目精度舍入。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。\n\n年报摘录：\np26 Products and Services Performance: 2025 | Change | 2024 | Change | 2023\np26 Services (USD millions) | 109,158 | 14% | 96,169 | 13% | 85,200\np26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:39:09.210127Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;status\&quot;: \&quot;answered\&quot;,\n  \&quot;value\&quot;: \&quot;24.38\&quot;,\n  \&quot;unit\&quot;: \&quot;%\&quot;,\n  \&quot;pages\&quot;: [26],\n  \&quot;explanation\&quot;: \&quot;服务收入增加额为109,158 - 96,169 = 12,989千元，总净销售额增加额为416,161 - 391,035 = 25,126千元，计算得12,989 / 25,126 * 100 = 24.38%\&quot;\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 24280778875,
+    &quot;load_duration&quot;: 801465041,
+    &quot;prompt_eval_count&quot;: 254,
+    &quot;prompt_eval_duration&quot;: 99127000,
+    &quot;eval_count&quot;: 132,
+    &quot;eval_duration&quot;: 23279464000
+  },
+  &quot;latency_ms&quot;: 24358
+}</pre></details></article></div></section><h2 id='calc'>让程序算百分比，哪些错能修好？</h2><p>同一原表、模型与调用预算。两种工具在归档动作上实际执行。选择年份错误仍会得到格式正确的计算结果。</p><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>核准 / 总题数</th><th scope='col'>修好</th><th scope='col'>退化</th></tr></thead><tbody><tr><td>直接作答</td><td>1 / 4</td><td>—</td><td>—</td></tr><tr><td>选择原格</td><td>2 / 4</td><td>apple.2025.contribution、apple.2024.growth</td><td>apple.2025.growth</td></tr><tr><td>选择业务函数</td><td>3 / 4</td><td>apple.2025.contribution、apple.2024.growth</td><td>—</td></tr></tbody></table></div><h3>请根据 Apple FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。</h3><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判定</th><th scope='col'>交付值 %</th><th scope='col'>目标 %</th><th scope='col'>分子</th><th scope='col'>分母</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>直接作答</td><td><span class="tag pass">已核准</span></td><td>13.51</td><td>13.51</td><td>—</td><td>—</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;value&quot;: 13.51,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: null,
+  &quot;value&quot;: &quot;13.51&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2025.growth&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;apple.2025.growth--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:00.613127Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 13.51,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5189218500,
+    &quot;load_duration&quot;: 366778875,
+    &quot;prompt_eval_count&quot;: 226,
+    &quot;prompt_eval_duration&quot;: 2517245000,
+    &quot;eval_count&quot;: 22,
+    &quot;eval_duration&quot;: 2250351000
+  },
+  &quot;latency_ms&quot;: 5260
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag fail">未通过</span></td><td>118.42</td><td>13.51</td><td>12989</td><td>10969</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;numerator&quot;: [
+    &quot;S25&quot;,
+    &quot;S24&quot;
+  ],
+  &quot;denominator&quot;: [
+    &quot;S24&quot;,
+    &quot;S23&quot;
+  ],
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;S24&quot;,
+      &quot;S23&quot;
+    ],
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;12989&quot;,
+  &quot;denominator&quot;: &quot;10969&quot;,
+  &quot;value&quot;: &quot;118.42&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2025.growth&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;apple.2025.growth--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:12.32988Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;S24\&quot;, \&quot;S23\&quot;],\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 11651163458,
+    &quot;load_duration&quot;: 1174714917,
+    &quot;prompt_eval_count&quot;: 264,
+    &quot;prompt_eval_duration&quot;: 2995761000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 7469633000
+  },
+  &quot;latency_ms&quot;: 11703
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>13.51</td><td>13.51</td><td>12989</td><td>96169</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;metric&quot;: &quot;yoy_growth&quot;,
+  &quot;series&quot;: &quot;Services&quot;,
+  &quot;year&quot;: 2025,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;metric_tool&quot;,
+  &quot;arguments&quot;: {
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;12989&quot;,
+  &quot;denominator&quot;: &quot;96169&quot;,
+  &quot;value&quot;: &quot;13.51&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2025.growth&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;apple.2025.growth--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:19.341395Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;yoy_growth\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2025,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6962044208,
+    &quot;load_duration&quot;: 864045916,
+    &quot;prompt_eval_count&quot;: 263,
+    &quot;prompt_eval_duration&quot;: 2658277000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 3425018000
+  },
+  &quot;latency_ms&quot;: 7008
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Apple FY2025 年报，计算 FY2025 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。</h3><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判定</th><th scope='col'>交付值 %</th><th scope='col'>目标 %</th><th scope='col'>分子</th><th scope='col'>分母</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>选择原格</td><td><span class="tag pass">已核准</span></td><td>51.70</td><td>51.70</td><td>12989</td><td>25126</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;numerator&quot;: [
+    &quot;S25&quot;,
+    &quot;S24&quot;
+  ],
+  &quot;denominator&quot;: [
+    &quot;T25&quot;,
+    &quot;T24&quot;
+  ],
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ],
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;12989&quot;,
+  &quot;denominator&quot;: &quot;25126&quot;,
+  &quot;value&quot;: &quot;51.70&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;apple.2025.contribution--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2025 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:26.470796Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;T25\&quot;, \&quot;T24\&quot;],\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7091659041,
+    &quot;load_duration&quot;: 762758375,
+    &quot;prompt_eval_count&quot;: 272,
+    &quot;prompt_eval_duration&quot;: 1866542000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 4443881000
+  },
+  &quot;latency_ms&quot;: 7382
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>51.70</td><td>51.70</td><td>12989</td><td>25126</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;metric&quot;: &quot;share_of_change&quot;,
+  &quot;series&quot;: &quot;Services&quot;,
+  &quot;year&quot;: 2025,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;metric_tool&quot;,
+  &quot;arguments&quot;: {
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;12989&quot;,
+  &quot;denominator&quot;: &quot;25126&quot;,
+  &quot;value&quot;: &quot;51.70&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;apple.2025.contribution--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2025 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:34.240023Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;share_of_change\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2025,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7313835792,
+    &quot;load_duration&quot;: 777804833,
+    &quot;prompt_eval_count&quot;: 271,
+    &quot;prompt_eval_duration&quot;: 2070784999,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4436157000
+  },
+  &quot;latency_ms&quot;: 7515
+}</pre></details></td></tr><tr><td>直接作答</td><td><span class="tag fail">未通过</span></td><td>26.35</td><td>51.70</td><td>—</td><td>—</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;value&quot;: 26.35,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: null,
+  &quot;value&quot;: &quot;26.35&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;apple.2025.contribution--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2025 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:39.529304Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 26.35,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5233841625,
+    &quot;load_duration&quot;: 959404417,
+    &quot;prompt_eval_count&quot;: 234,
+    &quot;prompt_eval_duration&quot;: 1960081000,
+    &quot;eval_count&quot;: 22,
+    &quot;eval_duration&quot;: 2255094000
+  },
+  &quot;latency_ms&quot;: 5287
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Apple FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。</h3><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判定</th><th scope='col'>交付值 %</th><th scope='col'>目标 %</th><th scope='col'>分子</th><th scope='col'>分母</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>12.87</td><td>12.87</td><td>10969</td><td>85200</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;metric&quot;: &quot;yoy_growth&quot;,
+  &quot;series&quot;: &quot;Services&quot;,
+  &quot;year&quot;: 2024,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;metric_tool&quot;,
+  &quot;arguments&quot;: {
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;10969&quot;,
+  &quot;denominator&quot;: &quot;85200&quot;,
+  &quot;value&quot;: &quot;12.87&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2024.growth&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;apple.2024.growth--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:45.786882Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;yoy_growth\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2024,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6225406334,
+    &quot;load_duration&quot;: 944059334,
+    &quot;prompt_eval_count&quot;: 263,
+    &quot;prompt_eval_duration&quot;: 1877829000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 3374549000
+  },
+  &quot;latency_ms&quot;: 6263
+}</pre></details></td></tr><tr><td>直接作答</td><td><span class="tag fail">未通过</span></td><td>13.51</td><td>12.87</td><td>—</td><td>—</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;value&quot;: 13.51,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: null,
+  &quot;value&quot;: &quot;13.51&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2024.growth&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;apple.2024.growth--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:50.324891Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 13.51,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4479432459,
+    &quot;load_duration&quot;: 702686667,
+    &quot;prompt_eval_count&quot;: 226,
+    &quot;prompt_eval_duration&quot;: 1852942000,
+    &quot;eval_count&quot;: 22,
+    &quot;eval_duration&quot;: 1887987000
+  },
+  &quot;latency_ms&quot;: 4532
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag pass">已核准</span></td><td>12.87</td><td>12.87</td><td>10969</td><td>85200</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;numerator&quot;: [
+    &quot;S24&quot;,
+    &quot;S23&quot;
+  ],
+  &quot;denominator&quot;: [
+    &quot;S23&quot;
+  ],
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S24&quot;,
+      &quot;S23&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;S23&quot;
+    ],
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;10969&quot;,
+  &quot;denominator&quot;: &quot;85200&quot;,
+  &quot;value&quot;: &quot;12.87&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2024.growth&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;apple.2024.growth--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:42:56.361882Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S24\&quot;, \&quot;S23\&quot;],\n  \&quot;denominator\&quot;: [\&quot;S23\&quot;],\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5980059333,
+    &quot;load_duration&quot;: 855619667,
+    &quot;prompt_eval_count&quot;: 264,
+    &quot;prompt_eval_duration&quot;: 1900853000,
+    &quot;eval_count&quot;: 36,
+    &quot;eval_duration&quot;: 3202310000
+  },
+  &quot;latency_ms&quot;: 6035
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Apple FY2025 年报，计算 FY2024 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。</h3><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>判定</th><th scope='col'>交付值 %</th><th scope='col'>目标 %</th><th scope='col'>分子</th><th scope='col'>分母</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>直接作答</td><td><span class="tag fail">未通过</span></td><td>28.35</td><td>141.54</td><td>—</td><td>—</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;value&quot;: 28.35,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: null,
+  &quot;value&quot;: &quot;28.35&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;apple.2024.contribution--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2024 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:43:00.677895Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 28.35,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4269918834,
+    &quot;load_duration&quot;: 731209792,
+    &quot;prompt_eval_count&quot;: 234,
+    &quot;prompt_eval_duration&quot;: 1829907000,
+    &quot;eval_count&quot;: 22,
+    &quot;eval_duration&quot;: 1694209000
+  },
+  &quot;latency_ms&quot;: 4315
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag fail">未通过</span></td><td>51.70</td><td>141.54</td><td>12989</td><td>25126</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;numerator&quot;: [
+    &quot;S25&quot;,
+    &quot;S24&quot;
+  ],
+  &quot;denominator&quot;: [
+    &quot;T25&quot;,
+    &quot;T24&quot;
+  ],
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;cells&quot;,
+  &quot;arguments&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ],
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;12989&quot;,
+  &quot;denominator&quot;: &quot;25126&quot;,
+  &quot;value&quot;: &quot;51.70&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;apple.2024.contribution--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2024 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:43:07.52946Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;T25\&quot;, \&quot;T24\&quot;],\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6809361333,
+    &quot;load_duration&quot;: 796511791,
+    &quot;prompt_eval_count&quot;: 272,
+    &quot;prompt_eval_duration&quot;: 1901973000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 4099711000
+  },
+  &quot;latency_ms&quot;: 6855
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag fail">未通过</span></td><td>51.70</td><td>141.54</td><td>12989</td><td>25126</td><td><details><summary>动作与原始回复</summary><pre>{
+  &quot;metric&quot;: &quot;share_of_change&quot;,
+  &quot;series&quot;: &quot;Services&quot;,
+  &quot;year&quot;: 2025,
+  &quot;pages&quot;: [
+    26
+  ]
+}</pre><pre>{
+  &quot;tool&quot;: &quot;metric_tool&quot;,
+  &quot;arguments&quot;: {
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      26
+    ]
+  },
+  &quot;numerator&quot;: &quot;12989&quot;,
+  &quot;denominator&quot;: &quot;25126&quot;,
+  &quot;value&quot;: &quot;51.70&quot;
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;apple.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;apple.2024.contribution--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;public_dev&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;apple&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;5484e08fe0d7da0f68f73385ed25cc0e9159da2af3df3f425737dc574515d4c0&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Apple FY2025 年报，计算 FY2024 服务收入增加额占公司总净销售额增加额的比例。用原金额重新计算，百分比保留两位，附页码。\n第 26 页，Products and Services Performance，单位百万美元。\nServices | FY2025 [S25] 109158 | FY2024 [S24] 96169 | FY2023 [S23] 85200\nTotal net sales | FY2025 [T25] 416161 | FY2024 [T24] 391035 | FY2023 [T23] 383285&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T14:43:14.337257Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;share_of_change\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2025,\n  \&quot;pages\&quot;: [26]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6748150333,
+    &quot;load_duration&quot;: 673979875,
+    &quot;prompt_eval_count&quot;: 271,
+    &quot;prompt_eval_duration&quot;: 1828521000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4218308000
+  },
+  &quot;latency_ms&quot;: 6799
+}</pre></details></td></tr></tbody></table></div><h2 id='archive'>同一回答在四种评分方法下的结果</h2><p>历史模型回执和脚本构造对照分别标出。证据不足保留为待核实。标注由 Codex 比照原表完成，尚无独立人工复核。</p><div class='history'><details><summary>历史模型 · catl.annual · 宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。</blockquote><p>开发标注：第 12 页的第四季度值冒充全年。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;e1df2a4553e44125befe1d3fe973d529&quot;,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;archived_model&quot;,
+  &quot;answer&quot;: &quot;宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 12
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k&quot;,
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;sequential:e1df2a4553e44125befe1d3fe973d529&quot;,
+      &quot;sha256&quot;: &quot;d9c9c957a72e0a5a956ddf4a23af5da81365e24c9b7f62844345e8c43219ae33&quot;
+    }
+  ],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: &quot;ANSWERED&quot;,
+  &quot;latency_ms&quot;: 21995.0,
+  &quot;cost&quot;: null,
+  &quot;archived_record&quot;: {
+    &quot;question&quot;: &quot;宁德时代 2025 年经营活动产生的现金流量净额是多少？&quot;,
+    &quot;state&quot;: &quot;queued&quot;,
+    &quot;job_id&quot;: &quot;e1df2a4553e44125befe1d3fe973d529&quot;,
+    &quot;client_first_token_ms&quot;: 17596.1,
+    &quot;client_total_ms&quot;: 21995.0,
+    &quot;event_counts&quot;: {
+      &quot;final&quot;: 1,
+      &quot;queued&quot;: 1,
+      &quot;retrieved&quot;: 1,
+      &quot;started&quot;: 1,
+      &quot;token&quot;: 16
+    },
+    &quot;status&quot;: &quot;ANSWERED&quot;,
+    &quot;found&quot;: true,
+    &quot;answer&quot;: &quot;宁德时代 2025 年经营活动产生的现金流量净额是 52,559,552 千元。&quot;,
+    &quot;citations&quot;: [
+      {
+        &quot;company&quot;: &quot;宁德时代新能源科技股份有限公司 (300750.SZ)&quot;,
+        &quot;page&quot;: 12
+      }
+    ],
+    &quot;server_timings&quot;: {
+      &quot;retrieval_ms&quot;: 1600.4,
+      &quot;answer_ms&quot;: 20337.7,
+      &quot;first_token_ms&quot;: 15724.4,
+      &quot;queue_ms&quot;: 14.3
+    },
+    &quot;attempt&quot;: 1
+  }
+}</pre></details></details><details><summary>历史模型 · apple.margin · Apple&#x27;s products gross margin percentage in fiscal 2025 was 36.8%.</summary><p>What was Apple&#x27;s products gross margin percentage in fiscal 2025?</p><blockquote>Apple&#x27;s products gross margin percentage in fiscal 2025 was 36.8%.</blockquote><p>开发标注：第 27 页 Products 毛利率的 2025 列为 36.8%。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;dc3647af187e40a18d9f0d0109888fd4&quot;,
+  &quot;case_id&quot;: &quot;apple.margin&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;archived_model&quot;,
+  &quot;answer&quot;: &quot;Apple&#x27;s products gross margin percentage in fiscal 2025 was 36.8%.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;apple&quot;,
+      &quot;page&quot;: 27
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k&quot;,
+  &quot;artifact_refs&quot;: [
+    {
+      &quot;ref&quot;: &quot;sequential:dc3647af187e40a18d9f0d0109888fd4&quot;,
+      &quot;sha256&quot;: &quot;061324cabfdc0f799147657c550000817addd6af49c462d403744b675e6948cb&quot;
+    }
+  ],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: &quot;ANSWERED&quot;,
+  &quot;latency_ms&quot;: 14868.2,
+  &quot;cost&quot;: null,
+  &quot;archived_record&quot;: {
+    &quot;question&quot;: &quot;What was Apple&#x27;s products gross margin percentage in fiscal 2025?&quot;,
+    &quot;state&quot;: &quot;queued&quot;,
+    &quot;job_id&quot;: &quot;dc3647af187e40a18d9f0d0109888fd4&quot;,
+    &quot;client_first_token_ms&quot;: 10861.8,
+    &quot;client_total_ms&quot;: 14868.2,
+    &quot;event_counts&quot;: {
+      &quot;final&quot;: 1,
+      &quot;queued&quot;: 1,
+      &quot;retrieved&quot;: 1,
+      &quot;started&quot;: 1,
+      &quot;token&quot;: 11
+    },
+    &quot;status&quot;: &quot;ANSWERED&quot;,
+    &quot;found&quot;: true,
+    &quot;answer&quot;: &quot;Apple&#x27;s products gross margin percentage in fiscal 2025 was 36.8%.&quot;,
+    &quot;citations&quot;: [
+      {
+        &quot;company&quot;: &quot;Apple Inc. (AAPL)&quot;,
+        &quot;page&quot;: 27
+      }
+    ],
+    &quot;server_timings&quot;: {
+      &quot;retrieval_ms&quot;: 1572.6,
+      &quot;answer_ms&quot;: 13252.5,
+      &quot;first_token_ms&quot;: 8982.8,
+      &quot;queue_ms&quot;: 10.0
+    },
+    &quot;attempt&quot;: 1
+  }
+}</pre></details></details><details><summary>构造对照 · catl.annual · 全年为 133,219,982 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>全年为 133,219,982 千元。</blockquote><p>开发标注：年度行及单位正确。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;annual-correct&quot;,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;全年为 133,219,982 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 11
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · catl.annual · 四季合计为 133,219,982 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>四季合计为 133,219,982 千元。</blockquote><p>开发标注：合计与年度行一致，两页含列头和四个操作数。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;annual-from-quarters&quot;,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;四季合计为 133,219,982 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 11
+    },
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 12
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · catl.annual · 全年为 96,990,345 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>全年为 96,990,345 千元。</blockquote><p>开发标注：同页取了 2024 年的值。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;annual-wrong-year&quot;,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;全年为 96,990,345 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 11
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · catl.annual · 全年为 133,219,982 元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>全年为 133,219,982 元。</blockquote><p>开发标注：原表单位千元。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;annual-wrong-unit&quot;,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;全年为 133,219,982 元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 11
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · catl.q4 · 第四季度为 52,559,552 千元。</summary><p>宁德时代 2025 年第四季度的经营活动现金流量净额是多少？</p><blockquote>第四季度为 52,559,552 千元。</blockquote><p>开发标注：季度口径正确，表头和续页同时提供。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;q4-correct&quot;,
+  &quot;case_id&quot;: &quot;catl.q4&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;第四季度为 52,559,552 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 11
+    },
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 12
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · catl.annual · 全年为 133,219,982 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>全年为 133,219,982 千元。</blockquote><p>开发标注：数值正确但当前回执证据读取超时。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag unknown">待核实</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag unknown">待核实</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;annual-unread&quot;,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;全年为 133,219,982 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 11
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;timeout&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · catl.annual · 全年为 52,559,552 千元。</summary><p>宁德时代 2025 年经营活动产生的现金流量净额是多少？</p><blockquote>全年为 52,559,552 千元。</blockquote><p>开发标注：已确认错数，证据超时另外保留。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag unknown">待核实</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;annual-wrong-unread&quot;,
+  &quot;case_id&quot;: &quot;catl.annual&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;全年为 52,559,552 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 12
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;timeout&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · apple.growth · 同比增长 13.51%。</summary><p>Apple FY2025 服务收入同比增速，保留两位小数。</p><blockquote>同比增长 13.51%。</blockquote><p>开发标注：从当期与上期服务收入复算。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;apple-growth-ok&quot;,
+  &quot;case_id&quot;: &quot;apple.growth&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;同比增长 13.51%。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;apple&quot;,
+      &quot;page&quot;: 26
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · apple.contribution · 贡献率为 51.70%。</summary><p>Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。</p><blockquote>贡献率为 51.70%。</blockquote><p>开发标注：总净销售额增量作分母。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;apple-contrib-ok&quot;,
+  &quot;case_id&quot;: &quot;apple.contribution&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;贡献率为 51.70%。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;apple&quot;,
+      &quot;page&quot;: 26
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · apple.contribution · 贡献率为 13.51%。</summary><p>Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。</p><blockquote>贡献率为 13.51%。</blockquote><p>开发标注：误用上年服务收入作分母。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;apple-denominator&quot;,
+  &quot;case_id&quot;: &quot;apple.contribution&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;贡献率为 13.51%。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;apple&quot;,
+      &quot;page&quot;: 26
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · apple.contribution · 贡献率为 51.70%。</summary><p>Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。</p><blockquote>贡献率为 51.70%。</blockquote><p>开发标注：算对但引用了另一家公司。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag fail">未通过</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;apple-foreign-citation&quot;,
+  &quot;case_id&quot;: &quot;apple.contribution&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;贡献率为 51.70%。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 11
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details><details><summary>构造对照 · catl.q4 · 第四季度为 52,559,552 千元。</summary><p>宁德时代 2025 年第四季度的经营活动现金流量净额是多少？</p><blockquote>第四季度为 52,559,552 千元。</blockquote><p>开发标注：续页有值但已提供的引用缺季度表头。</p><div class='scroll'><table><thead><tr><th scope='col'>有页码</th><th scope='col'>摘录出现数字</th><th scope='col'>独立复算</th><th scope='col'>复算＋支持页组</th></tr></thead><tbody><tr><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag pass">已核准</span></td><td><span class="tag unknown">待核实</span></td></tr></tbody></table></div><details><summary>原始记录</summary><pre>{
+  &quot;run_id&quot;: &quot;quarter-header-missing&quot;,
+  &quot;case_id&quot;: &quot;catl.q4&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;source_kind&quot;: &quot;scripted_fixture&quot;,
+  &quot;answer&quot;: &quot;第四季度为 52,559,552 千元。&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;doc&quot;: &quot;catl&quot;,
+      &quot;page&quot;: 12
+    }
+  ],
+  &quot;evidence_status&quot;: &quot;available&quot;,
+  &quot;model&quot;: null,
+  &quot;artifact_refs&quot;: [],
+  &quot;tool_actions&quot;: null,
+  &quot;terminal_state&quot;: null,
+  &quot;latency_ms&quot;: null,
+  &quot;cost&quot;: null
+}</pre></details></details></div></main><script>
+const pdfUrls = new Map();
+const picker = document.getElementById('pdf');
+picker.addEventListener('change', async () => {
+  const labels = [];
+  for (const file of picker.files) {
+    try {
+      const bytes = await file.arrayBuffer();
+      const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)),
+                              b => b.toString(16).padStart(2, '0')).join('');
+      const links = Array.from(document.querySelectorAll('a[data-hash]')).filter(a => a.dataset.hash === hash);
+      if (!links.length) { labels.push(file.name + '：版本与冻结原件不符'); continue; }
+      if (pdfUrls.has(hash)) URL.revokeObjectURL(pdfUrls.get(hash));
+      const url = URL.createObjectURL(new Blob([bytes], {type:'application/pdf'}));
+      pdfUrls.set(hash, url);
+      for (const a of links) a.href = url + '#page=' + a.dataset.page;
+      labels.push(file.name + '：版本已核对，可打开原页');
+    } catch { labels.push(file.name + '：无法校验文件'); }
+  }
+  document.getElementById('pdf-status').textContent = labels.join(' · ');
+});
+</script></html>
