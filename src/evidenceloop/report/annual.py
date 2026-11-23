@@ -9,7 +9,7 @@ from collections import Counter
 from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 
-METHODS = ("cited", "printed", "value_unit", "grounded")
+METHODS = ("cited", "printed", "value_unit", "value_pages")
 AMOUNT = re.compile(r"(?<![\d.,+−-])([+−-]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?)\s*(千元|亿元|元|%|％)")
 SCALES = {"千元": Decimal(1000), "亿元": Decimal(100000000), "元": Decimal(1)}
 
@@ -88,12 +88,33 @@ def score(case, obs, sources):
         support = "fail"
     else:
         support = "unknown"  # Unannotated pages or incomplete cross-page evidence.
+    # Page-only receipts make no cell-level assertion. An explicit locator must
+    # never be silently discarded, even if its page and the answer are correct.
+    located = [item for item in obs["citations"] if "cell" in item]
+    cell_status = "not_supplied"
+    if located and readable:
+        possible = set(case["cells"] + case.get("alternative_sum", []))
+        cell_status = "consistent"
+        for ref in located:
+            identifier = ref["cell"]
+            cell = sources["cells"].get(identifier) if isinstance(identifier, str) else None
+            if cell is None:
+                cell_status = "unknown"
+            elif (identifier not in possible or cell["doc"] != ref["doc"] or cell["page"] != ref["page"]):
+                cell_status = "conflict"
+                break
+        if cell_status == "conflict":
+            support = "fail"
+        elif cell_status == "unknown" and support != "fail":
+            support = "unknown"
+    elif located:
+        cell_status = "unknown"
     hard = (values, support)
-    grounded = "fail" if "fail" in hard else ("unknown" if "unknown" in hard else "pass")
+    value_pages = "fail" if "fail" in hard else ("unknown" if "unknown" in hard else "pass")
     return {"scores": {"cited": "pass" if obs["answer"] and pages else "fail",
-                       "printed": printed, "value_unit": values, "grounded": grounded},
+                       "printed": printed, "value_unit": values, "value_pages": value_pages},
             "checks": {"value_unit": values, "page_support": support,
-                       "evidence_read": obs["evidence_status"]},
+                       "evidence_read": obs["evidence_status"], "explicit_cell": cell_status},
             "expected": str(expected), "unit": case["unit"]}
 
 
@@ -127,7 +148,7 @@ def compare(folder: Path):
                        for gold in ("pass", "fail", "unknown")}}
     inputs = {name: digest(folder / name) for name in
               ["manifest.json", "cases.json", "sources.json", "observations.jsonl", "review.json"]}
-    return {"schema_version": 1, "dataset_version": manifest["dataset_version"],
+    return {"schema_version": 1, "scorer_version": "page-support-1.1", "dataset_version": manifest["dataset_version"],
             "split": manifest["split"], "input_sha256": inputs, "totals": totals, "rows": rows}
 
 

@@ -16,11 +16,11 @@ def test_checked_in_comparison_is_reproducible():
     indexed = {r["run_id"]: r for r in results["rows"]}
     real_error = indexed["e1df2a4553e44125befe1d3fe973d529"]
     assert real_error["scores"]["cited"] == "pass"
-    assert real_error["scores"]["grounded"] == "fail"
-    assert indexed["annual-unread"]["scores"]["grounded"] == "unknown"
+    assert real_error["scores"]["value_pages"] == "fail"
+    assert indexed["annual-unread"]["scores"]["value_pages"] == "unknown"
     assert indexed["annual-wrong-unread"]["checks"]["page_support"] == "unknown"
-    assert indexed["annual-wrong-unread"]["scores"]["grounded"] == "fail"
-    assert indexed["quarter-header-missing"]["scores"]["grounded"] == "unknown"
+    assert indexed["annual-wrong-unread"]["scores"]["value_pages"] == "fail"
+    assert indexed["quarter-header-missing"]["scores"]["value_pages"] == "unknown"
 
 
 def test_normalize_units_and_abstain_on_multiple_amounts():
@@ -28,7 +28,7 @@ def test_normalize_units_and_abstain_on_multiple_amounts():
     sources = read_json(DATA / "sources.json")
     row = read_lines(DATA / "observations.jsonl")[0]
     row.update(answer="1,332.19982 亿元。", citations=[{"doc":"catl", "page":11}])
-    assert score(case, row, sources)["scores"]["grounded"] == "pass"
+    assert score(case, row, sources)["scores"]["value_pages"] == "pass"
     assert extract_claim("1332 亿元或 500 千元") is None
 
 
@@ -41,3 +41,14 @@ def test_reviewer_cannot_silently_drop_an_observation(tmp_path):
     (tmp_path / "review.json").write_text(json.dumps(gold))
     with pytest.raises(ValueError, match="one-to-one"):
         compare(tmp_path)
+
+
+@pytest.mark.parametrize(("locator", "verdict"), [
+    ("catl.prior", "fail"), ("unmapped-cell", "unknown"), ("catl.annual", "pass")
+])
+def test_same_page_does_not_hide_a_bad_explicit_cell(locator, verdict):
+    case = read_json(DATA / "cases.json")["catl.annual"]
+    sources = read_json(DATA / "sources.json")
+    row = {"answer":"133,219,982 千元", "evidence_status":"available",
+           "citations":[{"doc":"catl", "page":11, "cell":locator}]}
+    assert score(case, row, sources)["scores"]["value_pages"] == verdict

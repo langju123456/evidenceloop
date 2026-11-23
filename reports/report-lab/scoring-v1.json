@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "scorer_version": "page-support-1.1",
   "dataset_version": "report-dev-v1",
   "split": "public_dev",
   "input_sha256": {
@@ -98,7 +99,7 @@
         }
       }
     },
-    "grounded": {
+    "value_pages": {
       "agreed": 14,
       "false_pass": 0,
       "unknown_passed": 0,
@@ -144,12 +145,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "fail",
-        "grounded": "fail"
+        "value_pages": "fail"
       },
       "checks": {
         "value_unit": "fail",
         "page_support": "unknown",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "133219982",
       "unit": "千元"
@@ -164,12 +166,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "pass",
-        "grounded": "pass"
+        "value_pages": "pass"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "36.8",
       "unit": "%"
@@ -184,12 +187,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "pass",
-        "grounded": "pass"
+        "value_pages": "pass"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "133219982",
       "unit": "千元"
@@ -204,12 +208,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "pass",
-        "grounded": "pass"
+        "value_pages": "pass"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "133219982",
       "unit": "千元"
@@ -224,12 +229,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "fail",
-        "grounded": "fail"
+        "value_pages": "fail"
       },
       "checks": {
         "value_unit": "fail",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "133219982",
       "unit": "千元"
@@ -244,12 +250,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "fail",
-        "grounded": "fail"
+        "value_pages": "fail"
       },
       "checks": {
         "value_unit": "fail",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "133219982",
       "unit": "千元"
@@ -264,12 +271,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "pass",
-        "grounded": "pass"
+        "value_pages": "pass"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "52559552",
       "unit": "千元"
@@ -284,12 +292,13 @@
         "cited": "pass",
         "printed": "unknown",
         "value_unit": "pass",
-        "grounded": "unknown"
+        "value_pages": "unknown"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "unknown",
-        "evidence_read": "timeout"
+        "evidence_read": "timeout",
+        "explicit_cell": "not_supplied"
       },
       "expected": "133219982",
       "unit": "千元"
@@ -304,12 +313,13 @@
         "cited": "pass",
         "printed": "unknown",
         "value_unit": "fail",
-        "grounded": "fail"
+        "value_pages": "fail"
       },
       "checks": {
         "value_unit": "fail",
         "page_support": "unknown",
-        "evidence_read": "timeout"
+        "evidence_read": "timeout",
+        "explicit_cell": "not_supplied"
       },
       "expected": "133219982",
       "unit": "千元"
@@ -324,12 +334,13 @@
         "cited": "pass",
         "printed": "fail",
         "value_unit": "pass",
-        "grounded": "pass"
+        "value_pages": "pass"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "13.51",
       "unit": "%"
@@ -344,12 +355,13 @@
         "cited": "pass",
         "printed": "fail",
         "value_unit": "pass",
-        "grounded": "pass"
+        "value_pages": "pass"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "51.70",
       "unit": "%"
@@ -364,12 +376,13 @@
         "cited": "pass",
         "printed": "fail",
         "value_unit": "fail",
-        "grounded": "fail"
+        "value_pages": "fail"
       },
       "checks": {
         "value_unit": "fail",
         "page_support": "pass",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "51.70",
       "unit": "%"
@@ -384,12 +397,13 @@
         "cited": "pass",
         "printed": "fail",
         "value_unit": "pass",
-        "grounded": "fail"
+        "value_pages": "fail"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "fail",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "51.70",
       "unit": "%"
@@ -404,12 +418,13 @@
         "cited": "pass",
         "printed": "pass",
         "value_unit": "pass",
-        "grounded": "unknown"
+        "value_pages": "unknown"
       },
       "checks": {
         "value_unit": "pass",
         "page_support": "unknown",
-        "evidence_read": "available"
+        "evidence_read": "available",
+        "explicit_cell": "not_supplied"
       },
       "expected": "52559552",
       "unit": "千元"
