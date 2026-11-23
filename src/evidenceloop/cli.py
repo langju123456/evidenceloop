@@ -554,7 +554,18 @@ def main(argv: list[str] | None = None) -> None:
     ev.add_argument("--out", required=True)
     ev.set_defaults(func=cmd_eval)
 
-    report = sub.add_parser("report").add_subparsers(dest="action", required=True).add_parser("baseline")
+    from evidenceloop.report.annual import compare_command, verify_command
+
+    report_actions = sub.add_parser("report").add_subparsers(dest="action", required=True)
+    annual = report_actions.add_parser("compare-claims", help="compare annual-report scorers on frozen observations")
+    annual.add_argument("--dataset", default="benchmarks/report_dev/v1")
+    annual.set_defaults(func=compare_command)
+    verify_report = report_actions.add_parser("verify-sources", help="check PDF and archived response provenance")
+    verify_report.add_argument("--dataset", default="benchmarks/report_dev/v1")
+    verify_report.add_argument("--pdf-dir", required=True)
+    verify_report.add_argument("--archive", required=True)
+    verify_report.set_defaults(func=verify_command)
+    report = report_actions.add_parser("baseline")
     report.add_argument("--evals", nargs="+", required=True)
     report.add_argument("--names", nargs="+")
     report.add_argument("--title", default="EvidenceLoop 基线报告")

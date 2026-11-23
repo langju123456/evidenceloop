@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "split": "public_dev",
+  "dataset_version": "report-dev-v1",
+  "archive": {
+    "repository": "https://github.com/langju123456/forgeflow",
+    "commit": "e64675244a40f59353711b5b91f05ca657bdbc3b",
+    "path": "preparation/s5/desk-service/real-model-run.json",
+    "sha256": "26d768894a55f941793e9a5a13b960e0d3421faf4581db6129c93a9b4b6a60db",
+    "model": "forgeflow-qwen3-8b-ctx16k",
+    "execution_commit": "1a76b2d"
+  }
+}

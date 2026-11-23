@@ -4,6 +4,8 @@
 
 从这里看起：[校准报告](reports/) · [决策记录](docs/decisions.md) · [验证器](src/evidenceloop/verify/verifier.py) · [错误路径表](src/evidenceloop/oracle/oracle.py)
 
+年报应用的实施进度、分工、复验入口与下一步见[年报报告评测实验室](docs/report-lab/README.md)。
+
 ## 现状
 
 | 部分 | 状态 |

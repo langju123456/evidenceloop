@@ -1,0 +1,52 @@
+{
+  "catl.annual": {
+    "question": "宁德时代 2025 年经营活动产生的现金流量净额是多少？",
+    "op": "read",
+    "cells": [
+      "catl.annual"
+    ],
+    "unit": "千元",
+    "alternative_sum": [
+      "catl.q1",
+      "catl.q2",
+      "catl.q3",
+      "catl.q4"
+    ]
+  },
+  "catl.q4": {
+    "question": "宁德时代 2025 年第四季度的经营活动现金流量净额是多少？",
+    "op": "read",
+    "cells": [
+      "catl.q4"
+    ],
+    "unit": "千元"
+  },
+  "apple.margin": {
+    "question": "What was Apple's products gross margin percentage in fiscal 2025?",
+    "op": "read",
+    "cells": [
+      "apple.margin"
+    ],
+    "unit": "%"
+  },
+  "apple.growth": {
+    "question": "Apple FY2025 服务收入同比增速，保留两位小数。",
+    "op": "growth",
+    "cells": [
+      "apple.s25",
+      "apple.s24"
+    ],
+    "unit": "%"
+  },
+  "apple.contribution": {
+    "question": "Apple FY2025 服务收入增加额占总净销售额增加额多少？保留两位小数。",
+    "op": "contribution",
+    "cells": [
+      "apple.s25",
+      "apple.s24",
+      "apple.t25",
+      "apple.t24"
+    ],
+    "unit": "%"
+  }
+}

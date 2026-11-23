@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "split": "public_dev",
+  "documents": {
+    "catl": {
+      "filename": "catl_2025_annual_zh.pdf",
+      "sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9"
+    },
+    "apple": {
+      "filename": "apple_fy2025_10k_en.pdf",
+      "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+    }
+  },
+  "cells": {
+    "catl.annual": {
+      "doc": "catl",
+      "page": 11,
+      "header_page": 11,
+      "row": "经营活动产生的现金流量净额",
+      "column": "2025年",
+      "value": "133219982",
+      "unit": "千元"
+    },
+    "catl.prior": {
+      "doc": "catl",
+      "page": 11,
+      "header_page": 11,
+      "row": "经营活动产生的现金流量净额",
+      "column": "2024年",
+      "value": "96990345",
+      "unit": "千元"
+    },
+    "catl.q1": {
+      "doc": "catl",
+      "page": 12,
+      "header_page": 11,
+      "row": "经营活动产生的现金流量净额",
+      "column": "第一季度",
+      "value": "32868257",
+      "unit": "千元"
+    },
+    "catl.q2": {
+      "doc": "catl",
+      "page": 12,
+      "header_page": 11,
+      "row": "经营活动产生的现金流量净额",
+      "column": "第二季度",
+      "value": "25818809",
+      "unit": "千元"
+    },
+    "catl.q3": {
+      "doc": "catl",
+      "page": 12,
+      "header_page": 11,
+      "row": "经营活动产生的现金流量净额",
+      "column": "第三季度",
+      "value": "21973364",
+      "unit": "千元"
+    },
+    "catl.q4": {
+      "doc": "catl",
+      "page": 12,
+      "header_page": 11,
+      "row": "经营活动产生的现金流量净额",
+      "column": "第四季度",
+      "value": "52559552",
+      "unit": "千元"
+    },
+    "apple.s25": {
+      "doc": "apple",
+      "page": 26,
+      "header_page": 26,
+      "row": "Services",
+      "column": "2025",
+      "value": "109158",
+      "unit": "USD million"
+    },
+    "apple.s24": {
+      "doc": "apple",
+      "page": 26,
+      "header_page": 26,
+      "row": "Services",
+      "column": "2024",
+      "value": "96169",
+      "unit": "USD million"
+    },
+    "apple.t25": {
+      "doc": "apple",
+      "page": 26,
+      "header_page": 26,
+      "row": "Total net sales",
+      "column": "2025",
+      "value": "416161",
+      "unit": "USD million"
+    },
+    "apple.t24": {
+      "doc": "apple",
+      "page": 26,
+      "header_page": 26,
+      "row": "Total net sales",
+      "column": "2024",
+      "value": "391035",
+      "unit": "USD million"
+    },
+    "apple.margin": {
+      "doc": "apple",
+      "page": 27,
+      "header_page": 27,
+      "row": "Gross margin percentage / Products",
+      "column": "2025",
+      "value": "36.8",
+      "unit": "%"
+    }
+  },
+  "companies": {
+    "宁德时代新能源科技股份有限公司 (300750.SZ)": "catl",
+    "Apple Inc. (AAPL)": "apple"
+  }
+}

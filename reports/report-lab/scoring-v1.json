@@ -1,0 +1,418 @@
+{
+  "schema_version": 1,
+  "dataset_version": "report-dev-v1",
+  "split": "public_dev",
+  "input_sha256": {
+    "manifest.json": "a560a0959897311590eb86e098b3d1d57f176f28383debbc3bb1a43909f7252f",
+    "cases.json": "056749589ea353beec6f6f6b4887f0faa0c986ffcf36ac99f20a0bf70450a33c",
+    "sources.json": "a5ab2a7759d5f7b8c162b0995fb2593a4eb902f2dcdfb3987be529384f887222",
+    "observations.jsonl": "5c2b4fa50eee1d2456e73b7c94d9b80ab3ad52edc37048f7321bbcf86ad3e5cb",
+    "review.json": "8fcebfbe9b975c016e22510a1cf0f15da899a027ba53d067d24dd019ba95fe3b"
+  },
+  "totals": {
+    "cited": {
+      "agreed": 6,
+      "false_pass": 6,
+      "unknown_passed": 2,
+      "correct_rejected": 0,
+      "fixed_vs_cited": [],
+      "regressed_vs_cited": [],
+      "matrix": {
+        "pass": {
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0
+        },
+        "fail": {
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0
+        },
+        "unknown": {
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0
+        }
+      }
+    },
+    "printed": {
+      "agreed": 7,
+      "false_pass": 3,
+      "unknown_passed": 1,
+      "correct_rejected": 2,
+      "fixed_vs_cited": [
+        "annual-unread",
+        "apple-denominator",
+        "apple-foreign-citation"
+      ],
+      "regressed_vs_cited": [
+        "apple-growth-ok",
+        "apple-contrib-ok"
+      ],
+      "matrix": {
+        "pass": {
+          "pass": 4,
+          "fail": 2,
+          "unknown": 0
+        },
+        "fail": {
+          "pass": 3,
+          "fail": 2,
+          "unknown": 1
+        },
+        "unknown": {
+          "pass": 1,
+          "fail": 0,
+          "unknown": 1
+        }
+      }
+    },
+    "value_unit": {
+      "agreed": 11,
+      "false_pass": 1,
+      "unknown_passed": 2,
+      "correct_rejected": 0,
+      "fixed_vs_cited": [
+        "e1df2a4553e44125befe1d3fe973d529",
+        "annual-wrong-year",
+        "annual-wrong-unit",
+        "annual-wrong-unread",
+        "apple-denominator"
+      ],
+      "regressed_vs_cited": [],
+      "matrix": {
+        "pass": {
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0
+        },
+        "fail": {
+          "pass": 1,
+          "fail": 5,
+          "unknown": 0
+        },
+        "unknown": {
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0
+        }
+      }
+    },
+    "grounded": {
+      "agreed": 14,
+      "false_pass": 0,
+      "unknown_passed": 0,
+      "correct_rejected": 0,
+      "fixed_vs_cited": [
+        "e1df2a4553e44125befe1d3fe973d529",
+        "annual-wrong-year",
+        "annual-wrong-unit",
+        "annual-unread",
+        "annual-wrong-unread",
+        "apple-denominator",
+        "apple-foreign-citation",
+        "quarter-header-missing"
+      ],
+      "regressed_vs_cited": [],
+      "matrix": {
+        "pass": {
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0
+        },
+        "fail": {
+          "pass": 0,
+          "fail": 6,
+          "unknown": 0
+        },
+        "unknown": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 2
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "run_id": "e1df2a4553e44125befe1d3fe973d529",
+      "case_id": "catl.annual",
+      "origin": "archived_model",
+      "reviewed": "fail",
+      "review_reason": "第 12 页的第四季度值冒充全年。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "fail",
+        "grounded": "fail"
+      },
+      "checks": {
+        "value_unit": "fail",
+        "page_support": "unknown",
+        "evidence_read": "available"
+      },
+      "expected": "133219982",
+      "unit": "千元"
+    },
+    {
+      "run_id": "dc3647af187e40a18d9f0d0109888fd4",
+      "case_id": "apple.margin",
+      "origin": "archived_model",
+      "reviewed": "pass",
+      "review_reason": "第 27 页 Products 毛利率的 2025 列为 36.8%。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "pass",
+        "grounded": "pass"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "36.8",
+      "unit": "%"
+    },
+    {
+      "run_id": "annual-correct",
+      "case_id": "catl.annual",
+      "origin": "scripted_fixture",
+      "reviewed": "pass",
+      "review_reason": "年度行及单位正确。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "pass",
+        "grounded": "pass"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "133219982",
+      "unit": "千元"
+    },
+    {
+      "run_id": "annual-from-quarters",
+      "case_id": "catl.annual",
+      "origin": "scripted_fixture",
+      "reviewed": "pass",
+      "review_reason": "合计与年度行一致，两页含列头和四个操作数。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "pass",
+        "grounded": "pass"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "133219982",
+      "unit": "千元"
+    },
+    {
+      "run_id": "annual-wrong-year",
+      "case_id": "catl.annual",
+      "origin": "scripted_fixture",
+      "reviewed": "fail",
+      "review_reason": "同页取了 2024 年的值。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "fail",
+        "grounded": "fail"
+      },
+      "checks": {
+        "value_unit": "fail",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "133219982",
+      "unit": "千元"
+    },
+    {
+      "run_id": "annual-wrong-unit",
+      "case_id": "catl.annual",
+      "origin": "scripted_fixture",
+      "reviewed": "fail",
+      "review_reason": "原表单位千元。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "fail",
+        "grounded": "fail"
+      },
+      "checks": {
+        "value_unit": "fail",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "133219982",
+      "unit": "千元"
+    },
+    {
+      "run_id": "q4-correct",
+      "case_id": "catl.q4",
+      "origin": "scripted_fixture",
+      "reviewed": "pass",
+      "review_reason": "季度口径正确，表头和续页同时提供。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "pass",
+        "grounded": "pass"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "52559552",
+      "unit": "千元"
+    },
+    {
+      "run_id": "annual-unread",
+      "case_id": "catl.annual",
+      "origin": "scripted_fixture",
+      "reviewed": "unknown",
+      "review_reason": "数值正确但当前回执证据读取超时。",
+      "scores": {
+        "cited": "pass",
+        "printed": "unknown",
+        "value_unit": "pass",
+        "grounded": "unknown"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "unknown",
+        "evidence_read": "timeout"
+      },
+      "expected": "133219982",
+      "unit": "千元"
+    },
+    {
+      "run_id": "annual-wrong-unread",
+      "case_id": "catl.annual",
+      "origin": "scripted_fixture",
+      "reviewed": "fail",
+      "review_reason": "已确认错数，证据超时另外保留。",
+      "scores": {
+        "cited": "pass",
+        "printed": "unknown",
+        "value_unit": "fail",
+        "grounded": "fail"
+      },
+      "checks": {
+        "value_unit": "fail",
+        "page_support": "unknown",
+        "evidence_read": "timeout"
+      },
+      "expected": "133219982",
+      "unit": "千元"
+    },
+    {
+      "run_id": "apple-growth-ok",
+      "case_id": "apple.growth",
+      "origin": "scripted_fixture",
+      "reviewed": "pass",
+      "review_reason": "从当期与上期服务收入复算。",
+      "scores": {
+        "cited": "pass",
+        "printed": "fail",
+        "value_unit": "pass",
+        "grounded": "pass"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "13.51",
+      "unit": "%"
+    },
+    {
+      "run_id": "apple-contrib-ok",
+      "case_id": "apple.contribution",
+      "origin": "scripted_fixture",
+      "reviewed": "pass",
+      "review_reason": "总净销售额增量作分母。",
+      "scores": {
+        "cited": "pass",
+        "printed": "fail",
+        "value_unit": "pass",
+        "grounded": "pass"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "51.70",
+      "unit": "%"
+    },
+    {
+      "run_id": "apple-denominator",
+      "case_id": "apple.contribution",
+      "origin": "scripted_fixture",
+      "reviewed": "fail",
+      "review_reason": "误用上年服务收入作分母。",
+      "scores": {
+        "cited": "pass",
+        "printed": "fail",
+        "value_unit": "fail",
+        "grounded": "fail"
+      },
+      "checks": {
+        "value_unit": "fail",
+        "page_support": "pass",
+        "evidence_read": "available"
+      },
+      "expected": "51.70",
+      "unit": "%"
+    },
+    {
+      "run_id": "apple-foreign-citation",
+      "case_id": "apple.contribution",
+      "origin": "scripted_fixture",
+      "reviewed": "fail",
+      "review_reason": "算对但引用了另一家公司。",
+      "scores": {
+        "cited": "pass",
+        "printed": "fail",
+        "value_unit": "pass",
+        "grounded": "fail"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "fail",
+        "evidence_read": "available"
+      },
+      "expected": "51.70",
+      "unit": "%"
+    },
+    {
+      "run_id": "quarter-header-missing",
+      "case_id": "catl.q4",
+      "origin": "scripted_fixture",
+      "reviewed": "unknown",
+      "review_reason": "续页有值但已提供的引用缺季度表头。",
+      "scores": {
+        "cited": "pass",
+        "printed": "pass",
+        "value_unit": "pass",
+        "grounded": "unknown"
+      },
+      "checks": {
+        "value_unit": "pass",
+        "page_support": "unknown",
+        "evidence_read": "available"
+      },
+      "expected": "52559552",
+      "unit": "千元"
+    }
+  ]
+}
