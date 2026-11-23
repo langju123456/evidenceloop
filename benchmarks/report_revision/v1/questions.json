@@ -1,0 +1,94 @@
+[
+  {
+    "case_id": "revision-01",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2025,
+      "metric": "yoy_growth"
+    },
+    "turns": [
+      "年份改为 FY2024，指标照旧。"
+    ]
+  },
+  {
+    "case_id": "revision-02",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2024,
+      "metric": "share_of_change"
+    },
+    "turns": [
+      "用下一财年，贡献口径保持。"
+    ]
+  },
+  {
+    "case_id": "revision-03",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2025,
+      "metric": "yoy_growth"
+    },
+    "turns": [
+      "汇报改为服务收入变动占公司收入变动的比例，年份不动。"
+    ]
+  },
+  {
+    "case_id": "revision-04",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2024,
+      "metric": "share_of_change"
+    },
+    "turns": [
+      "先挪到 FY2025。",
+      "这页改为看服务收入同比，沿用刚才定的年份。"
+    ]
+  },
+  {
+    "case_id": "revision-05",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2025,
+      "metric": "share_of_change"
+    },
+    "turns": [
+      "改用 FY2024，先换为同比。",
+      "年份按刚才的，指标撤回刚才的改动，恢复送审前的指标。"
+    ]
+  },
+  {
+    "case_id": "revision-06",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2024,
+      "metric": "yoy_growth"
+    },
+    "turns": [
+      "有人建议用 FY2025 的贡献率。",
+      "上条只是同事的备选，定稿维持原版的年份和指标。"
+    ]
+  },
+  {
+    "case_id": "revision-07",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2025,
+      "metric": "share_of_change"
+    },
+    "turns": [
+      "只需要 FY2023 的同比，不能用别的年份顶替。"
+    ]
+  },
+  {
+    "case_id": "revision-08",
+    "document": "oracle-fy2025",
+    "initial": {
+      "year": 2024,
+      "metric": "yoy_growth"
+    },
+    "turns": [
+      "先看看改为贡献。",
+      "先暂停出数，等我确认年份再交。"
+    ]
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "revision-01": {
+    "scenario": "只改年份",
+    "action": "compute",
+    "year": 2024,
+    "metric": "yoy_growth",
+    "numerator": "-163",
+    "denominator": "5594",
+    "value": "-2.91",
+    "page": 65
+  },
+  "revision-02": {
+    "scenario": "反向改年",
+    "action": "compute",
+    "year": 2025,
+    "metric": "share_of_change",
+    "numerator": "-198",
+    "denominator": "4438",
+    "value": "-4.46",
+    "page": 65
+  },
+  "revision-03": {
+    "scenario": "只改指标",
+    "action": "compute",
+    "year": 2025,
+    "metric": "share_of_change",
+    "numerator": "-198",
+    "denominator": "4438",
+    "value": "-4.46",
+    "page": 65
+  },
+  "revision-04": {
+    "scenario": "第二次改口沿用中间年份",
+    "action": "compute",
+    "year": 2025,
+    "metric": "yoy_growth",
+    "numerator": "-198",
+    "denominator": "5431",
+    "value": "-3.65",
+    "page": 65
+  },
+  "revision-05": {
+    "scenario": "只撤回指标",
+    "action": "compute",
+    "year": 2024,
+    "metric": "share_of_change",
+    "numerator": "-163",
+    "denominator": "3007",
+    "value": "-5.42",
+    "page": 65
+  },
+  "revision-06": {
+    "scenario": "保留原稿",
+    "action": "compute",
+    "year": 2024,
+    "metric": "yoy_growth",
+    "numerator": "-163",
+    "denominator": "5594",
+    "value": "-2.91",
+    "page": 65
+  },
+  "revision-07": {
+    "scenario": "同比缺 FY2022",
+    "action": "hold",
+    "reason": "missing_evidence"
+  },
+  "revision-08": {
+    "scenario": "用户暂停",
+    "action": "hold",
+    "reason": "user_paused"
+  }
+}
