@@ -44,3 +44,19 @@ def test_observable_wrong_year_and_missing_citation_remain_separate():
            "receipt": {"value": "17.4"}, "decision": {"year": 2025, "series": "Services",
                                                     "metric": "share_of_change", "pages": [26]}}
     assert hold.diagnose(row, {"page": 57}) == ["citation_does_not_locate_table", "wrong_fiscal_year"]
+
+
+def test_archived_results_score_again_from_first_responses_without_git():
+    folder = hold.ROOT / "reports/report-lab"
+    scored = read_json(folder / "issuer-results-v1.json")
+    baseline = calculation.summarize(hold.ROOT / hold.DATA / "questions.json",
+                                     hold.ROOT / hold.DATA / "references.json",
+                                     folder / "issuer-trials-v1.jsonl",
+                                     split="issuer_holdout_v1", freeze=scored["freeze_commit"])
+    assert len(scored["rows"]) == len(baseline["rows"]) == 24
+    assert scored["raw_sha256"] == baseline["raw_sha256"]
+    for actual, original in zip(scored["rows"], baseline["rows"]):
+        assert {k: actual[k] for k in original} == original
+    for arm, totals in scored["summaries"].items():
+        assert totals["pass"] == baseline["summaries"][arm]["pass"] == sum(totals["by_issuer"].values())
+        assert totals["pass"] + totals["failed"] + totals["unknown"] == totals["n"] == 8

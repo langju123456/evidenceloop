@@ -25,8 +25,15 @@ def test_review_page_uses_stored_archives_and_escapes_untrusted_content():
                               logs / "peer-runs-v1.json")
     assert page == (logs / "review.html").read_text()
     assert "收到 2 份" in page and "产品与收件回执" in page
+    assert "跨公司留出结果" in page and "印刷页 57" in page and "印刷页 77" in page
+    assert page.count("查看动作和核验记录") == 24
     parsed = Count()
     parsed.feed(page)
     assert parsed.case_count == 4
     assert parsed.openers >= 14 + 12 + 12
     assert '<img' not in review_page.pre('<img src=x onerror=alert(1)>')
+
+
+def test_partial_acquisition_preserves_existing_review(tmp_path):
+    (tmp_path / "issuer-trials-v1.jsonl").write_text('{"in_progress":true}\n')
+    assert review_page.holdout_section(tmp_path) == ""

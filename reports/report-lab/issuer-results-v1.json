@@ -1,0 +1,914 @@
+{
+  "model": [
+    "forgeflow-qwen3-8b-ctx16k:latest",
+    "7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5",
+    "0.32.1"
+  ],
+  "split": "issuer_holdout_v1",
+  "raw_sha256": "d88e94a632f17a8ad741a6de0d396a888c12ce19c8968a0d776d2f1d269b4cba",
+  "gold_sha256": "762af5278551564b34d57b3ad2901cbd1bce0eb936f1367066fbcc68d116d340",
+  "summaries": {
+    "direct": {
+      "n": 8,
+      "pass": 1,
+      "fixed": [],
+      "lost": [],
+      "unknown_to_pass": [],
+      "failed": 7,
+      "unknown": 0,
+      "by_issuer": {
+        "dell": 0,
+        "cisco": 1
+      },
+      "model_ms_sum": 42388,
+      "input_tokens": 1864,
+      "output_tokens": 169
+    },
+    "cells": {
+      "n": 8,
+      "pass": 3,
+      "fixed": [
+        "dell.2025.contribution",
+        "cisco.2025.contribution",
+        "cisco.2024.growth"
+      ],
+      "lost": [
+        "cisco.2025.growth"
+      ],
+      "unknown_to_pass": [],
+      "failed": 5,
+      "unknown": 0,
+      "by_issuer": {
+        "dell": 1,
+        "cisco": 2
+      },
+      "model_ms_sum": 61881,
+      "input_tokens": 2168,
+      "output_tokens": 318
+    },
+    "metric_tool": {
+      "n": 8,
+      "pass": 8,
+      "fixed": [
+        "dell.2025.growth",
+        "dell.2025.contribution",
+        "dell.2024.growth",
+        "dell.2024.contribution",
+        "cisco.2025.contribution",
+        "cisco.2024.growth",
+        "cisco.2024.contribution"
+      ],
+      "lost": [],
+      "unknown_to_pass": [],
+      "failed": 0,
+      "unknown": 0,
+      "by_issuer": {
+        "dell": 4,
+        "cisco": 4
+      },
+      "model_ms_sum": 58452,
+      "input_tokens": 2160,
+      "output_tokens": 296
+    }
+  },
+  "rows": [
+    {
+      "case_id": "dell.2025.growth",
+      "arm": "direct",
+      "run_id": "dell.2025.growth--direct",
+      "decision": {
+        "value": 2.85,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "2.85"
+      },
+      "expected": "0.31",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 6435,
+      "input_tokens": 231,
+      "output_tokens": 21,
+      "observed_errors": [
+        "wrong_number_internal_cause_unobserved"
+      ]
+    },
+    {
+      "case_id": "dell.2025.growth",
+      "arm": "cells",
+      "run_id": "dell.2025.growth--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "S24",
+          "S23"
+        ],
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24",
+            "S23"
+          ],
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "75",
+        "denominator": "1021",
+        "value": "7.35"
+      },
+      "expected": "0.31",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 9151,
+      "input_tokens": 269,
+      "output_tokens": 41,
+      "observed_errors": [
+        "different_denominator_cells"
+      ]
+    },
+    {
+      "case_id": "dell.2025.growth",
+      "arm": "metric_tool",
+      "run_id": "dell.2025.growth--metric_tool",
+      "decision": {
+        "metric": "yoy_growth",
+        "series": "Services",
+        "year": 2025,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "yoy_growth",
+          "series": "Services",
+          "year": 2025,
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "75",
+        "denominator": "24072",
+        "value": "0.31"
+      },
+      "expected": "0.31",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 8548,
+      "input_tokens": 268,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "dell.2025.contribution",
+      "arm": "cells",
+      "run_id": "dell.2025.contribution--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "T25",
+          "T24"
+        ],
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ],
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "75",
+        "denominator": "7142",
+        "value": "1.05"
+      },
+      "expected": "1.05",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7764,
+      "input_tokens": 275,
+      "output_tokens": 41,
+      "observed_errors": []
+    },
+    {
+      "case_id": "dell.2025.contribution",
+      "arm": "metric_tool",
+      "run_id": "dell.2025.contribution--metric_tool",
+      "decision": {
+        "metric": "share_of_change",
+        "series": "Services",
+        "year": 2025,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "share_of_change",
+          "series": "Services",
+          "year": 2025,
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "75",
+        "denominator": "7142",
+        "value": "1.05"
+      },
+      "expected": "1.05",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7090,
+      "input_tokens": 274,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "dell.2025.contribution",
+      "arm": "direct",
+      "run_id": "dell.2025.contribution--direct",
+      "decision": {
+        "value": 25.23,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "25.23"
+      },
+      "expected": "1.05",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 5415,
+      "input_tokens": 237,
+      "output_tokens": 22,
+      "observed_errors": [
+        "wrong_number_internal_cause_unobserved"
+      ]
+    },
+    {
+      "case_id": "dell.2024.growth",
+      "arm": "metric_tool",
+      "run_id": "dell.2024.growth--metric_tool",
+      "decision": {
+        "metric": "yoy_growth",
+        "series": "Services",
+        "year": 2024,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "yoy_growth",
+          "series": "Services",
+          "year": 2024,
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "1021",
+        "denominator": "23051",
+        "value": "4.43"
+      },
+      "expected": "4.43",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7295,
+      "input_tokens": 268,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "dell.2024.growth",
+      "arm": "direct",
+      "run_id": "dell.2024.growth--direct",
+      "decision": {
+        "value": 1.96,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "1.96"
+      },
+      "expected": "4.43",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 5121,
+      "input_tokens": 231,
+      "output_tokens": 21,
+      "observed_errors": [
+        "wrong_number_internal_cause_unobserved"
+      ]
+    },
+    {
+      "case_id": "dell.2024.growth",
+      "arm": "cells",
+      "run_id": "dell.2024.growth--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "S24",
+          "S23"
+        ],
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24",
+            "S23"
+          ],
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "75",
+        "denominator": "1021",
+        "value": "7.35"
+      },
+      "expected": "4.43",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 8091,
+      "input_tokens": 269,
+      "output_tokens": 41,
+      "observed_errors": [
+        "different_numerator_cells",
+        "different_denominator_cells"
+      ]
+    },
+    {
+      "case_id": "dell.2024.contribution",
+      "arm": "direct",
+      "run_id": "dell.2024.contribution--direct",
+      "decision": {
+        "value": 27.23,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "27.23"
+      },
+      "expected": "-7.36",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 5795,
+      "input_tokens": 237,
+      "output_tokens": 22,
+      "observed_errors": [
+        "wrong_number_internal_cause_unobserved"
+      ]
+    },
+    {
+      "case_id": "dell.2024.contribution",
+      "arm": "cells",
+      "run_id": "dell.2024.contribution--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "T25",
+          "T24"
+        ],
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ],
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "75",
+        "denominator": "7142",
+        "value": "1.05"
+      },
+      "expected": "-7.36",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 7842,
+      "input_tokens": 275,
+      "output_tokens": 41,
+      "observed_errors": [
+        "different_numerator_cells",
+        "different_denominator_cells"
+      ]
+    },
+    {
+      "case_id": "dell.2024.contribution",
+      "arm": "metric_tool",
+      "run_id": "dell.2024.contribution--metric_tool",
+      "decision": {
+        "metric": "share_of_change",
+        "series": "Services",
+        "year": 2024,
+        "pages": [
+          77
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "share_of_change",
+          "series": "Services",
+          "year": 2024,
+          "pages": [
+            77
+          ]
+        },
+        "numerator": "1021",
+        "denominator": "-13876",
+        "value": "-7.36"
+      },
+      "expected": "-7.36",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7224,
+      "input_tokens": 274,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2025.growth",
+      "arm": "cells",
+      "run_id": "cisco.2025.growth--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "S23"
+        ],
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S23"
+          ],
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "496",
+        "denominator": "13856",
+        "value": "3.58"
+      },
+      "expected": "3.41",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 7133,
+      "input_tokens": 267,
+      "output_tokens": 36,
+      "observed_errors": [
+        "different_denominator_cells"
+      ]
+    },
+    {
+      "case_id": "cisco.2025.growth",
+      "arm": "metric_tool",
+      "run_id": "cisco.2025.growth--metric_tool",
+      "decision": {
+        "metric": "yoy_growth",
+        "series": "Services",
+        "year": 2025,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "yoy_growth",
+          "series": "Services",
+          "year": 2025,
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "496",
+        "denominator": "14550",
+        "value": "3.41"
+      },
+      "expected": "3.41",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7109,
+      "input_tokens": 266,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2025.growth",
+      "arm": "direct",
+      "run_id": "cisco.2025.growth--direct",
+      "decision": {
+        "value": 3.41,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "3.41"
+      },
+      "expected": "3.41",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 5590,
+      "input_tokens": 229,
+      "output_tokens": 21,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2025.contribution",
+      "arm": "metric_tool",
+      "run_id": "cisco.2025.contribution--metric_tool",
+      "decision": {
+        "metric": "share_of_change",
+        "series": "Services",
+        "year": 2025,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "share_of_change",
+          "series": "Services",
+          "year": 2025,
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "496",
+        "denominator": "2851",
+        "value": "17.40"
+      },
+      "expected": "17.40",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7213,
+      "input_tokens": 272,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2025.contribution",
+      "arm": "direct",
+      "run_id": "cisco.2025.contribution--direct",
+      "decision": {
+        "value": 26,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "26"
+      },
+      "expected": "17.40",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 4784,
+      "input_tokens": 235,
+      "output_tokens": 19,
+      "observed_errors": [
+        "wrong_number_internal_cause_unobserved"
+      ]
+    },
+    {
+      "case_id": "cisco.2025.contribution",
+      "arm": "cells",
+      "run_id": "cisco.2025.contribution--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "T25",
+          "T24"
+        ],
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ],
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "496",
+        "denominator": "2851",
+        "value": "17.40"
+      },
+      "expected": "17.40",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7679,
+      "input_tokens": 273,
+      "output_tokens": 41,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2024.growth",
+      "arm": "direct",
+      "run_id": "cisco.2024.growth--direct",
+      "decision": {
+        "value": 3.41,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "3.41"
+      },
+      "expected": "5.01",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 4990,
+      "input_tokens": 229,
+      "output_tokens": 21,
+      "observed_errors": [
+        "wrong_number_internal_cause_unobserved"
+      ]
+    },
+    {
+      "case_id": "cisco.2024.growth",
+      "arm": "cells",
+      "run_id": "cisco.2024.growth--cells",
+      "decision": {
+        "numerator": [
+          "S24",
+          "S23"
+        ],
+        "denominator": [
+          "S23"
+        ],
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ],
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "694",
+        "denominator": "13856",
+        "value": "5.01"
+      },
+      "expected": "5.01",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 6925,
+      "input_tokens": 267,
+      "output_tokens": 36,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2024.growth",
+      "arm": "metric_tool",
+      "run_id": "cisco.2024.growth--metric_tool",
+      "decision": {
+        "metric": "yoy_growth",
+        "series": "Services",
+        "year": 2024,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "yoy_growth",
+          "series": "Services",
+          "year": 2024,
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "694",
+        "denominator": "13856",
+        "value": "5.01"
+      },
+      "expected": "5.01",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 6905,
+      "input_tokens": 266,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2024.contribution",
+      "arm": "cells",
+      "run_id": "cisco.2024.contribution--cells",
+      "decision": {
+        "numerator": [
+          "S25",
+          "S24"
+        ],
+        "denominator": [
+          "T25",
+          "T24"
+        ],
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ],
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "496",
+        "denominator": "2851",
+        "value": "17.40"
+      },
+      "expected": "-21.72",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 7296,
+      "input_tokens": 273,
+      "output_tokens": 41,
+      "observed_errors": [
+        "different_numerator_cells",
+        "different_denominator_cells"
+      ]
+    },
+    {
+      "case_id": "cisco.2024.contribution",
+      "arm": "metric_tool",
+      "run_id": "cisco.2024.contribution--metric_tool",
+      "decision": {
+        "metric": "share_of_change",
+        "series": "Services",
+        "year": 2024,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": "metric_tool",
+        "arguments": {
+          "metric": "share_of_change",
+          "series": "Services",
+          "year": 2024,
+          "pages": [
+            57
+          ]
+        },
+        "numerator": "694",
+        "denominator": "-3195",
+        "value": "-21.72"
+      },
+      "expected": "-21.72",
+      "verdict": "pass",
+      "error": null,
+      "model_ms": 7068,
+      "input_tokens": 272,
+      "output_tokens": 37,
+      "observed_errors": []
+    },
+    {
+      "case_id": "cisco.2024.contribution",
+      "arm": "direct",
+      "run_id": "cisco.2024.contribution--direct",
+      "decision": {
+        "value": 27.47,
+        "pages": [
+          57
+        ]
+      },
+      "receipt": {
+        "tool": null,
+        "value": "27.47"
+      },
+      "expected": "-21.72",
+      "verdict": "fail",
+      "error": null,
+      "model_ms": 4258,
+      "input_tokens": 235,
+      "output_tokens": 22,
+      "observed_errors": [
+        "wrong_number_internal_cause_unobserved"
+      ]
+    }
+  ],
+  "candidate_meets_pilot_gate": true,
+  "freeze_commit": "0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe",
+  "frozen_sha256": {
+    "benchmarks/report_holdout/v1/protocol.json": "822b5247d9507c829819787656fa78b0a90c64f4d078f58e2b083f73d45a6b6f",
+    "benchmarks/report_holdout/v1/questions.json": "915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393",
+    "benchmarks/report_holdout/v1/references.json": "762af5278551564b34d57b3ad2901cbd1bce0eb936f1367066fbcc68d116d340",
+    "src/evidenceloop/report/issuer_holdout.py": "5d088a24dff21057af66339641c62ccb1dc3cbb7098af2c316e793b0ee17671f",
+    "src/evidenceloop/report/calculation.py": "46bd8cbcb4b3e198c2c6d7fe50b869daad72d9ab90d5a4a26a722f738b32cc14",
+    "src/evidenceloop/report/evidence_trials.py": "b076fb359352dc766e0c7df2964d0f0347ac83c8349640e8f8f05035cfb75285",
+    "src/evidenceloop/report/annual.py": "e53586a8677d8d81378cf796adc545f4036e1f31c41321bfd7e6114845770919",
+    "src/evidenceloop/cli.py": "e86d2fb15d30803fdddc27ffef78c6efd92c28b46faabcda66adfad81da186c0",
+    "docs/report-lab/06-cross-document.md": "cc3fef0488b630fa2b3e2ca1a755515a3e1b8d496613032af1c1fe24751c4ea8"
+  },
+  "issuer_families": 2,
+  "independent_human_reviews": 0
+}

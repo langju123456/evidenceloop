@@ -7,7 +7,7 @@ h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin
 .tag{border:1px solid;padding:2px 7px;border-radius:6px;font-size:13px}.pass{color:#185d41}.fail{color:#9b3224}.unknown{color:#775713}
 summary{cursor:pointer;padding:5px 0;overflow-wrap:anywhere}pre{background:#eef3ef;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace}
 blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history>details{border-top:1px solid #ccd9d2;padding:8px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
+</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#holdout">跨公司留出结果</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
 <p><label>关联本地原年报 <input id="pdf" type="file" accept="application/pdf" multiple></label><br>
 <span id="pdf-status" class="muted" role="status">选取原 PDF 后可从表格页码打开原页。文件只在本浏览器读取。</span></p>
 <h2 id="trial">给同一模型补上列头后，哪些题答对了？</h2><p>forgeflow-qwen3-8b-ctx16k:latest · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p><div class='scroll'><table><thead><tr><th scope='col'>输入条件</th><th scope='col'>核准 / 总题数</th><th scope='col'>待核实</th><th scope='col'>相对仅数值行修好</th><th scope='col'>退化</th></tr></thead><tbody><tr><td>仅数值行</td><td>0 / 4</td><td>0</td><td>—</td><td>—</td></tr><tr><td>同样的行＋列头</td><td>1 / 4</td><td>1</td><td>catl.annual</td><td>—</td></tr><tr><td>人工选行＋列头</td><td>2 / 4</td><td>0</td><td>catl.annual、catl.q4</td><td>—</td></tr></tbody></table></div><section class='case'><h3>宁德时代 2025 年经营活动产生的现金流量净额是多少？</h3><p class='muted'>catl.annual · catl_2025_annual_zh.pdf</p><details><summary>核对原表摘录与文件指纹</summary><div class='scroll'><table><thead><tr><th scope='col'>原表行</th><th scope='col'>列</th><th scope='col'>标注值</th><th scope='col'>PDF 页</th></tr></thead><tbody><tr><td>经营活动产生的现金流量净额</td><td>2025年</td><td>133219982 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第一季度</td><td>32868257 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第二季度</td><td>25818809 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第三季度</td><td>21973364 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr><tr><td>经营活动产生的现金流量净额</td><td>第四季度</td><td>52559552 千元</td><td>表头 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a> · 数值 <a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="12" target="_blank" rel="noopener noreferrer">第 12 页</a></td></tr></tbody></table></div><pre>c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9</pre></details><div class='grid'><article><h4>仅数值行</h4><span class="tag fail">未通过</span><p class='num'>abstained</p><p>年报摘录中未明确给出2025年的具体数值，仅提供了2024年及以前的数据和部分对比信息。</p><p>引用页 [11, 12] · 数值 — · 出处 —</p><p>11480 ms · token 253 入 / 71 出</p><details><summary>查看模型可见的摘录</summary><pre>宁德时代 2025 年经营活动产生的现金流量净额是多少？
@@ -1663,6 +1663,2021 @@ p26 Total net sales (USD millions) | 416,161 | 6% | 391,035 | 2% | 383,285</pre>
     &quot;eval_duration&quot;: 4218308000
   },
   &quot;latency_ms&quot;: 6799
+}</pre></details></td></tr></tbody></table></div><h2 id='holdout'>换成 Dell 和 Cisco 年报，公式选择还能用吗？</h2><p>8 道冻结题，24 次本地调用。业务公式候选达到预设试点门槛。独立人工复核 0 份。推理前冻结提交 <code>0772ba8c3c0d</code>。</p><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>核准</th><th scope='col'>Dell</th><th scope='col'>Cisco</th><th scope='col'>待核</th><th scope='col'>相对直接回答修好</th><th scope='col'>退化</th><th scope='col'>模型总秒数</th></tr></thead><tbody><tr><td>直接回答</td><td>1/8</td><td>0/4</td><td>1/4</td><td>0</td><td>—</td><td>—</td><td>42.39</td></tr><tr><td>选择原格</td><td>3/8</td><td>1/4</td><td>2/4</td><td>0</td><td>dell.2025.contribution、cisco.2025.contribution、cisco.2024.growth</td><td>cisco.2025.growth</td><td>61.88</td></tr><tr><td>选择业务函数</td><td>8/8</td><td>4/4</td><td>4/4</td><td>0</td><td>dell.2025.growth、dell.2025.contribution、dell.2024.growth、dell.2024.contribution、cisco.2025.contribution、cisco.2024.growth、cisco.2024.contribution</td><td>—</td><td>58.45</td></tr></tbody></table></div><h3>请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 77 页，Consolidated Statements of Income，单位百万美元。
+Services | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051
+Total net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301</pre><a href="https://investors.delltechnologies.com/_assets/_68d5f5cb646dff05d81f360ff6dc8916/delltechnologies/db/3572/34587/file/Fiscal_Year_2025_Annual_Report_on_Form_10-K.FINAL_.pdf#page=77" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 77）</a><pre>cb701ce3fcddf1b3fb18a0055226f63a05d57f93114de758822558512729dd7e</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>直接回答</td><td><span class="tag fail">未通过</span></td><td>2.85</td><td>0.31</td><td>6435</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 2.85,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;2.85&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;wrong_number_internal_cause_unobserved&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2025.growth&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;dell.2025.growth--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:08:52.595595Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 2.85,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6426078916,
+    &quot;load_duration&quot;: 165441541,
+    &quot;prompt_eval_count&quot;: 231,
+    &quot;prompt_eval_duration&quot;: 4029921000,
+    &quot;eval_count&quot;: 21,
+    &quot;eval_duration&quot;: 2153980000
+  },
+  &quot;latency_ms&quot;: 6435
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag fail">未通过</span></td><td>7.35</td><td>0.31</td><td>9151</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;S24&quot;,
+      &quot;S23&quot;
+    ],
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S25&quot;,
+        &quot;S24&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;S24&quot;,
+        &quot;S23&quot;
+      ],
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;75&quot;,
+    &quot;denominator&quot;: &quot;1021&quot;,
+    &quot;value&quot;: &quot;7.35&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;different_denominator_cells&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2025.growth&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;dell.2025.growth--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:01.74678Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;S24\&quot;, \&quot;S23\&quot;],\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 9113242916,
+    &quot;load_duration&quot;: 658744541,
+    &quot;prompt_eval_count&quot;: 269,
+    &quot;prompt_eval_duration&quot;: 3652436000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 4739643000
+  },
+  &quot;latency_ms&quot;: 9151
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>0.31</td><td>0.31</td><td>8548</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;yoy_growth&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2025,
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;75&quot;,
+    &quot;denominator&quot;: &quot;24072&quot;,
+    &quot;value&quot;: &quot;0.31&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2025.growth&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;dell.2025.growth--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:10.296397Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;yoy_growth\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2025,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 8530614083,
+    &quot;load_duration&quot;: 337743542,
+    &quot;prompt_eval_count&quot;: 268,
+    &quot;prompt_eval_duration&quot;: 3744194000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4422414000
+  },
+  &quot;latency_ms&quot;: 8548
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 77 页，Consolidated Statements of Income，单位百万美元。
+Services | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051
+Total net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301</pre><a href="https://investors.delltechnologies.com/_assets/_68d5f5cb646dff05d81f360ff6dc8916/delltechnologies/db/3572/34587/file/Fiscal_Year_2025_Annual_Report_on_Form_10-K.FINAL_.pdf#page=77" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 77）</a><pre>cb701ce3fcddf1b3fb18a0055226f63a05d57f93114de758822558512729dd7e</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>选择原格</td><td><span class="tag pass">已核准</span></td><td>1.05</td><td>1.05</td><td>7764</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ],
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S25&quot;,
+        &quot;S24&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;T25&quot;,
+        &quot;T24&quot;
+      ],
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;75&quot;,
+    &quot;denominator&quot;: &quot;7142&quot;,
+    &quot;value&quot;: &quot;1.05&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;dell.2025.contribution--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:18.060981Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;T25\&quot;, \&quot;T24\&quot;],\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7750789375,
+    &quot;load_duration&quot;: 290420166,
+    &quot;prompt_eval_count&quot;: 275,
+    &quot;prompt_eval_duration&quot;: 2691775000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 4730503000
+  },
+  &quot;latency_ms&quot;: 7764
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>1.05</td><td>1.05</td><td>7090</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;share_of_change&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2025,
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;75&quot;,
+    &quot;denominator&quot;: &quot;7142&quot;,
+    &quot;value&quot;: &quot;1.05&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;dell.2025.contribution--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:25.151036Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;share_of_change\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2025,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7077474209,
+    &quot;load_duration&quot;: 248387792,
+    &quot;prompt_eval_count&quot;: 274,
+    &quot;prompt_eval_duration&quot;: 2613892000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4190169000
+  },
+  &quot;latency_ms&quot;: 7090
+}</pre></details></td></tr><tr><td>直接回答</td><td><span class="tag fail">未通过</span></td><td>25.23</td><td>1.05</td><td>5415</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 25.23,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;25.23&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;wrong_number_internal_cause_unobserved&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;dell.2025.contribution--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:30.565135Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 25.23,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5401660500,
+    &quot;load_duration&quot;: 232980291,
+    &quot;prompt_eval_count&quot;: 237,
+    &quot;prompt_eval_duration&quot;: 2828743000,
+    &quot;eval_count&quot;: 22,
+    &quot;eval_duration&quot;: 2323219000
+  },
+  &quot;latency_ms&quot;: 5415
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 77 页，Consolidated Statements of Income，单位百万美元。
+Services | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051
+Total net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301</pre><a href="https://investors.delltechnologies.com/_assets/_68d5f5cb646dff05d81f360ff6dc8916/delltechnologies/db/3572/34587/file/Fiscal_Year_2025_Annual_Report_on_Form_10-K.FINAL_.pdf#page=77" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 77）</a><pre>cb701ce3fcddf1b3fb18a0055226f63a05d57f93114de758822558512729dd7e</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>4.43</td><td>4.43</td><td>7295</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;yoy_growth&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2024,
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;1021&quot;,
+    &quot;denominator&quot;: &quot;23051&quot;,
+    &quot;value&quot;: &quot;4.43&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2024.growth&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;dell.2024.growth--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:37.863214Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;yoy_growth\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2024,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7271337292,
+    &quot;load_duration&quot;: 376826500,
+    &quot;prompt_eval_count&quot;: 268,
+    &quot;prompt_eval_duration&quot;: 2589093000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4273859999
+  },
+  &quot;latency_ms&quot;: 7295
+}</pre></details></td></tr><tr><td>直接回答</td><td><span class="tag fail">未通过</span></td><td>1.96</td><td>4.43</td><td>5121</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 1.96,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;1.96&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;wrong_number_internal_cause_unobserved&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2024.growth&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;dell.2024.growth--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:42.984801Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 1.96,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5107187042,
+    &quot;load_duration&quot;: 253609209,
+    &quot;prompt_eval_count&quot;: 231,
+    &quot;prompt_eval_duration&quot;: 2664852000,
+    &quot;eval_count&quot;: 21,
+    &quot;eval_duration&quot;: 2179810000
+  },
+  &quot;latency_ms&quot;: 5121
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag fail">未通过</span></td><td>7.35</td><td>4.43</td><td>8091</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;S24&quot;,
+      &quot;S23&quot;
+    ],
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S25&quot;,
+        &quot;S24&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;S24&quot;,
+        &quot;S23&quot;
+      ],
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;75&quot;,
+    &quot;denominator&quot;: &quot;1021&quot;,
+    &quot;value&quot;: &quot;7.35&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;different_numerator_cells&quot;,
+    &quot;different_denominator_cells&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2024.growth&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;dell.2024.growth--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:51.074257Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;S24\&quot;, \&quot;S23\&quot;],\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 8077503625,
+    &quot;load_duration&quot;: 239142083,
+    &quot;prompt_eval_count&quot;: 269,
+    &quot;prompt_eval_duration&quot;: 2775053000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 5041604000
+  },
+  &quot;latency_ms&quot;: 8091
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 77 页，Consolidated Statements of Income，单位百万美元。
+Services | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051
+Total net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301</pre><a href="https://investors.delltechnologies.com/_assets/_68d5f5cb646dff05d81f360ff6dc8916/delltechnologies/db/3572/34587/file/Fiscal_Year_2025_Annual_Report_on_Form_10-K.FINAL_.pdf#page=77" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 77）</a><pre>cb701ce3fcddf1b3fb18a0055226f63a05d57f93114de758822558512729dd7e</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>直接回答</td><td><span class="tag fail">未通过</span></td><td>27.23</td><td>-7.36</td><td>5795</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 27.23,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;27.23&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;wrong_number_internal_cause_unobserved&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;dell.2024.contribution--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:09:56.871915Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 27.23,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5767063875,
+    &quot;load_duration&quot;: 1145011875,
+    &quot;prompt_eval_count&quot;: 237,
+    &quot;prompt_eval_duration&quot;: 2324670000,
+    &quot;eval_count&quot;: 22,
+    &quot;eval_duration&quot;: 2269810000
+  },
+  &quot;latency_ms&quot;: 5795
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag fail">未通过</span></td><td>1.05</td><td>-7.36</td><td>7842</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ],
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S25&quot;,
+        &quot;S24&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;T25&quot;,
+        &quot;T24&quot;
+      ],
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;75&quot;,
+    &quot;denominator&quot;: &quot;7142&quot;,
+    &quot;value&quot;: &quot;1.05&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;different_numerator_cells&quot;,
+    &quot;different_denominator_cells&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;dell.2024.contribution--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:04.71416Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;T25\&quot;, \&quot;T24\&quot;],\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7830628875,
+    &quot;load_duration&quot;: 223578708,
+    &quot;prompt_eval_count&quot;: 275,
+    &quot;prompt_eval_duration&quot;: 2870094000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 4721042000
+  },
+  &quot;latency_ms&quot;: 7842
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>-7.36</td><td>-7.36</td><td>7224</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      77
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;share_of_change&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2024,
+      &quot;pages&quot;: [
+        77
+      ]
+    },
+    &quot;numerator&quot;: &quot;1021&quot;,
+    &quot;denominator&quot;: &quot;-13876&quot;,
+    &quot;value&quot;: &quot;-7.36&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;dell.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;dell.2024.contribution--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;dell&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Dell Technologies FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 77 页，Consolidated Statements of Income，单位百万美元。\nServices | FY2025 [S25] 24147 | FY2024 [S24] 24072 | FY2023 [S23] 23051\nTotal net revenue | FY2025 [T25] 95567 | FY2024 [T24] 88425 | FY2023 [T23] 102301&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:11.938562Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;share_of_change\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2024,\n  \&quot;pages\&quot;: [77]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7211393125,
+    &quot;load_duration&quot;: 248080250,
+    &quot;prompt_eval_count&quot;: 274,
+    &quot;prompt_eval_duration&quot;: 2767566000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4150901000
+  },
+  &quot;latency_ms&quot;: 7224
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 57 页，Consolidated Statements of Operations，单位百万美元。
+Services | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856
+Total revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998</pre><a href="https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf#page=75" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 57）</a><pre>85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>选择原格</td><td><span class="tag fail">未通过</span></td><td>3.58</td><td>3.41</td><td>7133</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;S23&quot;
+    ],
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S25&quot;,
+        &quot;S24&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;S23&quot;
+      ],
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;496&quot;,
+    &quot;denominator&quot;: &quot;13856&quot;,
+    &quot;value&quot;: &quot;3.58&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;different_denominator_cells&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2025.growth&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;cisco.2025.growth--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:19.071704Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;S23\&quot;],\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7121494084,
+    &quot;load_duration&quot;: 225103584,
+    &quot;prompt_eval_count&quot;: 267,
+    &quot;prompt_eval_duration&quot;: 2764651000,
+    &quot;eval_count&quot;: 36,
+    &quot;eval_duration&quot;: 4123160000
+  },
+  &quot;latency_ms&quot;: 7133
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>3.41</td><td>3.41</td><td>7109</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;yoy_growth&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2025,
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;496&quot;,
+    &quot;denominator&quot;: &quot;14550&quot;,
+    &quot;value&quot;: &quot;3.41&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2025.growth&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;cisco.2025.growth--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:26.182308Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;yoy_growth\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2025,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7091474333,
+    &quot;load_duration&quot;: 378857833,
+    &quot;prompt_eval_count&quot;: 266,
+    &quot;prompt_eval_duration&quot;: 2579042000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4107099000
+  },
+  &quot;latency_ms&quot;: 7109
+}</pre></details></td></tr><tr><td>直接回答</td><td><span class="tag pass">已核准</span></td><td>3.41</td><td>3.41</td><td>5590</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 3.41,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;3.41&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2025.growth&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;cisco.2025.growth--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:31.77253Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 3.41,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 5578921375,
+    &quot;load_duration&quot;: 223908375,
+    &quot;prompt_eval_count&quot;: 229,
+    &quot;prompt_eval_duration&quot;: 3268136000,
+    &quot;eval_count&quot;: 21,
+    &quot;eval_duration&quot;: 2080996999
+  },
+  &quot;latency_ms&quot;: 5590
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 57 页，Consolidated Statements of Operations，单位百万美元。
+Services | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856
+Total revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998</pre><a href="https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf#page=75" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 57）</a><pre>85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>17.40</td><td>17.40</td><td>7213</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2025,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;share_of_change&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2025,
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;496&quot;,
+    &quot;denominator&quot;: &quot;2851&quot;,
+    &quot;value&quot;: &quot;17.40&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;cisco.2025.contribution--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:38.985602Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;share_of_change\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2025,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7201383083,
+    &quot;load_duration&quot;: 188122333,
+    &quot;prompt_eval_count&quot;: 272,
+    &quot;prompt_eval_duration&quot;: 2947681000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4056299000
+  },
+  &quot;latency_ms&quot;: 7213
+}</pre></details></td></tr><tr><td>直接回答</td><td><span class="tag fail">未通过</span></td><td>26</td><td>17.40</td><td>4784</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 26,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;26&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;wrong_number_internal_cause_unobserved&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;cisco.2025.contribution--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:43.769275Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 26,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4769760583,
+    &quot;load_duration&quot;: 459534875,
+    &quot;prompt_eval_count&quot;: 235,
+    &quot;prompt_eval_duration&quot;: 2500252000,
+    &quot;eval_count&quot;: 19,
+    &quot;eval_duration&quot;: 1797531000
+  },
+  &quot;latency_ms&quot;: 4784
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag pass">已核准</span></td><td>17.40</td><td>17.40</td><td>7679</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ],
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S25&quot;,
+        &quot;S24&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;T25&quot;,
+        &quot;T24&quot;
+      ],
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;496&quot;,
+    &quot;denominator&quot;: &quot;2851&quot;,
+    &quot;value&quot;: &quot;17.40&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2025.contribution&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;cisco.2025.contribution--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2025 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:51.449916Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;T25\&quot;, \&quot;T24\&quot;],\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7667451083,
+    &quot;load_duration&quot;: 193546916,
+    &quot;prompt_eval_count&quot;: 273,
+    &quot;prompt_eval_duration&quot;: 2984460000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 4481064000
+  },
+  &quot;latency_ms&quot;: 7679
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 57 页，Consolidated Statements of Operations，单位百万美元。
+Services | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856
+Total revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998</pre><a href="https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf#page=75" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 57）</a><pre>85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>直接回答</td><td><span class="tag fail">未通过</span></td><td>3.41</td><td>5.01</td><td>4990</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 3.41,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;3.41&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;wrong_number_internal_cause_unobserved&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2024.growth&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;cisco.2024.growth--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:10:56.441022Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 3.41,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4976381625,
+    &quot;load_duration&quot;: 279441292,
+    &quot;prompt_eval_count&quot;: 229,
+    &quot;prompt_eval_duration&quot;: 2577707000,
+    &quot;eval_count&quot;: 21,
+    &quot;eval_duration&quot;: 2071228000
+  },
+  &quot;latency_ms&quot;: 4990
+}</pre></details></td></tr><tr><td>选择原格</td><td><span class="tag pass">已核准</span></td><td>5.01</td><td>5.01</td><td>6925</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S24&quot;,
+      &quot;S23&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;S23&quot;
+    ],
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S24&quot;,
+        &quot;S23&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;S23&quot;
+      ],
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;694&quot;,
+    &quot;denominator&quot;: &quot;13856&quot;,
+    &quot;value&quot;: &quot;5.01&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2024.growth&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;cisco.2024.growth--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:11:03.366754Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S24\&quot;, \&quot;S23\&quot;],\n  \&quot;denominator\&quot;: [\&quot;S23\&quot;],\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6915638583,
+    &quot;load_duration&quot;: 171428417,
+    &quot;prompt_eval_count&quot;: 267,
+    &quot;prompt_eval_duration&quot;: 2925204000,
+    &quot;eval_count&quot;: 36,
+    &quot;eval_duration&quot;: 3805636000
+  },
+  &quot;latency_ms&quot;: 6925
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>5.01</td><td>5.01</td><td>6905</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;yoy_growth&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;yoy_growth&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2024,
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;694&quot;,
+    &quot;denominator&quot;: &quot;13856&quot;,
+    &quot;value&quot;: &quot;5.01&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2024.growth&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;cisco.2024.growth--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入同比增速。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:11:10.271577Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;yoy_growth\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2024,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 6889594417,
+    &quot;load_duration&quot;: 249696583,
+    &quot;prompt_eval_count&quot;: 266,
+    &quot;prompt_eval_duration&quot;: 2630613000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 3972111000
+  },
+  &quot;latency_ms&quot;: 6905
+}</pre></details></td></tr></tbody></table></div><h3>请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。</h3><details><summary>模型看到的财报摘录</summary><pre>第 57 页，Consolidated Statements of Operations，单位百万美元。
+Services | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856
+Total revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998</pre><a href="https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf#page=75" target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 57）</a><pre>85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb</pre></details><div class='scroll'><table><thead><tr><th scope='col'>做法</th><th scope='col'>结论</th><th scope='col'>回答 %</th><th scope='col'>参考 %</th><th scope='col'>毫秒</th><th scope='col'>证据</th></tr></thead><tbody><tr><td>选择原格</td><td><span class="tag fail">未通过</span></td><td>17.40</td><td>-21.72</td><td>7296</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;numerator&quot;: [
+      &quot;S25&quot;,
+      &quot;S24&quot;
+    ],
+    &quot;denominator&quot;: [
+      &quot;T25&quot;,
+      &quot;T24&quot;
+    ],
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;cells&quot;,
+    &quot;arguments&quot;: {
+      &quot;numerator&quot;: [
+        &quot;S25&quot;,
+        &quot;S24&quot;
+      ],
+      &quot;denominator&quot;: [
+        &quot;T25&quot;,
+        &quot;T24&quot;
+      ],
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;496&quot;,
+    &quot;denominator&quot;: &quot;2851&quot;,
+    &quot;value&quot;: &quot;17.40&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;different_numerator_cells&quot;,
+    &quot;different_denominator_cells&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;cells&quot;,
+  &quot;run_id&quot;: &quot;cisco.2024.contribution--cells&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择原表操作数，工具执行 100 × 分子 / 分母。JSON 字段 numerator 和 denominator 各为一到两个格 ID 的列表；单格取原值，两格按顺序相减。pages 为页码整数列表。只允许给格 ID。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:11:17.56844Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;numerator\&quot;: [\&quot;S25\&quot;, \&quot;S24\&quot;],\n  \&quot;denominator\&quot;: [\&quot;T25\&quot;, \&quot;T24\&quot;],\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7282404000,
+    &quot;load_duration&quot;: 267582208,
+    &quot;prompt_eval_count&quot;: 273,
+    &quot;prompt_eval_duration&quot;: 2630895000,
+    &quot;eval_count&quot;: 41,
+    &quot;eval_duration&quot;: 4371178000
+  },
+  &quot;latency_ms&quot;: 7296
+}</pre></details></td></tr><tr><td>选择业务函数</td><td><span class="tag pass">已核准</span></td><td>-21.72</td><td>-21.72</td><td>7068</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;metric&quot;: &quot;share_of_change&quot;,
+    &quot;series&quot;: &quot;Services&quot;,
+    &quot;year&quot;: 2024,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: &quot;metric_tool&quot;,
+    &quot;arguments&quot;: {
+      &quot;metric&quot;: &quot;share_of_change&quot;,
+      &quot;series&quot;: &quot;Services&quot;,
+      &quot;year&quot;: 2024,
+      &quot;pages&quot;: [
+        57
+      ]
+    },
+    &quot;numerator&quot;: &quot;694&quot;,
+    &quot;denominator&quot;: &quot;-3195&quot;,
+    &quot;value&quot;: &quot;-21.72&quot;
+  },
+  &quot;可见差异&quot;: [],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;metric_tool&quot;,
+  &quot;run_id&quot;: &quot;cisco.2024.contribution--metric_tool&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。选择计算函数及参数。JSON 字段 metric（yoy_growth 同比增速，或 share_of_change 增量贡献），series（Services 或 Total），year（目标财年整数），pages（页码整数列表）。增量贡献以所选业务增量除以总收入增量。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:11:24.637071Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;metric\&quot;: \&quot;share_of_change\&quot;,\n  \&quot;series\&quot;: \&quot;Services\&quot;,\n  \&quot;year\&quot;: 2024,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 7056708541,
+    &quot;load_duration&quot;: 229790750,
+    &quot;prompt_eval_count&quot;: 272,
+    &quot;prompt_eval_duration&quot;: 2613969000,
+    &quot;eval_count&quot;: 37,
+    &quot;eval_duration&quot;: 4205310999
+  },
+  &quot;latency_ms&quot;: 7068
+}</pre></details></td></tr><tr><td>直接回答</td><td><span class="tag fail">未通过</span></td><td>27.47</td><td>-21.72</td><td>4258</td><td><details><summary>查看动作和核验记录</summary><pre>{
+  &quot;动作&quot;: {
+    &quot;value&quot;: 27.47,
+    &quot;pages&quot;: [
+      57
+    ]
+  },
+  &quot;执行&quot;: {
+    &quot;tool&quot;: null,
+    &quot;value&quot;: &quot;27.47&quot;
+  },
+  &quot;可见差异&quot;: [
+    &quot;wrong_number_internal_cause_unobserved&quot;
+  ],
+  &quot;错误&quot;: null
+}</pre><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;case_id&quot;: &quot;cisco.2024.contribution&quot;,
+  &quot;arm&quot;: &quot;direct&quot;,
+  &quot;run_id&quot;: &quot;cisco.2024.contribution--direct&quot;,
+  &quot;attempt&quot;: 1,
+  &quot;split&quot;: &quot;issuer_holdout_v1&quot;,
+  &quot;source_kind&quot;: &quot;local_model&quot;,
+  &quot;document&quot;: &quot;cisco&quot;,
+  &quot;document_input&quot;: &quot;curated_public_excerpts&quot;,
+  &quot;prompt_file_sha256&quot;: &quot;915ee017d575676341814b7f5f9b189a01e008f9837702b97817650c372e2393&quot;,
+  &quot;model_digest&quot;: &quot;7ef4ca800d20a0ceaca9c42647f7626e6174aa47a5b32cbbc70276561557eaa5&quot;,
+  &quot;ollama_version&quot;: &quot;0.32.1&quot;,
+  &quot;request&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;stream&quot;: false,
+    &quot;think&quot;: false,
+    &quot;format&quot;: &quot;json&quot;,
+    &quot;options&quot;: {
+      &quot;num_ctx&quot;: 4096,
+      &quot;num_predict&quot;: 160,
+      &quot;seed&quot;: 23,
+      &quot;temperature&quot;: 0
+    },
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;只用给定证据，只输出一个 JSON 对象。直接给最终百分数。JSON 字段为 value（不含百分号的数字）、pages（页码整数列表）。&quot;
+      },
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;请根据 Cisco Systems FY2025 年报，计算 FY2024 服务收入净变动占公司总收入净变动的比例。用原金额重新计算，保留正负号，百分比保留两位，附页码。\n第 57 页，Consolidated Statements of Operations，单位百万美元。\nServices | FY2025 [S25] 15046 | FY2024 [S24] 14550 | FY2023 [S23] 13856\nTotal revenue | FY2025 [T25] 56654 | FY2024 [T24] 53803 | FY2023 [T23] 56998&quot;
+      }
+    ]
+  },
+  &quot;tool_actions&quot;: [],
+  &quot;cost&quot;: {
+    &quot;external_charge_usd&quot;: 0,
+    &quot;energy_cost&quot;: null
+  },
+  &quot;freeze_commit&quot;: &quot;0772ba8c3c0d38cada2dc2624daf2cf9f5f41afe&quot;,
+  &quot;response&quot;: {
+    &quot;model&quot;: &quot;forgeflow-qwen3-8b-ctx16k:latest&quot;,
+    &quot;created_at&quot;: &quot;2026-11-23T15:11:28.895492Z&quot;,
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: &quot;{\n  \&quot;value\&quot;: 27.47,\n  \&quot;pages\&quot;: [57]\n}&quot;
+    },
+    &quot;done&quot;: true,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 4250911791,
+    &quot;load_duration&quot;: 131952625,
+    &quot;prompt_eval_count&quot;: 235,
+    &quot;prompt_eval_duration&quot;: 2599137000,
+    &quot;eval_count&quot;: 22,
+    &quot;eval_duration&quot;: 1513507000
+  },
+  &quot;latency_ms&quot;: 4258
 }</pre></details></td></tr></tbody></table></div><h2 id='peers'>产品答对了吗？收件方拿到了几份？</h2><h3>ForgeFlow 的年度现金流问答</h3><p>四次请求经过产品 API 和本地计算工具。评分逐项核对宁德时代年报第 11 页。2022 年超出该表列示范围，保留为待核实。</p><div class='scroll'><table><thead><tr><th scope='col'>用户问题</th><th scope='col'>产品回答</th><th scope='col'>核验</th><th scope='col'>出处</th><th scope='col'>毫秒</th><th scope='col'>记录</th></tr></thead><tbody><tr><td>宁德时代 2025 年经营活动产生的现金流量净额是多少？</td><td>宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。</td><td><span class="tag pass">已核准</span></td><td><a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="11" target="_blank" rel="noopener noreferrer">第 11 页</a>、<a data-hash="c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9" data-page="30" target="_blank" rel="noopener noreferrer">第 30 页</a></td><td>945.1</td><td><details><summary>查看问答回执</summary><pre>{
   &quot;run_id&quot;: &quot;forgeflow/e195a0a2f764/annual-cash/2025&quot;,
   &quot;id_origin&quot;: &quot;derived_from_archive&quot;,

@@ -4,8 +4,8 @@ import json
 from html import escape
 from pathlib import Path
 
-from evidenceloop.report import calculation, peer_runs
-from evidenceloop.report.annual import compare, read_json, read_lines
+from evidenceloop.report import calculation, issuer_holdout, peer_runs
+from evidenceloop.report.annual import compare, digest, read_json, read_lines
 from evidenceloop.report.evidence_trials import ARMS, summarize
 
 ARM_NAMES = {"row":"仅数值行", "header":"同样的行＋列头", "selected":"人工选行＋列头"}
@@ -109,6 +109,55 @@ def peer_section(archive):
             + "<p>两个实验共享业务案例。上游没有贯通这两批记录的运行编号，完整跨项目交付次数尚待实测。</p>")
 
 
+def holdout_section(folder):
+    result_path = folder / "issuer-results-v1.json"
+    raw_path = folder / "issuer-trials-v1.jsonl"
+    if not result_path.exists():
+        return ""
+    result = read_json(result_path)
+    if digest(raw_path) != result["raw_sha256"]:
+        raise ValueError("holdout report and raw archive differ")
+    archive = {r["run_id"]: r for r in read_lines(raw_path)}
+    protocol_file = issuer_holdout.DATA / "protocol.json"
+    path = issuer_holdout.ROOT / protocol_file
+    if digest(path) != result["frozen_sha256"][str(protocol_file)]:
+        raise ValueError("holdout report and source manifest differ")
+    documents = read_json(path)["documents"]
+    names = {"direct": "直接回答", "cells": "选择原格", "metric_tool": "选择业务函数"}
+    scorecard = []
+    for arm, totals in result["summaries"].items():
+        scorecard.append([esc(names[arm]), f'{totals["pass"]}/{totals["n"]}',
+                          f'{totals["by_issuer"]["dell"]}/4', f'{totals["by_issuer"]["cisco"]}/4',
+                          esc(totals["unknown"]), esc("、".join(totals["fixed"]) or "—"),
+                          esc("、".join(totals["lost"]) or "—"), f'{totals["model_ms_sum"]/1000:.2f}'])
+    cards = []
+    for case_id in dict.fromkeys(r["case_id"] for r in result["rows"]):
+        rows = [r for r in result["rows"] if r["case_id"] == case_id]
+        request = archive[rows[0]["run_id"]]["request"]["messages"][-1]["content"]
+        title, evidence = request.split("\n", 1)
+        lines = []
+        for r in rows:
+            receipt = r["receipt"] or {}
+            raw = archive[r["run_id"]]
+            lines.append([esc(names[r["arm"]]), badge(r["verdict"]), esc(receipt.get("value", "—")),
+                          esc(r["expected"]), esc(r["model_ms"]),
+                          details("查看动作和核验记录", pre({"动作": r["decision"], "执行": receipt,
+                                                        "可见差异": r["observed_errors"], "错误": r["error"]})
+                                  + pre(raw))])
+        doc = documents[archive[rows[0]["run_id"]]["document"]]
+        source = (f'<a href="{esc(doc["pdf_source"])}#page={int(doc["pdf_physical_page"])}" '
+                  f'target="_blank" rel="noopener noreferrer">查看发行人原件（印刷页 {int(doc["printed_page"])}）</a>')
+        cards.append(f'<h3>{esc(title)}</h3>' + details("模型看到的财报摘录", pre(evidence) + source
+                                                      + pre(doc["pdf_sha256"]))
+                     + table(["做法", "结论", "回答 %", "参考 %", "毫秒", "证据"], lines))
+    gate = "达到预设试点门槛" if result["candidate_meets_pilot_gate"] else "未达到预设试点门槛"
+    return ("<h2 id='holdout'>换成 Dell 和 Cisco 年报，公式选择还能用吗？</h2>"
+            f"<p>8 道冻结题，24 次本地调用。业务公式候选{gate}。独立人工复核 0 份。"
+            f"推理前冻结提交 <code>{esc(result['freeze_commit'][:12])}</code>。</p>"
+            + table(["做法", "核准", "Dell", "Cisco", "待核", "相对直接回答修好", "退化", "模型总秒数"], scorecard)
+            + "".join(cards))
+
+
 def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_review: Path, calc_log: Path, peers: Path):
     facts = read_json(dataset / "sources.json")
     cases = read_json(dataset / "cases.json")
@@ -153,6 +202,8 @@ def render(dataset: Path, prompts: Path, log: Path, calc_prompts: Path, calc_rev
                    [[esc(ARM_NAMES[a]),f"{t['pass']} / {t['n']}",str(t["unknown"]),
                      esc("、".join(t['fixed']) or "—"),esc("、".join(t['lost']) or "—")]
                     for a,t in trial["summaries"].items()])
+    holdout = holdout_section(peers.parent)
+    link = '<a href="#holdout">跨公司留出结果</a>' if holdout else ""
     return """<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>年报逐题评测 · EvidenceLoop</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f8faf9;color:#182823;font:16px/1.6 Inter,system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:36px clamp(16px,4vw,55px)}
@@ -162,14 +213,14 @@ h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.05em;margin:.45em 0}h2{margin
 .tag{border:1px solid;padding:2px 7px;border-radius:6px;font-size:13px}.pass{color:#185d41}.fail{color:#9b3224}.unknown{color:#775713}
 summary{cursor:pointer;padding:5px 0;overflow-wrap:anywhere}pre{background:#eef3ef;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace}
 blockquote{margin-left:0;border-left:3px solid #257254;padding:4px 12px}.history>details{border-top:1px solid #ccd9d2;padding:8px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a><a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
+</style><main><h1>年报逐题评测</h1><nav><a href="#trial">真实模型对照</a><a href="#calc">计算工具对照</a>""" + link + """<a href="#peers">产品与收件回执</a><a href="#archive">评分依据</a></nav>
 <p><label>关联本地原年报 <input id="pdf" type="file" accept="application/pdf" multiple></label><br>
 <span id="pdf-status" class="muted" role="status">选取原 PDF 后可从表格页码打开原页。文件只在本浏览器读取。</span></p>
 <h2 id="trial">给同一模型补上列头后，哪些题答对了？</h2>""" + (
         f"<p>{esc(trial['model'][0])} · 公开开发题 · 每种输入每题一次。核准要求数值、单位和引用页组同时满足。"
         "模型弃答与基础设施故障分开记录；本地耗时包含冷启动。</p>" + counts + "".join(blocks)
         + calculation_section(calc_prompts, calc_review, calc_log)
-        + peer_section(peers)
+        + holdout + peer_section(peers)
         + "<h2 id='archive'>同一回答在四种评分方法下的结果</h2><p>历史模型回执和脚本构造对照分别标出。"
         "证据不足保留为待核实。标注由 Codex 比照原表完成，尚无独立人工复核。</p><div class='history'>"
         + "".join(observations_html) + "</div></main>" + PDF_SCRIPT + "</html>\n")

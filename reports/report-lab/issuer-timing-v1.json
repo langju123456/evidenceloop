@@ -1,0 +1,10 @@
+{
+  "start_utc": "2026-11-23T15:08:45.899260+00:00",
+  "end_utc": "2026-11-23T15:11:29.426063+00:00",
+  "exit": 0,
+  "quiet_seconds_before_launch": 20,
+  "checks_during_batch": 148,
+  "poll_interval_seconds": 1,
+  "other_activity_observations": [],
+  "measurement": "Local macOS process names and changes to established TCP client byte counters at 127.0.0.1:11434, excluding this run. Sampling cannot rule out activity between checks."
+}
