@@ -1,0 +1,71 @@
+{
+  "assumptions": {
+    "slot_minutes": 15,
+    "default_start": "2026-11-23T09:00:00",
+    "calendar_days_available": [0, 1, 2, 3, 4, 5, 6],
+    "human_windows_by_daily_hours": {
+      "2": [["09:00", "10:00"], ["19:00", "20:00"]],
+      "4": [["09:00", "11:00"], ["19:00", "21:00"]],
+      "8": [["09:00", "13:00"], ["14:00", "18:00"]]
+    },
+    "agent_workers": 3,
+    "local_model_lanes": 1
+  },
+  "scopes": {
+    "review": {
+      "label": "整理已有成果并讲清边界",
+      "tasks": [
+        {"id":"review_facts", "label":"冻结已完成实验与证据边界", "resource":"human", "hours":[1.5,2.5], "depends":[], "notes":"逐项分开真实模型、确定性实验、人工反例和模拟故障。"},
+        {"id":"review_docs", "label":"整理复跑入口、架构图和演示材料", "resource":"agent", "hours":[3,5], "depends":["review_facts"], "notes":"AI 可独立整理现有文档，保留链接和命令。"},
+        {"id":"review_walkthrough", "label":"亲自走一次演示并写口头解释", "resource":"human", "hours":[1.5,2.5], "depends":["review_docs"], "notes":"不新增模型实验；需要你判断讲什么和如何如实表述。"},
+        {"id":"review_polish", "label":"修正演示发现的问题", "resource":"agent", "hours":[2,4], "depends":["review_walkthrough"], "notes":"小范围修文档、命令或展示，不扩大产品。"},
+        {"id":"review_accept", "label":"最终验收与面试问答复盘", "resource":"human", "hours":[1,2], "depends":["review_polish"], "notes":"你确认每个主张都能回到证据。"}
+      ]
+    },
+    "interview": {
+      "label": "可面试的三项目联动演示",
+      "tasks": [
+        {"id":"int_contract", "label":"确定一条年报委托、完成标准与跨项目契约", "resource":"human", "hours":[2,4], "depends":[], "notes":"case/run/version/artifact/digest/receipt；包括从十种方案挑三至四种做低成本对照的判断。"},
+        {"id":"int_forge_build", "label":"ForgeFlow：两期查数、公式、稿件和可追溯 UI", "resource":"agent", "hours":[10,18], "depends":["int_contract"], "notes":"复用已有年报表、确定性计算与研究工作台。"},
+        {"id":"int_eval_freeze", "label":"EvidenceLoop：冻结 12 个开发题、标签与失败分类", "resource":"human", "hours":[5,8], "depends":["int_contract"], "notes":"需要你裁定任务定义、金标、未知项和污染边界。"},
+        {"id":"int_eval_tools", "label":"EvidenceLoop：评分、比较页和版本决策卡", "resource":"agent", "hours":[6,11], "depends":["int_eval_freeze"], "notes":"规则、回执和 UI；不把训练写成已完成。"},
+        {"id":"int_model_trial", "label":"同条件模型对照：证据、公式与工具调用", "resource":"model", "hours":[1,4.75], "model_workload":{"kind":"single_step","low":{"cases":12,"variants":3,"repeats":3,"seconds_per_trial":20,"warmup_seconds":900},"high":{"cases":12,"variants":3,"repeats":3,"seconds_per_trial":120,"warmup_seconds":3600}}, "depends":["int_eval_freeze"], "notes":"108 次单步调用：12 题 × 3 方案 × 3 重复。D18 的 12 次实际调用共约 79 秒；这里按每次 20–120 秒加 15–60 分钟冷启动/重试预算，15 分钟向上取整。Mac 本地模型单通道；不含 Agent 改代码时间。"},
+        {"id":"int_eval_review", "label":"复核修好、退化、未知与成本", "resource":"human", "hours":[3,5], "depends":["int_eval_tools","int_model_trial"], "notes":"决定候选版是否推进，不用平均数掩盖退化。"},
+        {"id":"int_horizon_harness", "label":"HorizonBench：扩展回执故障环境与独立判定", "resource":"agent", "hours":[7,12], "depends":["int_contract"], "notes":"可与 ForgeFlow 功能开发并行，先在稳定任务契约上构建环境。"},
+        {"id":"int_horizon_adapter", "label":"HorizonBench：接入真实提交入口与原键对账", "resource":"agent", "hours":[4,8], "depends":["int_forge_build","int_horizon_harness"], "notes":"把既有 4×3 受控矩阵接到真实业务产物。"},
+        {"id":"int_horizon_review", "label":"审阅回执故障结果与恢复策略", "resource":"human", "hours":[2,4], "depends":["int_horizon_adapter"], "notes":"确认什么叫送达、正确版本和无重复。"},
+        {"id":"int_trace", "label":"统一 run、产物摘要、评分和回执的展示", "resource":"agent", "hours":[5,9], "depends":["int_eval_review","int_horizon_review"], "notes":"三项目消费同一条业务任务，但各自保留职责。"},
+        {"id":"int_e2e", "label":"盲走一次完整委托与修复", "resource":"agent", "hours":[4,8], "depends":["int_trace"], "notes":"执行、故障、恢复和回归；不算外部用户试用。"},
+        {"id":"int_accept", "label":"本人验收、取舍复盘与面试讲解", "resource":"human", "hours":[3,6], "depends":["int_e2e"], "notes":"你能说明两种以上已试方案、结果和边界。"}
+      ]
+    },
+    "complete": {
+      "label": "完整离线应用与评测作品集",
+      "tasks": [
+        {"id":"full_contract", "label":"统一协议、任务族与发布标准", "resource":"human", "hours":[4,7], "depends":[], "notes":"跨项目 schema、数据边界、完成标准及优先级。"},
+        {"id":"full_forge_research", "label":"ForgeFlow：取证、两期比较、公式与冲突恢复", "resource":"agent", "hours":[15,27], "depends":["full_contract"], "notes":"扩展现有年度和 Apple 开发切片，保留未知状态。"},
+        {"id":"full_forge_workflow", "label":"ForgeFlow：稿件、版本、审批和一次性交付", "resource":"agent", "hours":[18,32], "depends":["full_forge_research"], "notes":"真正的研究流程，非单题查数页面。"},
+        {"id":"full_labeling", "label":"EvidenceLoop：任务族切分、标签、双复核设计", "resource":"human", "hours":[12,20], "depends":["full_contract"], "notes":"先定义独立留出、疑难项和审阅协议；实际第二复核人时间另列。"},
+        {"id":"full_eval_system", "label":"EvidenceLoop：混合评分、校准、统计与回归页", "resource":"agent", "hours":[18,30], "depends":["full_labeling"], "notes":"程序硬判与开放项校准；展示退化与不确定性。"},
+        {"id":"full_model_trials", "label":"多文档族同条件模型实验", "resource":"model", "hours":[1.5,8.25], "model_workload":{"kind":"single_step","low":{"cases":24,"variants":3,"repeats":3,"seconds_per_trial":20,"warmup_seconds":900},"high":{"cases":24,"variants":3,"repeats":3,"seconds_per_trial":120,"warmup_seconds":3600}}, "depends":["full_labeling"], "notes":"216 次单步调用：24 个锁定任务 × 3 方案 × 3 重复。按每次 20–120 秒加 15–60 分钟冷启动/重试预算；不含 GPU 训练和 Agent 改代码时间。"},
+        {"id":"full_eval_decision", "label":"人工复核、版本决策与实验解释", "resource":"human", "hours":[7,12], "depends":["full_eval_system","full_model_trials"], "notes":"复核重大发现，决定是否进入训练或继续工程修复。"},
+        {"id":"full_horizon_environment", "label":"HorizonBench：五类故障环境与独立判定", "resource":"agent", "hours":[12,20], "depends":["full_contract"], "notes":"可与 ForgeFlow 流程实现并行，覆盖改口径、清上下文、并发修改、提交失败和回执丢失。"},
+        {"id":"full_horizon_reliability", "label":"HorizonBench：真实接口、恢复与回执联调", "resource":"agent", "hours":[8,14], "depends":["full_forge_workflow","full_horizon_environment"], "notes":"将故障环境接到真实产物和提交入口。"},
+        {"id":"full_horizon_studies", "label":"记忆/恢复策略配对实验与报告", "resource":"model", "hours":[10.25,37.5], "model_workload":{"kind":"multi_step","low":{"cases":8,"variants":3,"repeats":3,"seconds_per_trial":480,"warmup_seconds":1800},"high":{"cases":8,"variants":3,"repeats":3,"seconds_per_trial":1800,"warmup_seconds":5400}}, "depends":["full_horizon_reliability"], "notes":"72 次多步长任务：8 个故障场景 × 3 种恢复/记忆策略 × 3 重复。按每次 8–30 分钟加 30–90 分钟环境启动/重试预算；与单步模型实验共用 1 条 Mac lane。"},
+        {"id":"full_horizon_review", "label":"独立终态与长任务策略验收", "resource":"human", "hours":[5,9], "depends":["full_horizon_studies"], "notes":"确认收件箱、版本、digest与本地状态全都一致。"},
+        {"id":"full_integration", "label":"联通 Trace、artifact、receipt 与可演示界面", "resource":"agent", "hours":[10,18], "depends":["full_eval_decision","full_horizon_review"], "notes":"把三套实验连成一条可追踪交付链。"},
+        {"id":"full_blind_accept", "label":"留出任务、性能记录与本人答辩复盘", "resource":"human", "hours":[8,14], "depends":["full_integration"], "notes":"包含未参与开发的任务、失败复盘、展示和面试说明。"}
+      ]
+    },
+    "training_addon": {
+      "label": "可选：单项新域后训练实验",
+      "tasks": [
+        {"id":"train_gate", "label":"确认稳定错误、数据许可、权重与预算", "resource":"human", "hours":[3,6], "depends":[], "notes":"只有工程与输入路径都确认后才启动。"},
+        {"id":"train_pairs", "label":"构造 SFT 样本或偏好对与锁定测试", "resource":"human", "hours":[8,16], "depends":["train_gate"], "notes":"DPO 需要同观察下可靠的正负对。"},
+        {"id":"train_run", "label":"训练、评估与产物记录", "resource":"model", "hours":[12,36], "depends":["train_pairs"], "notes":"这是外部 GPU/权重条件下的占位估计，不是 Mac 单 lane 的可信日历预测；需要可用 GPU、权重、数据许可和实际吞吐后才能排期。"},
+        {"id":"train_regression", "label":"应用回归、遗忘检查与报告", "resource":"agent", "hours":[8,14], "depends":["train_run"], "notes":"与强工具基线比较，记录成本。"},
+        {"id":"train_review", "label":"本人复核训练是否值得保留", "resource":"human", "hours":[3,6], "depends":["train_regression"], "notes":"没有锁测改进就不写成训练成果。"}
+      ]
+    }
+  }
+}

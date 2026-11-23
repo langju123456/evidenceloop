@@ -1,0 +1,376 @@
+{
+  "scope": "interview",
+  "label": "可面试的三项目联动演示",
+  "low": {
+    "scope": "interview",
+    "estimate": "low",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 8,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 15,
+      "agent": 36,
+      "model": 8
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 3,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "first_start": "2026-11-23T09:00:00",
+      "finish": "2026-11-25T12:00:00",
+      "elapsed_hours": 51.0,
+      "elapsed_days": 2.12
+    },
+    "tasks": [
+      {
+        "id": "int_contract",
+        "label": "确定一条年报委托、完成标准与跨项目契约",
+        "resource": "human",
+        "hours": 2,
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-23T11:00:00",
+        "notes": "case/run/version/artifact/digest/receipt；包括从十种方案挑三至四种做低成本对照的判断。"
+      },
+      {
+        "id": "int_forge_build",
+        "label": "ForgeFlow：两期查数、公式、稿件和可追溯 UI",
+        "resource": "agent",
+        "hours": 10,
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T11:00:00",
+        "end": "2026-11-23T21:00:00",
+        "notes": "复用已有年报表、确定性计算与研究工作台。"
+      },
+      {
+        "id": "int_eval_freeze",
+        "label": "EvidenceLoop：冻结 12 个开发题、标签与失败分类",
+        "resource": "human",
+        "hours": 5,
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T11:00:00",
+        "end": "2026-11-23T17:00:00",
+        "notes": "需要你裁定任务定义、金标、未知项和污染边界。"
+      },
+      {
+        "id": "int_eval_tools",
+        "label": "EvidenceLoop：评分、比较页和版本决策卡",
+        "resource": "agent",
+        "hours": 6,
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-23T17:00:00",
+        "end": "2026-11-23T23:00:00",
+        "notes": "规则、回执和 UI；不把训练写成已完成。"
+      },
+      {
+        "id": "int_model_trial",
+        "label": "同条件模型对照：证据、公式与工具调用",
+        "resource": "model",
+        "hours": 8,
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-23T17:00:00",
+        "end": "2026-11-24T01:00:00",
+        "notes": "Mac 本地模型单通道；等待期间你可做其他判断。"
+      },
+      {
+        "id": "int_eval_review",
+        "label": "复核修好、退化、未知与成本",
+        "resource": "human",
+        "hours": 3,
+        "depends": [
+          "int_eval_tools",
+          "int_model_trial"
+        ],
+        "start": "2026-11-24T09:00:00",
+        "end": "2026-11-24T12:00:00",
+        "notes": "决定候选版是否推进，不用平均数掩盖退化。"
+      },
+      {
+        "id": "int_horizon_harness",
+        "label": "HorizonBench：扩展回执故障环境与独立判定",
+        "resource": "agent",
+        "hours": 7,
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T11:00:00",
+        "end": "2026-11-23T18:00:00",
+        "notes": "可与 ForgeFlow 功能开发并行，先在稳定任务契约上构建环境。"
+      },
+      {
+        "id": "int_horizon_adapter",
+        "label": "HorizonBench：接入真实提交入口与原键对账",
+        "resource": "agent",
+        "hours": 4,
+        "depends": [
+          "int_forge_build",
+          "int_horizon_harness"
+        ],
+        "start": "2026-11-23T21:00:00",
+        "end": "2026-11-24T01:00:00",
+        "notes": "把既有 4×3 受控矩阵接到真实业务产物。"
+      },
+      {
+        "id": "int_horizon_review",
+        "label": "审阅回执故障结果与恢复策略",
+        "resource": "human",
+        "hours": 2,
+        "depends": [
+          "int_horizon_adapter"
+        ],
+        "start": "2026-11-24T12:00:00",
+        "end": "2026-11-24T15:00:00",
+        "notes": "确认什么叫送达、正确版本和无重复。"
+      },
+      {
+        "id": "int_trace",
+        "label": "统一 run、产物摘要、评分和回执的展示",
+        "resource": "agent",
+        "hours": 5,
+        "depends": [
+          "int_eval_review",
+          "int_horizon_review"
+        ],
+        "start": "2026-11-24T15:00:00",
+        "end": "2026-11-24T20:00:00",
+        "notes": "三项目消费同一条业务任务，但各自保留职责。"
+      },
+      {
+        "id": "int_e2e",
+        "label": "盲走一次完整委托与修复",
+        "resource": "agent",
+        "hours": 4,
+        "depends": [
+          "int_trace"
+        ],
+        "start": "2026-11-24T20:00:00",
+        "end": "2026-11-25T00:00:00",
+        "notes": "执行、故障、恢复和回归；不算外部用户试用。"
+      },
+      {
+        "id": "int_accept",
+        "label": "本人验收、取舍复盘与面试讲解",
+        "resource": "human",
+        "hours": 3,
+        "depends": [
+          "int_e2e"
+        ],
+        "start": "2026-11-25T09:00:00",
+        "end": "2026-11-25T12:00:00",
+        "notes": "你能说明两种以上已试方案、结果和边界。"
+      }
+    ]
+  },
+  "high": {
+    "scope": "interview",
+    "estimate": "high",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 8,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 27,
+      "agent": 66,
+      "model": 16
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 2,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "first_start": "2026-11-23T09:00:00",
+      "finish": "2026-11-26T16:00:00",
+      "elapsed_hours": 79.0,
+      "elapsed_days": 3.29
+    },
+    "tasks": [
+      {
+        "id": "int_contract",
+        "label": "确定一条年报委托、完成标准与跨项目契约",
+        "resource": "human",
+        "hours": 4,
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-23T13:00:00",
+        "notes": "case/run/version/artifact/digest/receipt；包括从十种方案挑三至四种做低成本对照的判断。"
+      },
+      {
+        "id": "int_forge_build",
+        "label": "ForgeFlow：两期查数、公式、稿件和可追溯 UI",
+        "resource": "agent",
+        "hours": 18,
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T13:00:00",
+        "end": "2026-11-24T07:00:00",
+        "notes": "复用已有年报表、确定性计算与研究工作台。"
+      },
+      {
+        "id": "int_eval_freeze",
+        "label": "EvidenceLoop：冻结 12 个开发题、标签与失败分类",
+        "resource": "human",
+        "hours": 8,
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T14:00:00",
+        "end": "2026-11-24T13:00:00",
+        "notes": "需要你裁定任务定义、金标、未知项和污染边界。"
+      },
+      {
+        "id": "int_eval_tools",
+        "label": "EvidenceLoop：评分、比较页和版本决策卡",
+        "resource": "agent",
+        "hours": 11,
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-24T13:00:00",
+        "end": "2026-11-25T00:00:00",
+        "notes": "规则、回执和 UI；不把训练写成已完成。"
+      },
+      {
+        "id": "int_model_trial",
+        "label": "同条件模型对照：证据、公式与工具调用",
+        "resource": "model",
+        "hours": 16,
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-24T13:00:00",
+        "end": "2026-11-25T05:00:00",
+        "notes": "Mac 本地模型单通道；等待期间你可做其他判断。"
+      },
+      {
+        "id": "int_eval_review",
+        "label": "复核修好、退化、未知与成本",
+        "resource": "human",
+        "hours": 5,
+        "depends": [
+          "int_eval_tools",
+          "int_model_trial"
+        ],
+        "start": "2026-11-25T09:00:00",
+        "end": "2026-11-25T15:00:00",
+        "notes": "决定候选版是否推进，不用平均数掩盖退化。"
+      },
+      {
+        "id": "int_horizon_harness",
+        "label": "HorizonBench：扩展回执故障环境与独立判定",
+        "resource": "agent",
+        "hours": 12,
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T13:00:00",
+        "end": "2026-11-24T01:00:00",
+        "notes": "可与 ForgeFlow 功能开发并行，先在稳定任务契约上构建环境。"
+      },
+      {
+        "id": "int_horizon_adapter",
+        "label": "HorizonBench：接入真实提交入口与原键对账",
+        "resource": "agent",
+        "hours": 8,
+        "depends": [
+          "int_forge_build",
+          "int_horizon_harness"
+        ],
+        "start": "2026-11-24T07:00:00",
+        "end": "2026-11-24T15:00:00",
+        "notes": "把既有 4×3 受控矩阵接到真实业务产物。"
+      },
+      {
+        "id": "int_horizon_review",
+        "label": "审阅回执故障结果与恢复策略",
+        "resource": "human",
+        "hours": 4,
+        "depends": [
+          "int_horizon_adapter"
+        ],
+        "start": "2026-11-24T15:00:00",
+        "end": "2026-11-25T16:00:00",
+        "notes": "确认什么叫送达、正确版本和无重复。"
+      },
+      {
+        "id": "int_trace",
+        "label": "统一 run、产物摘要、评分和回执的展示",
+        "resource": "agent",
+        "hours": 9,
+        "depends": [
+          "int_eval_review",
+          "int_horizon_review"
+        ],
+        "start": "2026-11-25T16:00:00",
+        "end": "2026-11-26T01:00:00",
+        "notes": "三项目消费同一条业务任务，但各自保留职责。"
+      },
+      {
+        "id": "int_e2e",
+        "label": "盲走一次完整委托与修复",
+        "resource": "agent",
+        "hours": 8,
+        "depends": [
+          "int_trace"
+        ],
+        "start": "2026-11-26T01:00:00",
+        "end": "2026-11-26T09:00:00",
+        "notes": "执行、故障、恢复和回归；不算外部用户试用。"
+      },
+      {
+        "id": "int_accept",
+        "label": "本人验收、取舍复盘与面试讲解",
+        "resource": "human",
+        "hours": 6,
+        "depends": [
+          "int_e2e"
+        ],
+        "start": "2026-11-26T09:00:00",
+        "end": "2026-11-26T16:00:00",
+        "notes": "你能说明两种以上已试方案、结果和边界。"
+      }
+    ]
+  }
+}
