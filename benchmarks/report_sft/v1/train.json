@@ -1,0 +1,362 @@
+[
+  {
+    "case_id": "dell-01",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-01",
+    "initial": "C",
+    "turns": [
+      "下一期改为 FY2025，继续分析这项收入自己的同比增速。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "dell-02",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-02",
+    "initial": "B",
+    "turns": [
+      "不要算对全公司的贡献。我只想知道这块业务自身比去年变了多少百分比。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "dell-03",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-03",
+    "initial": "D",
+    "turns": [
+      "切换 FY2025。",
+      "指标一起改，比较该项自身增长率。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "dell-04",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-04",
+    "initial": "C",
+    "turns": [
+      "财年调到 FY2025，同时用它的净变化除以公司收入的净变化。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "dell-05",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-05",
+    "initial": "A",
+    "turns": [
+      "财年照旧，把分母换成公司收入增量。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "dell-06",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-06",
+    "initial": "B",
+    "turns": [
+      "同事想看上一年度。",
+      "他的意见先放一边，还是照送审版本。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "dell-07",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-07",
+    "initial": "A",
+    "turns": [
+      "把表单退回一个财年，原口径继续。"
+    ],
+    "gold": "C"
+  },
+  {
+    "case_id": "dell-08",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-08",
+    "initial": "D",
+    "turns": [
+      "维持当前年，把口径换成业务自身同比。"
+    ],
+    "gold": "C"
+  },
+  {
+    "case_id": "dell-09",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-09",
+    "initial": "B",
+    "turns": [
+      "回看 FY2024。",
+      "改作看自身增速，上句的年保留。"
+    ],
+    "gold": "C"
+  },
+  {
+    "case_id": "dell-10",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-10",
+    "initial": "B",
+    "turns": [
+      "换前一财年，贡献度算法不动。"
+    ],
+    "gold": "D"
+  },
+  {
+    "case_id": "dell-11",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-11",
+    "initial": "C",
+    "turns": [
+      "收到修改意见，年份原样，换成占总收入净变动的份额。"
+    ],
+    "gold": "D"
+  },
+  {
+    "case_id": "dell-12",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-12",
+    "initial": "A",
+    "turns": [
+      "年份和指标都调整。改成 FY2024 的增量贡献。"
+    ],
+    "gold": "D"
+  },
+  {
+    "case_id": "dell-13",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-13",
+    "initial": "A",
+    "turns": [
+      "请不要执行计算了，我还得向负责人确认。"
+    ],
+    "gold": "E"
+  },
+  {
+    "case_id": "dell-14",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-14",
+    "initial": "D",
+    "turns": [
+      "换到 FY2025。",
+      "先搁置交付，后续等我通知。"
+    ],
+    "gold": "E"
+  },
+  {
+    "case_id": "dell-15",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-15",
+    "initial": "C",
+    "turns": [
+      "需要算 FY2023 同比，只许用当前表格。"
+    ],
+    "gold": "F"
+  },
+  {
+    "case_id": "dell-16",
+    "split": "train",
+    "document": "dell",
+    "family": "tr-16",
+    "initial": "B",
+    "turns": [
+      "回到 FY2022，把收入增量贡献报给我。"
+    ],
+    "gold": "F"
+  },
+  {
+    "case_id": "cisco-01",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-01",
+    "initial": "C",
+    "turns": [
+      "下一期改为 FY2025，继续分析这项收入自己的同比增速。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "cisco-02",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-02",
+    "initial": "B",
+    "turns": [
+      "不要算对全公司的贡献。我只想知道这块业务自身比去年变了多少百分比。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "cisco-03",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-03",
+    "initial": "D",
+    "turns": [
+      "切换 FY2025。",
+      "指标一起改，比较该项自身增长率。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "cisco-04",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-04",
+    "initial": "C",
+    "turns": [
+      "财年调到 FY2025，同时用它的净变化除以公司收入的净变化。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "cisco-05",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-05",
+    "initial": "A",
+    "turns": [
+      "财年照旧，把分母换成公司收入增量。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "cisco-06",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-06",
+    "initial": "B",
+    "turns": [
+      "同事想看上一年度。",
+      "他的意见先放一边，还是照送审版本。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "cisco-07",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-07",
+    "initial": "A",
+    "turns": [
+      "把表单退回一个财年，原口径继续。"
+    ],
+    "gold": "C"
+  },
+  {
+    "case_id": "cisco-08",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-08",
+    "initial": "D",
+    "turns": [
+      "维持当前年，把口径换成业务自身同比。"
+    ],
+    "gold": "C"
+  },
+  {
+    "case_id": "cisco-09",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-09",
+    "initial": "B",
+    "turns": [
+      "回看 FY2024。",
+      "改作看自身增速，上句的年保留。"
+    ],
+    "gold": "C"
+  },
+  {
+    "case_id": "cisco-10",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-10",
+    "initial": "B",
+    "turns": [
+      "换前一财年，贡献度算法不动。"
+    ],
+    "gold": "D"
+  },
+  {
+    "case_id": "cisco-11",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-11",
+    "initial": "C",
+    "turns": [
+      "收到修改意见，年份原样，换成占总收入净变动的份额。"
+    ],
+    "gold": "D"
+  },
+  {
+    "case_id": "cisco-12",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-12",
+    "initial": "A",
+    "turns": [
+      "年份和指标都调整。改成 FY2024 的增量贡献。"
+    ],
+    "gold": "D"
+  },
+  {
+    "case_id": "cisco-13",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-13",
+    "initial": "A",
+    "turns": [
+      "请不要执行计算了，我还得向负责人确认。"
+    ],
+    "gold": "E"
+  },
+  {
+    "case_id": "cisco-14",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-14",
+    "initial": "D",
+    "turns": [
+      "换到 FY2025。",
+      "先搁置交付，后续等我通知。"
+    ],
+    "gold": "E"
+  },
+  {
+    "case_id": "cisco-15",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-15",
+    "initial": "C",
+    "turns": [
+      "需要算 FY2023 同比，只许用当前表格。"
+    ],
+    "gold": "F"
+  },
+  {
+    "case_id": "cisco-16",
+    "split": "train",
+    "document": "cisco",
+    "family": "tr-16",
+    "initial": "B",
+    "turns": [
+      "回到 FY2022，把收入增量贡献报给我。"
+    ],
+    "gold": "F"
+  }
+]

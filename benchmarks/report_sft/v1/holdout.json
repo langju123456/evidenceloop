@@ -1,0 +1,207 @@
+[
+  {
+    "case_id": "tencent-01",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-01",
+    "initial": "B",
+    "turns": [
+      "定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "tencent-02",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-02",
+    "initial": "D",
+    "turns": [
+      "下一期用 2025 年。",
+      "表中显示该板块在公司收入增减里所占比例。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "tencent-03",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-03",
+    "initial": "C",
+    "turns": [
+      "刚才有人要换指标。",
+      "按我的口径：取 2025 年，比较板块自己与上年。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "tencent-04",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-04",
+    "initial": "A",
+    "turns": [
+      "分母别用这块业务的上年额，改用同年全公司的收入差额。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "tencent-05",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-05",
+    "initial": "B",
+    "turns": [
+      "草拟时有人提过上年自身增幅。",
+      "这条仅供备查，照最初的表单交。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "tencent-06",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-06",
+    "initial": "D",
+    "turns": [
+      "先切换到 2025。",
+      "贡献的提议取消，改为相较去年的板块增长百分数。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "tencent-07",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-07",
+    "initial": "A",
+    "turns": [
+      "就算可以算，也请把这一版挂起，收到签字我再叫你出数。"
+    ],
+    "gold": "E"
+  },
+  {
+    "case_id": "tencent-08",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-08",
+    "initial": "B",
+    "turns": [
+      "委员会指定 FY2022，分母用其上一年，请按现有原表交付。"
+    ],
+    "gold": "F"
+  },
+  {
+    "case_id": "moutai-01",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-01",
+    "initial": "D",
+    "turns": [
+      "经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "moutai-02",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-02",
+    "initial": "A",
+    "turns": [
+      "汇报年份保留，求公司收入差额中有多少比例由该子项解释。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "moutai-03",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-03",
+    "initial": "B",
+    "turns": [
+      "上年也是个选择。",
+      "撤掉这个建议，已送审的两项内容全部保留。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "moutai-04",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-04",
+    "initial": "C",
+    "turns": [
+      "不再用原先的期间，定在 2025 年，对自身基期列做除法。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "moutai-05",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-05",
+    "initial": "D",
+    "turns": [
+      "年份更新为最新一列，计算口径照送审要求。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "moutai-06",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-06",
+    "initial": "B",
+    "turns": [
+      "可以讨论它对全局的影响。",
+      "这次先用自身去年金额作分母，期间维持。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "moutai-07",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-07",
+    "initial": "B",
+    "turns": [
+      "收到我下一条确认前，先别让这笔数出现在材料里。"
+    ],
+    "gold": "E"
+  },
+  {
+    "case_id": "moutai-08",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-08",
+    "initial": "A",
+    "turns": [
+      "会议只接受 2021 年的同比，只能引用屏幕上的表格。"
+    ],
+    "gold": "F"
+  },
+  {
+    "case_id": "tencent-09",
+    "split": "holdout",
+    "document": "tencent",
+    "family": "te-tx-09",
+    "initial": "B",
+    "turns": [
+      "把分析迁到表里的较早一年，改看这一年该板块本身的同比。"
+    ],
+    "gold": "F"
+  },
+  {
+    "case_id": "moutai-09",
+    "split": "holdout",
+    "document": "moutai",
+    "family": "te-mt-09",
+    "initial": "D",
+    "turns": [
+      "有人希望看当年。",
+      "不采纳，仍按原财年，保留原计算定义。"
+    ],
+    "gold": "F"
+  }
+]

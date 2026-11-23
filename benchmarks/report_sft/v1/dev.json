@@ -1,0 +1,69 @@
+[
+  {
+    "case_id": "apple-01",
+    "split": "dev",
+    "document": "apple",
+    "family": "dv-01",
+    "initial": "D",
+    "turns": [
+      "我现在要 FY2025 同比，两项都替我更新。"
+    ],
+    "gold": "A"
+  },
+  {
+    "case_id": "apple-02",
+    "split": "dev",
+    "document": "apple",
+    "family": "dv-02",
+    "initial": "C",
+    "turns": [
+      "请转到 FY2025 的增长贡献。"
+    ],
+    "gold": "B"
+  },
+  {
+    "case_id": "apple-03",
+    "split": "dev",
+    "document": "apple",
+    "family": "dv-03",
+    "initial": "B",
+    "turns": [
+      "改稿只接受 FY2024 的同比结果。"
+    ],
+    "gold": "C"
+  },
+  {
+    "case_id": "apple-04",
+    "split": "dev",
+    "document": "apple",
+    "family": "dv-04",
+    "initial": "A",
+    "turns": [
+      "改成 FY2024。",
+      "口径另定为增量贡献。"
+    ],
+    "gold": "D"
+  },
+  {
+    "case_id": "apple-05",
+    "split": "dev",
+    "document": "apple",
+    "family": "dv-05",
+    "initial": "A",
+    "turns": [
+      "这版先压下，暂时不计算。"
+    ],
+    "gold": "E"
+  },
+  {
+    "case_id": "apple-06",
+    "split": "dev",
+    "document": "apple",
+    "family": "dv-06",
+    "initial": "C",
+    "turns": [
+      "核 FY2023 那年的增量占比。"
+    ],
+    "gold": "F"
+  }
+]
