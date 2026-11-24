@@ -594,4 +594,3 @@ def mine(results: Path, out: Path) -> dict[str, Any]:
     failures = [{"source_id": r["source_id"], "source_digest": r["source_digest"], "case_id": r["case_id"], "trace_id": r["trace_id"], "event_ids": r["event_ids"], "checks": r["checks"], "tool_verdict": r.get("tool_verdict"), "delivery_checks": r.get("delivery_checks"), "delivery_verdict": r.get("delivery_verdict"), "scope": r.get("scope"), "verdict": r["verdict"]} for r in payload.get("rows", []) if r.get("verdict") != "pass"]
     out.write_text(json.dumps({"schema_version": NATIVE_SCHEMA, "source_results_digest": file_sha(results), "failures": failures}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {"failures": len(failures), "out": str(out)}
-
