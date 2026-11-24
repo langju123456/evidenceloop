@@ -1,0 +1,278 @@
+{
+  "digest": "3a31395e361013846ffe63ecba95b9ac6b38f5fe23027f96643009b5734b3d04",
+  "events": [
+    {
+      "actor": "integration-author",
+      "at": "2026-11-24T11:52:53.314536+00:00",
+      "digest": "3a31395e361013846ffe63ecba95b9ac6b38f5fe23027f96643009b5734b3d04",
+      "draft": "dd860c9b17724a3c947fd39ab113ba90",
+      "kind": "saved",
+      "memo": "",
+      "seq": 5,
+      "version": 1
+    },
+    {
+      "actor": "integration-author",
+      "at": "2026-11-24T11:52:53.315782+00:00",
+      "digest": "3a31395e361013846ffe63ecba95b9ac6b38f5fe23027f96643009b5734b3d04",
+      "draft": "dd860c9b17724a3c947fd39ab113ba90",
+      "kind": "submitted",
+      "memo": "",
+      "seq": 6,
+      "version": 1
+    },
+    {
+      "actor": "integration-reviewer",
+      "at": "2026-11-24T11:52:53.317167+00:00",
+      "digest": "3a31395e361013846ffe63ecba95b9ac6b38f5fe23027f96643009b5734b3d04",
+      "draft": "dd860c9b17724a3c947fd39ab113ba90",
+      "kind": "approved",
+      "memo": "",
+      "seq": 7,
+      "version": 1
+    },
+    {
+      "actor": "integration-author",
+      "at": "2026-11-24T11:52:53.318290+00:00",
+      "digest": "3a31395e361013846ffe63ecba95b9ac6b38f5fe23027f96643009b5734b3d04",
+      "draft": "dd860c9b17724a3c947fd39ab113ba90",
+      "kind": "delivered",
+      "memo": "",
+      "seq": 8,
+      "version": 1
+    }
+  ],
+  "local_receipt": "08d4fb6fdc4e6bdfb2b9ec1e7477174bf6921146a76a302b0531cfc592dc2c1f",
+  "payload": {
+    "draft_id": "dd860c9b17724a3c947fd39ab113ba90",
+    "evidence": {
+      "answer": "Apple FY2025，服务收入增速为13.51%（12,989 / 96,169）；服务对公司收入增量的贡献为51.70%（12,989 / 25,126）。金额单位为百万美元。",
+      "attempt": null,
+      "cached": false,
+      "calculation": {
+        "operations": [
+          {
+            "denominator": 96169,
+            "formula": "服务收入增量 / 上期服务收入",
+            "metric": "服务收入增速",
+            "numerator": 12989,
+            "percent": "13.51"
+          },
+          {
+            "denominator": 25126,
+            "formula": "服务收入增量 / 公司收入增量",
+            "metric": "服务对公司收入增量的贡献",
+            "numerator": 12989,
+            "percent": "51.70"
+          }
+        ],
+        "periods": [
+          2025,
+          2024
+        ],
+        "services": [
+          109158,
+          96169
+        ],
+        "total_sales": [
+          416161,
+          391035
+        ],
+        "unit": "百万美元"
+      },
+      "case_id": "apple-services-growth-contribution-dev",
+      "checks": {
+        "gate": "SALES_CALCULATION",
+        "state": "ANSWERED"
+      },
+      "citations": [
+        {
+          "bbox": [
+            52.1,
+            76.6,
+            558.8,
+            170.1
+          ],
+          "company": "Apple Inc. (AAPL)",
+          "doc": "apple_fy2025_10k_en",
+          "file_prefix": "3eb270b22acb7d8d",
+          "id": "apple_fy2025_10k_en#p26-t1",
+          "kind": "table",
+          "page": 26,
+          "row_version": "3eb270b22acb7d8d",
+          "snippet": "百万美元 · FY2025 / FY2024\nServices | 109,158 | 96,169\nTotal net sales | 416,161 | 391,035\n[table] Products and Services Performance | in millions (x1000000 )\n | 2025 | Change | Change | 2024 | Change | Change | 2023\niPhone | $ 209,586 |  | 4 % $ | 201,183 |  | — % $ | 200,583\nMac | 33,708 | 12 % |  | 29,984 | 2 % |  | 29,357\niPad | 28,023 | 5 % |  | 26,694 | (6)% |  | 28,300\nWearables, Home and Accessories | 35,686 | (4)% |  | 37,005 | (7)% |  | 39,845\nServices (1) | 109,158 | 14 % |  | 96,169 | 13 % |  | 85,200\nTotal net sales | $ 416,161 |  | 6 % $ | 391,035 |  | 2 % $ | 383,285",
+          "source_hash": "fb0eaeb0edefa7c67ef44a33688c43837316e9795673e97de2f9ed4e01469979"
+        },
+        {
+          "bbox": [
+            52.1,
+            70.6,
+            558.8,
+            164.1
+          ],
+          "company": "Apple Inc. (AAPL)",
+          "doc": "apple_fy2025_10k_en",
+          "file_prefix": "3eb270b22acb7d8d",
+          "id": "apple_fy2025_10k_en#p39-t1",
+          "kind": "table",
+          "page": 39,
+          "row_version": "3eb270b22acb7d8d",
+          "snippet": "百万美元 · FY2025 / FY2024\nServices | 109,158 | 96,169\nTotal net sales | 416,161 | 391,035\n[table] (untitled) | in millions (x1000000 )\n | 2025 | 2024 | 2023\niPhone | $ 209,586 | $ 201,183 | $ 200,583\nMac | 33,708 | 29,984 | 29,357\niPad | 28,023 | 26,694 | 28,300\nWearables, Home and Accessories | 35,686 | 37,005 | 39,845\nServices (1) | 109,158 | 96,169 | 85,200\nTotal net sales | $ 416,161 | $ 391,035 | $ 383,285",
+          "source_hash": "fd56025d54aab35bdcd979fed671ae8b1a6330b02e00353ec9bf70c94878fae8"
+        }
+      ],
+      "external_cost": 0,
+      "index_version": "c0283df6e94c39ff",
+      "model": null,
+      "model_calls": 0,
+      "question": "Apple FY2025 服务收入增速和增长贡献",
+      "request_id": "f9ab5fc916f142d3bab0ae1b1e430d3b",
+      "request_owner": "integration-author",
+      "run_id": "f9ab5fc916f142d3bab0ae1b1e430d3b",
+      "schema_version": "forgeflow.research.evidence.v1",
+      "source": {
+        "document": "Form 10-K, fiscal year ended September 27, 2025",
+        "key": "apple_fy2025_10k_en",
+        "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+        "url": "https://s2.q4cdn.com/470004039/files/doc_earnings/2025/q4/filing/10K-Q4-2025-as-filed.pdf"
+      },
+      "source_scope": "local/reports/annual-reports",
+      "split": "public-dev",
+      "timings": {
+        "retrieval_ms": 250.8,
+        "tool_ms": 1.8
+      },
+      "tool_trace": {
+        "attempt": 1,
+        "case_id": "apple-services-growth-contribution-dev",
+        "events": [
+          {
+            "call_id": "489fc80093964660805d8a0a577b197a",
+            "event_id": "a5f44250655045bebbd26c6f72fa212f:1",
+            "kind": "hook_decision",
+            "seq": 1,
+            "status": "ok",
+            "tool": "annual_report.answer.v1"
+          },
+          {
+            "arguments": {
+              "input_sha256": "817f69bcded335c8fb1d4245765d3f93bf0260fb3773af2fb77ddc4ebc67e87c"
+            },
+            "call_id": "489fc80093964660805d8a0a577b197a",
+            "event_id": "a5f44250655045bebbd26c6f72fa212f:2",
+            "kind": "tool_call",
+            "seq": 2,
+            "status": "ok",
+            "tool": "annual_report.answer.v1"
+          },
+          {
+            "call_id": "489fc80093964660805d8a0a577b197a",
+            "event_id": "a5f44250655045bebbd26c6f72fa212f:3",
+            "kind": "tool_result",
+            "result": {
+              "output_sha256": "1fbb24edfcaaa283c101cbd7ff23651935dc3a7c4efb844ec24e0732bb5c358b",
+              "receipt": {
+                "protocol_version": "2025-11-25",
+                "sdk_version": "1.30.0",
+                "server_instance": "report-mcp-runtime-v2:4861",
+                "tools": [
+                  "annual_report.answer.v1"
+                ],
+                "transport": "stdio"
+              }
+            },
+            "seq": 3,
+            "status": "ok",
+            "tool": "annual_report.answer.v1"
+          }
+        ],
+        "index_version": "c0283df6e94c39ff",
+        "producer": {
+          "name": "forgeflow.report_plugin",
+          "version": "v1"
+        },
+        "request": {
+          "hits": [
+            {
+              "classification": 1,
+              "content": "[source] apple_fy2025_10k_en.pdf | p.26 [52.1,76.6,558.8,170.1] | sha256 3eb270b22acb7d8d\n[table] Products and Services Performance | in millions (x1000000 )\n | 2025 | Change | Change | 2024 | Change | Change | 2023\niPhone | $ 209,586 |  | 4 % $ | 201,183 |  | — % $ | 200,583\nMac | 33,708 | 12 % |  | 29,984 | 2 % |  | 29,357\niPad | 28,023 | 5 % |  | 26,694 | (6)% |  | 28,300\nWearables, Home and Accessories | 35,686 | (4)% |  | 37,005 | (7)% |  | 39,845\nServices (1) | 109,158 | 14 % |  | 96,169 | 13 % |  | 85,200\nTotal net sales | $ 416,161 |  | 6 % $ | 391,035 |  | 2 % $ | 383,285",
+              "id": "apple_fy2025_10k_en#p26-t1",
+              "source_hash": "fb0eaeb0edefa7c67ef44a33688c43837316e9795673e97de2f9ed4e01469979",
+              "status": "CURRENT",
+              "version": "3eb270b22acb7d8d"
+            },
+            {
+              "classification": 1,
+              "content": "[source] apple_fy2025_10k_en.pdf | p.39 [52.1,70.6,558.8,164.1] | sha256 3eb270b22acb7d8d\n[table] (untitled) | in millions (x1000000 )\n | 2025 | 2024 | 2023\niPhone | $ 209,586 | $ 201,183 | $ 200,583\nMac | 33,708 | 29,984 | 29,357\niPad | 28,023 | 26,694 | 28,300\nWearables, Home and Accessories | 35,686 | 37,005 | 39,845\nServices (1) | 109,158 | 96,169 | 85,200\nTotal net sales | $ 416,161 | $ 391,035 | $ 383,285",
+              "id": "apple_fy2025_10k_en#p39-t1",
+              "source_hash": "fd56025d54aab35bdcd979fed671ae8b1a6330b02e00353ec9bf70c94878fae8",
+              "status": "CURRENT",
+              "version": "3eb270b22acb7d8d"
+            }
+          ],
+          "input_sha256": "817f69bcded335c8fb1d4245765d3f93bf0260fb3773af2fb77ddc4ebc67e87c",
+          "question": "Apple FY2025 服务收入增速和增长贡献"
+        },
+        "result": {
+          "answer": "Apple FY2025，服务收入增速为13.51%（12,989 / 96,169）；服务对公司收入增量的贡献为51.70%（12,989 / 25,126）。金额单位为百万美元。",
+          "calculation": {
+            "operations": [
+              {
+                "denominator": 96169,
+                "formula": "服务收入增量 / 上期服务收入",
+                "metric": "服务收入增速",
+                "numerator": 12989,
+                "percent": "13.51"
+              },
+              {
+                "denominator": 25126,
+                "formula": "服务收入增量 / 公司收入增量",
+                "metric": "服务对公司收入增量的贡献",
+                "numerator": 12989,
+                "percent": "51.70"
+              }
+            ],
+            "periods": [
+              2025,
+              2024
+            ],
+            "services": [
+              109158,
+              96169
+            ],
+            "total_sales": [
+              416161,
+              391035
+            ],
+            "unit": "百万美元"
+          },
+          "call_id": "489fc80093964660805d8a0a577b197a",
+          "citations": [
+            "apple_fy2025_10k_en#p26-t1",
+            "apple_fy2025_10k_en#p39-t1"
+          ],
+          "found": true,
+          "input_sha256": "817f69bcded335c8fb1d4245765d3f93bf0260fb3773af2fb77ddc4ebc67e87c",
+          "output_sha256": "1fbb24edfcaaa283c101cbd7ff23651935dc3a7c4efb844ec24e0732bb5c358b",
+          "schema_version": "forgeflow.report.tool-result.v1",
+          "status": "ANSWERED",
+          "tool_version": "apple-services-v1"
+        },
+        "run_id": "f9ab5fc916f142d3bab0ae1b1e430d3b",
+        "schema_version": "forgeflow.report.trace.v1",
+        "terminal_state": "success",
+        "trace_id": "a5f44250655045bebbd26c6f72fa212f"
+      },
+      "tool_version": "apple-services-v1",
+      "transport": "sync"
+    },
+    "note": "真实本机模块集成验收；由脚本扮演作者和审阅人。",
+    "owner": "integration-author",
+    "parent_digest": null,
+    "saved_at": "2026-11-24T11:52:53.314296+00:00",
+    "schema_version": "forgeflow.research.revision.v1",
+    "version": 1
+  },
+  "schema_version": "forgeflow.research.export.v1",
+  "state": "delivered"
+}

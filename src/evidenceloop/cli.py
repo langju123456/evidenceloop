@@ -617,6 +617,36 @@ def main(argv: list[str] | None = None) -> None:
     peers.add_argument("--forge-repo", required=True)
     peers.add_argument("--horizon-repo", required=True)
     peers.set_defaults(func=peer_runs.command)
+    # Native ForgeFlow export ingestion stays separate from the legacy simulator
+    # reports.  It only accepts the frozen typed export/trace schemas.
+    from evidenceloop.report import native_report
+
+    native = report_actions.add_parser("native-ingest", help="append/dedupe typed ForgeFlow export or trace JSONL")
+    native.add_argument("--input", required=True)
+    native.add_argument("--store", required=True)
+    native.set_defaults(func=lambda a: print(json.dumps(native_report.ingest(Path(a.input), Path(a.store)), ensure_ascii=False, indent=2)))
+    native_eval = report_actions.add_parser("native-evaluate", help="offline Decimal evaluation against a source-linked casebank")
+    native_eval.add_argument("--store", required=True)
+    native_eval.add_argument("--casebank", required=True)
+    native_eval.add_argument("--out", required=True)
+    native_eval.add_argument("--evaluator", default="native-product-v1")
+    native_eval.set_defaults(func=lambda a: print(json.dumps(native_report.evaluate(Path(a.store), Path(a.casebank), Path(a.out), a.evaluator), ensure_ascii=False, indent=2)))
+    native_replay = report_actions.add_parser("native-replay", help="repeat native evaluation offline with a distinct eval run id")
+    native_replay.add_argument("--store", required=True)
+    native_replay.add_argument("--casebank", required=True)
+    native_replay.add_argument("--out", required=True)
+    native_replay.add_argument("--evaluator", default="native-product-v1")
+    native_replay.set_defaults(func=lambda a: print(json.dumps(native_report.replay(Path(a.store), Path(a.casebank), Path(a.out), a.evaluator), ensure_ascii=False, indent=2)))
+    native_aa = report_actions.add_parser("native-aa", help="two independent native evaluation passes and exact verdict comparison")
+    native_aa.add_argument("--store", required=True)
+    native_aa.add_argument("--casebank", required=True)
+    native_aa.add_argument("--out", required=True)
+    native_aa.add_argument("--evaluator", default="native-product-v1")
+    native_aa.set_defaults(func=lambda a: print(json.dumps(native_report.aa(Path(a.store), Path(a.casebank), Path(a.out), a.evaluator), ensure_ascii=False, indent=2)))
+    native_mine = report_actions.add_parser("native-mine", help="emit source-linked native failures without training")
+    native_mine.add_argument("--results", required=True)
+    native_mine.add_argument("--out", required=True)
+    native_mine.set_defaults(func=lambda a: print(json.dumps(native_report.mine(Path(a.results), Path(a.out)), ensure_ascii=False, indent=2)))
     from evidenceloop.report import blind_review
 
     blind = report_actions.add_parser("blind-review", help="create an offline blinded annotation form")

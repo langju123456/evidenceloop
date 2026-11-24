@@ -1,0 +1,217 @@
+{
+  "digest": "c8b7f93798f8b81ca63bf580e339f8cf54827bd29a3dac43232df24ed7354ea7",
+  "events": [
+    {
+      "actor": "integration-author",
+      "at": "2026-11-24T11:52:53.049857+00:00",
+      "digest": "c8b7f93798f8b81ca63bf580e339f8cf54827bd29a3dac43232df24ed7354ea7",
+      "draft": "d22567eb35fb420e8e868c7951d3aa0e",
+      "kind": "saved",
+      "memo": "",
+      "seq": 1,
+      "version": 1
+    },
+    {
+      "actor": "integration-author",
+      "at": "2026-11-24T11:52:53.051372+00:00",
+      "digest": "c8b7f93798f8b81ca63bf580e339f8cf54827bd29a3dac43232df24ed7354ea7",
+      "draft": "d22567eb35fb420e8e868c7951d3aa0e",
+      "kind": "submitted",
+      "memo": "",
+      "seq": 2,
+      "version": 1
+    },
+    {
+      "actor": "integration-reviewer",
+      "at": "2026-11-24T11:52:53.053042+00:00",
+      "digest": "c8b7f93798f8b81ca63bf580e339f8cf54827bd29a3dac43232df24ed7354ea7",
+      "draft": "d22567eb35fb420e8e868c7951d3aa0e",
+      "kind": "approved",
+      "memo": "",
+      "seq": 3,
+      "version": 1
+    },
+    {
+      "actor": "integration-author",
+      "at": "2026-11-24T11:52:53.054249+00:00",
+      "digest": "c8b7f93798f8b81ca63bf580e339f8cf54827bd29a3dac43232df24ed7354ea7",
+      "draft": "d22567eb35fb420e8e868c7951d3aa0e",
+      "kind": "delivered",
+      "memo": "",
+      "seq": 4,
+      "version": 1
+    }
+  ],
+  "local_receipt": "343558cec21e971bbf6a4300b3b3bde237f2e1f3188f8b481877fe611285c794",
+  "payload": {
+    "draft_id": "d22567eb35fb420e8e868c7951d3aa0e",
+    "evidence": {
+      "answer": "宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。",
+      "attempt": null,
+      "cached": false,
+      "calculation": null,
+      "case_id": "catl-operating-cash-period-dev",
+      "checks": {
+        "gate": "ANNUAL_COLUMN",
+        "state": "ANSWERED"
+      },
+      "citations": [
+        {
+          "bbox": [
+            56.8,
+            330.5,
+            538.4,
+            609.0
+          ],
+          "company": "宁德时代新能源科技股份有限公司 (300750.SZ)",
+          "doc": "catl_2025_annual_zh",
+          "file_prefix": "c15272977147dee7",
+          "id": "catl_2025_annual_zh#p11-t1",
+          "kind": "table",
+          "page": 11,
+          "row_version": "c15272977147dee7",
+          "snippet": "经营活动产生的现金流量净额 · 2025年年度列 · 人民币千元\n原格 133,219,982\n[table] □是 否 | 单位:千元 (x1000 CNY)\n项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年\n营业收入 | 423,701,834 | 362,012,554 | 17.04% | 400,917,045\n归属于上市公司股东的净利润 | 72,201,282 | 50,744,682 | 42.28% | 44,121,248\n归属于上市公司股东的扣除非经常性损益的净利润 | 64,507,864 | 44,992,919 | 43.37% | 40,091,674\n经营活动产生的现金流量净额 | 133,219,982 | 96,990,345 | 37.35% | 92,826,124\n基本每股收益（元/股） | 16.14 | 11.58 | 39.38% | 10.06\n稀释每股收益（元/股） | 16.14 | 11.58 | 39.38% | 10.05\n加权平均净资产收益率 | 24.91% | 24.13% | 0.78% | 24.04%\n项目 | 2025年末 | 2024年末 | 本年末比上年末增减 | 2023年末\n资产总额 | 974,827,544 | 786,658,123 | 23.92% | 717,168",
+          "source_hash": "fa8e32f8582a21d8ce7bbe3d87b0c98f5ad4e44a87be245e823e8664b8b38d98"
+        },
+        {
+          "bbox": [
+            56.8,
+            397.9,
+            538.4,
+            587.4
+          ],
+          "company": "宁德时代新能源科技股份有限公司 (300750.SZ)",
+          "doc": "catl_2025_annual_zh",
+          "file_prefix": "c15272977147dee7",
+          "id": "catl_2025_annual_zh#p30-t3",
+          "kind": "table",
+          "page": 30,
+          "row_version": "c15272977147dee7",
+          "snippet": "经营活动产生的现金流量净额 · 2025年年度列 · 人民币千元\n原格 133,219,982\n[table] 5、现金流 | 单位:千元 (x1000 CNY)\n项目 | 2025年 | 2024年 | 同比增减\n经营活动现金流入小计 | 511,868,353 | 444,879,417 | 15.06%\n经营活动现金流出小计 | 378,648,372 | 347,889,072 | 8.84%\n经营活动产生的现金流量净额 | 133,219,982 | 96,990,345 | 37.35%\n投资活动现金流入小计 | 8,303,785 | 4,906,012 | 69.26%\n投资活动现金流出小计 | 102,779,575 | 53,781,323 | 91.11%\n投资活动产生的现金流量净额 | -94,475,790 | -48,875,311 | -93.30%\n筹资活动现金流入小计 | 85,607,537 | 33,392,735 | 156.37%\n筹资活动现金流出小计 | 91,917,080 | 47,916,971 | 91.83%\n筹资活动产生的现金流量净额 | -6,309,543 | -14,524,236 | 56.56%\n现金及现金等价物净增加额 | 29,770,008 | 31,994,247 | -6.95%",
+          "source_hash": "1e2317eb5ac2e426a5c82e01e8c60a4af80e2c683ab70e18b7c319ce9a3a1fd1"
+        }
+      ],
+      "external_cost": 0,
+      "index_version": "c0283df6e94c39ff",
+      "model": null,
+      "model_calls": 0,
+      "question": "宁德时代2025年经营活动产生的现金流量净额是多少？",
+      "request_id": "9cf455bf184f4bacb75fc1d3b258d078",
+      "request_owner": "integration-author",
+      "run_id": "9cf455bf184f4bacb75fc1d3b258d078",
+      "schema_version": "forgeflow.research.evidence.v1",
+      "source": {
+        "document": "2025 年年度报告",
+        "key": "catl_2025_annual_zh",
+        "sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "url": "https://static.cninfo.com.cn/finalpage/2026-03-10/1225002214.PDF"
+      },
+      "source_scope": "local/reports/annual-reports",
+      "split": "public-dev",
+      "timings": {
+        "retrieval_ms": 252.9,
+        "tool_ms": 229.1
+      },
+      "tool_trace": {
+        "attempt": 1,
+        "case_id": "catl-operating-cash-period-dev",
+        "events": [
+          {
+            "call_id": "2f75251427554246a48481e074d9f241",
+            "event_id": "4b2fc2f4872b454bb440092ace9148a5:1",
+            "kind": "hook_decision",
+            "seq": 1,
+            "status": "ok",
+            "tool": "annual_report.answer.v1"
+          },
+          {
+            "arguments": {
+              "input_sha256": "ce5d24fc771feb4e7055c8d3fad905957a75c421b6efb26ef3af84a54840c1be"
+            },
+            "call_id": "2f75251427554246a48481e074d9f241",
+            "event_id": "4b2fc2f4872b454bb440092ace9148a5:2",
+            "kind": "tool_call",
+            "seq": 2,
+            "status": "ok",
+            "tool": "annual_report.answer.v1"
+          },
+          {
+            "call_id": "2f75251427554246a48481e074d9f241",
+            "event_id": "4b2fc2f4872b454bb440092ace9148a5:3",
+            "kind": "tool_result",
+            "result": {
+              "output_sha256": "b72e4f1fc64709720a2af756091888192079e4d4432088ac99d62aa60665d7d1",
+              "receipt": {
+                "protocol_version": "2025-11-25",
+                "sdk_version": "1.30.0",
+                "server_instance": "report-mcp-runtime-v2:4861",
+                "tools": [
+                  "annual_report.answer.v1"
+                ],
+                "transport": "stdio"
+              }
+            },
+            "seq": 3,
+            "status": "ok",
+            "tool": "annual_report.answer.v1"
+          }
+        ],
+        "index_version": "c0283df6e94c39ff",
+        "producer": {
+          "name": "forgeflow.report_plugin",
+          "version": "v1"
+        },
+        "request": {
+          "hits": [
+            {
+              "classification": 1,
+              "content": "[source] catl_2025_annual_zh.pdf | p.11 [56.8,330.5,538.4,609.0] | sha256 c15272977147dee7\n[table] □是 否 | 单位:千元 (x1000 CNY)\n项目 | 2025年 | 2024年 | 本年比上年增减 | 2023年\n营业收入 | 423,701,834 | 362,012,554 | 17.04% | 400,917,045\n归属于上市公司股东的净利润 | 72,201,282 | 50,744,682 | 42.28% | 44,121,248\n归属于上市公司股东的扣除非经常性损益的净利润 | 64,507,864 | 44,992,919 | 43.37% | 40,091,674\n经营活动产生的现金流量净额 | 133,219,982 | 96,990,345 | 37.35% | 92,826,124\n基本每股收益（元/股） | 16.14 | 11.58 | 39.38% | 10.06\n稀释每股收益（元/股） | 16.14 | 11.58 | 39.38% | 10.05\n加权平均净资产收益率 | 24.91% | 24.13% | 0.78% | 24.04%\n项目 | 2025年末 | 2024年末 | 本年末比上年末增减 | 2023年末\n资产总额 | 974,827,544 | 786,658,123 | 23.92% | 717,168,041\n归属于上市公司股东的净资产 | 337,107,747 | 246,930,033 | 36.52% | 197,708,052",
+              "id": "catl_2025_annual_zh#p11-t1",
+              "source_hash": "fa8e32f8582a21d8ce7bbe3d87b0c98f5ad4e44a87be245e823e8664b8b38d98",
+              "status": "CURRENT",
+              "version": "c15272977147dee7"
+            },
+            {
+              "classification": 1,
+              "content": "[source] catl_2025_annual_zh.pdf | p.30 [56.8,397.9,538.4,587.4] | sha256 c15272977147dee7\n[table] 5、现金流 | 单位:千元 (x1000 CNY)\n项目 | 2025年 | 2024年 | 同比增减\n经营活动现金流入小计 | 511,868,353 | 444,879,417 | 15.06%\n经营活动现金流出小计 | 378,648,372 | 347,889,072 | 8.84%\n经营活动产生的现金流量净额 | 133,219,982 | 96,990,345 | 37.35%\n投资活动现金流入小计 | 8,303,785 | 4,906,012 | 69.26%\n投资活动现金流出小计 | 102,779,575 | 53,781,323 | 91.11%\n投资活动产生的现金流量净额 | -94,475,790 | -48,875,311 | -93.30%\n筹资活动现金流入小计 | 85,607,537 | 33,392,735 | 156.37%\n筹资活动现金流出小计 | 91,917,080 | 47,916,971 | 91.83%\n筹资活动产生的现金流量净额 | -6,309,543 | -14,524,236 | 56.56%\n现金及现金等价物净增加额 | 29,770,008 | 31,994,247 | -6.95%",
+              "id": "catl_2025_annual_zh#p30-t3",
+              "source_hash": "1e2317eb5ac2e426a5c82e01e8c60a4af80e2c683ab70e18b7c319ce9a3a1fd1",
+              "status": "CURRENT",
+              "version": "c15272977147dee7"
+            }
+          ],
+          "input_sha256": "ce5d24fc771feb4e7055c8d3fad905957a75c421b6efb26ef3af84a54840c1be",
+          "question": "宁德时代2025年经营活动产生的现金流量净额是多少？"
+        },
+        "result": {
+          "answer": "宁德时代 2025 年全年经营活动产生的现金流量净额为 133,219,982 千元人民币。取自 2025 年报的“经营活动产生的现金流量净额”行、“2025年”列。",
+          "call_id": "2f75251427554246a48481e074d9f241",
+          "citations": [
+            "catl_2025_annual_zh#p11-t1",
+            "catl_2025_annual_zh#p30-t3"
+          ],
+          "found": true,
+          "input_sha256": "ce5d24fc771feb4e7055c8d3fad905957a75c421b6efb26ef3af84a54840c1be",
+          "output_sha256": "b72e4f1fc64709720a2af756091888192079e4d4432088ac99d62aa60665d7d1",
+          "schema_version": "forgeflow.report.tool-result.v1",
+          "status": "ANSWERED",
+          "tool_version": "annual-cash-v1"
+        },
+        "run_id": "9cf455bf184f4bacb75fc1d3b258d078",
+        "schema_version": "forgeflow.report.trace.v1",
+        "terminal_state": "success",
+        "trace_id": "4b2fc2f4872b454bb440092ace9148a5"
+      },
+      "tool_version": "annual-cash-v1",
+      "transport": "sync"
+    },
+    "note": "真实本机模块集成验收；由脚本扮演作者和审阅人。",
+    "owner": "integration-author",
+    "parent_digest": null,
+    "saved_at": "2026-11-24T11:52:53.049612+00:00",
+    "schema_version": "forgeflow.research.revision.v1",
+    "version": 1
+  },
+  "schema_version": "forgeflow.research.export.v1",
+  "state": "delivered"
+}

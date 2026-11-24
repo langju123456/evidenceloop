@@ -6,6 +6,8 @@
 
 [分工与实验入口](docs/report-lab/README.md) · [训练拟合及记录勘误](docs/report-lab/19-terminal-train-fit-results.md) · [D27冻结方案](docs/report-lab/20-restricted-action-sft-freeze.md) · [D27原始结果与拒绝理由](docs/report-lab/21-restricted-action-sft-results.md)
 
+[ForgeFlow 原生轨迹接入与复现](docs/report-lab/native-forgeflow-import.md)：真实 MCP 工具与审批交付导出进入独立评测、增量去重、错误回链、回放和 A/A；与早期模拟环境分开。
+
 下方是早期工具任务环境的记录；它与年报任务、划分和分母不同，不能混合统计。
 
 
