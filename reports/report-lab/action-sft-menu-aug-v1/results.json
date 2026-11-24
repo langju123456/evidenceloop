@@ -1,0 +1,1558 @@
+{
+  "gate_passed": false,
+  "gate_by_control": {
+    "base": {
+      "net_gain": -2,
+      "by_document": {
+        "tencent": -1,
+        "moutai": -1
+      },
+      "holds_changed_to_compute": []
+    },
+    "coached": {
+      "net_gain": -2,
+      "by_document": {
+        "tencent": -1,
+        "moutai": -1
+      },
+      "holds_changed_to_compute": []
+    }
+  },
+  "oracle_retained": true,
+  "freeze": "bdd537127a9e8733fa063a3abd9a152ae98b21cc912254ec7dcee6e7c3865fac",
+  "predictions_sha256": "5fb4752536078574d3a4035fa31e5562e54a5fa37c5ce0043015483c23bfbdc4",
+  "adapter_sha256": "d287a61daf218784bbf685d902c614b7e695d089c2fa472c4ceba09a27fc408e",
+  "summary": {
+    "dev": {
+      "base": {
+        "n": 6,
+        "passed": 1,
+        "unconstrained": 1,
+        "fixed": [],
+        "lost": []
+      },
+      "coached": {
+        "n": 6,
+        "passed": 1,
+        "unconstrained": 1,
+        "fixed": [],
+        "lost": []
+      },
+      "lora": {
+        "n": 6,
+        "passed": 2,
+        "unconstrained": 2,
+        "fixed": [
+          "apple-04",
+          "apple-05"
+        ],
+        "lost": [
+          "apple-06"
+        ]
+      }
+    },
+    "holdout": {
+      "base": {
+        "n": 18,
+        "passed": 4,
+        "unconstrained": 4,
+        "fixed": [],
+        "lost": []
+      },
+      "coached": {
+        "n": 18,
+        "passed": 4,
+        "unconstrained": 4,
+        "fixed": [],
+        "lost": []
+      },
+      "lora": {
+        "n": 18,
+        "passed": 2,
+        "unconstrained": 2,
+        "fixed": [
+          "tencent-07",
+          "moutai-07"
+        ],
+        "lost": [
+          "tencent-08",
+          "moutai-08",
+          "tencent-09",
+          "moutai-09"
+        ]
+      }
+    },
+    "regression": {
+      "base": {
+        "n": 8,
+        "passed": 1,
+        "unconstrained": 1,
+        "fixed": [],
+        "lost": []
+      },
+      "coached": {
+        "n": 8,
+        "passed": 1,
+        "unconstrained": 1,
+        "fixed": [],
+        "lost": []
+      },
+      "lora": {
+        "n": 8,
+        "passed": 2,
+        "unconstrained": 2,
+        "fixed": [
+          "revision-06",
+          "revision-08"
+        ],
+        "lost": [
+          "revision-07"
+        ]
+      }
+    }
+  },
+  "rows": [
+    {
+      "arm": "base",
+      "case_id": "apple-01",
+      "document": "apple",
+      "split": "dev",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "apple-02",
+      "document": "apple",
+      "split": "dev",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "apple-03",
+      "document": "apple",
+      "split": "dev",
+      "gold": "C",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "apple-04",
+      "document": "apple",
+      "split": "dev",
+      "gold": "D",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "apple-05",
+      "document": "apple",
+      "split": "dev",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "apple-06",
+      "document": "apple",
+      "split": "dev",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-01",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-02",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-03",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-04",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-05",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-06",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-07",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-08",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-01",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-02",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-03",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-04",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-05",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-06",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-07",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-08",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "base",
+      "case_id": "tencent-09",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "base",
+      "case_id": "moutai-09",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-01",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "C",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-02",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-03",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-04",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-05",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "D",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-06",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "C",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-07",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "base",
+      "case_id": "revision-08",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "apple-01",
+      "document": "apple",
+      "split": "dev",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "apple-02",
+      "document": "apple",
+      "split": "dev",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "apple-03",
+      "document": "apple",
+      "split": "dev",
+      "gold": "C",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "apple-04",
+      "document": "apple",
+      "split": "dev",
+      "gold": "D",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "apple-05",
+      "document": "apple",
+      "split": "dev",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "apple-06",
+      "document": "apple",
+      "split": "dev",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-01",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-02",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-03",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-04",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-05",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-06",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-07",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-08",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-01",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-02",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-03",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-04",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-05",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-06",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-07",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-08",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "coached",
+      "case_id": "tencent-09",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "coached",
+      "case_id": "moutai-09",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-01",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "C",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-02",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-03",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "B",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-04",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "A",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-05",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "D",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-06",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "C",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-07",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "F",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "coached",
+      "case_id": "revision-08",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "E",
+      "choice": "F",
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "apple-01",
+      "document": "apple",
+      "split": "dev",
+      "gold": "A",
+      "choice": "D",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "7750",
+        "value": "141.54"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "apple-02",
+      "document": "apple",
+      "split": "dev",
+      "gold": "B",
+      "choice": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "apple-03",
+      "document": "apple",
+      "split": "dev",
+      "gold": "C",
+      "choice": "D",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "7750",
+        "value": "141.54"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "apple-04",
+      "document": "apple",
+      "split": "dev",
+      "gold": "D",
+      "choice": "D",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "7750",
+        "value": "141.54"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "lora",
+      "case_id": "apple-05",
+      "document": "apple",
+      "split": "dev",
+      "gold": "E",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "lora",
+      "case_id": "apple-06",
+      "document": "apple",
+      "split": "dev",
+      "gold": "F",
+      "choice": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-01",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-02",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "D",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-03",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-04",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-05",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-06",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "D",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-07",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "E",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-08",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-01",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-02",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-03",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-04",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-05",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "B",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-06",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "A",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-07",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "E",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-08",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "tencent-09",
+      "document": "tencent",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "moutai-09",
+      "document": "moutai",
+      "split": "holdout",
+      "gold": "F",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-01",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "C",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-02",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "B",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-03",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "B",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-04",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "A",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-05",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "D",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-06",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "C",
+      "choice": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-07",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "F",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": false,
+      "unconstrained_correct": false
+    },
+    {
+      "arm": "lora",
+      "case_id": "revision-08",
+      "document": "oracle",
+      "split": "regression",
+      "gold": "E",
+      "choice": "E",
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "passed": true,
+      "unconstrained_correct": true
+    }
+  ],
+  "schema": "action-sft-menu-augmented-results/1",
+  "evaluation_scope": {
+    "holdout": "exposed-reuse regression set; do not call fresh holdout",
+    "regression": "exposed Oracle regression set"
+  }
+}

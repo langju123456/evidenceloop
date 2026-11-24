@@ -1,0 +1,44 @@
+{
+  "schema": "action-sft-menu-augmented/1",
+  "repository_head_at_freeze": "99beaa3277b871822f645afd5a6c065050011a21",
+  "files": {
+    "src/evidenceloop/report/action_sft_menu_aug.py": "e8026ee95c9ac98f939af1244f37d9ae30d797ce83a80a47778a16414c946337",
+    "docs/report-lab/16-menu-augmented-sft-freeze.md": "856206f6f98bb12ef48558e4593a293ffaa82d22f4044200dba1ce55fe10dc90",
+    "benchmarks/report_sft/v1/train.json": "bbd451c797efe462059029b96a12d3e6436d87ae3bfbf6558d53db52fc53b456",
+    "benchmarks/report_sft/v1/dev.json": "7c50cb51a7819fa92286a03dc2b55ff7bd4ac7175fe7ef97e1e93bc2e898a9bd",
+    "benchmarks/report_sft/v1/holdout.json": "b8a8b1fe0b47d8733349716e66835dcb623d4cdede253844b3d74080cea46ea8",
+    "benchmarks/report_sft/v1/regression.json": "843fb4ea6ae985fbd79fcd5e5dd79a2274d65953db84bef42caa481b63e05161",
+    "benchmarks/report_sft/v1/sources.json": "7ae1e01f78b6c63f373a7961b4af0f2cdaebc51a2229e8ba6cf3fbb75a143b80",
+    "benchmarks/report_sft/v1/finance-reference.json": "54a78c899bc1a9f9ab86302ca62e24add05a1d93b0b37e1319828aae33b0ce2f",
+    "benchmarks/report_sft/v1/model.json": "5fd5ab2d53c3084a0af1b8c6237d9392e7a8deae42e053ead1ca180df6abc129",
+    "src/evidenceloop/report/action_sft.py": "1a77e0498a22e1c8c01033ab5ef8d1f16d0ebc6554b8d0b8b7d1ae4fe1fb11e0",
+    "src/evidenceloop/report/calculation.py": "46bd8cbcb4b3e198c2c6d7fe50b869daad72d9ab90d5a4a26a722f738b32cc14",
+    "src/evidenceloop/report/annual.py": "e53586a8677d8d81378cf796adc545f4036e1f31c41321bfd7e6114845770919"
+  },
+  "base_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "config": {
+    "fine_tune_type": "lora",
+    "num_layers": 4,
+    "lora_parameters": {
+      "rank": 4,
+      "scale": 8.0,
+      "dropout": 0.0,
+      "keys": [
+        "self_attn.q_proj",
+        "self_attn.v_proj"
+      ]
+    }
+  },
+  "seed": 23,
+  "updates": 64,
+  "menu_schedule": "menu[(case_index + epoch - 1) % 2]",
+  "menus": [
+    "canonical",
+    "rotated"
+  ],
+  "evaluation_scope": {
+    "dev": "Apple development set",
+    "holdout": "Tencent and Moutai exposed-reuse regression set; not fresh holdout",
+    "regression": "Oracle exposed regression set"
+  }
+}

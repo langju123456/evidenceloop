@@ -1,0 +1,105 @@
+{
+  "schema": "D25-comparison/1",
+  "evaluation_scope": {
+    "holdout": "exposed-reuse regression set; do not call fresh holdout",
+    "regression": "exposed Oracle regression set"
+  },
+  "decision": "reject",
+  "gate_passed": false,
+  "counts": {
+    "dev": {
+      "n": 6,
+      "base": 1,
+      "coached": 1,
+      "old_lora": 0,
+      "menu_aug_lora": 2
+    },
+    "holdout": {
+      "n": 18,
+      "base": 4,
+      "coached": 4,
+      "old_lora": 1,
+      "menu_aug_lora": 2
+    },
+    "regression": {
+      "n": 8,
+      "base": 1,
+      "coached": 1,
+      "old_lora": 2,
+      "menu_aug_lora": 2
+    }
+  },
+  "gate_by_control": {
+    "base": {
+      "net_gain": -2,
+      "by_document": {
+        "tencent": -1,
+        "moutai": -1
+      },
+      "holds_changed_to_compute": []
+    },
+    "coached": {
+      "net_gain": -2,
+      "by_document": {
+        "tencent": -1,
+        "moutai": -1
+      },
+      "holds_changed_to_compute": []
+    }
+  },
+  "oracle_retained": true,
+  "vs_previous_adapter": {
+    "dev": {
+      "fixed": [
+        "apple-04",
+        "apple-05"
+      ],
+      "lost": []
+    },
+    "holdout": {
+      "fixed": [
+        "tencent-07",
+        "moutai-07"
+      ],
+      "lost": [
+        "moutai-05"
+      ]
+    },
+    "regression": {
+      "fixed": [
+        "revision-08"
+      ],
+      "lost": [
+        "revision-01"
+      ]
+    }
+  },
+  "holdout_diagnostics": {
+    "choices": {
+      "E": 14,
+      "D": 2,
+      "C": 2
+    },
+    "correct_user_pause": 2,
+    "unnecessary_user_pause": 8,
+    "missing_evidence_mislabelled_user_pause": 4,
+    "invalid_calculation_intercepted": 4
+  },
+  "controls_outcome_matches_previous": 64,
+  "control_rows": 64,
+  "provenance": {
+    "original_results_sha256": "2321fdfb934c89cef4ec8ddc965bbfd55d888a3232eae7abcfc295aa15480182",
+    "results_sha256": "29856dfd53a67a13ac94323a1e5074b314d31cc22d31ed9fd8e2854ee631a993",
+    "predictions_sha256": "5fb4752536078574d3a4035fa31e5562e54a5fa37c5ce0043015483c23bfbdc4",
+    "training_sha256": "937f0c4360c09281bc0fe585eb99b7a62a16a898cb0821da35160a82b3cf3f92",
+    "freeze_sha256": "bdd537127a9e8733fa063a3abd9a152ae98b21cc912254ec7dcee6e7c3865fac"
+  },
+  "training": {
+    "seconds": 8.726,
+    "peak_memory_bytes": 1584965006,
+    "trainable_parameters": 81920,
+    "adapter_sha256": "d287a61daf218784bbf685d902c614b7e695d089c2fa472c4ceba09a27fc408e"
+  },
+  "input_tokens": 12100,
+  "inference_forward_seconds": 9.6117
+}

@@ -1,0 +1,176 @@
+{
+  "type": "synthetic gate verification, not model performance",
+  "checks": [
+    {
+      "synthetic_case": "same_as_base",
+      "gate_passed": false,
+      "gate_by_control": {
+        "base": {
+          "net_gain": 0,
+          "by_document": {
+            "tencent": 0,
+            "moutai": 0
+          },
+          "holds_changed_to_compute": []
+        },
+        "coached": {
+          "net_gain": 0,
+          "by_document": {
+            "tencent": 0,
+            "moutai": 0
+          },
+          "holds_changed_to_compute": []
+        }
+      },
+      "oracle_retained": true
+    },
+    {
+      "synthetic_case": "all_correct",
+      "gate_passed": true,
+      "gate_by_control": {
+        "base": {
+          "net_gain": 14,
+          "by_document": {
+            "tencent": 7,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": []
+        },
+        "coached": {
+          "net_gain": 14,
+          "by_document": {
+            "tencent": 7,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": []
+        }
+      },
+      "oracle_retained": true
+    },
+    {
+      "synthetic_case": "unsafe_pause",
+      "gate_passed": false,
+      "gate_by_control": {
+        "base": {
+          "net_gain": 13,
+          "by_document": {
+            "tencent": 6,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": [
+            "tencent-08"
+          ]
+        },
+        "coached": {
+          "net_gain": 13,
+          "by_document": {
+            "tencent": 6,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": [
+            "tencent-08"
+          ]
+        }
+      },
+      "oracle_retained": true
+    },
+    {
+      "synthetic_case": "company_regression",
+      "gate_passed": false,
+      "gate_by_control": {
+        "base": {
+          "net_gain": 5,
+          "by_document": {
+            "tencent": -2,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": [
+            "tencent-08",
+            "tencent-09"
+          ]
+        },
+        "coached": {
+          "net_gain": 5,
+          "by_document": {
+            "tencent": -2,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": [
+            "tencent-08",
+            "tencent-09"
+          ]
+        }
+      },
+      "oracle_retained": true
+    },
+    {
+      "synthetic_case": "oracle_regression",
+      "gate_passed": false,
+      "gate_by_control": {
+        "base": {
+          "net_gain": 14,
+          "by_document": {
+            "tencent": 7,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": []
+        },
+        "coached": {
+          "net_gain": 14,
+          "by_document": {
+            "tencent": 7,
+            "moutai": 7
+          },
+          "holds_changed_to_compute": []
+        }
+      },
+      "oracle_retained": false
+    },
+    {
+      "synthetic_case": "only_plus_one",
+      "gate_passed": false,
+      "gate_by_control": {
+        "base": {
+          "net_gain": 1,
+          "by_document": {
+            "tencent": 1,
+            "moutai": 0
+          },
+          "holds_changed_to_compute": []
+        },
+        "coached": {
+          "net_gain": 1,
+          "by_document": {
+            "tencent": 1,
+            "moutai": 0
+          },
+          "holds_changed_to_compute": []
+        }
+      },
+      "oracle_retained": true
+    },
+    {
+      "synthetic_case": "plus_two_no_loss",
+      "gate_passed": true,
+      "gate_by_control": {
+        "base": {
+          "net_gain": 2,
+          "by_document": {
+            "tencent": 1,
+            "moutai": 1
+          },
+          "holds_changed_to_compute": []
+        },
+        "coached": {
+          "net_gain": 2,
+          "by_document": {
+            "tencent": 1,
+            "moutai": 1
+          },
+          "holds_changed_to_compute": []
+        }
+      },
+      "oracle_retained": true
+    }
+  ]
+}

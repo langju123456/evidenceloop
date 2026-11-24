@@ -1,0 +1,53 @@
+{
+  "schema": "D25-archive/1",
+  "files": {
+    "adapter/adapter_config.json": {
+      "bytes": 202,
+      "sha256": "13d434096ebfb61bb0a0aaeae71141fcc2b09d4c357eefbfc738457e03f0bd2d"
+    },
+    "adapter/adapters.safetensors": {
+      "bytes": 329390,
+      "sha256": "d287a61daf218784bbf685d902c614b7e695d089c2fa472c4ceba09a27fc408e"
+    },
+    "comparison.json": {
+      "bytes": 2445,
+      "sha256": "718e207bf17e4d6d2fdade7b6f960b0d1655d00362cfb2f01f46432ce0a9159c"
+    },
+    "freeze.json": {
+      "bytes": 2176,
+      "sha256": "bdd537127a9e8733fa063a3abd9a152ae98b21cc912254ec7dcee6e7c3865fac"
+    },
+    "predictions.jsonl": {
+      "bytes": 96639,
+      "sha256": "5fb4752536078574d3a4035fa31e5562e54a5fa37c5ce0043015483c23bfbdc4"
+    },
+    "results.json": {
+      "bytes": 34223,
+      "sha256": "29856dfd53a67a13ac94323a1e5074b314d31cc22d31ed9fd8e2854ee631a993"
+    },
+    "synthetic-gate-checks.json": {
+      "bytes": 3936,
+      "sha256": "fe3436bf7cd059f546f44bd458583c495f0eb5d1800c347f73f2d1458f19eceb"
+    },
+    "training-started.json": {
+      "bytes": 233,
+      "sha256": "56ba618f02b4b970857517834866d038525c0a318b629329ea344493f57b5c52"
+    },
+    "training-steps.jsonl": {
+      "bytes": 12637,
+      "sha256": "48b6051d1deac99162a694c9cca365ffb363821d5aac89a003fb3a8c5c99afe4"
+    },
+    "training.json": {
+      "bytes": 17428,
+      "sha256": "937f0c4360c09281bc0fe585eb99b7a62a16a898cb0821da35160a82b3cf3f92"
+    },
+    "verification.json": {
+      "bytes": 1164,
+      "sha256": "11e40ecb268fa8191159bc0c3ce0b7f12fa868fccccf6d014de290418da55c96"
+    }
+  },
+  "results_document": {
+    "path": "docs/report-lab/17-menu-augmented-sft-results.md",
+    "sha256": "07ad045d82ddd4531364336b8219946ed9c8d962c6c4c4cda09bf808dc7031c7"
+  }
+}

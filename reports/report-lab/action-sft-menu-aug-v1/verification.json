@@ -1,0 +1,29 @@
+{
+  "schema": "D25-verification/1",
+  "implementation_commit": "99beaa3277b871822f645afd5a6c065050011a21",
+  "tests": {
+    "command": "PYTHONPATH=src python -m pytest tests/test_report_action_sft.py tests/test_report_action_sft_position.py tests/test_report_action_sft_position_v2.py tests/test_report_action_sft_menu_aug.py -q",
+    "passed": 16,
+    "exit_code": 0,
+    "executor": "implementation agent"
+  },
+  "ruff": {
+    "command": "python -m ruff check src/evidenceloop/report/action_sft_menu_aug.py tests/test_report_action_sft_menu_aug.py",
+    "exit_code": 0
+  },
+  "independent_review": {
+    "kind": "AI read-only code and results review",
+    "code_findings_remaining": 0,
+    "result_facts_verified": true,
+    "human_expert_labels": 0,
+    "note": "Archive push is performed after this review; this receipt is not cryptographic proof of execution."
+  },
+  "offline_rescore_exact": true,
+  "expected_model_predictions": 96,
+  "observed_model_predictions": 96,
+  "training_receipt_steps": 64,
+  "original_controls_outcome_matches": 64,
+  "synthetic_gate_boundaries_passed": 7,
+  "synthetic_predictions_in_model_results": 0,
+  "decision": "reject"
+}
