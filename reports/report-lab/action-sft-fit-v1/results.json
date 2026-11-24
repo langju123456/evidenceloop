@@ -1,0 +1,45 @@
+{
+  "schema": "action-sft-terminal-fit-results/1",
+  "freeze": "c38f95c5d846b4fc0f2d1edfef6f8f7a809f92d3d225ea17442d95ec76470ba9",
+  "predictions_sha256": "244fa5480d2545e9f7e888258341098e0bb29fa55348d511b8d16f0ace84308c",
+  "rows": 192,
+  "by_arm": {
+    "base": {
+      "n": 64,
+      "restricted_correct": 6,
+      "by_menu": {
+        "canonical": 4,
+        "rotated": 2
+      },
+      "mean_target_full_vocab_nll": 3.223083,
+      "mean_target_margin_vs_other_actions": -2.712891
+    },
+    "d22_lora": {
+      "n": 64,
+      "restricted_correct": 10,
+      "by_menu": {
+        "canonical": 6,
+        "rotated": 4
+      },
+      "mean_target_full_vocab_nll": 2.033522,
+      "mean_target_margin_vs_other_actions": -0.800781
+    },
+    "d25_lora": {
+      "n": 64,
+      "restricted_correct": 12,
+      "by_menu": {
+        "canonical": 5,
+        "rotated": 7
+      },
+      "mean_target_full_vocab_nll": 1.84226,
+      "mean_target_margin_vs_other_actions": -0.376953
+    }
+  },
+  "d25_supervised_fit": {
+    "n": 64,
+    "restricted_correct": 12,
+    "classification": "training_actions_not_fully_fit",
+    "next_candidate": "one fixed 0.6B D25-equivalent candidate with restricted A-F CE only"
+  },
+  "scope": "Dell/Cisco training-fit diagnosis only; passing it is not a generalization claim."
+}

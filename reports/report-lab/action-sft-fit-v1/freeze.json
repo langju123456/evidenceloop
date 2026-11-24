@@ -1,0 +1,429 @@
+{
+  "schema": "action-sft-terminal-fit/1",
+  "repository_head_at_freeze": "5a7d629dce8d6d292fe4e2d827fd85af56588128",
+  "files": {
+    "src/evidenceloop/report/action_sft_fit_probe.py": "39f818a05eb96f16a4fec3982de9c1249e4bce23f12c16ba7418cd3f6950e78a",
+    "docs/report-lab/18-terminal-train-fit-probe.md": "a9a1799c96c68fc25684531b155c03cb55de415cf1b3a08c9c8ef79691411c61",
+    "src/evidenceloop/report/action_sft.py": "1a77e0498a22e1c8c01033ab5ef8d1f16d0ebc6554b8d0b8b7d1ae4fe1fb11e0",
+    "src/evidenceloop/report/action_sft_menu_aug.py": "e8026ee95c9ac98f939af1244f37d9ae30d797ce83a80a47778a16414c946337",
+    "benchmarks/report_sft/v1/train.json": "bbd451c797efe462059029b96a12d3e6436d87ae3bfbf6558d53db52fc53b456",
+    "benchmarks/report_sft/v1/sources.json": "7ae1e01f78b6c63f373a7961b4af0f2cdaebc51a2229e8ba6cf3fbb75a143b80",
+    "benchmarks/report_sft/v1/model.json": "5fd5ab2d53c3084a0af1b8c6237d9392e7a8deae42e053ead1ca180df6abc129",
+    "reports/report-lab/action-sft-v1/training.json": "fab4b7cda700de83b8b5c2f4c142d9687877fa9003dd6ae6f30c23b75d358582",
+    "reports/report-lab/action-sft-v1/adapter/adapter_config.json": "13d434096ebfb61bb0a0aaeae71141fcc2b09d4c357eefbfc738457e03f0bd2d",
+    "reports/report-lab/action-sft-v1/adapter/adapters.safetensors": "2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de",
+    "reports/report-lab/action-sft-menu-aug-v1/freeze.json": "bdd537127a9e8733fa063a3abd9a152ae98b21cc912254ec7dcee6e7c3865fac",
+    "reports/report-lab/action-sft-menu-aug-v1/training.json": "937f0c4360c09281bc0fe585eb99b7a62a16a898cb0821da35160a82b3cf3f92",
+    "reports/report-lab/action-sft-menu-aug-v1/adapter/adapter_config.json": "13d434096ebfb61bb0a0aaeae71141fcc2b09d4c357eefbfc738457e03f0bd2d",
+    "reports/report-lab/action-sft-menu-aug-v1/adapter/adapters.safetensors": "d287a61daf218784bbf685d902c614b7e695d089c2fa472c4ceba09a27fc408e"
+  },
+  "base_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "runtime": {
+    "device": "Apple M4",
+    "mlx": "0.32.3",
+    "mlx-lm": "0.32.0",
+    "transformers": "5.18.0"
+  },
+  "matrix": [
+    {
+      "case_id": "dell-01",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "dell-01",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "dell-02",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "dell-02",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "dell-03",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "dell-03",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "dell-04",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "dell-04",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "dell-05",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "dell-05",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "dell-06",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "dell-06",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "dell-07",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "dell-07",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "dell-08",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "dell-08",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "dell-09",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "dell-09",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "dell-10",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "dell-10",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "dell-11",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "dell-11",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "dell-12",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "dell-12",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "dell-13",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "dell-13",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "dell-14",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "dell-14",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "dell-15",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "dell-15",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "dell-16",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "dell-16",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "cisco-01",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "cisco-01",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "cisco-02",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "cisco-02",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "cisco-03",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "cisco-03",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "cisco-04",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "cisco-04",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "cisco-05",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "cisco-05",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "cisco-06",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "cisco-06",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "cisco-07",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "cisco-07",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "cisco-08",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "cisco-08",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "cisco-09",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "cisco-09",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "cisco-10",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "cisco-10",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "cisco-11",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "cisco-11",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "cisco-12",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D"
+    },
+    {
+      "case_id": "cisco-12",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B"
+    },
+    {
+      "case_id": "cisco-13",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "cisco-13",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "cisco-14",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E"
+    },
+    {
+      "case_id": "cisco-14",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C"
+    },
+    {
+      "case_id": "cisco-15",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "cisco-15",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "gold_code": "A"
+    },
+    {
+      "case_id": "cisco-16",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "gold_code": "F"
+    },
+    {
+      "case_id": "cisco-16",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "gold_code": "A"
+    }
+  ],
+  "arms": [
+    "base",
+    "d22_lora",
+    "d25_lora"
+  ],
+  "menus": [
+    "canonical",
+    "rotated"
+  ],
+  "attempt_policy": "one forward pass per (case_id, menu_id, arm); no retry or overwrite",
+  "decision_rule": {
+    "d25_supervised_cells": 64,
+    "if_lt_64": "one fixed 0.6B D25-equivalent candidate with restricted A-F CE only",
+    "if_eq_64": "one fixed cached 1.7B D25-equivalent candidate; no 4B fallback"
+  },
+  "scope": "Dell/Cisco training-fit diagnosis only; passing it is not a generalization claim."
+}

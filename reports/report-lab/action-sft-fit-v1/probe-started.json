@@ -1,0 +1,10 @@
+{
+  "freeze": "c38f95c5d846b4fc0f2d1edfef6f8f7a809f92d3d225ea17442d95ec76470ba9",
+  "planned_rows": 192,
+  "arms": [
+    "base",
+    "d22_lora",
+    "d25_lora"
+  ],
+  "matrix_cells": 64
+}
