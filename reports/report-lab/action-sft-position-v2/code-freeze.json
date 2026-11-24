@@ -1,0 +1,8 @@
+{
+  "src/evidenceloop/report/action_sft_position.py": "f00b9fb3674fecb79e08b4f9983b6186692fa0894a636afcc03d0fcee8174d68",
+  "src/evidenceloop/report/action_sft_position_v2.py": "faf47c6ad507c99964e20b9117c2ce41ee9511b09eb866a9c4a5db05eb3aa94e",
+  "scripts/run_action_position.py": "bd72c9df8fe3631ecee089026404017b5a03777ca110b096daefeb3d7d0ea3fd",
+  "docs/report-lab/14-menu-position-v2-freeze.md": "c047c2eca492f1af4f4a7f0576d1c7ee10b49b3407e324c241419f085df45ad0",
+  "benchmarks/report_sft/menu_position_v1/cases.json": "053c3a65403212f4998aa123cfd56b2132ba0615f39072d781787103bc5b2a1e",
+  "benchmarks/report_sft/v1/sources.json": "7ae1e01f78b6c63f373a7961b4af0f2cdaebc51a2229e8ba6cf3fbb75a143b80"
+}
