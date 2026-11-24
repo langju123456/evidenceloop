@@ -1,5 +1,14 @@
 # EvidenceLoop
 
+## 当前年报评测与训练实验（2026-11-24）
+
+完成三轮真实Qwen3-0.6B LoRA训练及独立进程权重重载，每轮归档96条canonical首答。D26诊断将训练拟合与跨公司回归分开；D27仅改六动作损失后旧回归5/18，对照4/18，但净增不足2且缺证暂停变成计算，按原门槛拒绝采用。训练终态17/64，不能宣称退化已解决。
+
+[分工与实验入口](docs/report-lab/README.md) · [训练拟合及记录勘误](docs/report-lab/19-terminal-train-fit-results.md) · [D27冻结方案](docs/report-lab/20-restricted-action-sft-freeze.md) · [D27原始结果与拒绝理由](docs/report-lab/21-restricted-action-sft-results.md)
+
+下方是早期工具任务环境的记录；它与年报任务、划分和分母不同，不能混合统计。
+
+
 可验证的 Agent 经验固化与后训练数据平台。核心问题：在一个可验证的工具调用环境里，什么样的经验值得写进参数，又怎样写才安全。
 
 从这里看起：[校准报告](reports/) · [决策记录](docs/decisions.md) · [验证器](src/evidenceloop/verify/verifier.py) · [错误路径表](src/evidenceloop/oracle/oracle.py)
