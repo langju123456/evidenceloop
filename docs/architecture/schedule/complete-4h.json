@@ -1,0 +1,560 @@
+{
+  "scope": "complete",
+  "label": "完整离线应用与评测作品集",
+  "low": {
+    "scope": "complete",
+    "estimate": "low",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 4,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 36,
+      "agent": 81,
+      "model": 11.75
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 2,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T09:00:00",
+      "first_task_start": "2026-11-23T09:00:00",
+      "finish": "2026-12-01T21:00:00",
+      "wait_before_first_task_hours": 0.0,
+      "elapsed_after_first_task_start_hours": 204.0,
+      "elapsed_from_requested_start_hours": 204.0,
+      "elapsed_from_requested_start_days": 8.5
+    },
+    "tasks": [
+      {
+        "id": "full_contract",
+        "label": "统一协议、任务族与发布标准",
+        "resource": "human",
+        "hours": 4,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-23T21:00:00",
+        "notes": "跨项目 schema、数据边界、完成标准及优先级。",
+        "model_workload": null
+      },
+      {
+        "id": "full_forge_research",
+        "label": "ForgeFlow：取证、两期比较、公式与冲突恢复",
+        "resource": "agent",
+        "hours": 15,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_contract"
+        ],
+        "start": "2026-11-23T21:00:00",
+        "end": "2026-11-24T12:00:00",
+        "notes": "扩展现有年度和 Apple 开发切片，保留未知状态。",
+        "model_workload": null
+      },
+      {
+        "id": "full_forge_workflow",
+        "label": "ForgeFlow：稿件、版本、审批和一次性交付",
+        "resource": "agent",
+        "hours": 18,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_forge_research"
+        ],
+        "start": "2026-11-24T12:00:00",
+        "end": "2026-11-25T06:00:00",
+        "notes": "真正的研究流程，非单题查数页面。",
+        "model_workload": null
+      },
+      {
+        "id": "full_labeling",
+        "label": "EvidenceLoop：任务族切分、标签、双复核设计",
+        "resource": "human",
+        "hours": 12,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_contract"
+        ],
+        "start": "2026-11-24T09:00:00",
+        "end": "2026-11-26T21:00:00",
+        "notes": "先定义独立留出、疑难项和审阅协议；实际第二复核人时间另列。",
+        "model_workload": null
+      },
+      {
+        "id": "full_eval_system",
+        "label": "EvidenceLoop：混合评分、校准、统计与回归页",
+        "resource": "agent",
+        "hours": 18,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_labeling"
+        ],
+        "start": "2026-11-26T21:00:00",
+        "end": "2026-11-27T15:00:00",
+        "notes": "程序硬判与开放项校准；展示退化与不确定性。",
+        "model_workload": null
+      },
+      {
+        "id": "full_model_trials",
+        "label": "多文档族同条件模型实验",
+        "resource": "model",
+        "hours": 1.5,
+        "declared_hours_reference": [
+          1.5,
+          8.25
+        ],
+        "hours_source": "model_workload_derived",
+        "depends": [
+          "full_labeling"
+        ],
+        "start": "2026-11-26T21:00:00",
+        "end": "2026-11-26T22:30:00",
+        "notes": "216 次单步调用：24 个锁定任务 × 3 方案 × 3 重复。按每次 20–120 秒加 15–60 分钟冷启动/重试预算；不含 GPU 训练和 Agent 改代码时间。",
+        "model_workload": {
+          "kind": "single_step",
+          "low": {
+            "cases": 24,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 20,
+            "warmup_seconds": 900
+          },
+          "high": {
+            "cases": 24,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 120,
+            "warmup_seconds": 3600
+          }
+        }
+      },
+      {
+        "id": "full_eval_decision",
+        "label": "人工复核、版本决策与实验解释",
+        "resource": "human",
+        "hours": 7,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_eval_system",
+          "full_model_trials"
+        ],
+        "start": "2026-11-27T19:00:00",
+        "end": "2026-11-29T10:00:00",
+        "notes": "复核重大发现，决定是否进入训练或继续工程修复。",
+        "model_workload": null
+      },
+      {
+        "id": "full_horizon_environment",
+        "label": "HorizonBench：五类故障环境与独立判定",
+        "resource": "agent",
+        "hours": 12,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_contract"
+        ],
+        "start": "2026-11-23T21:00:00",
+        "end": "2026-11-24T09:00:00",
+        "notes": "可与 ForgeFlow 流程实现并行，覆盖改口径、清上下文、并发修改、提交失败和回执丢失。",
+        "model_workload": null
+      },
+      {
+        "id": "full_horizon_reliability",
+        "label": "HorizonBench：真实接口、恢复与回执联调",
+        "resource": "agent",
+        "hours": 8,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_forge_workflow",
+          "full_horizon_environment"
+        ],
+        "start": "2026-11-25T06:00:00",
+        "end": "2026-11-25T14:00:00",
+        "notes": "将故障环境接到真实产物和提交入口。",
+        "model_workload": null
+      },
+      {
+        "id": "full_horizon_studies",
+        "label": "记忆/恢复策略配对实验与报告",
+        "resource": "model",
+        "hours": 10.25,
+        "declared_hours_reference": [
+          10.25,
+          37.5
+        ],
+        "hours_source": "model_workload_derived",
+        "depends": [
+          "full_horizon_reliability"
+        ],
+        "start": "2026-11-25T14:00:00",
+        "end": "2026-11-26T00:15:00",
+        "notes": "72 次多步长任务：8 个故障场景 × 3 种恢复/记忆策略 × 3 重复。按每次 8–30 分钟加 30–90 分钟环境启动/重试预算；与单步模型实验共用 1 条 Mac lane。",
+        "model_workload": {
+          "kind": "multi_step",
+          "low": {
+            "cases": 8,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 480,
+            "warmup_seconds": 1800
+          },
+          "high": {
+            "cases": 8,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 1800,
+            "warmup_seconds": 5400
+          }
+        }
+      },
+      {
+        "id": "full_horizon_review",
+        "label": "独立终态与长任务策略验收",
+        "resource": "human",
+        "hours": 5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_horizon_studies"
+        ],
+        "start": "2026-11-27T09:00:00",
+        "end": "2026-11-29T21:00:00",
+        "notes": "确认收件箱、版本、digest与本地状态全都一致。",
+        "model_workload": null
+      },
+      {
+        "id": "full_integration",
+        "label": "联通 Trace、artifact、receipt 与可演示界面",
+        "resource": "agent",
+        "hours": 10,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_eval_decision",
+          "full_horizon_review"
+        ],
+        "start": "2026-11-29T21:00:00",
+        "end": "2026-11-30T07:00:00",
+        "notes": "把三套实验连成一条可追踪交付链。",
+        "model_workload": null
+      },
+      {
+        "id": "full_blind_accept",
+        "label": "留出任务、性能记录与本人答辩复盘",
+        "resource": "human",
+        "hours": 8,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_integration"
+        ],
+        "start": "2026-11-30T09:00:00",
+        "end": "2026-12-01T21:00:00",
+        "notes": "包含未参与开发的任务、失败复盘、展示和面试说明。",
+        "model_workload": null
+      }
+    ]
+  },
+  "high": {
+    "scope": "complete",
+    "estimate": "high",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 4,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 62,
+      "agent": 141,
+      "model": 45.75
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 2,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T09:00:00",
+      "first_task_start": "2026-11-23T09:00:00",
+      "finish": "2026-12-08T21:00:00",
+      "wait_before_first_task_hours": 0.0,
+      "elapsed_after_first_task_start_hours": 372.0,
+      "elapsed_from_requested_start_hours": 372.0,
+      "elapsed_from_requested_start_days": 15.5
+    },
+    "tasks": [
+      {
+        "id": "full_contract",
+        "label": "统一协议、任务族与发布标准",
+        "resource": "human",
+        "hours": 7,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-24T20:00:00",
+        "notes": "跨项目 schema、数据边界、完成标准及优先级。",
+        "model_workload": null
+      },
+      {
+        "id": "full_forge_research",
+        "label": "ForgeFlow：取证、两期比较、公式与冲突恢复",
+        "resource": "agent",
+        "hours": 27,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_contract"
+        ],
+        "start": "2026-11-24T20:00:00",
+        "end": "2026-11-25T23:00:00",
+        "notes": "扩展现有年度和 Apple 开发切片，保留未知状态。",
+        "model_workload": null
+      },
+      {
+        "id": "full_forge_workflow",
+        "label": "ForgeFlow：稿件、版本、审批和一次性交付",
+        "resource": "agent",
+        "hours": 32,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_forge_research"
+        ],
+        "start": "2026-11-25T23:00:00",
+        "end": "2026-11-27T07:00:00",
+        "notes": "真正的研究流程，非单题查数页面。",
+        "model_workload": null
+      },
+      {
+        "id": "full_labeling",
+        "label": "EvidenceLoop：任务族切分、标签、双复核设计",
+        "resource": "human",
+        "hours": 20,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_contract"
+        ],
+        "start": "2026-11-24T20:00:00",
+        "end": "2026-11-29T20:00:00",
+        "notes": "先定义独立留出、疑难项和审阅协议；实际第二复核人时间另列。",
+        "model_workload": null
+      },
+      {
+        "id": "full_eval_system",
+        "label": "EvidenceLoop：混合评分、校准、统计与回归页",
+        "resource": "agent",
+        "hours": 30,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_labeling"
+        ],
+        "start": "2026-11-29T20:00:00",
+        "end": "2026-12-01T02:00:00",
+        "notes": "程序硬判与开放项校准；展示退化与不确定性。",
+        "model_workload": null
+      },
+      {
+        "id": "full_model_trials",
+        "label": "多文档族同条件模型实验",
+        "resource": "model",
+        "hours": 8.25,
+        "declared_hours_reference": [
+          1.5,
+          8.25
+        ],
+        "hours_source": "model_workload_derived",
+        "depends": [
+          "full_labeling"
+        ],
+        "start": "2026-11-29T20:00:00",
+        "end": "2026-11-30T04:15:00",
+        "notes": "216 次单步调用：24 个锁定任务 × 3 方案 × 3 重复。按每次 20–120 秒加 15–60 分钟冷启动/重试预算；不含 GPU 训练和 Agent 改代码时间。",
+        "model_workload": {
+          "kind": "single_step",
+          "low": {
+            "cases": 24,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 20,
+            "warmup_seconds": 900
+          },
+          "high": {
+            "cases": 24,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 120,
+            "warmup_seconds": 3600
+          }
+        }
+      },
+      {
+        "id": "full_eval_decision",
+        "label": "人工复核、版本决策与实验解释",
+        "resource": "human",
+        "hours": 12,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_eval_system",
+          "full_model_trials"
+        ],
+        "start": "2026-12-01T09:00:00",
+        "end": "2026-12-03T21:00:00",
+        "notes": "复核重大发现，决定是否进入训练或继续工程修复。",
+        "model_workload": null
+      },
+      {
+        "id": "full_horizon_environment",
+        "label": "HorizonBench：五类故障环境与独立判定",
+        "resource": "agent",
+        "hours": 20,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_contract"
+        ],
+        "start": "2026-11-24T20:00:00",
+        "end": "2026-11-25T16:00:00",
+        "notes": "可与 ForgeFlow 流程实现并行，覆盖改口径、清上下文、并发修改、提交失败和回执丢失。",
+        "model_workload": null
+      },
+      {
+        "id": "full_horizon_reliability",
+        "label": "HorizonBench：真实接口、恢复与回执联调",
+        "resource": "agent",
+        "hours": 14,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_forge_workflow",
+          "full_horizon_environment"
+        ],
+        "start": "2026-11-27T07:00:00",
+        "end": "2026-11-27T21:00:00",
+        "notes": "将故障环境接到真实产物和提交入口。",
+        "model_workload": null
+      },
+      {
+        "id": "full_horizon_studies",
+        "label": "记忆/恢复策略配对实验与报告",
+        "resource": "model",
+        "hours": 37.5,
+        "declared_hours_reference": [
+          10.25,
+          37.5
+        ],
+        "hours_source": "model_workload_derived",
+        "depends": [
+          "full_horizon_reliability"
+        ],
+        "start": "2026-11-27T21:00:00",
+        "end": "2026-11-29T10:30:00",
+        "notes": "72 次多步长任务：8 个故障场景 × 3 种恢复/记忆策略 × 3 重复。按每次 8–30 分钟加 30–90 分钟环境启动/重试预算；与单步模型实验共用 1 条 Mac lane。",
+        "model_workload": {
+          "kind": "multi_step",
+          "low": {
+            "cases": 8,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 480,
+            "warmup_seconds": 1800
+          },
+          "high": {
+            "cases": 8,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 1800,
+            "warmup_seconds": 5400
+          }
+        }
+      },
+      {
+        "id": "full_horizon_review",
+        "label": "独立终态与长任务策略验收",
+        "resource": "human",
+        "hours": 9,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_horizon_studies"
+        ],
+        "start": "2026-11-29T20:00:00",
+        "end": "2026-12-04T21:00:00",
+        "notes": "确认收件箱、版本、digest与本地状态全都一致。",
+        "model_workload": null
+      },
+      {
+        "id": "full_integration",
+        "label": "联通 Trace、artifact、receipt 与可演示界面",
+        "resource": "agent",
+        "hours": 18,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_eval_decision",
+          "full_horizon_review"
+        ],
+        "start": "2026-12-04T21:00:00",
+        "end": "2026-12-05T15:00:00",
+        "notes": "把三套实验连成一条可追踪交付链。",
+        "model_workload": null
+      },
+      {
+        "id": "full_blind_accept",
+        "label": "留出任务、性能记录与本人答辩复盘",
+        "resource": "human",
+        "hours": 14,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "full_integration"
+        ],
+        "start": "2026-12-05T19:00:00",
+        "end": "2026-12-08T21:00:00",
+        "notes": "包含未参与开发的任务、失败复盘、展示和面试说明。",
+        "model_workload": null
+      }
+    ]
+  }
+}

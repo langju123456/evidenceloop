@@ -1,0 +1,238 @@
+{
+  "scope": "review",
+  "label": "整理已有成果并讲清边界",
+  "low": {
+    "scope": "review",
+    "estimate": "low",
+    "configuration": {
+      "start": "2026-11-23T23:45:00",
+      "human_hours_per_day": 2,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 4.0,
+      "agent": 5,
+      "model": 0
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 1,
+        "model": 0
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T23:45:00",
+      "first_task_start": "2026-11-24T09:00:00",
+      "finish": "2026-11-26T10:00:00",
+      "wait_before_first_task_hours": 9.25,
+      "elapsed_after_first_task_start_hours": 49.0,
+      "elapsed_from_requested_start_hours": 58.25,
+      "elapsed_from_requested_start_days": 2.43
+    },
+    "tasks": [
+      {
+        "id": "review_facts",
+        "label": "冻结已完成实验与证据边界",
+        "resource": "human",
+        "hours": 1.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-24T09:00:00",
+        "end": "2026-11-24T19:30:00",
+        "notes": "逐项分开真实模型、确定性实验、人工反例和模拟故障。",
+        "model_workload": null
+      },
+      {
+        "id": "review_docs",
+        "label": "整理复跑入口、架构图和演示材料",
+        "resource": "agent",
+        "hours": 3,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_facts"
+        ],
+        "start": "2026-11-24T19:30:00",
+        "end": "2026-11-24T22:30:00",
+        "notes": "AI 可独立整理现有文档，保留链接和命令。",
+        "model_workload": null
+      },
+      {
+        "id": "review_walkthrough",
+        "label": "亲自走一次演示并写口头解释",
+        "resource": "human",
+        "hours": 1.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_docs"
+        ],
+        "start": "2026-11-25T09:00:00",
+        "end": "2026-11-25T19:30:00",
+        "notes": "不新增模型实验；需要你判断讲什么和如何如实表述。",
+        "model_workload": null
+      },
+      {
+        "id": "review_polish",
+        "label": "修正演示发现的问题",
+        "resource": "agent",
+        "hours": 2,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_walkthrough"
+        ],
+        "start": "2026-11-25T19:30:00",
+        "end": "2026-11-25T21:30:00",
+        "notes": "小范围修文档、命令或展示，不扩大产品。",
+        "model_workload": null
+      },
+      {
+        "id": "review_accept",
+        "label": "最终验收与面试问答复盘",
+        "resource": "human",
+        "hours": 1,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_polish"
+        ],
+        "start": "2026-11-26T09:00:00",
+        "end": "2026-11-26T10:00:00",
+        "notes": "你确认每个主张都能回到证据。",
+        "model_workload": null
+      }
+    ]
+  },
+  "high": {
+    "scope": "review",
+    "estimate": "high",
+    "configuration": {
+      "start": "2026-11-23T23:45:00",
+      "human_hours_per_day": 2,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 7.0,
+      "agent": 9,
+      "model": 0
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 1,
+        "model": 0
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T23:45:00",
+      "first_task_start": "2026-11-24T09:00:00",
+      "finish": "2026-11-27T20:00:00",
+      "wait_before_first_task_hours": 9.25,
+      "elapsed_after_first_task_start_hours": 83.0,
+      "elapsed_from_requested_start_hours": 92.25,
+      "elapsed_from_requested_start_days": 3.84
+    },
+    "tasks": [
+      {
+        "id": "review_facts",
+        "label": "冻结已完成实验与证据边界",
+        "resource": "human",
+        "hours": 2.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-24T09:00:00",
+        "end": "2026-11-25T09:30:00",
+        "notes": "逐项分开真实模型、确定性实验、人工反例和模拟故障。",
+        "model_workload": null
+      },
+      {
+        "id": "review_docs",
+        "label": "整理复跑入口、架构图和演示材料",
+        "resource": "agent",
+        "hours": 5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_facts"
+        ],
+        "start": "2026-11-25T09:30:00",
+        "end": "2026-11-25T14:30:00",
+        "notes": "AI 可独立整理现有文档，保留链接和命令。",
+        "model_workload": null
+      },
+      {
+        "id": "review_walkthrough",
+        "label": "亲自走一次演示并写口头解释",
+        "resource": "human",
+        "hours": 2.5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_docs"
+        ],
+        "start": "2026-11-25T19:00:00",
+        "end": "2026-11-26T19:30:00",
+        "notes": "不新增模型实验；需要你判断讲什么和如何如实表述。",
+        "model_workload": null
+      },
+      {
+        "id": "review_polish",
+        "label": "修正演示发现的问题",
+        "resource": "agent",
+        "hours": 4,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_walkthrough"
+        ],
+        "start": "2026-11-26T19:30:00",
+        "end": "2026-11-26T23:30:00",
+        "notes": "小范围修文档、命令或展示，不扩大产品。",
+        "model_workload": null
+      },
+      {
+        "id": "review_accept",
+        "label": "最终验收与面试问答复盘",
+        "resource": "human",
+        "hours": 2,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "review_polish"
+        ],
+        "start": "2026-11-27T09:00:00",
+        "end": "2026-11-27T20:00:00",
+        "notes": "你确认每个主张都能回到证据。",
+        "model_workload": null
+      }
+    ]
+  }
+}

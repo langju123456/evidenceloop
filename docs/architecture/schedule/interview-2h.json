@@ -1,0 +1,492 @@
+{
+  "scope": "interview",
+  "label": "可面试的三项目联动演示",
+  "low": {
+    "scope": "interview",
+    "estimate": "low",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 2,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 15,
+      "agent": 36,
+      "model": 1.0
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 2,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T09:00:00",
+      "first_task_start": "2026-11-23T09:00:00",
+      "finish": "2026-11-30T10:00:00",
+      "wait_before_first_task_hours": 0.0,
+      "elapsed_after_first_task_start_hours": 169.0,
+      "elapsed_from_requested_start_hours": 169.0,
+      "elapsed_from_requested_start_days": 7.04
+    },
+    "tasks": [
+      {
+        "id": "int_contract",
+        "label": "确定一条年报委托、完成标准与跨项目契约",
+        "resource": "human",
+        "hours": 2,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-23T20:00:00",
+        "notes": "case/run/version/artifact/digest/receipt；包括从十种方案挑三至四种做低成本对照的判断。",
+        "model_workload": null
+      },
+      {
+        "id": "int_forge_build",
+        "label": "ForgeFlow：两期查数、公式、稿件和可追溯 UI",
+        "resource": "agent",
+        "hours": 10,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T20:00:00",
+        "end": "2026-11-24T06:00:00",
+        "notes": "复用已有年报表、确定性计算与研究工作台。",
+        "model_workload": null
+      },
+      {
+        "id": "int_eval_freeze",
+        "label": "EvidenceLoop：冻结 12 个开发题、标签与失败分类",
+        "resource": "human",
+        "hours": 5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-24T09:00:00",
+        "end": "2026-11-26T10:00:00",
+        "notes": "需要你裁定任务定义、金标、未知项和污染边界。",
+        "model_workload": null
+      },
+      {
+        "id": "int_eval_tools",
+        "label": "EvidenceLoop：评分、比较页和版本决策卡",
+        "resource": "agent",
+        "hours": 6,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-26T10:00:00",
+        "end": "2026-11-26T16:00:00",
+        "notes": "规则、回执和 UI；不把训练写成已完成。",
+        "model_workload": null
+      },
+      {
+        "id": "int_model_trial",
+        "label": "同条件模型对照：证据、公式与工具调用",
+        "resource": "model",
+        "hours": 1.0,
+        "declared_hours_reference": [
+          1,
+          4.75
+        ],
+        "hours_source": "model_workload_derived",
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-26T10:00:00",
+        "end": "2026-11-26T11:00:00",
+        "notes": "108 次单步调用：12 题 × 3 方案 × 3 重复。D18 的 12 次实际调用共约 79 秒；这里按每次 20–120 秒加 15–60 分钟冷启动/重试预算，15 分钟向上取整。Mac 本地模型单通道；不含 Agent 改代码时间。",
+        "model_workload": {
+          "kind": "single_step",
+          "low": {
+            "cases": 12,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 20,
+            "warmup_seconds": 900
+          },
+          "high": {
+            "cases": 12,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 120,
+            "warmup_seconds": 3600
+          }
+        }
+      },
+      {
+        "id": "int_eval_review",
+        "label": "复核修好、退化、未知与成本",
+        "resource": "human",
+        "hours": 3,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_eval_tools",
+          "int_model_trial"
+        ],
+        "start": "2026-11-26T19:00:00",
+        "end": "2026-11-27T20:00:00",
+        "notes": "决定候选版是否推进，不用平均数掩盖退化。",
+        "model_workload": null
+      },
+      {
+        "id": "int_horizon_harness",
+        "label": "HorizonBench：扩展回执故障环境与独立判定",
+        "resource": "agent",
+        "hours": 7,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-23T20:00:00",
+        "end": "2026-11-24T03:00:00",
+        "notes": "可与 ForgeFlow 功能开发并行，先在稳定任务契约上构建环境。",
+        "model_workload": null
+      },
+      {
+        "id": "int_horizon_adapter",
+        "label": "HorizonBench：接入真实提交入口与原键对账",
+        "resource": "agent",
+        "hours": 4,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_forge_build",
+          "int_horizon_harness"
+        ],
+        "start": "2026-11-24T06:00:00",
+        "end": "2026-11-24T10:00:00",
+        "notes": "把既有 4×3 受控矩阵接到真实业务产物。",
+        "model_workload": null
+      },
+      {
+        "id": "int_horizon_review",
+        "label": "审阅回执故障结果与恢复策略",
+        "resource": "human",
+        "hours": 2,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_horizon_adapter"
+        ],
+        "start": "2026-11-28T09:00:00",
+        "end": "2026-11-28T20:00:00",
+        "notes": "确认什么叫送达、正确版本和无重复。",
+        "model_workload": null
+      },
+      {
+        "id": "int_trace",
+        "label": "统一 run、产物摘要、评分和回执的展示",
+        "resource": "agent",
+        "hours": 5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_eval_review",
+          "int_horizon_review"
+        ],
+        "start": "2026-11-28T20:00:00",
+        "end": "2026-11-29T01:00:00",
+        "notes": "三项目消费同一条业务任务，但各自保留职责。",
+        "model_workload": null
+      },
+      {
+        "id": "int_e2e",
+        "label": "盲走一次完整委托与修复",
+        "resource": "agent",
+        "hours": 4,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_trace"
+        ],
+        "start": "2026-11-29T01:00:00",
+        "end": "2026-11-29T05:00:00",
+        "notes": "执行、故障、恢复和回归；不算外部用户试用。",
+        "model_workload": null
+      },
+      {
+        "id": "int_accept",
+        "label": "本人验收、取舍复盘与面试讲解",
+        "resource": "human",
+        "hours": 3,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_e2e"
+        ],
+        "start": "2026-11-29T09:00:00",
+        "end": "2026-11-30T10:00:00",
+        "notes": "你能说明两种以上已试方案、结果和边界。",
+        "model_workload": null
+      }
+    ]
+  },
+  "high": {
+    "scope": "interview",
+    "estimate": "high",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 2,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 27,
+      "agent": 66,
+      "model": 4.75
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 2,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T09:00:00",
+      "first_task_start": "2026-11-23T09:00:00",
+      "finish": "2026-12-06T20:00:00",
+      "wait_before_first_task_hours": 0.0,
+      "elapsed_after_first_task_start_hours": 323.0,
+      "elapsed_from_requested_start_hours": 323.0,
+      "elapsed_from_requested_start_days": 13.46
+    },
+    "tasks": [
+      {
+        "id": "int_contract",
+        "label": "确定一条年报委托、完成标准与跨项目契约",
+        "resource": "human",
+        "hours": 4,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-24T20:00:00",
+        "notes": "case/run/version/artifact/digest/receipt；包括从十种方案挑三至四种做低成本对照的判断。",
+        "model_workload": null
+      },
+      {
+        "id": "int_forge_build",
+        "label": "ForgeFlow：两期查数、公式、稿件和可追溯 UI",
+        "resource": "agent",
+        "hours": 18,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-24T20:00:00",
+        "end": "2026-11-25T14:00:00",
+        "notes": "复用已有年报表、确定性计算与研究工作台。",
+        "model_workload": null
+      },
+      {
+        "id": "int_eval_freeze",
+        "label": "EvidenceLoop：冻结 12 个开发题、标签与失败分类",
+        "resource": "human",
+        "hours": 8,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-25T09:00:00",
+        "end": "2026-11-28T20:00:00",
+        "notes": "需要你裁定任务定义、金标、未知项和污染边界。",
+        "model_workload": null
+      },
+      {
+        "id": "int_eval_tools",
+        "label": "EvidenceLoop：评分、比较页和版本决策卡",
+        "resource": "agent",
+        "hours": 11,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-28T20:00:00",
+        "end": "2026-11-29T07:00:00",
+        "notes": "规则、回执和 UI；不把训练写成已完成。",
+        "model_workload": null
+      },
+      {
+        "id": "int_model_trial",
+        "label": "同条件模型对照：证据、公式与工具调用",
+        "resource": "model",
+        "hours": 4.75,
+        "declared_hours_reference": [
+          1,
+          4.75
+        ],
+        "hours_source": "model_workload_derived",
+        "depends": [
+          "int_eval_freeze"
+        ],
+        "start": "2026-11-28T20:00:00",
+        "end": "2026-11-29T00:45:00",
+        "notes": "108 次单步调用：12 题 × 3 方案 × 3 重复。D18 的 12 次实际调用共约 79 秒；这里按每次 20–120 秒加 15–60 分钟冷启动/重试预算，15 分钟向上取整。Mac 本地模型单通道；不含 Agent 改代码时间。",
+        "model_workload": {
+          "kind": "single_step",
+          "low": {
+            "cases": 12,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 20,
+            "warmup_seconds": 900
+          },
+          "high": {
+            "cases": 12,
+            "variants": 3,
+            "repeats": 3,
+            "seconds_per_trial": 120,
+            "warmup_seconds": 3600
+          }
+        }
+      },
+      {
+        "id": "int_eval_review",
+        "label": "复核修好、退化、未知与成本",
+        "resource": "human",
+        "hours": 5,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_eval_tools",
+          "int_model_trial"
+        ],
+        "start": "2026-11-29T09:00:00",
+        "end": "2026-12-01T10:00:00",
+        "notes": "决定候选版是否推进，不用平均数掩盖退化。",
+        "model_workload": null
+      },
+      {
+        "id": "int_horizon_harness",
+        "label": "HorizonBench：扩展回执故障环境与独立判定",
+        "resource": "agent",
+        "hours": 12,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_contract"
+        ],
+        "start": "2026-11-24T20:00:00",
+        "end": "2026-11-25T08:00:00",
+        "notes": "可与 ForgeFlow 功能开发并行，先在稳定任务契约上构建环境。",
+        "model_workload": null
+      },
+      {
+        "id": "int_horizon_adapter",
+        "label": "HorizonBench：接入真实提交入口与原键对账",
+        "resource": "agent",
+        "hours": 8,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_forge_build",
+          "int_horizon_harness"
+        ],
+        "start": "2026-11-25T14:00:00",
+        "end": "2026-11-25T22:00:00",
+        "notes": "把既有 4×3 受控矩阵接到真实业务产物。",
+        "model_workload": null
+      },
+      {
+        "id": "int_horizon_review",
+        "label": "审阅回执故障结果与恢复策略",
+        "resource": "human",
+        "hours": 4,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_horizon_adapter"
+        ],
+        "start": "2026-12-01T19:00:00",
+        "end": "2026-12-03T10:00:00",
+        "notes": "确认什么叫送达、正确版本和无重复。",
+        "model_workload": null
+      },
+      {
+        "id": "int_trace",
+        "label": "统一 run、产物摘要、评分和回执的展示",
+        "resource": "agent",
+        "hours": 9,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_eval_review",
+          "int_horizon_review"
+        ],
+        "start": "2026-12-03T10:00:00",
+        "end": "2026-12-03T19:00:00",
+        "notes": "三项目消费同一条业务任务，但各自保留职责。",
+        "model_workload": null
+      },
+      {
+        "id": "int_e2e",
+        "label": "盲走一次完整委托与修复",
+        "resource": "agent",
+        "hours": 8,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_trace"
+        ],
+        "start": "2026-12-03T19:00:00",
+        "end": "2026-12-04T03:00:00",
+        "notes": "执行、故障、恢复和回归；不算外部用户试用。",
+        "model_workload": null
+      },
+      {
+        "id": "int_accept",
+        "label": "本人验收、取舍复盘与面试讲解",
+        "resource": "human",
+        "hours": 6,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "int_e2e"
+        ],
+        "start": "2026-12-04T09:00:00",
+        "end": "2026-12-06T20:00:00",
+        "notes": "你能说明两种以上已试方案、结果和边界。",
+        "model_workload": null
+      }
+    ]
+  }
+}

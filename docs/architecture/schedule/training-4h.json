@@ -1,0 +1,244 @@
+{
+  "scope": "training_addon",
+  "label": "可选：单项新域后训练实验",
+  "low": {
+    "scope": "training_addon",
+    "estimate": "low",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 4,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 14,
+      "agent": 8,
+      "model": 12
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 1,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T09:00:00",
+      "first_task_start": "2026-11-23T09:00:00",
+      "finish": "2026-11-27T10:00:00",
+      "wait_before_first_task_hours": 0.0,
+      "elapsed_after_first_task_start_hours": 97.0,
+      "elapsed_from_requested_start_hours": 97.0,
+      "elapsed_from_requested_start_days": 4.04
+    },
+    "tasks": [
+      {
+        "id": "train_gate",
+        "label": "确认稳定错误、数据许可、权重与预算",
+        "resource": "human",
+        "hours": 3,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-23T20:00:00",
+        "notes": "只有工程与输入路径都确认后才启动。",
+        "model_workload": null
+      },
+      {
+        "id": "train_pairs",
+        "label": "构造 SFT 样本或偏好对与锁定测试",
+        "resource": "human",
+        "hours": 8,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_gate"
+        ],
+        "start": "2026-11-23T20:00:00",
+        "end": "2026-11-25T20:00:00",
+        "notes": "DPO 需要同观察下可靠的正负对。",
+        "model_workload": null
+      },
+      {
+        "id": "train_run",
+        "label": "训练、评估与产物记录",
+        "resource": "model",
+        "hours": 12,
+        "declared_hours_reference": [
+          12,
+          36
+        ],
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_pairs"
+        ],
+        "start": "2026-11-25T20:00:00",
+        "end": "2026-11-26T08:00:00",
+        "notes": "这是外部 GPU/权重条件下的占位估计，不是 Mac 单 lane 的可信日历预测；需要可用 GPU、权重、数据许可和实际吞吐后才能排期。",
+        "model_workload": null
+      },
+      {
+        "id": "train_regression",
+        "label": "应用回归、遗忘检查与报告",
+        "resource": "agent",
+        "hours": 8,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_run"
+        ],
+        "start": "2026-11-26T08:00:00",
+        "end": "2026-11-26T16:00:00",
+        "notes": "与强工具基线比较，记录成本。",
+        "model_workload": null
+      },
+      {
+        "id": "train_review",
+        "label": "本人复核训练是否值得保留",
+        "resource": "human",
+        "hours": 3,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_regression"
+        ],
+        "start": "2026-11-26T19:00:00",
+        "end": "2026-11-27T10:00:00",
+        "notes": "没有锁测改进就不写成训练成果。",
+        "model_workload": null
+      }
+    ]
+  },
+  "high": {
+    "scope": "training_addon",
+    "estimate": "high",
+    "configuration": {
+      "start": "2026-11-23T09:00:00",
+      "human_hours_per_day": 4,
+      "agent_workers": 3,
+      "model_lanes": 1,
+      "slot_minutes": 15,
+      "calendar_days_available": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "resource_hours": {
+      "human": 28,
+      "agent": 14,
+      "model": 36
+    },
+    "allocation_audit": {
+      "human_slots_outside_windows": 0,
+      "maximum_parallel_slots": {
+        "human": 1,
+        "agent": 1,
+        "model": 1
+      }
+    },
+    "calendar": {
+      "requested_start": "2026-11-23T09:00:00",
+      "first_task_start": "2026-11-23T09:00:00",
+      "finish": "2026-12-01T21:00:00",
+      "wait_before_first_task_hours": 0.0,
+      "elapsed_after_first_task_start_hours": 204.0,
+      "elapsed_from_requested_start_hours": 204.0,
+      "elapsed_from_requested_start_days": 8.5
+    },
+    "tasks": [
+      {
+        "id": "train_gate",
+        "label": "确认稳定错误、数据许可、权重与预算",
+        "resource": "human",
+        "hours": 6,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [],
+        "start": "2026-11-23T09:00:00",
+        "end": "2026-11-24T11:00:00",
+        "notes": "只有工程与输入路径都确认后才启动。",
+        "model_workload": null
+      },
+      {
+        "id": "train_pairs",
+        "label": "构造 SFT 样本或偏好对与锁定测试",
+        "resource": "human",
+        "hours": 16,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_gate"
+        ],
+        "start": "2026-11-24T19:00:00",
+        "end": "2026-11-28T11:00:00",
+        "notes": "DPO 需要同观察下可靠的正负对。",
+        "model_workload": null
+      },
+      {
+        "id": "train_run",
+        "label": "训练、评估与产物记录",
+        "resource": "model",
+        "hours": 36,
+        "declared_hours_reference": [
+          12,
+          36
+        ],
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_pairs"
+        ],
+        "start": "2026-11-28T11:00:00",
+        "end": "2026-11-29T23:00:00",
+        "notes": "这是外部 GPU/权重条件下的占位估计，不是 Mac 单 lane 的可信日历预测；需要可用 GPU、权重、数据许可和实际吞吐后才能排期。",
+        "model_workload": null
+      },
+      {
+        "id": "train_regression",
+        "label": "应用回归、遗忘检查与报告",
+        "resource": "agent",
+        "hours": 14,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_run"
+        ],
+        "start": "2026-11-29T23:00:00",
+        "end": "2026-11-30T13:00:00",
+        "notes": "与强工具基线比较，记录成本。",
+        "model_workload": null
+      },
+      {
+        "id": "train_review",
+        "label": "本人复核训练是否值得保留",
+        "resource": "human",
+        "hours": 6,
+        "declared_hours_reference": null,
+        "hours_source": "declared_task_hours",
+        "depends": [
+          "train_regression"
+        ],
+        "start": "2026-11-30T19:00:00",
+        "end": "2026-12-01T21:00:00",
+        "notes": "没有锁测改进就不写成训练成果。",
+        "model_workload": null
+      }
+    ]
+  }
+}
