@@ -1,0 +1,7 @@
+{
+  "freeze": "724a924ca0bca3c5efccfd372438210f4902ca6eb16937ac12b6dfa617f0d558",
+  "base_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "planned_updates": 64,
+  "steps_file": "training-steps.jsonl",
+  "loss": "restricted_action_cross_entropy"
+}

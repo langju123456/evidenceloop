@@ -1,0 +1,564 @@
+{
+  "schema": "action-sft-restricted/1",
+  "repository_head_at_freeze": "25a7964ebd6aa0751cfb4e4112b926fa03929aab",
+  "files": {
+    "src/evidenceloop/report/action_sft_restricted.py": "504d962ca2ff83bbbf6421db986874ee6f315bb18c74db254c384c2073b146ed",
+    "docs/report-lab/20-restricted-action-sft-freeze.md": "1c3398e370740e97381cbafd0bb70cff1587bdf0450cb8eb5cb8ac7fc74aa1d7",
+    "src/evidenceloop/report/action_sft.py": "1a77e0498a22e1c8c01033ab5ef8d1f16d0ebc6554b8d0b8b7d1ae4fe1fb11e0",
+    "src/evidenceloop/report/action_sft_menu_aug.py": "e8026ee95c9ac98f939af1244f37d9ae30d797ce83a80a47778a16414c946337",
+    "src/evidenceloop/report/action_sft_fit_audit.py": "7a54b1f74650b0dada32788b63e91d61f67f73475735e87c194b70f0adbed7c4",
+    "benchmarks/report_sft/v1/train.json": "bbd451c797efe462059029b96a12d3e6436d87ae3bfbf6558d53db52fc53b456",
+    "benchmarks/report_sft/v1/dev.json": "7c50cb51a7819fa92286a03dc2b55ff7bd4ac7175fe7ef97e1e93bc2e898a9bd",
+    "benchmarks/report_sft/v1/holdout.json": "b8a8b1fe0b47d8733349716e66835dcb623d4cdede253844b3d74080cea46ea8",
+    "benchmarks/report_sft/v1/regression.json": "843fb4ea6ae985fbd79fcd5e5dd79a2274d65953db84bef42caa481b63e05161",
+    "benchmarks/report_sft/v1/sources.json": "7ae1e01f78b6c63f373a7961b4af0f2cdaebc51a2229e8ba6cf3fbb75a143b80",
+    "benchmarks/report_sft/v1/finance-reference.json": "54a78c899bc1a9f9ab86302ca62e24add05a1d93b0b37e1319828aae33b0ce2f",
+    "benchmarks/report_sft/v1/model.json": "5fd5ab2d53c3084a0af1b8c6237d9392e7a8deae42e053ead1ca180df6abc129",
+    "src/evidenceloop/report/calculation.py": "46bd8cbcb4b3e198c2c6d7fe50b869daad72d9ab90d5a4a26a722f738b32cc14",
+    "src/evidenceloop/report/annual.py": "e53586a8677d8d81378cf796adc545f4036e1f31c41321bfd7e6114845770919"
+  },
+  "base_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "runtime": {
+    "device": "Apple M4",
+    "mlx": "0.32.3",
+    "mlx-lm": "0.32.0",
+    "transformers": "5.18.0"
+  },
+  "config": {
+    "fine_tune_type": "lora",
+    "num_layers": 4,
+    "lora_parameters": {
+      "rank": 4,
+      "scale": 8.0,
+      "dropout": 0.0,
+      "keys": [
+        "self_attn.q_proj",
+        "self_attn.v_proj"
+      ]
+    }
+  },
+  "seed": 23,
+  "updates": 64,
+  "menu_schedule": "menu[(case_index + epoch - 1) % 2]",
+  "plan": [
+    {
+      "epoch": 1,
+      "case_index": 10,
+      "case_id": "dell-11",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "target_code": "D"
+    },
+    {
+      "epoch": 1,
+      "case_index": 29,
+      "case_id": "cisco-14",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "target_code": "C"
+    },
+    {
+      "epoch": 1,
+      "case_index": 17,
+      "case_id": "cisco-02",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "target_code": "D"
+    },
+    {
+      "epoch": 1,
+      "case_index": 30,
+      "case_id": "cisco-15",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "target_code": "F"
+    },
+    {
+      "epoch": 1,
+      "case_index": 3,
+      "case_id": "dell-04",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "target_code": "F"
+    },
+    {
+      "epoch": 1,
+      "case_index": 5,
+      "case_id": "dell-06",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "target_code": "F"
+    },
+    {
+      "epoch": 1,
+      "case_index": 20,
+      "case_id": "cisco-05",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 1,
+      "case_index": 23,
+      "case_id": "cisco-08",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "target_code": "E"
+    },
+    {
+      "epoch": 1,
+      "case_index": 19,
+      "case_id": "cisco-04",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "target_code": "F"
+    },
+    {
+      "epoch": 1,
+      "case_index": 24,
+      "case_id": "cisco-09",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "target_code": "C"
+    },
+    {
+      "epoch": 1,
+      "case_index": 21,
+      "case_id": "cisco-06",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "target_code": "F"
+    },
+    {
+      "epoch": 1,
+      "case_index": 1,
+      "case_id": "dell-02",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "target_code": "D"
+    },
+    {
+      "epoch": 1,
+      "case_index": 22,
+      "case_id": "cisco-07",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "target_code": "C"
+    },
+    {
+      "epoch": 1,
+      "case_index": 15,
+      "case_id": "dell-16",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "target_code": "A"
+    },
+    {
+      "epoch": 1,
+      "case_index": 25,
+      "case_id": "cisco-10",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 1,
+      "case_index": 7,
+      "case_id": "dell-08",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "target_code": "E"
+    },
+    {
+      "epoch": 1,
+      "case_index": 27,
+      "case_id": "cisco-12",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 1,
+      "case_index": 14,
+      "case_id": "dell-15",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "target_code": "F"
+    },
+    {
+      "epoch": 1,
+      "case_index": 8,
+      "case_id": "dell-09",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "target_code": "C"
+    },
+    {
+      "epoch": 1,
+      "case_index": 6,
+      "case_id": "dell-07",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "target_code": "C"
+    },
+    {
+      "epoch": 1,
+      "case_index": 4,
+      "case_id": "dell-05",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 1,
+      "case_index": 11,
+      "case_id": "dell-12",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 1,
+      "case_index": 16,
+      "case_id": "cisco-01",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "target_code": "A"
+    },
+    {
+      "epoch": 1,
+      "case_index": 12,
+      "case_id": "dell-13",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "target_code": "E"
+    },
+    {
+      "epoch": 1,
+      "case_index": 13,
+      "case_id": "dell-14",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "target_code": "C"
+    },
+    {
+      "epoch": 1,
+      "case_index": 9,
+      "case_id": "dell-10",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 1,
+      "case_index": 31,
+      "case_id": "cisco-16",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "target_code": "A"
+    },
+    {
+      "epoch": 1,
+      "case_index": 0,
+      "case_id": "dell-01",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "target_code": "A"
+    },
+    {
+      "epoch": 1,
+      "case_index": 2,
+      "case_id": "dell-03",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "target_code": "A"
+    },
+    {
+      "epoch": 1,
+      "case_index": 26,
+      "case_id": "cisco-11",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "target_code": "D"
+    },
+    {
+      "epoch": 1,
+      "case_index": 28,
+      "case_id": "cisco-13",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "target_code": "E"
+    },
+    {
+      "epoch": 1,
+      "case_index": 18,
+      "case_id": "cisco-03",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "target_code": "A"
+    },
+    {
+      "epoch": 2,
+      "case_index": 3,
+      "case_id": "dell-04",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 2,
+      "case_index": 0,
+      "case_id": "dell-01",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "target_code": "D"
+    },
+    {
+      "epoch": 2,
+      "case_index": 16,
+      "case_id": "cisco-01",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "target_code": "D"
+    },
+    {
+      "epoch": 2,
+      "case_index": 1,
+      "case_id": "dell-02",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "target_code": "A"
+    },
+    {
+      "epoch": 2,
+      "case_index": 25,
+      "case_id": "cisco-10",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "target_code": "D"
+    },
+    {
+      "epoch": 2,
+      "case_index": 14,
+      "case_id": "dell-15",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "target_code": "A"
+    },
+    {
+      "epoch": 2,
+      "case_index": 4,
+      "case_id": "dell-05",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "target_code": "F"
+    },
+    {
+      "epoch": 2,
+      "case_index": 8,
+      "case_id": "dell-09",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "target_code": "E"
+    },
+    {
+      "epoch": 2,
+      "case_index": 12,
+      "case_id": "dell-13",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "target_code": "C"
+    },
+    {
+      "epoch": 2,
+      "case_index": 17,
+      "case_id": "cisco-02",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "target_code": "A"
+    },
+    {
+      "epoch": 2,
+      "case_index": 20,
+      "case_id": "cisco-05",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "target_code": "F"
+    },
+    {
+      "epoch": 2,
+      "case_index": 13,
+      "case_id": "dell-14",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "target_code": "E"
+    },
+    {
+      "epoch": 2,
+      "case_index": 26,
+      "case_id": "cisco-11",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 2,
+      "case_index": 7,
+      "case_id": "dell-08",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "target_code": "C"
+    },
+    {
+      "epoch": 2,
+      "case_index": 28,
+      "case_id": "cisco-13",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "target_code": "C"
+    },
+    {
+      "epoch": 2,
+      "case_index": 27,
+      "case_id": "cisco-12",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "target_code": "D"
+    },
+    {
+      "epoch": 2,
+      "case_index": 15,
+      "case_id": "dell-16",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "target_code": "F"
+    },
+    {
+      "epoch": 2,
+      "case_index": 31,
+      "case_id": "cisco-16",
+      "menu_id": "canonical",
+      "gold_action": "missing_evidence",
+      "target_code": "F"
+    },
+    {
+      "epoch": 2,
+      "case_index": 10,
+      "case_id": "dell-11",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 2,
+      "case_index": 9,
+      "case_id": "dell-10",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "target_code": "D"
+    },
+    {
+      "epoch": 2,
+      "case_index": 22,
+      "case_id": "cisco-07",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "target_code": "E"
+    },
+    {
+      "epoch": 2,
+      "case_index": 24,
+      "case_id": "cisco-09",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "target_code": "E"
+    },
+    {
+      "epoch": 2,
+      "case_index": 30,
+      "case_id": "cisco-15",
+      "menu_id": "rotated",
+      "gold_action": "missing_evidence",
+      "target_code": "A"
+    },
+    {
+      "epoch": 2,
+      "case_index": 29,
+      "case_id": "cisco-14",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "target_code": "E"
+    },
+    {
+      "epoch": 2,
+      "case_index": 23,
+      "case_id": "cisco-08",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "target_code": "C"
+    },
+    {
+      "epoch": 2,
+      "case_index": 6,
+      "case_id": "dell-07",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "target_code": "E"
+    },
+    {
+      "epoch": 2,
+      "case_index": 19,
+      "case_id": "cisco-04",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 2,
+      "case_index": 5,
+      "case_id": "dell-06",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 2,
+      "case_index": 21,
+      "case_id": "cisco-06",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "target_code": "B"
+    },
+    {
+      "epoch": 2,
+      "case_index": 11,
+      "case_id": "dell-12",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "target_code": "D"
+    },
+    {
+      "epoch": 2,
+      "case_index": 18,
+      "case_id": "cisco-03",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "target_code": "D"
+    },
+    {
+      "epoch": 2,
+      "case_index": 2,
+      "case_id": "dell-03",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "target_code": "D"
+    }
+  ],
+  "only_changed_variable": "restricted cross_entropy(logits[A:F], target_action_index), replacing full-vocabulary CE",
+  "train_fit_requirement": "candidate terminal train fit must equal 64/64 on the 32x2 D25 presentations",
+  "adoption_requirement": "original D22 canonical 96-row gate must pass AND terminal train fit must equal 64/64",
+  "evaluation_scope": {
+    "holdout": "exposed-reuse regression set; not fresh holdout",
+    "regression": "exposed Oracle regression set"
+  }
+}

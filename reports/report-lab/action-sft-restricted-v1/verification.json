@@ -1,0 +1,11 @@
+{
+  "original_gate_passed": false,
+  "adopted": false,
+  "training_updates": 64,
+  "canonical_rows": 96,
+  "training_fit_rows": 64,
+  "exact_offline_replay": true,
+  "runtime_and_trainable_parameters_verified": true,
+  "source_commit": "25a7964",
+  "review": "independent AI pre-run review; no human annotation"
+}

@@ -1,0 +1,42 @@
+{
+  "adapter/adapter_config.json": {
+    "sha256": "13d434096ebfb61bb0a0aaeae71141fcc2b09d4c357eefbfc738457e03f0bd2d",
+    "bytes": 202
+  },
+  "adapter/adapters.safetensors": {
+    "sha256": "4ee792edf398ba6e769c123cef4b5da0e2f85eb105bde720cedb485327841070",
+    "bytes": 329390
+  },
+  "freeze.json": {
+    "sha256": "724a924ca0bca3c5efccfd372438210f4902ca6eb16937ac12b6dfa617f0d558",
+    "bytes": 14053
+  },
+  "predictions.jsonl": {
+    "sha256": "410e7ea9cbb4abcd1baab77b4134fc8579980684f09eb56f05815d2e0565fc5b",
+    "bytes": 96825
+  },
+  "results.json": {
+    "sha256": "d12a6b418c30335326ab6515535eb96d46e7fb1a62feb6af5ec2294ad0d3540b",
+    "bytes": 39427
+  },
+  "training-fit.jsonl": {
+    "sha256": "3fd443a539cec4e843726a80bb46d3059e9f6349bdf6e82f054637026849cc4e",
+    "bytes": 33253
+  },
+  "training-started.json": {
+    "sha256": "e88563faed44bb0790304714089b97106c8870f861e15cf19100e6c18a093998",
+    "bytes": 278
+  },
+  "training-steps.jsonl": {
+    "sha256": "26ab484daf6808d272f38bd74ec40baabdbb3a44afe81b05eb1aad0cac13bd99",
+    "bytes": 14305
+  },
+  "training.json": {
+    "sha256": "99196e103f89b00a8eb477879defd916b8a6412e3d0b5887fb450126cc4b95a5",
+    "bytes": 19430
+  },
+  "verification.json": {
+    "sha256": "3d75e3389167fdc3f33a32dbfb43bacfaeb97ef622835e7592084e4d63987661",
+    "bytes": 313
+  }
+}
