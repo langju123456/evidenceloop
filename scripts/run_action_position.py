@@ -13,14 +13,19 @@ import time
 from pathlib import Path
 
 from evidenceloop.report.action_sft import runtime, sha
-from evidenceloop.report.action_sft_position import ARCHIVE, manifest, score
+from evidenceloop.report.action_sft_position import ARCHIVE
 
 
 def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument("--base", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--protocol-version", choices=("v1", "v2"), default="v1")
     args = parser.parse_args()
+    if args.protocol_version == "v2":
+        from evidenceloop.report.action_sft_position_v2 import manifest, score
+    else:
+        from evidenceloop.report.action_sft_position import manifest, score
     frozen = json.loads((args.out / "manifest.json").read_text())
     if frozen != manifest():
         raise ValueError("source or protocol changed after freeze")
