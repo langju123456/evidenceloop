@@ -1,0 +1,1782 @@
+{
+  "schema": "action-sft-menu-position-results/1",
+  "manifest_configuration_sha256": "beb3ab7d68322d3c0380e73e6f03a45873c0294359775b8de43d6b3db5f1625e",
+  "n": 72,
+  "totals": {
+    "base": {
+      "n": 36,
+      "semantic_action_correct": 10,
+      "menu_position_consistent": 2,
+      "tool_intercepted": 0,
+      "final_misreport": 7
+    },
+    "lora": {
+      "n": 36,
+      "semantic_action_correct": 7,
+      "menu_position_consistent": 0,
+      "tool_intercepted": 6,
+      "final_misreport": 18
+    }
+  },
+  "paired": {
+    "fixed": [
+      "apple-24-contribution-pause/rotated",
+      "apple-25-growth-pause/rotated",
+      "oracle-25-growth-pause/rotated",
+      "tencent-25-growth-pause/rotated"
+    ],
+    "lost": [
+      "apple-24-contribution-pause/canonical",
+      "apple-25-growth-allow/rotated",
+      "apple-25-growth-pause/canonical",
+      "oracle-24-growth-pause/canonical",
+      "oracle-25-growth-allow/rotated",
+      "tencent-25-growth-allow/rotated",
+      "tencent-25-growth-pause/canonical"
+    ]
+  },
+  "manual_review": {
+    "submitted": 0,
+    "pass": 0,
+    "fail": 0,
+    "unknown": 0
+  },
+  "rows": [
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "D",
+      "chosen_action": "fy25_growth",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24"
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "96169",
+        "value": "13.51"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "E",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "D",
+      "chosen_action": "fy25_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24"
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "96169",
+        "value": "13.51"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "7750",
+        "value": "141.54"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "7750",
+        "value": "141.54"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy24_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": true
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "A",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy24_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": true
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "E",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "A",
+      "chosen_action": "missing_evidence",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "D",
+      "chosen_action": "fy25_growth",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24"
+          ]
+        },
+        "numerator": "-198",
+        "denominator": "5431",
+        "value": "-3.65"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "D",
+      "chosen_action": "fy25_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24"
+          ]
+        },
+        "numerator": "-198",
+        "denominator": "5431",
+        "value": "-3.65"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "3007",
+        "value": "-5.42"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "E",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "3007",
+        "value": "-5.42"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "D",
+      "chosen_action": "fy25_growth",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "growth",
+        "page": "8",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24"
+          ]
+        },
+        "numerator": "50113",
+        "denominator": "319168",
+        "value": "15.70"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "E",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "D",
+      "chosen_action": "fy25_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "growth",
+        "page": "8",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "S24"
+          ]
+        },
+        "numerator": "50113",
+        "denominator": "319168",
+        "value": "15.70"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "answer": "F",
+      "chosen_action": "missing_evidence",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "missing_evidence"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "B",
+      "chosen_action": "fy25_contribution",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "25126",
+        "value": "51.70"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "7750",
+        "value": "141.54"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "7750",
+        "value": "141.54"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "fy24_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy24_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "B",
+      "chosen_action": "fy25_contribution",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "contribution",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ]
+        },
+        "numerator": "-198",
+        "denominator": "4438",
+        "value": "-4.46"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "fy24_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "3007",
+        "value": "-5.42"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "contribution",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "T24",
+            "T23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "3007",
+        "value": "-5.42"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "fy25_growth",
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "B",
+      "chosen_action": "fy24_contribution",
+      "gold_action": "fy25_contribution",
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "answer": "C",
+      "chosen_action": "fy24_growth",
+      "gold_action": "user_pause",
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "answer": "C",
+      "chosen_action": "user_pause",
+      "gold_action": "user_pause",
+      "semantic_action_correct": true,
+      "tool_intercepted": false,
+      "final_misreport": false,
+      "receipt": {
+        "action": "hold",
+        "reason": "user_paused"
+      },
+      "manual_label": null,
+      "menu_position_consistent": false
+    }
+  ],
+  "environment": {
+    "device": "Apple M4",
+    "mlx": "0.32.3",
+    "mlx-lm": "0.32.0",
+    "transformers": "5.18.0"
+  },
+  "seconds": 8.1652,
+  "responses_sha256": "15e65a535771d8d84a94c1c3996f82e563ea0d3dd7f4f16e009ad9cf22f0469c",
+  "runner_sha256": "806874caf5410790471fc26f3a85562e5c3dd2a59ff7a81338f9566b9b8fd59e",
+  "decoding": "argmax over A-F first-token logits, same as D22; no free-form generation"
+}

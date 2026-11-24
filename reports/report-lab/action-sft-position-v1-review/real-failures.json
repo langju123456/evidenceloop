@@ -1,0 +1,997 @@
+{
+  "schema": "action-sft-real-failure-export/1",
+  "source_results_sha256": "2321fdfb934c89cef4ec8ddc965bbfd55d888a3232eae7abcfc295aa15480182",
+  "source_predictions_sha256": "e040865ad8fa29a2a1ec4d06653222a4357cba518f0933295799e9692439921f",
+  "n": 29,
+  "manual_review": {
+    "submitted": 0,
+    "pass": 0,
+    "fail": 0,
+    "unknown": 0
+  },
+  "rows": [
+    {
+      "case_id": "apple-01",
+      "document": "apple",
+      "split": "dev",
+      "gold_action": "A",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：我现在要 FY2025 同比，两项都替我更新。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-02",
+      "document": "apple",
+      "split": "dev",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请转到 FY2025 的增长贡献。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-03",
+      "document": "apple",
+      "split": "dev",
+      "gold_action": "C",
+      "chosen_action": "B",
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "contribution",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ]
+        },
+        "numerator": "12989",
+        "denominator": "25126",
+        "value": "51.70"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：改稿只接受 FY2024 的同比结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-04",
+      "document": "apple",
+      "split": "dev",
+      "gold_action": "D",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：改成 FY2024。\n分析师：口径另定为增量贡献。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-05",
+      "document": "apple",
+      "split": "dev",
+      "gold_action": "E",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：这版先压下，暂时不计算。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-06",
+      "document": "apple",
+      "split": "dev",
+      "gold_action": "F",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "26,39",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "10969",
+        "denominator": "85200",
+        "value": "12.87"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：核 FY2023 那年的增量占比。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-01",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "A",
+      "chosen_action": "B",
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "contribution",
+        "page": "8",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ]
+        },
+        "numerator": "50113",
+        "denominator": "91509",
+        "value": "54.76"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-02",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：下一期用 2025 年。\n分析师：表中显示该板块在公司收入增减里所占比例。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-03",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "A",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：刚才有人要换指标。\n分析师：按我的口径：取 2025 年，比较板块自己与上年。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-04",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：分母别用这块业务的上年额，改用同年全公司的收入差额。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-05",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：草拟时有人提过上年自身增幅。\n分析师：这条仅供备查，照最初的表单交。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-06",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "A",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：先切换到 2025。\n分析师：贡献的提议取消，改为相较去年的板块增长百分数。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-07",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "E",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 A。\n分析师：就算可以算，也请把这一版挂起，收到签字我再叫你出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-08",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "F",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：委员会指定 FY2022，分母用其上一年，请按现有原表交付。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-01",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "A",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-02",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：汇报年份保留，求公司收入差额中有多少比例由该子项解释。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-03",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：上年也是个选择。\n分析师：撤掉这个建议，已送审的两项内容全部保留。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-04",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "A",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 C。\n分析师：不再用原先的期间，定在 2025 年，对自身基期列做除法。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-06",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "A",
+      "chosen_action": "B",
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "contribution",
+        "page": "107",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ]
+        },
+        "numerator": "-223796897.18",
+        "denominator": "-2061049761.55",
+        "value": "10.86"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：可以讨论它对全局的影响。\n分析师：这次先用自身去年金额作分母，期间维持。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-07",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "E",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 B。\n分析师：收到我下一条确认前，先别让这笔数出现在材料里。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-08",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "F",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 A。\n分析师：会议只接受 2021 年的同比，只能引用屏幕上的表格。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-09",
+      "document": "tencent",
+      "split": "holdout",
+      "gold_action": "F",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "invalid_calculation",
+        "error": "unknown or missing cell"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": true,
+      "final_misreport": false,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 B。\n分析师：把分析迁到表里的较早一年，改看这一年该板块本身的同比。"
+        }
+      ]
+    },
+    {
+      "case_id": "moutai-09",
+      "document": "moutai",
+      "split": "holdout",
+      "gold_action": "F",
+      "chosen_action": "B",
+      "receipt": {
+        "action": "compute",
+        "year": 2025,
+        "metric": "contribution",
+        "page": "107",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S25",
+            "S24"
+          ],
+          "denominator": [
+            "T25",
+            "T24"
+          ]
+        },
+        "numerator": "-223796897.18",
+        "denominator": "-2061049761.55",
+        "value": "10.86"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。\nFY2025: 63517327.14 / 168838102514.79\nFY2024: 287314224.32 / 170899152276.34\n送审前动作 D。\n分析师：有人希望看当年。\n分析师：不采纳，仍按原财年，保留原计算定义。"
+        }
+      ]
+    },
+    {
+      "case_id": "revision-02",
+      "document": "oracle",
+      "split": "regression",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：用下一财年，贡献口径保持。"
+        }
+      ]
+    },
+    {
+      "case_id": "revision-03",
+      "document": "oracle",
+      "split": "regression",
+      "gold_action": "B",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 A。\n分析师：汇报改为服务收入变动占公司收入变动的比例，年份不动。"
+        }
+      ]
+    },
+    {
+      "case_id": "revision-04",
+      "document": "oracle",
+      "split": "regression",
+      "gold_action": "A",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：先挪到 FY2025。\n分析师：这页改为看服务收入同比，沿用刚才定的年份。"
+        }
+      ]
+    },
+    {
+      "case_id": "revision-05",
+      "document": "oracle",
+      "split": "regression",
+      "gold_action": "D",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：改用 FY2024，先换为同比。\n分析师：年份按刚才的，指标撤回刚才的改动，恢复送审前的指标。"
+        }
+      ]
+    },
+    {
+      "case_id": "revision-07",
+      "document": "oracle",
+      "split": "regression",
+      "gold_action": "F",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：只需要 FY2023 的同比，不能用别的年份顶替。"
+        }
+      ]
+    },
+    {
+      "case_id": "revision-08",
+      "document": "oracle",
+      "split": "regression",
+      "gold_action": "E",
+      "chosen_action": "C",
+      "receipt": {
+        "action": "compute",
+        "year": 2024,
+        "metric": "growth",
+        "page": "65",
+        "tool": "cells",
+        "arguments": {
+          "numerator": [
+            "S24",
+            "S23"
+          ],
+          "denominator": [
+            "S23"
+          ]
+        },
+        "numerator": "-163",
+        "denominator": "5594",
+        "value": "-2.91"
+      },
+      "semantic_action_correct": false,
+      "tool_intercepted": false,
+      "final_misreport": true,
+      "manual_label": null,
+      "independent_reviewer": null,
+      "input_messages": [
+        {
+          "role": "system",
+          "content": "请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：先看看改为贡献。\n分析师：先暂停出数，等我确认年份再交。"
+        }
+      ]
+    }
+  ]
+}

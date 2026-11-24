@@ -24,6 +24,24 @@
 
 当前核准的是从六个合法工具动作中选出一个，并用已给定的表格执行。训练、运行与推荐由 Codex 代为完成，独立人审为 0。尚待验证自由生成工具参数、完整报告交付、真实使用中的错报率、其他工具域遗忘以及换种子后的稳定性。旧工具域的 Kaggle 九个 LoRA 和上一轮 Oracle 的 8B 结果各自保留原口径，此处严格比较同一 0.6B 模型的三个条件。
 
+## D22 后续：先分开业务动作与菜单位置
+
+已完成菜单位置诊断的72次首答，详见[结果及局限](13-menu-position-results.md)。协议为9组同一业务情境的“允许出数／必须暂停”委托，共18条；每条以两种菜单给原模型、已归档适配器各一次。先将字母按当次菜单反解为业务动作再评分；报告动作正确、一致性、工具拦截、最终错报与配对修好/退化。确定性业务路由仅可作参考，不计作模型收益。
+
+推理前必须先写出 `manifest.json`，其中含样本、菜单、基础权重和归档适配器哈希；不重训、不挑种子。此诊断不能证明自由工具参数、完整 Agent 或训练有效，只回答菜单位置是否可能解释已观察到的选择。另导出三个评测划分的 29 条真实适配器失败和离线人工复核页；其人工标注固定为 0，机器重放和 Codex 生成的字段均不冒充独立专家结论。
+
+```sh
+export PYTHONPATH=src
+python3 -m evidenceloop.cli report action-sft-position prepare --out reports/report-lab/action-sft-position-v1
+python3 -m evidenceloop.cli report action-sft-position export-legacy-failures --out reports/report-lab/action-sft-position-v1-review
+```
+
+模型通道由协调线程显式交接后，运行器只能向 `manifest.json` 的 72 个单元各写入一条 `attempt: 1` 的首答记录；再离线评分：
+
+```sh
+python3 -m evidenceloop.cli report action-sft-position score --out reports/report-lab/action-sft-position-v1 --responses first-responses.jsonl
+```
+
 ## 原样复核
 
 在本分支仓库根执行，使用标准库和 Git。该命令核对冻结文件、适配器摘要、三臂的输入匹配与覆盖，再执行所有选择并逐字节比较报告。

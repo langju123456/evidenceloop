@@ -26,6 +26,7 @@ import json
 import os
 import sys
 import time
+from pathlib import Path
 from typing import Any
 
 from evidenceloop.data.export import build_manifest, expand, match_budgets, supervised_size, to_format, write_jsonl
@@ -631,6 +632,29 @@ def main(argv: list[str] | None = None) -> None:
     for review_parser in (blind, pick, returned, key):
         review_parser.add_argument("--dataset", default="benchmarks/report_dev/v1")
         review_parser.set_defaults(func=blind_review.command)
+    from evidenceloop.report import action_sft_position
+
+    position = report_actions.add_parser("action-sft-position", help="prepare or score D22's frozen menu-position diagnostic")
+    position.add_argument("action", choices=["prepare", "score", "export-legacy-failures"])
+    position.add_argument("--out", required=True, help="new directory for prepare, or output directory for legacy failures")
+    position.add_argument("--responses", help="JSONL first responses; required for score")
+    def _position_command(args):
+        if args.action == "prepare":
+            print(json.dumps(action_sft_position.prepare(Path(args.out)), ensure_ascii=False, indent=2))
+        elif args.action == "score":
+            if not args.responses:
+                raise ValueError("--responses is required for score")
+            frozen = json.loads((Path(args.out) / "manifest.json").read_text(encoding="utf-8"))
+            records = [json.loads(line) for line in Path(args.responses).read_text(encoding="utf-8").splitlines() if line]
+            print(json.dumps(action_sft_position.score(records, frozen), ensure_ascii=False, indent=2))
+        else:
+            target = Path(args.out)
+            target.mkdir(parents=True, exist_ok=False)
+            exported = action_sft_position.legacy_failures()
+            (target / "real-failures.json").write_text(json.dumps(exported, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            (target / "offline-review.html").write_text(action_sft_position.render_legacy_review(exported), encoding="utf-8")
+            print(json.dumps({"n": exported["n"], "out": str(target)}, ensure_ascii=False))
+    position.set_defaults(func=_position_command)
     report = report_actions.add_parser("baseline")
     report.add_argument("--evals", nargs="+", required=True)
     report.add_argument("--names", nargs="+")

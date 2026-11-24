@@ -1,0 +1,12 @@
+{
+  "protocol": "D22-menu-position-v1",
+  "purpose": "Distinguish business-action routing from dependence on menu letter or position. This is not free tool-parameter training or an end-to-end agent evaluation.",
+  "arms": ["base", "lora"],
+  "menu_ids": ["canonical", "rotated"],
+  "first_response_only": true,
+  "max_first_responses": 72,
+  "no_retraining": true,
+  "no_seed_selection": true,
+  "manual_annotations_before_submission": 0,
+  "execution_gate": "Do not invoke MLX, Ollama, or training until the coordinating thread explicitly hands over the model channel."
+}

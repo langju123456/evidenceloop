@@ -1,0 +1,1325 @@
+{
+  "schema": "action-sft-menu-position/1",
+  "protocol": {
+    "protocol": "D22-menu-position-v1",
+    "purpose": "Distinguish business-action routing from dependence on menu letter or position. This is not free tool-parameter training or an end-to-end agent evaluation.",
+    "arms": [
+      "base",
+      "lora"
+    ],
+    "menu_ids": [
+      "canonical",
+      "rotated"
+    ],
+    "first_response_only": true,
+    "max_first_responses": 72,
+    "no_retraining": true,
+    "no_seed_selection": true,
+    "manual_annotations_before_submission": 0,
+    "execution_gate": "Do not invoke MLX, Ollama, or training until the coordinating thread explicitly hands over the model channel."
+  },
+  "base_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "archived_adapter_sha256": "2ffa83b2e74ead3f9b819907329a54728499979fd2cee9f903f193b4053777de",
+  "cases_sha256": "053c3a65403212f4998aa123cfd56b2132ba0615f39072d781787103bc5b2a1e",
+  "sources_sha256": "7ae1e01f78b6c63f373a7961b4af0f2cdaebc51a2229e8ba6cf3fbb75a143b80",
+  "configuration_sha256": "beb3ab7d68322d3c0380e73e6f03a45873c0294359775b8de43d6b3db5f1625e",
+  "expected_first_responses": 72,
+  "matrix": [
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-growth-allow",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比。现在尚未签字，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比。现在尚未签字，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比。现在尚未签字，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-growth-pause",
+      "pair_id": "apple-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 D。\n分析师：请改为 FY2025 的板块自身同比。现在尚未签字，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-allow",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量。该稿已叫停，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量。该稿已叫停，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量。该稿已叫停，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-25-contribution-pause",
+      "pair_id": "apple-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 C。\n分析师：请改为 FY2025 的板块收入增量占公司收入增量。该稿已叫停，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-allow",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿。没有批准出数，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿。没有批准出数，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿。没有批准出数，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-growth-pause",
+      "pair_id": "apple-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 B。\n分析师：请按 FY2024 的板块自身同比改稿。没有批准出数，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy24_contribution",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-allow",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy24_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿。此版必须暂停，不要计算。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿。此版必须暂停，不要计算。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿。此版必须暂停，不要计算。"
+        }
+      ]
+    },
+    {
+      "case_id": "apple-24-contribution-pause",
+      "pair_id": "apple-24-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Apple。每行依次为Services与总收入，单位USD million。\nFY2025: 109158 / 416161\nFY2024: 96169 / 391035\nFY2023: 85200 / 383285\n送审前动作 A。\n分析师：请按 FY2024 的板块收入增量占公司收入增量改稿。此版必须暂停，不要计算。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-allow",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比。客户暂停此稿，必须停止，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比。客户暂停此稿，必须停止，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比。客户暂停此稿，必须停止，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-growth-pause",
+      "pair_id": "oracle-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 D。\n分析师：请改为 FY2025 的服务收入同比。客户暂停此稿，必须停止，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-allow",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量。客户要求暂停，不能出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量。客户要求暂停，不能出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量。客户要求暂停，不能出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-25-contribution-pause",
+      "pair_id": "oracle-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 C。\n分析师：请改为 FY2025 的服务收入增量占总收入增量。客户要求暂停，不能出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy24_growth",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-allow",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy24_growth",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比。这版暂挂，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比。这版暂挂，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比。这版暂挂，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "oracle-24-growth-pause",
+      "pair_id": "oracle-24-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "Oracle Corporation。每行依次为Services与总收入，单位USD million。\nFY2025: 5233 / 57399\nFY2024: 5431 / 52961\nFY2023: 5594 / 49954\n送审前动作 B。\n分析师：请改为 FY2024 的服务收入同比。这版暂挂，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy25_growth",
+      "gold_code": "A",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-allow",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy25_growth",
+      "gold_code": "D",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比。尚未获得核准，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比。尚未获得核准，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比。尚未获得核准，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-growth-pause",
+      "pair_id": "tencent-25-growth",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 D。\n分析师：请改为 FY2025 的 VAS 自身同比。尚未获得核准，必须暂停，不要出数。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "fy25_contribution",
+      "gold_code": "B",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-allow",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "fy25_contribution",
+      "gold_code": "F",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量，并给出可复算结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量。客户已经叫停，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "canonical",
+      "gold_action": "user_pause",
+      "gold_code": "E",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量。客户已经叫停，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "base",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量。客户已经叫停，必须暂停。"
+        }
+      ]
+    },
+    {
+      "case_id": "tencent-25-contribution-pause",
+      "pair_id": "tencent-25-contribution",
+      "arm": "lora",
+      "menu_id": "rotated",
+      "gold_action": "user_pause",
+      "gold_code": "C",
+      "messages": [
+        {
+          "role": "system",
+          "content": "从六个合法动作中选一个，只输出一个英文字母。菜单：A=表中缺少计算所需年度，B=FY2024贡献，C=按用户要求暂停，D=FY2025同比，E=FY2024同比，F=FY2025贡献"
+        },
+        {
+          "role": "user",
+          "content": "腾讯控股。每行依次为VAS与总收入，单位RMB million。\nFY2025: 369281 / 751766\nFY2024: 319168 / 660257\n送审前动作 C。\n分析师：请改为 FY2025 的 VAS 收入增量占集团收入增量。客户已经叫停，必须暂停。"
+        }
+      ]
+    }
+  ]
+}

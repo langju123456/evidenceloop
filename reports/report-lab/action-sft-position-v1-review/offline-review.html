@@ -1,0 +1,169 @@
+<!doctype html><meta charset='utf-8'><title>D22 失败离线复核</title><style>body{max-width:860px;margin:auto;font:16px/1.6 system-ui;padding:18px}section{border-top:1px solid #ccc;padding:10px 0}textarea{display:block;width:95%}pre{white-space:pre-wrap}code{overflow-wrap:anywhere}</style><h1>D22 真实失败离线复核</h1><p>尚无独立专家复核。这是定向失败复核，样本不是随机盲抽。原输入表格、指令和回执如下；请自行核对，不能将机器标签当作人工结论。填写后导出 JSON 保存；刷新页面会清空未导出内容。</p><label>复核者标识 <input id='reviewer' autocomplete='off'></label> <button id='export' type='button'>导出复核记录</button><p id='status' role='status'>尚未提交独立人工标注；共 29 个失败样本。</p><section data-case='apple-01'><h2>apple-01</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Apple。每行依次为Services与总收入，单位USD million。
+FY2025: 109158 / 416161
+FY2024: 96169 / 391035
+FY2023: 85200 / 383285
+送审前动作 D。
+分析师：我现在要 FY2025 同比，两项都替我更新。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;26,39&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;10969&quot;, &quot;denominator&quot;: &quot;85200&quot;, &quot;value&quot;: &quot;12.87&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='apple-02'><h2>apple-02</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Apple。每行依次为Services与总收入，单位USD million。
+FY2025: 109158 / 416161
+FY2024: 96169 / 391035
+FY2023: 85200 / 383285
+送审前动作 C。
+分析师：请转到 FY2025 的增长贡献。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;26,39&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;10969&quot;, &quot;denominator&quot;: &quot;85200&quot;, &quot;value&quot;: &quot;12.87&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='apple-03'><h2>apple-03</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Apple。每行依次为Services与总收入，单位USD million。
+FY2025: 109158 / 416161
+FY2024: 96169 / 391035
+FY2023: 85200 / 383285
+送审前动作 B。
+分析师：改稿只接受 FY2024 的同比结果。</pre><p>原策略选择：B。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2025, &quot;metric&quot;: &quot;contribution&quot;, &quot;page&quot;: &quot;26,39&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S25&quot;, &quot;S24&quot;], &quot;denominator&quot;: [&quot;T25&quot;, &quot;T24&quot;]}, &quot;numerator&quot;: &quot;12989&quot;, &quot;denominator&quot;: &quot;25126&quot;, &quot;value&quot;: &quot;51.70&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='apple-04'><h2>apple-04</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Apple。每行依次为Services与总收入，单位USD million。
+FY2025: 109158 / 416161
+FY2024: 96169 / 391035
+FY2023: 85200 / 383285
+送审前动作 A。
+分析师：改成 FY2024。
+分析师：口径另定为增量贡献。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;26,39&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;10969&quot;, &quot;denominator&quot;: &quot;85200&quot;, &quot;value&quot;: &quot;12.87&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='apple-05'><h2>apple-05</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Apple。每行依次为Services与总收入，单位USD million。
+FY2025: 109158 / 416161
+FY2024: 96169 / 391035
+FY2023: 85200 / 383285
+送审前动作 A。
+分析师：这版先压下，暂时不计算。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;26,39&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;10969&quot;, &quot;denominator&quot;: &quot;85200&quot;, &quot;value&quot;: &quot;12.87&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='apple-06'><h2>apple-06</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Apple。每行依次为Services与总收入，单位USD million。
+FY2025: 109158 / 416161
+FY2024: 96169 / 391035
+FY2023: 85200 / 383285
+送审前动作 C。
+分析师：核 FY2023 那年的增量占比。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;26,39&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;10969&quot;, &quot;denominator&quot;: &quot;85200&quot;, &quot;value&quot;: &quot;12.87&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-01'><h2>tencent-01</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 B。
+分析师：定稿的日期不要动，主语是这个板块自身：它比前一年增长了百分之几？</pre><p>原策略选择：B。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2025, &quot;metric&quot;: &quot;contribution&quot;, &quot;page&quot;: &quot;8&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S25&quot;, &quot;S24&quot;], &quot;denominator&quot;: [&quot;T25&quot;, &quot;T24&quot;]}, &quot;numerator&quot;: &quot;50113&quot;, &quot;denominator&quot;: &quot;91509&quot;, &quot;value&quot;: &quot;54.76&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-02'><h2>tencent-02</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 D。
+分析师：下一期用 2025 年。
+分析师：表中显示该板块在公司收入增减里所占比例。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-03'><h2>tencent-03</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 C。
+分析师：刚才有人要换指标。
+分析师：按我的口径：取 2025 年，比较板块自己与上年。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-04'><h2>tencent-04</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 A。
+分析师：分母别用这块业务的上年额，改用同年全公司的收入差额。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-05'><h2>tencent-05</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 B。
+分析师：草拟时有人提过上年自身增幅。
+分析师：这条仅供备查，照最初的表单交。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-06'><h2>tencent-06</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 D。
+分析师：先切换到 2025。
+分析师：贡献的提议取消，改为相较去年的板块增长百分数。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-07'><h2>tencent-07</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 A。
+分析师：就算可以算，也请把这一版挂起，收到签字我再叫你出数。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-08'><h2>tencent-08</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 B。
+分析师：委员会指定 FY2022，分母用其上一年，请按现有原表交付。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-01'><h2>moutai-01</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 D。
+分析师：经理不看增长来源，追问的是该项 FY2025 较上年变了百分之多少。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-02'><h2>moutai-02</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 A。
+分析师：汇报年份保留，求公司收入差额中有多少比例由该子项解释。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-03'><h2>moutai-03</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 B。
+分析师：上年也是个选择。
+分析师：撤掉这个建议，已送审的两项内容全部保留。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-04'><h2>moutai-04</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 C。
+分析师：不再用原先的期间，定在 2025 年，对自身基期列做除法。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-06'><h2>moutai-06</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 B。
+分析师：可以讨论它对全局的影响。
+分析师：这次先用自身去年金额作分母，期间维持。</pre><p>原策略选择：B。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2025, &quot;metric&quot;: &quot;contribution&quot;, &quot;page&quot;: &quot;107&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S25&quot;, &quot;S24&quot;], &quot;denominator&quot;: [&quot;T25&quot;, &quot;T24&quot;]}, &quot;numerator&quot;: &quot;-223796897.18&quot;, &quot;denominator&quot;: &quot;-2061049761.55&quot;, &quot;value&quot;: &quot;10.86&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-07'><h2>moutai-07</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 B。
+分析师：收到我下一条确认前，先别让这笔数出现在材料里。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-08'><h2>moutai-08</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 A。
+分析师：会议只接受 2021 年的同比，只能引用屏幕上的表格。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='tencent-09'><h2>tencent-09</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 腾讯控股。每行依次为VAS与总收入，单位RMB million。
+FY2025: 369281 / 751766
+FY2024: 319168 / 660257
+送审前动作 B。
+分析师：把分析迁到表里的较早一年，改看这一年该板块本身的同比。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;invalid_calculation&quot;, &quot;error&quot;: &quot;unknown or missing cell&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='moutai-09'><h2>moutai-09</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: 贵州茅台。每行依次为其他业务收入与总收入，单位人民币元。
+FY2025: 63517327.14 / 168838102514.79
+FY2024: 287314224.32 / 170899152276.34
+送审前动作 D。
+分析师：有人希望看当年。
+分析师：不采纳，仍按原财年，保留原计算定义。</pre><p>原策略选择：B。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2025, &quot;metric&quot;: &quot;contribution&quot;, &quot;page&quot;: &quot;107&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S25&quot;, &quot;S24&quot;], &quot;denominator&quot;: [&quot;T25&quot;, &quot;T24&quot;]}, &quot;numerator&quot;: &quot;-223796897.18&quot;, &quot;denominator&quot;: &quot;-2061049761.55&quot;, &quot;value&quot;: &quot;10.86&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='revision-02'><h2>revision-02</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Oracle Corporation。每行依次为Services与总收入，单位USD million。
+FY2025: 5233 / 57399
+FY2024: 5431 / 52961
+FY2023: 5594 / 49954
+送审前动作 D。
+分析师：用下一财年，贡献口径保持。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;65&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;-163&quot;, &quot;denominator&quot;: &quot;5594&quot;, &quot;value&quot;: &quot;-2.91&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='revision-03'><h2>revision-03</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Oracle Corporation。每行依次为Services与总收入，单位USD million。
+FY2025: 5233 / 57399
+FY2024: 5431 / 52961
+FY2023: 5594 / 49954
+送审前动作 A。
+分析师：汇报改为服务收入变动占公司收入变动的比例，年份不动。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;65&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;-163&quot;, &quot;denominator&quot;: &quot;5594&quot;, &quot;value&quot;: &quot;-2.91&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='revision-04'><h2>revision-04</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Oracle Corporation。每行依次为Services与总收入，单位USD million。
+FY2025: 5233 / 57399
+FY2024: 5431 / 52961
+FY2023: 5594 / 49954
+送审前动作 D。
+分析师：先挪到 FY2025。
+分析师：这页改为看服务收入同比，沿用刚才定的年份。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;65&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;-163&quot;, &quot;denominator&quot;: &quot;5594&quot;, &quot;value&quot;: &quot;-2.91&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='revision-05'><h2>revision-05</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Oracle Corporation。每行依次为Services与总收入，单位USD million。
+FY2025: 5233 / 57399
+FY2024: 5431 / 52961
+FY2023: 5594 / 49954
+送审前动作 B。
+分析师：改用 FY2024，先换为同比。
+分析师：年份按刚才的，指标撤回刚才的改动，恢复送审前的指标。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;65&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;-163&quot;, &quot;denominator&quot;: &quot;5594&quot;, &quot;value&quot;: &quot;-2.91&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='revision-07'><h2>revision-07</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Oracle Corporation。每行依次为Services与总收入，单位USD million。
+FY2025: 5233 / 57399
+FY2024: 5431 / 52961
+FY2023: 5594 / 49954
+送审前动作 B。
+分析师：只需要 FY2023 的同比，不能用别的年份顶替。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;65&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;-163&quot;, &quot;denominator&quot;: &quot;5594&quot;, &quot;value&quot;: &quot;-2.91&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><section data-case='revision-08'><h2>revision-08</h2><pre>system: 请从六个工具动作中选一个执行，只输出一个英文字母。A=FY2025同比，B=FY2025贡献，C=FY2024同比，D=FY2024贡献，E=按用户要求暂停，F=表中缺少计算所需年度。
+user: Oracle Corporation。每行依次为Services与总收入，单位USD million。
+FY2025: 5233 / 57399
+FY2024: 5431 / 52961
+FY2023: 5594 / 49954
+送审前动作 C。
+分析师：先看看改为贡献。
+分析师：先暂停出数，等我确认年份再交。</pre><p>原策略选择：C。工具回执：<code>{&quot;action&quot;: &quot;compute&quot;, &quot;year&quot;: 2024, &quot;metric&quot;: &quot;growth&quot;, &quot;page&quot;: &quot;65&quot;, &quot;tool&quot;: &quot;cells&quot;, &quot;arguments&quot;: {&quot;numerator&quot;: [&quot;S24&quot;, &quot;S23&quot;], &quot;denominator&quot;: [&quot;S23&quot;]}, &quot;numerator&quot;: &quot;-163&quot;, &quot;denominator&quot;: &quot;5594&quot;, &quot;value&quot;: &quot;-2.91&quot;}</code></p><label>你的判断 <select><option value=''>未评</option><option>pass</option><option>fail</option><option>unknown</option></select></label><label>依据 <textarea rows='2'></textarea></label></section><script>const packet={"source_results_sha256": "2321fdfb934c89cef4ec8ddc965bbfd55d888a3232eae7abcfc295aa15480182", "source_predictions_sha256": "e040865ad8fa29a2a1ec4d06653222a4357cba518f0933295799e9692439921f"};document.getElementById('export').onclick=()=>{const reviewer=document.getElementById('reviewer').value.trim(),status=document.getElementById('status');const rows=[...document.querySelectorAll('section[data-case]')].map(s=>({case_id:s.dataset.case,label:s.querySelector('select').value||null,reason:s.querySelector('textarea').value.trim()}));const selected=rows.filter(r=>r.label);if(!reviewer||!selected.length||selected.some(r=>!r.reason)){status.textContent='请填写复核者，并为至少一条判断填写依据。';return;}const data={schema:'action-sft-human-triage/1',...packet,reviewer,created_at:new Date().toISOString(),rows};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='d22-human-triage.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='已导出 '+selected.length+' 条判断；尚未导入评分。';};</script>
