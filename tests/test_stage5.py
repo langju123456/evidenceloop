@@ -12,7 +12,7 @@ from evidenceloop.data import stage4, stage5
 from evidenceloop.data.export import jsonl_sha256
 from evidenceloop.harness.loop import run_episodes
 from evidenceloop.harness.scripted import ScriptedBackend
-from evidenceloop.report.compare import STAGE4, STAGE5, render
+from evidenceloop.report.compare import STAGE4, STAGE5, STAGE5_OOD, render
 from evidenceloop.tasks.generator import HARD_SPLITS, RULE_SEQUENCES, TRAIN_TEMPLATES, generate_split
 from evidenceloop.train.dpo import DPOConfig
 from evidenceloop.verify.verifier import evaluate
@@ -300,3 +300,41 @@ def test_stage5_comparisons_follow_d16(tmp_path):
     main(["stage5", "compare", "--split", "test_hard", *paths, "--row", f"CP:3={tmp_path / 'missing.jsonl'}",
           "--expected-n", "20", "--resamples", "500", "--out", str(tmp_path / "cmp.md")])
     assert (tmp_path / "cmp.md").read_text(encoding="utf-8") == text
+
+
+def test_stage5_comparisons_on_test_ood_follow_d18(tmp_path):
+    """D18: the verdicts are read on test_ood; with one P and CP seed (D17) H4-H6 are not judged."""
+    ood = lambda name, wins: _evals(name, wins, n=20, split="test_ood")  # noqa: E731
+    rows = {"W": {None: ood("w", 4)}, "C": {s: ood(f"c{s}", 7) for s in (1, 2, 3)},
+            "P": {1: ood("p1", 9)}, "CP": {1: ood("cp1", 12)}}
+    text = render("test_ood", rows, 20, resamples=500, design=STAGE5_OOD)
+    assert text.startswith("# 阶段五：test_ood 上的对比（D18）")
+    assert "主指标是 test_ood" in text and "只作描述" not in text.splitlines()[2]
+    for label in ("| H4（主假设）", "| H5", "| H6"):
+        line = next(row for row in text.splitlines() if row.startswith(label))
+        assert "不判定" in line, "one seed on the P and CP side is not enough for a verdict"
+    c_minus_w = next(row for row in text.splitlines() if "| C − W |" in row)
+    assert "| 1, 2, 3 |" in c_minus_w and "不判定" not in c_minus_w
+
+    paths = []
+    for arm, runs in rows.items():
+        for seed, evals in runs.items():
+            path = tmp_path / f"{arm}{seed or ''}.jsonl"
+            path.write_text("\n".join(json.dumps(e) for e in evals), encoding="utf-8")
+            paths += ["--row", f"{arm}:{seed}={path}" if seed else f"{arm}={path}"]
+    main(["stage5", "compare", "--split", "test_ood", "--primary", "test_ood", *paths,
+          "--expected-n", "20", "--resamples", "500", "--out", str(tmp_path / "ood.md")])
+    assert (tmp_path / "ood.md").read_text(encoding="utf-8") == text
+    for arm, runs in rows.items():
+        for seed, evals in runs.items():
+            path = tmp_path / f"id_{arm}{seed or ''}.jsonl"
+            path.write_text("\n".join(json.dumps(dict(e, split="test_id")) for e in evals), encoding="utf-8")
+    id_rows = []
+    for arm, runs in rows.items():
+        for seed in runs:
+            path = tmp_path / f"id_{arm}{seed or ''}.jsonl"
+            id_rows += ["--row", f"{arm}:{seed}={path}" if seed else f"{arm}={path}"]
+    main(["stage5", "compare", "--split", "test_id", "--primary", "test_ood", *id_rows,
+          "--expected-n", "20", "--resamples", "500", "--out", str(tmp_path / "id.md")])
+    assert "主指标是 test_ood" in (tmp_path / "id.md").read_text(encoding="utf-8")
+    assert "只作描述" in (tmp_path / "id.md").read_text(encoding="utf-8")

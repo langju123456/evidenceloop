@@ -700,10 +700,11 @@ def cmd_stage5_gate(args: argparse.Namespace) -> None:
 
 def cmd_stage5_compare(args: argparse.Namespace) -> None:
     from evidenceloop.data.stage5 import HARD_SIZES
-    from evidenceloop.report.compare import STAGE5, render
+    from evidenceloop.report.compare import STAGE5_DESIGNS, render
 
     expected = args.expected_n or {**FREEZE_SIZES, **HARD_SIZES}[args.split]
-    text = render(args.split, _rows(args.row), expected, args.title, args.resamples, design=STAGE5)
+    design = STAGE5_DESIGNS[args.primary]
+    text = render(args.split, _rows(args.row), expected, args.title, args.resamples, design=design)
     _write_text(args.out, text)
     print(text)
 
@@ -839,7 +840,9 @@ def main(argv: list[str] | None = None) -> None:
     s5gate.add_argument("--out")
     s5gate.set_defaults(func=cmd_stage5_gate)
     s5cmp = stage5_cmd.add_parser("compare", help="D16's paired comparisons and verdicts on one split")
-    s5cmp.add_argument("--split", required=True, choices=["test_hard", "test_id", "calib_hard"])
+    s5cmp.add_argument("--split", required=True, choices=["test_hard", "test_ood", "test_id", "calib_hard"])
+    s5cmp.add_argument("--primary", default="test_hard", choices=["test_hard", "test_ood"],
+                       help="the split whose verdicts count: test_hard (D16) or test_ood (D18)")
     s5cmp.add_argument("--row", action="append", required=True, help="ARM=evals.jsonl or ARM:SEED=evals.jsonl")
     s5cmp.add_argument("--expected-n", type=int, default=0)
     s5cmp.add_argument("--resamples", type=int, default=10_000)

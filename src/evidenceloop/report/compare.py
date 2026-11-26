@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import random
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 from evidenceloop.data.selection import is_infra_error
@@ -75,6 +75,17 @@ STAGE5 = Design(
     ),
     arm_order=("W", "C", "P", "CP"),
 )
+# D18: the same arms and comparisons, but the verdicts are read on test_ood, where W25's and C's runs are stage 4's.
+STAGE5_OOD = replace(
+    STAGE5,
+    title="阶段五：{split} 上的对比（D18）",
+    primary_split="test_ood",
+    primary_note="主指标是 test_ood 上的 task_success（D18）；只有 test_ood 上 H4 的结论回答主问题。"
+                 "C 在 test_ood 上的成绩在定这条规则之前就已经知道（D15、D18）。",
+    rule="D18，规则同 D14、D16",
+    arms_note=STAGE5.arms_note + "W 和 C 在 test_ood、test_id 上用的是阶段四的评测（D18）。",
+)
+STAGE5_DESIGNS = {"test_hard": STAGE5, "test_ood": STAGE5_OOD}
 
 
 def run_problems(evals: list[dict[str, Any]], split: str, expected_n: int) -> list[str]:

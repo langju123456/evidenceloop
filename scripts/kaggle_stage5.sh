@@ -14,9 +14,12 @@
 #   → 难度检查：C1–C3 考 calib_hard，成功率不在 20%–90% 之间就停下，不训练
 #   → 先训完全部 6 个 LoRA（P1 CP1 P2 CP2 P3 CP3）→ 再评测：W25、C、P、CP 考 test_hard，P、CP 另考 test_id，
 #   WC_s 考 calib_hard（只作描述）→ 出报告 → 打包。
+# D18 之后（默认）：不另跑难度检查；P、CP 考 test_ood 和 test_id，主结论看 test_ood；W25 和 C 用阶段四的评测。
 # 进度和结论写在 /kaggle/working/STATUS.md，结果在 stage5_results.zip（不含几 GB 的合并模型）。
 # 用了 STAGE5_STOP_AFTER_MIN 分钟（默认 600）以后不再开始新的训练或评测，先打包；把这次的输出也加为 Input，
 # 用同一格再跑一次就接着跑（训好的不重训，el run 自己续跑）。
+# STAGE5_PRIMARY：主结论看哪个划分。默认 test_ood（D18）：不另跑难度检查，P、CP 考 test_ood 和 test_id，W25 和 C 在
+#   这两个划分上用阶段四的评测。test_hard 是 D16 原来的做法：先做难度检查，W25、C、P、CP 都考 test_hard。
 # STAGE5_DPO_SEEDS：P、CP（以及 WC）跑哪几个种子，默认 "1 2 3"（D16）；D17 的精简版是 "1"。C1–C3 的难度检查和
 #   test_hard 评测不受影响。
 # STAGE5_GATE_ONLY=1：只做开跑前的核对和难度检查，通过了也不训练，打包后停下（D17：先看难度，再估算时长）。
@@ -41,6 +44,15 @@ W=runs/W25/merged
 SEEDS=(1 2 3)
 read -r -a DPO_SEEDS <<< "${STAGE5_DPO_SEEDS:-1 2 3}"
 GATE_ONLY="${STAGE5_GATE_ONLY:-0}"
+PRIMARY="${STAGE5_PRIMARY:-test_ood}"
+case "$PRIMARY" in
+  test_ood) EVAL_TASKS=data/stage5/eval_ood.public.jsonl; PC_SPLITS=(test_ood test_id) ;;   # D18
+  test_hard) EVAL_TASKS=data/stage5/eval.public.jsonl; PC_SPLITS=(test_hard test_id) ;;     # D16
+  *) echo "STAGE5_PRIMARY 只能是 test_ood（D18）或 test_hard（D16）" >&2; exit 1 ;;
+esac
+if [ "$GATE_ONLY" = 1 ] && [ "$PRIMARY" != test_hard ]; then
+  echo "STAGE5_GATE_ONLY=1 只用于 D16 的难度检查（STAGE5_PRIMARY=test_hard）；D18 不再另跑难度检查" >&2; exit 1
+fi
 START=$(date +%s)
 FAILED=()
 if [ "$DRY_RUN" = 1 ]; then BACKEND=scripted; REPORTS=reports_dryrun; else BACKEND=vllm; REPORTS=reports; fi
@@ -222,9 +234,9 @@ rows_for() {  # $1 划分
     for s in "${DPO_SEEDS[@]}"; do echo "WC:$s=runs/WC${s}_stage5/evals_calib_hard.jsonl"; done
     return
   fi
-  if [ "$split" = test_id ]; then
-    echo "W=runs/W25_stage4/evals_test_id.jsonl"
-    for s in "${SEEDS[@]}"; do echo "C:$s=runs/C${s}_stage4/evals_test_id.jsonl"; done
+  if [ "$split" = test_id ] || [ "$split" = test_ood ]; then
+    echo "W=runs/W25_stage4/evals_$split.jsonl"
+    for s in "${SEEDS[@]}"; do echo "C:$s=runs/C${s}_stage4/evals_$split.jsonl"; done
   else
     echo "W=runs/W25_stage5/evals_$split.jsonl"
     for s in "${SEEDS[@]}"; do echo "C:$s=runs/C${s}_stage5/evals_$split.jsonl"; done
@@ -246,7 +258,7 @@ report_split() {  # $1 划分
     el report baseline --evals "${files[@]}" --names "${names[@]}" --title "阶段五：$split" --out "$REPORTS/stage5_$split.md"
   fi
   [ "$split" = calib_hard ] && return 0  # 只并排列出 C_s 和 WC_s，不做对比（D16）
-  el stage5 compare --split "$split" "${args[@]}" --out "$REPORTS/stage5_compare_$split.md" >/dev/null \
+  el stage5 compare --split "$split" --primary "$PRIMARY" "${args[@]}" --out "$REPORTS/stage5_compare_$split.md" >/dev/null \
     || note "对比报告没写成：$split"
 }
 
@@ -270,6 +282,7 @@ PY
 
 echo "# 阶段五运行状态" > "$STATUS"
 note "开始，代码 $(git rev-parse --short HEAD 2>/dev/null || echo '?')$([ "$DRY_RUN" = 1 ] && echo '（预演：脚本化参考策略，不合并、不训练）')"
+note "主结论看 $PRIMARY$([ "$PRIMARY" = test_ood ] && echo '（D18）' || echo '（D16）')，P、CP 考 ${PC_SPLITS[*]}；时间上限 $STOP_AFTER_MIN 分钟"
 note "P、CP 的种子：${DPO_SEEDS[*]}$([ "${DPO_SEEDS[*]}" = "${SEEDS[*]}" ] || echo '（精简版，D17）')$([ "$GATE_ONLY" = 1 ] && echo '；只做核对和难度检查（STAGE5_GATE_ONLY=1）')"
 mkdir -p "$REPORTS"
 
@@ -333,6 +346,11 @@ el stage5 freeze --tasks-dir "$TASKS" --exclude-records "${TRAINED[@]}" 2>&1 | t
 [ "${PIPESTATUS[0]}" = 0 ] || stop "test_hard、calib_hard 和 configs/frozen_hard.json 对不上"
 el stage5 build "${MINING[@]}" --tasks-dir "$TASKS" --warmup-records data/warmup/dose100.records.jsonl 2>&1 | tee -a "$STATUS"
 [ "${PIPESTATUS[0]}" = 0 ] || stop "阶段五的数据和 configs/stage5.json 对不上"
+if [ "$PRIMARY" = test_ood ]; then
+  # D18：P、CP 一次 el run 考 test_ood 和 test_id，题目就是两个冻结划分（上面 el frozen verify 核对过）原样接起来
+  cat "$TASKS/test_ood.public.jsonl" "$TASKS/test_id.public.jsonl" > "$EVAL_TASKS" || stop "写不出 $EVAL_TASKS"
+  note "P、CP 的考题：$EVAL_TASKS（test_ood 150 道 + test_id 150 道），sha256 $(python -c 'import hashlib, sys; print(hashlib.sha256(open(sys.argv[1], "rb").read()).hexdigest()[:12])' "$EVAL_TASKS")"
+fi
 if [ "$DRY_RUN" != 1 ]; then
   for s in "${SEEDS[@]}"; do
     python scripts/check_template.py --model "$BASE" --pairs "data/stage5/prefs_s$s.trl.jsonl" 2>&1 | tail -n 3 | tee -a "$STATUS"
@@ -346,12 +364,20 @@ if [ "$DRY_RUN" != 1 ]; then
       stop "runs/C$s 不是阶段四按 D14 训好的 C$s：右侧 Add Input 加上阶段四 Notebook 的输出（stage4_results.zip）"
     fi
   done
-  for f in runs/W25_stage4/evals_test_id.jsonl runs/C1_stage4/evals_test_id.jsonl runs/C2_stage4/evals_test_id.jsonl runs/C3_stage4/evals_test_id.jsonl; do
-    [ -f "$f" ] || note "注意：没有 $f，test_id 上的对比会缺这一行（主指标在 test_hard 上，不受影响）"
+  for split in test_id test_ood; do
+    for f in runs/W25_stage4/evals_$split.jsonl runs/C1_stage4/evals_$split.jsonl runs/C2_stage4/evals_$split.jsonl runs/C3_stage4/evals_$split.jsonl; do
+      [ -f "$f" ] && continue
+      [ "$split" = "$PRIMARY" ] && stop "没有 $f：主指标在 $split 上，要用阶段四的这份评测（D18）"
+      note "注意：没有 $f，$split 上的对比会缺这一行（主指标在 $PRIMARY 上，不受影响）"
+    done
   done
 fi
 
-# ---- 5. 难度检查（D16，在任何训练之前）：C1–C3 考 calib_hard，三个种子合起来的成功率要在 20%–90% 之间
+# ---- 5. 难度检查（D16，在任何训练之前）：C1–C3 考 calib_hard，三个种子合起来的成功率要在 20%–90% 之间。
+#   D18 不再另跑：阶段四里 C 在 test_ood 上是 131/450，在这个区间里（D15）
+if [ "$PRIMARY" = test_ood ]; then
+  note "D18：不再另跑难度检查（阶段四里 C 在 test_ood 上 131/450），开始训练"
+else
 GATE=()
 for s in "${SEEDS[@]}"; do
   eval_row "C${s}cal" "$TASKS/calib_hard.public.jsonl" "$W" "runs/C$s/adapter" calib_hard
@@ -367,13 +393,14 @@ case "${PIPESTATUS[0]}" in
      fi ;;
   *) stop "难度检查做不了：C 在 calib_hard 上的评测不完整" ;;
 esac
+fi
 if [ "$GATE_ONLY" = 1 ]; then
   note "只做难度检查（STAGE5_GATE_ONLY=1）：不训练，已用 $(( ($(date +%s) - START) / 60 )) 分钟，打包后停下"
   package
   exit 0
 fi
 
-# ---- 6. 先训完全部 LoRA（D16 是 6 个，D17 精简版是 P1、CP1），再开始 test_hard、test_id 上的任何评测。
+# ---- 6. 先训完全部 LoRA（D16 是 6 个，D17 精简版是 P1、CP1），再开始任何评测。
 #   P 从 W25 出发，CP 从 WC_s 出发
 for s in "${DPO_SEEDS[@]}"; do
   train_one "P$s" "$s" "$W" "$W_FP"
@@ -393,18 +420,19 @@ for s in "${DPO_SEEDS[@]}"; do
 done
 [ "$DRY_RUN" = 1 ] || training_summary 2>&1 | tee -a "$STATUS"
 
-# ---- 7. 评测：W25 → 每个种子的 C、P、CP → WC（calib_hard，只作描述）。CP 和 WC 的基座是重新合并的 WC_s
-eval_row W25 "$TASKS/test_hard.public.jsonl" "$W" "" test_hard
+# ---- 7. 评测：W25 → 每个种子的 C、P、CP → WC（calib_hard，只作描述）。CP 和 WC 的基座是重新合并的 WC_s。
+#   D18：W25 和 C 在 test_ood、test_id 上用阶段四的评测，不重考
+[ "$PRIMARY" = test_hard ] && eval_row W25 "$TASKS/test_hard.public.jsonl" "$W" "" test_hard
 for s in "${SEEDS[@]}"; do
-  eval_row "C$s" "$TASKS/test_hard.public.jsonl" "$W" "runs/C$s/adapter" test_hard
+  [ "$PRIMARY" = test_hard ] && eval_row "C$s" "$TASKS/test_hard.public.jsonl" "$W" "runs/C$s/adapter" test_hard
   case " ${DPO_SEEDS[*]} " in *" $s "*) ;; *) continue ;; esac  # 这个种子不训 P、CP（D17）
-  usable "P$s" "$s" "$W_FP" && eval_row "P$s" data/stage5/eval.public.jsonl "$W" "runs/P$s/adapter" test_hard test_id
+  usable "P$s" "$s" "$W_FP" && eval_row "P$s" "$EVAL_TASKS" "$W" "runs/P$s/adapter" "${PC_SPLITS[@]}"
   check_time
   # 两行都已经跑完（上一次会话）就不用再合并 WC_s，只重新评分
-  if { [ "$(pending data/stage5/eval.public.jsonl "runs/CP${s}_stage5/traces.jsonl")" = 0 ] \
+  if { [ "$(pending "$EVAL_TASKS" "runs/CP${s}_stage5/traces.jsonl")" = 0 ] \
        && [ "$(pending "$TASKS/calib_hard.public.jsonl" "runs/WC${s}_stage5/traces.jsonl")" = 0 ]; } || ensure_wc "$s"; then
     usable "CP$s" "$s" "$(cat "runs/WC$s/fingerprint.txt" 2>/dev/null)" \
-      && eval_row "CP$s" data/stage5/eval.public.jsonl "runs/WC$s/merged" "runs/CP$s/adapter" test_hard test_id
+      && eval_row "CP$s" "$EVAL_TASKS" "runs/WC$s/merged" "runs/CP$s/adapter" "${PC_SPLITS[@]}"
     eval_row "WC$s" "$TASKS/calib_hard.public.jsonl" "runs/WC$s/merged" "" calib_hard
   else
     FAILED+=("CP$s、WC$s：评测前 WC$s 没合并成，或者和训练时不是同一个模型")
@@ -413,11 +441,11 @@ for s in "${SEEDS[@]}"; do
   drop_wc "$s"
 done
 
-# ---- 8. 报告：结论只看 test_hard 上的 H4（D16）；test_id 和 calib_hard 只作描述
-for split in test_hard test_id calib_hard; do report_split "$split"; done
+# ---- 8. 报告：结论只看主划分上的 H4（D16 是 test_hard，D18 是 test_ood）；test_id 和 calib_hard 只作描述
+for split in "$PRIMARY" test_id calib_hard; do report_split "$split"; done
 if [ ${#FAILED[@]} -gt 0 ]; then
   note "没跑成的（D14、D16：如实列出，不补跑、不换设置）："
   for f in "${FAILED[@]}"; do note "  - $f"; done
 fi
-note "完成：结论在 $REPORTS/stage5_compare_test_hard.md"
+note "完成：结论在 $REPORTS/stage5_compare_$PRIMARY.md"
 package
