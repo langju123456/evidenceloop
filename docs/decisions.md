@@ -313,3 +313,8 @@
   - 偏好对取到和 C 的样本数一样多（约 815 对）：带梯度的序列数翻倍，P 和 C 的预算就不一样了。
   - 训练和评测交替进行：理由同 D14。
 - 影响：新增 `src/evidenceloop/data/prefs.py`（偏好对）、`src/evidenceloop/train/dpo.py` 和 `scripts/train_dpo.py`（DPO 训练）、`src/evidenceloop/data/stage5.py`、`el stage5 freeze / build / gate / compare`、`configs/frozen_hard.json`、`configs/stage5.json`、`scripts/kaggle_stage5.sh`（带没有 GPU 时的预演）；`report/compare.py` 里写死的组名和假设改成可以按阶段给。环境、验证器、harness、四个旧划分、预热数据和阶段四的数据都不变。
+- 实现后补充（2026-11-26，还没开始跑；上面的规则一条没改）：
+  - 上面"prompt 的平均字符数约是 C 样本的 1.24 倍"是在全部候选对上数的。按规则选出的 407、409、407 对上是 1.26、1.24、1.24 倍，预算的估计不变。
+  - 冻结下来的 test_hard 里，最新版规则是训练域没出现过的排除组合的题有 39 道。150 道里有 115 道和训练过的题共用了至少一个资源 ID（同一口径下 test_id 是 113 道），就是上面"没有防住的"那一条，数字记在 `configs/frozen_hard.json`。
+  - 训练代码里把"基座上新建 LoRA"这一段从 `train/sft.py` 的 `train()` 里抽成了函数，SFT 和 DPO 共用。抽之前和之后，用同一个小模型、同一条命令训练并合并，loss、梯度范数和合并模型的指纹完全一样。
+  - `scripts/kaggle_stage5.sh` 在 CPU 上走过两遍。一遍是预演（脚本化参考策略，不合并、不训练）。另一遍用随机初始化的小模型代替 W25 和 C1–C3，后端仍是参考策略，走的是不预演的那条路径：恢复上一次的结果、各项核对、难度检查不通过时停下、6 次 DPO 训练、到时间上限后打包再续跑、WC_s 重新合并后的指纹核对、评测和报告。这只说明脚本走得通，不是任何模型结果；真实的 Qwen3 模板、fp16 和 vLLM 只有在 Kaggle 上才会碰到。
