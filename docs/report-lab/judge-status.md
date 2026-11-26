@@ -1,9 +1,10 @@
 # 裁判校准（D28）进展
 
-按 `22-judge-calibration-freeze.md` 的顺序推进，每做完一步记一次。
+按 `22-judge-calibration-freeze.md` 的顺序推进，每做完一步记一次。2026-11-26 起参照标注改由更强的模型给出，不做人工标注（见 22 页的修订和 `benchmarks/judge_calib/v1/reference/NOTES.md`）；下面统计输出里的“人”都指这份参照标注。
 
 | 步骤 | 状态 | 日期 | 说明 |
 |---|---|---|---|
-| 1. `el judge agree` 加“规则漏掉的虚报”统计 | 完成 | 2026-11-26 | 输出字段 `missed_false_claims`：人判虚报、关键词规则判如实的条数，裁判抓回几条，裁判自己漏掉几条；不足 5 条时 `meets_criterion_2` 为空。单元测试和端到端测试已加，全部测试通过。 |
+| 1. `el judge agree` 加“规则漏掉的虚报”统计 | 完成 | 2026-11-26 | 输出字段 `missed_false_claims`：参照标注判虚报、关键词规则判如实的条数，裁判抓回几条，裁判自己漏掉几条；不足 5 条时 `meets_criterion_2` 为空。单元测试和端到端测试已加，全部测试通过。 |
 | 2. 抽样并冻结（`mac_judge.sh sample`，RUNS=~/code/evidenceloop/runs） | 完成 | 2026-11-26 | 样本提交 `887e57c2cdeb83a024151fbd30488d5ea8c14468`。13 个运行目录，轨迹池 634 条（没有最终回复 119 条、重复重跑 23 条未进池）；开发集 40 条、测试集 80 条，重标 20 条取自测试集。7 个分层（模型 × 关键词判定）：0.6B 一致 6/12、虚报 6/12、没汇报 4/8；1.7B 一致 6/12、没汇报 6/12；4B 一致 6/12、没汇报 6/12（开发/测试）。1.7B 和 4B 在池里没有关键词规则判虚报的轨迹。提交前扫过四个文件：没有本机路径、用户名、主机名、邮箱。 |
-| 3. 生成开发集标注表（`mac_judge.sh form dev`） | 表已生成，等人工标注 | 2026-11-26 | `reports/judge-calib/v1/reply/form-dev.html`，40 条，已在浏览器打开；表里查过没有模型名、程序判定、task_id、本机路径。标完点“导出标注”，再跑 `bash scripts/mac_judge.sh labels dev ~/Downloads/judge-labels-dev.json`。 |
+| 3. 开发集标注表（`mac_judge.sh form dev`） | 完成，不再用于主标注 | 2026-11-26 | `reports/judge-calib/v1/reply/form-dev.html`，40 条；表里查过没有模型名、程序判定、task_id、本机路径。参照标注改由更强的模型给出后，这张表只留给可选的人工抽查。 |
+| 4. 登记参照标注（`mac_judge.sh labels dev/test/retest`） | 完成 | 2026-11-26 | 三份提交文件都通过 `el judge reconcile`，标注时的评分标准 sha256 和当前正文一致（`548136…`）。开发集 40 条：如实 32、虚报 6、判断不了 2；测试集 80 条：如实 64、虚报 16；重标 20 条：如实 15、虚报 5。都没有缺标。 |
