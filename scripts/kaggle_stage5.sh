@@ -17,6 +17,10 @@
 # 进度和结论写在 /kaggle/working/STATUS.md，结果在 stage5_results.zip（不含几 GB 的合并模型）。
 # 用了 STAGE5_STOP_AFTER_MIN 分钟（默认 600）以后不再开始新的训练或评测，先打包；把这次的输出也加为 Input，
 # 用同一格再跑一次就接着跑（训好的不重训，el run 自己续跑）。
+# STAGE5_DPO_SEEDS：P、CP（以及 WC）跑哪几个种子，默认 "1 2 3"（D16）；D17 的精简版是 "1"。C1–C3 的难度检查和
+#   test_hard 评测不受影响。
+# STAGE5_GATE_ONLY=1：只做开跑前的核对和难度检查，通过了也不训练，打包后停下（D17：先看难度，再估算时长）。
+#   之后把这次的输出加为 Input，去掉这个开关再跑一次，难度检查的评测会直接恢复，不重考。
 # STAGE5_DRY_RUN=1：没有 GPU 的预演。不装环境、不合并、不训练（只打印命令），用脚本化参考策略代替模型跑完全部评测
 # 和报告，报告写进 reports_dryrun/，用来检查脚本本身。参考策略每道题都做对，所以预演里难度检查必然"不通过"，
 # 预演只把它记下来，接着往下走。
@@ -35,10 +39,15 @@ BASE=Qwen/Qwen3-1.7B
 TASKS=data/tasks/gen-0.2.1
 W=runs/W25/merged
 SEEDS=(1 2 3)
+read -r -a DPO_SEEDS <<< "${STAGE5_DPO_SEEDS:-1 2 3}"
+GATE_ONLY="${STAGE5_GATE_ONLY:-0}"
 START=$(date +%s)
 FAILED=()
 if [ "$DRY_RUN" = 1 ]; then BACKEND=scripted; REPORTS=reports_dryrun; else BACKEND=vllm; REPORTS=reports; fi
 cd "$REPO" || exit 1
+for s in "${DPO_SEEDS[@]}"; do
+  case " ${SEEDS[*]} " in *" $s "*) ;; *) echo "STAGE5_DPO_SEEDS 里的 $s 不是 1、2、3 之一" >&2; exit 1 ;; esac
+done
 
 note() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$STATUS"; }
 stop() { note "停下：$*"; package; exit 1; }
@@ -210,7 +219,7 @@ rows_for() {  # $1 划分
   local split="$1" s
   if [ "$split" = calib_hard ]; then
     for s in "${SEEDS[@]}"; do echo "C:$s=runs/C${s}cal_stage5/evals_calib_hard.jsonl"; done
-    for s in "${SEEDS[@]}"; do echo "WC:$s=runs/WC${s}_stage5/evals_calib_hard.jsonl"; done
+    for s in "${DPO_SEEDS[@]}"; do echo "WC:$s=runs/WC${s}_stage5/evals_calib_hard.jsonl"; done
     return
   fi
   if [ "$split" = test_id ]; then
@@ -220,8 +229,8 @@ rows_for() {  # $1 划分
     echo "W=runs/W25_stage5/evals_$split.jsonl"
     for s in "${SEEDS[@]}"; do echo "C:$s=runs/C${s}_stage5/evals_$split.jsonl"; done
   fi
-  for s in "${SEEDS[@]}"; do echo "P:$s=runs/P${s}_stage5/evals_$split.jsonl"; done
-  for s in "${SEEDS[@]}"; do echo "CP:$s=runs/CP${s}_stage5/evals_$split.jsonl"; done
+  for s in "${DPO_SEEDS[@]}"; do echo "P:$s=runs/P${s}_stage5/evals_$split.jsonl"; done
+  for s in "${DPO_SEEDS[@]}"; do echo "CP:$s=runs/CP${s}_stage5/evals_$split.jsonl"; done
 }
 
 report_split() {  # $1 划分
@@ -261,6 +270,7 @@ PY
 
 echo "# 阶段五运行状态" > "$STATUS"
 note "开始，代码 $(git rev-parse --short HEAD 2>/dev/null || echo '?')$([ "$DRY_RUN" = 1 ] && echo '（预演：脚本化参考策略，不合并、不训练）')"
+note "P、CP 的种子：${DPO_SEEDS[*]}$([ "${DPO_SEEDS[*]}" = "${SEEDS[*]}" ] || echo '（精简版，D17）')$([ "$GATE_ONLY" = 1 ] && echo '；只做核对和难度检查（STAGE5_GATE_ONLY=1）')"
 mkdir -p "$REPORTS"
 
 # ---- 0. 恢复阶段四（和上一次阶段五）的结果
@@ -357,9 +367,15 @@ case "${PIPESTATUS[0]}" in
      fi ;;
   *) stop "难度检查做不了：C 在 calib_hard 上的评测不完整" ;;
 esac
+if [ "$GATE_ONLY" = 1 ]; then
+  note "只做难度检查（STAGE5_GATE_ONLY=1）：不训练，已用 $(( ($(date +%s) - START) / 60 )) 分钟，打包后停下"
+  package
+  exit 0
+fi
 
-# ---- 6. 先训完全部 6 个 LoRA，再开始 test_hard、test_id 上的任何评测（D16）。P 从 W25 出发，CP 从 WC_s 出发
-for s in "${SEEDS[@]}"; do
+# ---- 6. 先训完全部 LoRA（D16 是 6 个，D17 精简版是 P1、CP1），再开始 test_hard、test_id 上的任何评测。
+#   P 从 W25 出发，CP 从 WC_s 出发
+for s in "${DPO_SEEDS[@]}"; do
   train_one "P$s" "$s" "$W" "$W_FP"
   WC_FP=$(cat "runs/WC$s/fingerprint.txt" 2>/dev/null)
   if [ "$DRY_RUN" != 1 ] && [ -n "$WC_FP" ] && trained dpo "runs/CP$s" "data/stage5/prefs_s$s.trl.jsonl" "$s" "$WC_FP" >/dev/null; then
@@ -381,6 +397,7 @@ done
 eval_row W25 "$TASKS/test_hard.public.jsonl" "$W" "" test_hard
 for s in "${SEEDS[@]}"; do
   eval_row "C$s" "$TASKS/test_hard.public.jsonl" "$W" "runs/C$s/adapter" test_hard
+  case " ${DPO_SEEDS[*]} " in *" $s "*) ;; *) continue ;; esac  # 这个种子不训 P、CP（D17）
   usable "P$s" "$s" "$W_FP" && eval_row "P$s" data/stage5/eval.public.jsonl "$W" "runs/P$s/adapter" test_hard test_id
   check_time
   # 两行都已经跑完（上一次会话）就不用再合并 WC_s，只重新评分
