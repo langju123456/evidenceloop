@@ -128,4 +128,7 @@ def build_training_set(policy: str, seed: int, n_tasks: int, evals: list[dict[st
         "rejects": rejects,
         "reject_counts": dict(Counter(r["reason"] for r in rejects)),
         "corrupted": sum(1 for r in records if r["corruption"]),
+        # the tasks themselves, for code that replays them (data/prefs.py); never written next to the records
+        "tasks": publics,
+        "privates": privates,
     }
