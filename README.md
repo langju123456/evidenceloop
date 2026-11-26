@@ -70,6 +70,7 @@ src/evidenceloop/
   data/                 采样策略、B/C/D 构建、预热数据与达标检查、SFT 导出与 manifest、阶段四的数据与 W+ICL 的题
   train/sft.py          LoRA SFT：loss mask、训练循环、合并成 W
   report/               报告与阶段四的配对对比（数字全部来自评测记录）
+  judge/                裁判模型校准：分层抽样与冻结、盲评表、Ollama 裁判、一致性统计（结果不进 task_success）
   cli.py                el 命令
 scripts/                Mac 快速开始、校准、基线、LoRA 训练与合并、Kaggle 阶段三和阶段四的一键脚本、阶段性提交推送、真实模板检查、逐题查看轨迹、上传 GitHub
 docs/                   决策记录、Kaggle 分步说明
