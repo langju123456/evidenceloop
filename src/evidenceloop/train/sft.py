@@ -162,15 +162,42 @@ def prepare(tokenizer: Any, samples: list[dict[str, Any]], max_len: int) -> tupl
     return examples, skipped
 
 
+def lora_model(cfg: Any, device: str, use_fp16: bool) -> Any:
+    """The base model with a fresh LoRA adapter on it: the base frozen (fp16 on a GPU), the adapter in fp32.
+    Every training run starts here (SFT, and DPO in train/dpo.py), so runs with one seed share their adapter init."""
+    import torch
+    from peft import LoraConfig, get_peft_model
+
+    from evidenceloop.harness.backends import load_causal_lm
+
+    model = load_causal_lm(cfg.base, torch.float16 if use_fp16 else torch.float32).to(device)
+    model.config.use_cache = False
+    if cfg.gradient_checkpointing:
+        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        model.enable_input_require_grads()
+    model = get_peft_model(model, LoraConfig(r=cfg.rank, lora_alpha=cfg.alpha, lora_dropout=cfg.dropout,
+                                             target_modules=cfg.target_modules, task_type="CAUSAL_LM"))
+    for p in model.parameters():  # adapters in fp32 even when the frozen base is fp16
+        if p.requires_grad:
+            p.data = p.data.float()
+    return model
+
+
+def grad_scaler(use_fp16: bool) -> Any:
+    import torch
+
+    try:
+        return torch.amp.GradScaler("cuda", init_scale=INIT_SCALE, enabled=use_fp16)
+    except (AttributeError, TypeError):  # torch < 2.3
+        return torch.cuda.amp.GradScaler(init_scale=INIT_SCALE, enabled=use_fp16)
+
+
 def train(cfg: TrainConfig) -> dict[str, Any]:
     check_no_old_torchao()
     import peft
     import torch
     import transformers
-    from peft import LoraConfig, get_peft_model
     from transformers import AutoTokenizer
-
-    from evidenceloop.harness.backends import load_causal_lm
 
     began = time.time()
     torch.manual_seed(cfg.seed)
@@ -183,24 +210,12 @@ def train(cfg: TrainConfig) -> dict[str, Any]:
     if not examples:
         raise RuntimeError("没有可训练的样本")
 
-    model = load_causal_lm(cfg.base, torch.float16 if use_fp16 else torch.float32).to(device)
-    model.config.use_cache = False
-    if cfg.gradient_checkpointing:
-        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
-        model.enable_input_require_grads()
-    model = get_peft_model(model, LoraConfig(r=cfg.rank, lora_alpha=cfg.alpha, lora_dropout=cfg.dropout,
-                                             target_modules=cfg.target_modules, task_type="CAUSAL_LM"))
-    for p in model.parameters():  # adapters in fp32 even when the frozen base is fp16
-        if p.requires_grad:
-            p.data = p.data.float()
+    model = lora_model(cfg, device, use_fp16)
     params = [p for p in model.parameters() if p.requires_grad]
     trainable = sum(p.numel() for p in params)
     total_params = sum(p.numel() for p in model.parameters())
     optimizer = torch.optim.AdamW(params, lr=cfg.lr, weight_decay=0.0)
-    try:
-        scaler = torch.amp.GradScaler("cuda", init_scale=INIT_SCALE, enabled=use_fp16)
-    except (AttributeError, TypeError):  # torch < 2.3
-        scaler = torch.cuda.amp.GradScaler(init_scale=INIT_SCALE, enabled=use_fp16)
+    scaler = grad_scaler(use_fp16)
     causal_lm = model.get_base_model()
     windows = plan_windows(len(examples), cfg.epochs, cfg.grad_accum, cfg.seed, cfg.max_steps)
     os.makedirs(cfg.out, exist_ok=True)
