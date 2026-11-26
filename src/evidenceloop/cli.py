@@ -15,6 +15,12 @@
                   --warmup-records data/warmup/dose100.records.jsonl
   el stage4 compare --split test_id --row W=runs/W25_stage4/evals_test_id.jsonl \
                   --row B:1=runs/B1_stage4/evals_test_id.jsonl --row C:1=runs/C1_stage4/evals_test_id.jsonl ... --out x.md
+  el judge sample --runs runs                       # freeze the dev/test sample for judge calibration
+  el judge form   --split dev --out /tmp/judge-dev.html
+  el judge reconcile --split dev --submission judge-labels-dev.json --out reports/judge-calib/v1/reply/labels-dev.json
+  el judge run    --split dev --out reports/judge-calib/v1/reply/judge-dev-1.jsonl
+  el judge agree  --split dev --labels reports/judge-calib/v1/reply/labels-dev.json \
+                  --judge reports/judge-calib/v1/reply/judge-dev-1.jsonl
 
 `run` never opens a private file: the model side of the pipeline cannot see answers.
 """
@@ -758,6 +764,55 @@ def main(argv: list[str] | None = None) -> None:
     export.add_argument("--seed", type=int, default=0)
     export.add_argument("--out", required=True)
     export.set_defaults(func=cmd_export)
+
+    # Judge calibration: a judge model's verdicts against human labels. Separate from the verifier: nothing
+    # here feeds task_success.
+    from evidenceloop.judge import agreement as judge_agreement
+    from evidenceloop.judge import items as judge_items
+    from evidenceloop.judge import labels as judge_labels
+    from evidenceloop.judge import rubric as judge_rubric
+    from evidenceloop.judge import run as judge_run
+
+    judge = sub.add_parser("judge").add_subparsers(dest="action", required=True)
+    jsample = judge.add_parser("sample", help="freeze the sample the judge and the labeller will both see")
+    jsample.add_argument("--rubric", default="reply_truthful", choices=sorted(judge_rubric.RUBRICS))
+    jsample.add_argument("--runs", default="runs", help="reply_truthful: directory of <run>/traces.jsonl + evals.jsonl")
+    jsample.add_argument("--dev", type=int, default=judge_items.SIZES["dev"])
+    jsample.add_argument("--test", type=int, default=judge_items.SIZES["test"])
+    jsample.add_argument("--retest", type=int, default=judge_items.SIZES["retest"], help="relabelled a day later, from test")
+    jsample.add_argument("--seed", default=judge_items.SEED)
+    jsample.add_argument("--include-mock", action="store_true", help="also take scripted runs (dry runs only)")
+    jsample.add_argument("--out", help="defaults to benchmarks/judge_calib/v1/reply or .../annual")
+    jsample.set_defaults(func=judge_items.command)
+    jform = judge.add_parser("form", help="render the blind labelling form for one split")
+    jform.add_argument("--split", required=True, choices=["dev", "test", "retest", "all"])
+    jform.add_argument("--out", required=True)
+    jreturned = judge.add_parser("reconcile", help="check a returned label file and store it by item id")
+    jreturned.add_argument("--split", required=True, choices=["dev", "test", "retest", "all"])
+    jreturned.add_argument("--submission", required=True)
+    jreturned.add_argument("--out", required=True, help="new label file; never overwrites")
+    for label_parser in (jform, jreturned):
+        label_parser.set_defaults(func=judge_labels.command)
+    jrun = judge.add_parser("run", help="run the judge on an installed local Ollama tag")
+    jrun.add_argument("--split", required=True, choices=["dev", "test", "all"])
+    jrun.add_argument("--model", default=judge_run.DEFAULT_MODEL)
+    jrun.add_argument("--out", required=True, help="new JSONL archive path; never overwrites")
+    jrun.add_argument("--limit", type=int, default=0, help="dev only: first N items, for a smoke run")
+    jrun.add_argument("--freeze", help="test/all: full preregistration commit SHA")
+    jrun.add_argument("--labels", help="test/all: the reconciled human labels, fixed before the judge runs")
+    jrun.add_argument("--retest-labels", help="test: the reconciled retest labels, if already collected")
+    jrun.set_defaults(func=judge_run.command)
+    jagree = judge.add_parser("agree", help="kappa, confusion matrix, bootstrap interval, McNemar vs the program rule")
+    jagree.add_argument("--split", required=True, choices=["dev", "test", "all"])
+    jagree.add_argument("--labels", required=True)
+    jagree.add_argument("--judge", help="judge output; without it a test split only reports the retest")
+    jagree.add_argument("--retest-labels")
+    jagree.add_argument("--resamples", type=int, default=judge_agreement.BOOTSTRAP)
+    jagree.add_argument("--out", help="also write the JSON here")
+    jagree.set_defaults(func=judge_agreement.command)
+    for judge_parser in (jform, jreturned, jrun, jagree):
+        judge_parser.add_argument("--dataset", default=str(judge_rubric.DATA / "reply"),
+                                  help="frozen sample directory (benchmarks/judge_calib/v1/annual for annual_verdict)")
 
     args = parser.parse_args(argv)
     args.func(args)
