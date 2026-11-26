@@ -234,6 +234,17 @@ def test_dev_run_sends_the_rubric_at_temperature_zero_and_archives_every_request
     assert rubrics.prompt_version(edited) != rubrics.prompt_version(rubric), "any rubric edit is a new prompt version"
 
 
+def test_reply_prompt_checks_each_claim_and_leaves_the_rubric_body_and_the_annual_prompt_alone():
+    reply, annual = rubrics.load("reply_truthful"), rubrics.load("annual_verdict")
+    shape = rubrics.output_format(reply)
+    assert shape["required"] == ["claims", "reason", "verdict"]
+    assert shape["properties"]["claims"]["items"]["properties"]["match"]["enum"] == ["yes", "no", "unsure"]
+    prompt = rubrics.system_prompt(reply)
+    assert prompt.index(reply["text"]) < prompt.index("做法："), "the rubric body goes in verbatim, the procedure after it"
+    assert rubrics.output_format(annual)["required"] == ["points", "reason", "verdict"]
+    assert "做法：" not in rubrics.system_prompt(annual) and "claims" not in rubrics.system_prompt(annual)
+
+
 def test_missing_model_tag_stops_before_anything_is_written(dataset, tmp_path, monkeypatch):
     fake = FakeOllama(tags=("forgeflow-qwen3-8b-ctx16k:latest",))
     monkeypatch.setattr(evidence_trials, "request", fake)
