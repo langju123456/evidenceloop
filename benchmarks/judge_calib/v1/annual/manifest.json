@@ -1,0 +1,32 @@
+{
+  "schema": "judge-calib/1",
+  "rubric": "annual_verdict",
+  "seed": "judge-calib-v1",
+  "sizes": {
+    "all": 26
+  },
+  "splits": [
+    "all"
+  ],
+  "inputs_sha256": {
+    "benchmarks/report_dev/v1/observations.jsonl": "5c2b4fa50eee1d2456e73b7c94d9b80ab3ad52edc37048f7321bbcf86ad3e5cb",
+    "benchmarks/report_dev/v1/cases.json": "056749589ea353beec6f6f6b4887f0faa0c986ffcf36ac99f20a0bf70450a33c",
+    "benchmarks/report_dev/v1/sources.json": "a5ab2a7759d5f7b8c162b0995fb2593a4eb902f2dcdfb3987be529384f887222",
+    "benchmarks/report_dev/v1/review.json": "8fcebfbe9b975c016e22510a1cf0f15da899a027ba53d067d24dd019ba95fe3b",
+    "benchmarks/report_dev/evidence-arms-v1.json": "818a2ce0625068ff3b0ede4fa00a88f5dbe0ee0fbcbfb9b6de4c659808f8d17b",
+    "reports/report-lab/evidence-trials-v1.jsonl": "94d2edf884daca2def914f502be5affa4a46be95ce65851ef31b32c2bde96712"
+  },
+  "sources": {
+    "report_dev_v1": 14,
+    "evidence_trials_v1": 12
+  },
+  "raters": {
+    "program": "report_dev 用 value_pages 评分，D17 用归档的 verdict",
+    "dev_label": "report_dev 的开发标注（review.json），D17 的 12 条没有"
+  },
+  "note": "仓库里现成的全部回答，不切分；簇是题目（case_id），只有 5 个",
+  "files": {
+    "items-all.jsonl": "00abd6dd455a3ac485f425255ff4094ad0215f521d351ebd3e62d24c6b31de43",
+    "key.jsonl": "e393d860594192b4528277d03437232b3dc9b53a5043f17a5262da91cba20d82"
+  }
+}
