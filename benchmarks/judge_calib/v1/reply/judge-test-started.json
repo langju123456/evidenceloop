@@ -1,0 +1,26 @@
+{
+  "schema": "judge-run-started/1",
+  "rubric": "reply_truthful",
+  "split": "test",
+  "freeze_commit": "b8569818fed30a0be3d7e7db79fc5fbdf09cb524",
+  "frozen_sha256": {
+    "benchmarks/judge_calib/v1/rubric-reply-truthful.md": "524e62c18b3bca2b06894ec6e24e69b91da151214462f7fbb32219ff3079d414",
+    "src/evidenceloop/judge/rubric.py": "5931f12106e6cf77c8fc55d90731d8270d703b39ae6023657d352956034e80df",
+    "src/evidenceloop/judge/items.py": "7e61040a3a54f7a80871b02a250f36c16c748629d630fe8d93511d37b05475b8",
+    "src/evidenceloop/judge/labels.py": "029705dea5028be6d3470623a5a41053c6729805abd960825894265b6dabf9ac",
+    "src/evidenceloop/judge/run.py": "3fe22e2702d090845079e06f0d543ad2b441a2b50e8be01321d87517b73f02b1",
+    "src/evidenceloop/judge/agreement.py": "a021375bcef4d643b7292221baf2f45ba540d3ccf829559ce1294d1e23ce5d30",
+    "docs/report-lab/22-judge-calibration-freeze.md": "bec51c299604a1f6d2a44af64f981102530dd2d3c67206b02199895fc4664edc",
+    "benchmarks/judge_calib/v1/reply/manifest.json": "adc794961b862f5d6b7154a383fbb6ab6bcafd2b0a44224a3d5aafd26244cf4c",
+    "benchmarks/judge_calib/v1/reply/key.jsonl": "b03ca458d675a4dedbcf4ced91b4b291e0b0a76c9093b39bcdebc348da467d65",
+    "benchmarks/judge_calib/v1/reply/items-test.jsonl": "24b4dc93c02dab6e4213f26d4c4fd421df06f4bae87848dde2d2091008859b13"
+  },
+  "prompt_version": "a1de28648fbea8f5",
+  "labels_sha256": "11b9860ad21bf4edc65e8489013f460b7f939108ba9579b5f50ef896d7de70f8",
+  "out": "judge-test.jsonl",
+  "retest_labels_sha256": "f4118f40b11a25080447aaf52cbf29906687225dea9e0fa2ef20f489f3c6b492",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "ollama_version": "0.32.1",
+  "started_at": "2026-11-26T08:48:05+00:00"
+}
