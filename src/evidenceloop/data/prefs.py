@@ -193,7 +193,7 @@ def select_pairs(pairs: list[dict[str, Any]], n: int, seed: int) -> list[dict[st
     for tid, indices in by_task.items():
         random.Random(f"prefs:{seed}:{tid}").shuffle(indices)
     taken: list[int] = []
-    for round_ in range(max(len(v) for v in by_task.values())):
+    for round_ in range(max((len(v) for v in by_task.values()), default=0)):
         for indices in by_task.values():
             if round_ < len(indices) and len(taken) < n:
                 taken.append(indices[round_])

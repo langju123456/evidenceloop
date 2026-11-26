@@ -55,7 +55,7 @@ def tiny(tmp_path_factory):
     data = build_training_set("uniform", 11, 2)
     orders = {r["task_id"]: r["demo_order"] for r in data["records"]}
     built = prefs.build_pairs(data["tasks"], data["privates"], orders, prefs.ScriptedSource())
-    pairs = [prefs.to_trl(p) for p in built["pairs"]]
+    pairs = [prefs.to_trl(p) for p in built["pairs"]][:16]  # every turn of one task, and the start of the next
     path = d / "prefs.trl.jsonl"
     path.write_text("\n".join(json.dumps(p, ensure_ascii=False) for p in pairs), encoding="utf-8")
     base = d / "tiny"
@@ -77,7 +77,7 @@ def _reply_logp(model, example):
 
 def test_pair_log_probabilities_and_loss_equal_an_independent_computation(tiny):
     model = load_causal_lm(str(tiny["base"]), torch.float32).eval()
-    for example in tiny["examples"][:6]:
+    for example in tiny["examples"][::6]:  # three pairs, at different turns
         with torch.no_grad():
             chosen, rejected = dpo.pair_logps(model, example, "cpu")
         mine = (chosen.item(), rejected.item())
@@ -101,7 +101,7 @@ def test_the_reference_is_the_model_with_its_adapter_disabled(tiny):
     torch.manual_seed(0)
     model = lora_model(cfg, "cpu", use_fp16=False)
     plain = load_causal_lm(str(tiny["base"]), torch.float32).eval()
-    examples = tiny["examples"][:5]
+    examples = tiny["examples"][::6]
     base_logps = [(_reply_logp(plain, e["chosen"]), _reply_logp(plain, e["rejected"])) for e in examples]
 
     flat = lambda rows: [v for row in rows for v in row]  # noqa: E731
@@ -163,7 +163,8 @@ def test_train_dpo_script_runs_and_moves_toward_chosen(tiny):
     plain = load_causal_lm(str(tiny["base"]), torch.float32).eval()
     assert len(reference["logps"]) == n_pairs
     for example, (chosen, rejected) in list(zip(tiny["examples"], reference["logps"]))[:4]:
-        assert (chosen, rejected) == pytest.approx((_reply_logp(plain, example["chosen"]), _reply_logp(plain, example["rejected"])), abs=1e-3)
+        expected = (_reply_logp(plain, example["chosen"]), _reply_logp(plain, example["rejected"]))
+        assert (chosen, rejected) == pytest.approx(expected, abs=1e-3)
     assert reference["chosen_more_likely"] == sum(1 for c, r in reference["logps"] if c > r)
     assert reference["mean_logp_chosen"] == pytest.approx(sum(c for c, _ in reference["logps"]) / n_pairs, abs=1e-3)
 

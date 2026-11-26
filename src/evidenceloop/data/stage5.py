@@ -26,7 +26,7 @@ from evidenceloop.common import ENV_VERSION, GENERATOR_VERSION, VERIFIER_VERSION
 from evidenceloop.harness.loop import DEFAULT_MAX_TURNS, run_episodes
 from evidenceloop.harness.scripted import ScriptedBackend
 from evidenceloop.report.compare import run_problems
-from evidenceloop.tasks.generator import HARD_SPLITS, TRAIN_TEMPLATES
+from evidenceloop.tasks.generator import TRAIN_TEMPLATES
 from evidenceloop.train.sft import steps_for
 
 from . import prefs, stage4
@@ -133,7 +133,7 @@ def build_seed(seed: int, n_tasks: int, evals: list[dict[str, Any]], exclude: se
     }
 
 
-def seed_summary(seed: int, result: dict[str, Any], trl_sha256: str) -> dict[str, Any]:
+def seed_summary(result: dict[str, Any], trl_sha256: str) -> dict[str, Any]:
     pairs, candidates = result["pairs"], result["candidates"]
     per_task = Counter(Counter(p["task_id"] for p in pairs).values())
     return {

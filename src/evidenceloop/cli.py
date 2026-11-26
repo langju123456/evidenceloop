@@ -15,11 +15,13 @@
                   --warmup-records data/warmup/dose100.records.jsonl
   el stage4 compare --split test_id --row W=runs/W25_stage4/evals_test_id.jsonl \
                   --row B:1=runs/B1_stage4/evals_test_id.jsonl --row C:1=runs/C1_stage4/evals_test_id.jsonl ... --out x.md
-  el stage5 freeze --tasks-dir data/tasks/gen-0.2.1 --exclude-records data/warmup/dose100.records.jsonl data/stage4/B1/records.jsonl ...
+  el stage5 freeze --tasks-dir data/tasks/gen-0.2.1 \
+                  --exclude-records data/warmup/dose100.records.jsonl data/stage4/B1/records.jsonl ...
   el stage5 build --evals runs/W25_train_mining/evals.jsonl --tasks-dir data/tasks/gen-0.2.1 \
                   --warmup-records data/warmup/dose100.records.jsonl
   el stage5 gate  --row C:1=runs/C1_calib/evals_calib_hard.jsonl --row C:2=... --row C:3=... --out reports/stage5_gate.md
-  el stage5 compare --split test_hard --row W=runs/W25_stage5/evals_test_hard.jsonl --row C:1=... --row P:1=... --row CP:1=... --out x.md
+  el stage5 compare --split test_hard --row W=runs/W25_stage5/evals_test_hard.jsonl --row C:1=... --row P:1=... \
+                  --row CP:1=... --out x.md
 
 `run` never opens a private file: the model side of the pipeline cannot see answers.
 """
@@ -665,7 +667,7 @@ def cmd_stage5_build(args: argparse.Namespace) -> None:
         trl_path = os.path.join(args.out, f"prefs_s{seed}.trl.jsonl")
         write_jsonl(trl_path, [prefs.to_trl(p) for p in result["pairs"]])
         write_jsonl(os.path.join(args.out, f"prefs_s{seed}.records.jsonl"), result["pairs"])
-        seeds[seed] = stage5.seed_summary(seed, result, _sha256_file(trl_path))
+        seeds[seed] = stage5.seed_summary(result, _sha256_file(trl_path))
         with open(os.path.join(args.out, f"prefs_s{seed}.manifest.json"), "w", encoding="utf-8") as fh:
             json.dump({"dataset_id": f"prefs_s{seed}", "format": "trl-dpo", "seed": seed, "source": source.describe(),
                        **seeds[seed]}, fh, ensure_ascii=False, indent=2)

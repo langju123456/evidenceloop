@@ -103,8 +103,10 @@ def workdir(tmp_path_factory):
     main(["stage4", "build", "--mining-report", REPORT_W25, "--tasks-dir", str(d / "tasks"), "--warmup-records",
           str(d / "warmup" / "dose3.records.jsonl"), "--seeds", "1", "2", "--n", "8", "--out", str(d / "s4"),
           "--record", str(d / "stage4.json")])
-    trained = [str(d / "warmup" / "dose3.records.jsonl")] + [str(d / "s4" / f"{a}{s}" / "records.jsonl") for s in (1, 2) for a in "BCD"]
-    freeze = ["stage5", "freeze", "--tasks-dir", str(d / "tasks"), "--exclude-records", *trained, "--record", str(d / "frozen_hard.json")]
+    trained = [str(d / "warmup" / "dose3.records.jsonl")]
+    trained += [str(d / "s4" / f"{a}{s}" / "records.jsonl") for s in (1, 2) for a in "BCD"]
+    freeze = ["stage5", "freeze", "--tasks-dir", str(d / "tasks"), "--exclude-records", *trained,
+              "--record", str(d / "frozen_hard.json")]
     main(freeze)
     return {"dir": d, "trained": trained, "freeze": freeze}
 
@@ -128,7 +130,7 @@ def test_freeze_records_checks_and_never_overwrites(workdir, tmp_path, hard):
 
     tasks = tmp_path / "tasks"
     shutil.copytree(d / "tasks", tasks)
-    own = ["stage5", "freeze", "--tasks-dir", str(tasks), "--exclude-records", *workdir["trained"]]
+    own = ["stage5", "freeze", "--tasks-dir", str(tasks), "--exclude-records", *workdir["trained"]]  # the copy's own files
     planted = tmp_path / "planted.records.jsonl"  # a trained task with the content of a hard one
     planted.write_text(json.dumps({"dedup_key": hard["test_hard"][1][0]["dedup_key"], "messages": []}) + "\n", encoding="utf-8")
     with pytest.raises(SystemExit) as stopped:
@@ -138,7 +140,7 @@ def test_freeze_records_checks_and_never_overwrites(workdir, tmp_path, hard):
     path.write_text(path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
     shutil.copy(d / "frozen_hard.json", tmp_path / "b.json")
     with pytest.raises(SystemExit):  # a changed file no longer matches the record, and the record stays
-        main(["stage5", "freeze", "--tasks-dir", str(tasks), "--exclude-records", *workdir["trained"], "--record", str(tmp_path / "b.json")])
+        main([*own, "--record", str(tmp_path / "b.json")])
     assert json.loads((tmp_path / "b.json").read_text(encoding="utf-8")) == record
 
 
@@ -228,7 +230,8 @@ def test_training_problems():
 
 
 def _evals(name, wins, n=50, split="calib_hard", infra=0):
-    return [{"task_id": f"t{i}", "split": split, "bucket": ("F1|all_mV|v4-5|transient|plain" if i % 2 else "F2|mixed|v4-5|transient|sci"),
+    buckets = ("F2|mixed|v4-5|transient|sci", "F1|all_mV|v4-5|transient|plain")
+    return [{"task_id": f"t{i}", "split": split, "bucket": buckets[i % 2],
              "inference_config_hash": name, "task_success": i < wins,
              "termination": "infra_error" if i < infra else "final_answer"} for i in range(n)]
 
