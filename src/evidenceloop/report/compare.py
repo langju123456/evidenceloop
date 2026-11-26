@@ -1,4 +1,5 @@
-"""D14's comparisons and verdicts, computed from eval records only (nothing typed by hand).
+"""D14's comparisons and verdicts, computed from eval records only (nothing typed by hand). Stage 5 (D16) uses the
+same rule with its own arms and hypotheses: which arms, which comparisons and which split is primary is a Design.
 
 For a comparison X vs Y on one split: every row must be one complete run (all tasks of the split, each once, one
 inference configuration, no infra_error); a row that is not is reported as missing and left out. A seed counts
@@ -15,6 +16,7 @@ from __future__ import annotations
 
 import random
 from collections import defaultdict
+from dataclasses import dataclass
 from typing import Any
 
 from evidenceloop.data.selection import is_infra_error
@@ -32,6 +34,47 @@ ARM_ORDER = ("A", "W", "B", "C", "D", "ICL")
 MIN_SEEDS = 2
 BOOTSTRAP = 10_000
 PRIMARY_SPLIT = "test_id"
+
+
+@dataclass(frozen=True)
+class Design:
+    """One stage's report: its arms, its comparisons, the split whose verdicts count, and the header lines."""
+    title: str  # takes {split}
+    primary_split: str
+    primary_note: str
+    rule: str  # where the verdict rule is written down
+    arms_note: str
+    comparisons: tuple[tuple[str, str, str, str], ...]
+    arm_order: tuple[str, ...]
+
+
+STAGE4 = Design(
+    title="阶段四：{split} 上的对比（D14）",
+    primary_split=PRIMARY_SPLIT,
+    primary_note="主指标是 test_id 上的 task_success；只有 test_id 上 H1 的结论回答主问题。",
+    rule="D14",
+    arms_note="W = W25（D13）；B、C、D 都是从 W 出发新训的 LoRA，数字是种子。",
+    comparisons=COMPARISONS,
+    arm_order=ARM_ORDER,
+)
+STAGE5 = Design(
+    title="阶段五：{split} 上的对比（D16）",
+    primary_split="test_hard",
+    primary_note="主指标是 test_hard 上的 task_success；只有 test_hard 上 H4 的结论回答主问题。",
+    rule="D16，规则同 D14",
+    arms_note="W = W25（D13）；C 是阶段四训好的 LoRA（只做 SFT）；P 是在 W 上只用偏好对训的 LoRA（只做 DPO）；"
+              "CP 是把 C 合并进 W 之后，用同一份偏好对再训的 LoRA（SFT 之后接 DPO）；数字是种子。"
+              "CP 比 C 多训了一段，H4 分不开偏好损失和多训一段各自的作用（D16）。",
+    comparisons=(
+        ("H4（主假设）", "CP", "C", "SFT 之后再接 DPO vs 只做 SFT"),
+        ("H5", "P", "C", "只做 DPO vs 只做 SFT（同一批题，同样多的序列和步数）"),
+        ("H6", "CP", "P", "DPO 之前先做 SFT vs 只做 DPO"),
+        ("相对 W", "C", "W", "C 相对起点 W 的提升"),
+        ("相对 W", "P", "W", "P 相对起点 W 的提升"),
+        ("相对 W", "CP", "W", "CP 相对起点 W 的提升"),
+    ),
+    arm_order=("W", "C", "P", "CP"),
+)
 
 
 def run_problems(evals: list[dict[str, Any]], split: str, expected_n: int) -> list[str]:
@@ -120,22 +163,22 @@ def _group(bucket: str) -> str:
 
 
 def render(split: str, rows: dict[str, dict[Any, list[dict[str, Any]] | None]], expected_n: int,
-           title: str | None = None, resamples: int = BOOTSTRAP) -> str:
+           title: str | None = None, resamples: int = BOOTSTRAP, design: Design = STAGE4) -> str:
     usable, missing = load_rows(rows, split, expected_n)
-    primary = split == PRIMARY_SPLIT
-    lines = [f"# {title or f'阶段四：{split} 上的对比（D14）'}", ""]
-    lines.append("- 主指标是 test_id 上的 task_success；只有 test_id 上 H1 的结论回答主问题。"
-                 + ("" if primary else f"本表是 {split}，只作描述，不下结论。"))
-    lines.append(f"- 判定（D14）：按题配对，差值取各种子的平均；95% 区间来自对题目的 {resamples} 次自助重抽（种子 0）。"
+    primary = split == design.primary_split
+    arm_order = design.arm_order
+    lines = [f"# {title or design.title.format(split=split)}", ""]
+    lines.append(f"- {design.primary_note}" + ("" if primary else f"本表是 {split}，只作描述，不下结论。"))
+    lines.append(f"- 判定（{design.rule}）：按题配对，差值取各种子的平均；95% 区间来自对题目的 {resamples} 次自助重抽（种子 0）。"
                  "区间在 0 以上且每个种子都赢，记为“X 更好”；区间在 0 以下且每个种子都输，记为“X 更差”；"
                  f"其余“分不出”；两边都完整的种子少于 {MIN_SEEDS} 个不判定。")
-    lines.append("- W = W25（D13）；B、C、D 都是从 W 出发新训的 LoRA，数字是种子。")
+    lines.append(f"- {design.arms_note}")
     lines.append("")
 
     seeds = sorted({s for runs in rows.values() for s in runs if s is not None})
     lines += ["## 成功数", "", "| 行 | " + " | ".join(f"种子 {s}" for s in seeds) + " | 单次 / 平均 |",
               "| --- |" + " --- |" * (len(seeds) + 1)]
-    for arm in [a for a in ARM_ORDER if a in rows] + [a for a in rows if a not in ARM_ORDER]:
+    for arm in [a for a in arm_order if a in rows] + [a for a in rows if a not in arm_order]:
         runs = rows[arm]
         cells = []
         for s in seeds:
@@ -154,7 +197,7 @@ def render(split: str, rows: dict[str, dict[Any, list[dict[str, Any]] | None]], 
 
     lines += ["", "## 对比", "", "| 编号 | X − Y | 含义 | 用到的种子 | 各种子的差（百分点） | 平均差（百分点） | 95% 区间 | 结论 |",
               "| --- | --- | --- | --- | --- | --- | --- | --- |"]
-    for label, x, y, meaning in COMPARISONS:
+    for label, x, y, meaning in design.comparisons:
         if x not in rows or y not in rows:
             continue
         xs, ys = usable.get(x, {}), usable.get(y, {})
@@ -181,7 +224,7 @@ def render(split: str, rows: dict[str, dict[Any, list[dict[str, Any]] | None]], 
         for success in runs.values():
             for task, ok in success.items():
                 groups[_group(buckets[task])][arm].append(ok)
-    arms = [a for a in ARM_ORDER if a in usable] + [a for a in usable if a not in ARM_ORDER]
+    arms = [a for a in arm_order if a in usable] + [a for a in usable if a not in arm_order]
     if groups:
         lines += ["", "## 按组（单位档｜题型）的成功率，各种子合并", "", "| 组 | 题数 | " + " | ".join(arms) + " |",
                   "| --- | --- |" + " --- |" * len(arms)]

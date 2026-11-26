@@ -15,6 +15,11 @@
                   --warmup-records data/warmup/dose100.records.jsonl
   el stage4 compare --split test_id --row W=runs/W25_stage4/evals_test_id.jsonl \
                   --row B:1=runs/B1_stage4/evals_test_id.jsonl --row C:1=runs/C1_stage4/evals_test_id.jsonl ... --out x.md
+  el stage5 freeze --tasks-dir data/tasks/gen-0.2.1 --exclude-records data/warmup/dose100.records.jsonl data/stage4/B1/records.jsonl ...
+  el stage5 build --evals runs/W25_train_mining/evals.jsonl --tasks-dir data/tasks/gen-0.2.1 \
+                  --warmup-records data/warmup/dose100.records.jsonl
+  el stage5 gate  --row C:1=runs/C1_calib/evals_calib_hard.jsonl --row C:2=... --row C:3=... --out reports/stage5_gate.md
+  el stage5 compare --split test_hard --row W=runs/W25_stage5/evals_test_hard.jsonl --row C:1=... --row P:1=... --row CP:1=... --out x.md
 
 `run` never opens a private file: the model side of the pipeline cannot see answers.
 """
@@ -497,21 +502,207 @@ def cmd_stage4_build(args: argparse.Namespace) -> None:
     print(f"记录写入 {args.record}")
 
 
-def cmd_stage4_compare(args: argparse.Namespace) -> None:
-    from evidenceloop.report.compare import render
-
+def _rows(specs: list[str]) -> dict[str, dict[Any, list[dict[str, Any]] | None]]:
+    """--row ARM=file or ARM:SEED=file; a file that does not exist is a row that was not run (None)."""
     rows: dict[str, dict[Any, list[dict[str, Any]] | None]] = {}
-    for spec in args.row:
+    for spec in specs:
         name, sep, path = spec.partition("=")
         arm, _, seed = name.partition(":")
         if not sep or not arm or (seed and not seed.isdigit()):
             sys.exit(f"--row 的写法是 组=文件 或 组:种子=文件，收到 {spec}")
         rows.setdefault(arm, {})[int(seed) if seed else None] = _read_jsonl(path) if os.path.exists(path) else None
-    expected = args.expected_n or FREEZE_SIZES[args.split]
-    text = render(args.split, rows, expected, args.title, args.resamples)
-    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
-    with open(args.out, "w", encoding="utf-8") as fh:
+    return rows
+
+
+def _write_text(path: str, text: str) -> None:
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
         fh.write(text)
+
+
+def cmd_stage4_compare(args: argparse.Namespace) -> None:
+    from evidenceloop.report.compare import render
+
+    expected = args.expected_n or FREEZE_SIZES[args.split]
+    text = render(args.split, _rows(args.row), expected, args.title, args.resamples)
+    _write_text(args.out, text)
+    print(text)
+
+
+def _check_or_write_record(path: str, record: dict[str, Any], ignore: tuple[str, ...] = ()) -> None:
+    """Write the record the first time; afterwards only compare (the record is never overwritten)."""
+    from evidenceloop.data.stage4 import record_diffs
+
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as fh:
+            old = json.load(fh)
+        diffs = [d for d in record_diffs(old, record) if d.split(".")[0] not in ignore]
+        if diffs:
+            sys.exit(f"和 {path} 对不上：{', '.join(diffs[:8])}（记录不会被覆盖）")
+        print(f"和 {path} 一致")
+        return
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(record, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    print(f"记录写入 {path}")
+
+
+def _record_keys(paths: list[str]) -> dict[str, set[str]]:
+    """The dedup keys in records files (warm-up, stage 4): tasks that were trained on."""
+    keys = {}
+    for path in paths:
+        if not os.path.exists(path):
+            sys.exit(f"找不到 {path}")
+        found = {r["dedup_key"] for r in _read_jsonl(path) if r.get("dedup_key")}
+        if not found:
+            sys.exit(f"{path} 里没有 dedup_key")
+        keys[path] = found
+    return keys
+
+
+def cmd_stage5_freeze(args: argparse.Namespace) -> None:
+    """D16: generate test_hard and calib_hard once (existing files are never overwritten), check them against the four
+    official splits and every task already trained on, and record the hashes in configs/frozen_hard.json. A later run
+    (Kaggle, a fresh clone) regenerates the files and checks them against that record."""
+    from datetime import date
+
+    from evidenceloop.data import stage4, stage5
+    from evidenceloop.data.warmup import frozen_dedup_keys
+    from evidenceloop.tasks.generator import HARD_SPLITS, generate_split
+
+    try:
+        keys = frozen_dedup_keys(args.tasks_dir)
+    except FileNotFoundError as err:
+        sys.exit(str(err))
+    trained = _record_keys(args.exclude_records)
+    keys.update(trained)
+    checked = {name: len(found) for name, found in keys.items()}
+    trained_ids = set().union(*(stage4.resource_ids(r) for path in trained for r in _read_jsonl(path)))
+    splits = {}
+    for split in HARD_SPLITS:
+        public = os.path.join(args.tasks_dir, f"{split}.public.jsonl")
+        private = os.path.join(args.tasks_dir, f"{split}.private.jsonl")
+        if not os.path.exists(public):
+            publics, privates, rejects = generate_split(split, stage5.HARD_SIZES[split])
+            write_jsonl(public, publics)
+            write_jsonl(private, privates)
+            write_jsonl(os.path.join(args.tasks_dir, f"{split}.rejects.jsonl"), rejects)
+        pubs, privs = _read_jsonl(public), _read_jsonl(private)
+        problems = stage5.hard_problems(split, pubs, privs)
+        if problems:
+            sys.exit("不能冻结：" + "；".join(problems[:5]))
+        keys[split] = {p["dedup_key"] for p in privs}
+        splits[split] = {
+            "n": len(pubs),
+            "public_sha256": _sha256_file(public),
+            "private_sha256": _sha256_file(private),
+            "reference_turns": stage5.reference_turns(pubs),
+            # not a leak of content (the rules and rows behind an id are drawn per task), recorded as it is (D16)
+            "tasks_sharing_a_resource_id_with_trained_tasks": sum(1 for t in pubs if stage4.resource_ids(t) & trained_ids),
+        }
+    overlaps = stage5.key_overlaps(keys, HARD_SPLITS)
+    if overlaps:
+        sys.exit("不能冻结：" + "；".join(overlaps))
+    for split, info in splits.items():
+        print(f"{split:13s} {info['n']:4d} 道  {info['public_sha256'][:12]}  参考解法的轮数 {info['reference_turns']}")
+    print(f"和 {len(checked)} 组题按去重键比对过，没有重复")
+    _check_or_write_record(args.record, stage5.freeze_record(args.tasks_dir, splits, checked, date.today().isoformat()),
+                           ignore=("frozen_at",))
+
+
+def cmd_stage5_build(args: argparse.Namespace) -> None:
+    """D16: the preference pairs for P and CP from C's own tasks, per seed, and the evaluation task file; recorded in
+    configs/stage5.json the first time, checked against it on every later run."""
+    from evidenceloop.data import prefs, stage4, stage5
+    from evidenceloop.data.warmup import FROZEN_SPLITS, frozen_dedup_keys
+    from evidenceloop.tasks.generator import HARD_SPLITS
+
+    if bool(args.evals) == bool(args.mining_report):
+        sys.exit("--evals（W25 在 train_mining 上的评测）和 --mining-report（只用于没有 GPU 的预演）给一个")
+    _require(args.evals or args.mining_report, args.warmup_records, args.stage4_record, args.hard_record)
+    try:
+        evals = _read_jsonl(args.evals) if args.evals else stage4.evals_from_check_report(args.mining_report)
+        mining = stage4.mining_summary(evals)
+        frozen = frozen_dedup_keys(args.tasks_dir, FROZEN_SPLITS + HARD_SPLITS)
+    except (ValueError, FileNotFoundError) as err:
+        sys.exit(f"不能构建阶段五的数据：{err}")
+    warm = {r["dedup_key"] for r in _read_jsonl(args.warmup_records) if r.get("dedup_key")}
+    if not warm:
+        sys.exit(f"{args.warmup_records} 里没有 dedup_key")
+    exclude = set().union(*frozen.values()) | warm  # every frozen split, the two hard ones included (D16)
+    with open(args.stage4_record, encoding="utf-8") as fh:
+        stage4_record = json.load(fh)
+    with open(args.hard_record, encoding="utf-8") as fh:
+        hard_record = json.load(fh)
+    hard = {}
+    for split in HARD_SPLITS:
+        info = hard_record["splits"][split]
+        same = all(_sha256_file(os.path.join(args.tasks_dir, f"{split}.{part}.jsonl")) == info[f"{part}_sha256"]
+                   for part in ("public", "private"))
+        if not same:
+            sys.exit(f"{split} 和 {args.hard_record} 对不上：先运行 el stage5 freeze")
+        hard[split] = {"n": info["n"], "public_sha256": info["public_sha256"]}
+
+    os.makedirs(args.out, exist_ok=True)
+    eval_path = os.path.join(args.out, "eval.public.jsonl")
+    eval_tasks = [t for split in stage5.EVAL_SPLITS for t in _read_jsonl(os.path.join(args.tasks_dir, f"{split}.public.jsonl"))]
+    write_jsonl(eval_path, eval_tasks)
+    eval_files = {"eval.public.jsonl": {"tasks": len(eval_tasks), "sha256": _sha256_file(eval_path)}}
+
+    source = prefs.ScriptedSource()
+    seeds = {}
+    for seed in args.seeds:
+        expected = stage4_record.get("per_seed", {}).get(str(seed))
+        if expected is None or stage4_record.get("n_tasks") != args.n:
+            sys.exit(f"{args.stage4_record} 里没有种子 {seed}、每组 {args.n} 道题的记录")
+        try:
+            result = stage5.build_seed(seed, args.n, evals, exclude, source)
+        except ValueError as err:
+            sys.exit(f"种子 {seed}：{err}")
+        if result["c_trl_sha256"] != expected["trl_sha256"][f"C{seed}"] or result["c_samples"] != expected["samples_per_arm"]:
+            sys.exit(f"种子 {seed}：重新构建的 C{seed} 和 {args.stage4_record} 对不上，偏好对就不是来自 C{seed} 训练用的那批题")
+        trl_path = os.path.join(args.out, f"prefs_s{seed}.trl.jsonl")
+        write_jsonl(trl_path, [prefs.to_trl(p) for p in result["pairs"]])
+        write_jsonl(os.path.join(args.out, f"prefs_s{seed}.records.jsonl"), result["pairs"])
+        seeds[seed] = stage5.seed_summary(seed, result, _sha256_file(trl_path))
+        with open(os.path.join(args.out, f"prefs_s{seed}.manifest.json"), "w", encoding="utf-8") as fh:
+            json.dump({"dataset_id": f"prefs_s{seed}", "format": "trl-dpo", "seed": seed, "source": source.describe(),
+                       **seeds[seed]}, fh, ensure_ascii=False, indent=2)
+        info = seeds[seed]
+        print(f"种子 {seed}：C{seed} 的 {info['tasks']} 道题和阶段四一致；候选 {info['candidate_pairs']} 对，取 {info['pairs']} 对"
+              f"（{info['optimizer_steps']} 步），{info['trl_sha256'][:12]}")
+    excluded = {**{split: len(found) for split, found in frozen.items()}, "warmup": len(warm)}
+    record = stage5.stage5_record(mining, seeds, excluded, source.describe(), hard, eval_files, args.n)
+    _check_or_write_record(args.record, record)
+
+
+def cmd_stage5_gate(args: argparse.Namespace) -> None:
+    """D16's difficulty check. Exit 0: go on. Exit 3: the split cannot tell the arms apart, do not train."""
+    from evidenceloop.data import stage5
+
+    rows = _rows(args.row)
+    if set(rows) != {"C"}:
+        sys.exit("难度检查只看 C 的结果：--row C:种子=文件")
+    try:
+        result = stage5.gate(rows["C"], tuple(args.seeds), args.expected_n)
+    except ValueError as err:
+        sys.exit(f"不能做难度检查：{err}")
+    text = stage5.render_gate(result)
+    print(text)
+    if args.out:
+        _write_text(args.out, text)
+    if not result["passed"]:
+        sys.exit(3)
+
+
+def cmd_stage5_compare(args: argparse.Namespace) -> None:
+    from evidenceloop.data.stage5 import HARD_SIZES
+    from evidenceloop.report.compare import STAGE5, render
+
+    expected = args.expected_n or {**FREEZE_SIZES, **HARD_SIZES}[args.split]
+    text = render(args.split, _rows(args.row), expected, args.title, args.resamples, design=STAGE5)
+    _write_text(args.out, text)
     print(text)
 
 
@@ -619,6 +810,40 @@ def main(argv: list[str] | None = None) -> None:
     s4cmp.add_argument("--title")
     s4cmp.add_argument("--out", required=True)
     s4cmp.set_defaults(func=cmd_stage4_compare)
+
+    stage5_cmd = sub.add_parser("stage5").add_subparsers(dest="action", required=True)
+    s5freeze = stage5_cmd.add_parser("freeze", help="D16: generate, check and record test_hard and calib_hard")
+    s5freeze.add_argument("--tasks-dir", required=True, help="the frozen splits; the two new ones are written next to them")
+    s5freeze.add_argument("--exclude-records", nargs="+", required=True,
+                          help="records of every task already trained on (warm-up, stage 4): none may match a hard task")
+    s5freeze.add_argument("--record", default="configs/frozen_hard.json")
+    s5freeze.set_defaults(func=cmd_stage5_freeze)
+    s5build = stage5_cmd.add_parser("build", help="D16: preference pairs from C's tasks, and the evaluation task file")
+    s5build.add_argument("--evals", help="W25's evals on all of train_mining (D13)")
+    s5build.add_argument("--mining-report", help="CPU dry run only: the per-group table of a warm-up check report")
+    s5build.add_argument("--tasks-dir", required=True, help="the frozen splits, test_hard and calib_hard included")
+    s5build.add_argument("--warmup-records", required=True, help="every warm-up task (dose100.records.jsonl)")
+    s5build.add_argument("--stage4-record", default="configs/stage4.json", help="C's training files must hash to this")
+    s5build.add_argument("--hard-record", default="configs/frozen_hard.json")
+    s5build.add_argument("--seeds", type=int, nargs="+", default=list(SEEDS))
+    s5build.add_argument("--n", type=int, default=N_TASKS)
+    s5build.add_argument("--out", default="data/stage5")
+    s5build.add_argument("--record", default="configs/stage5.json")
+    s5build.set_defaults(func=cmd_stage5_build)
+    s5gate = stage5_cmd.add_parser("gate", help="D16: is calib_hard between the floor and the ceiling for C")
+    s5gate.add_argument("--row", action="append", required=True, help="C:SEED=evals.jsonl, C's run on calib_hard")
+    s5gate.add_argument("--seeds", type=int, nargs="+", default=list(SEEDS))
+    s5gate.add_argument("--expected-n", type=int, default=50)
+    s5gate.add_argument("--out")
+    s5gate.set_defaults(func=cmd_stage5_gate)
+    s5cmp = stage5_cmd.add_parser("compare", help="D16's paired comparisons and verdicts on one split")
+    s5cmp.add_argument("--split", required=True, choices=["test_hard", "test_id", "calib_hard"])
+    s5cmp.add_argument("--row", action="append", required=True, help="ARM=evals.jsonl or ARM:SEED=evals.jsonl")
+    s5cmp.add_argument("--expected-n", type=int, default=0)
+    s5cmp.add_argument("--resamples", type=int, default=10_000)
+    s5cmp.add_argument("--title")
+    s5cmp.add_argument("--out", required=True)
+    s5cmp.set_defaults(func=cmd_stage5_compare)
 
     export = sub.add_parser("export").add_subparsers(dest="action", required=True).add_parser("sft")
     export.add_argument("--records", nargs="+", required=True)

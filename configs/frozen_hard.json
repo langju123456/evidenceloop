@@ -1,0 +1,81 @@
+{
+  "decision": "D16",
+  "frozen_at": "2026-11-26",
+  "generator_version": "gen-0.2.1",
+  "env_version": "env-0.2.1",
+  "verifier_version": "ver-0.1.6",
+  "tasks_dir": "data/tasks/gen-0.2.1",
+  "definition": {
+    "knobs": {
+      "template": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "schema": [
+        "S1",
+        "S2"
+      ],
+      "units": [
+        "all_mV",
+        "mixed"
+      ],
+      "n_versions": [
+        4,
+        5
+      ],
+      "error": [
+        "transient"
+      ],
+      "distractors": [
+        3,
+        4
+      ]
+    },
+    "note": "只用训练域已有的模板、表结构、单位和临时故障；没有简单档，规则 4–5 个版本，3–4 条干扰备注，每道题注入一次临时故障。题型、数字格式、行数和训练域一样。"
+  },
+  "checks": {
+    "no_duplicates_with_frozen_splits": true,
+    "no_duplicates_with_training_tasks": true,
+    "knobs_within_definition": true,
+    "reference_solves_every_task_in_both_orders": true
+  },
+  "dedup_keys_checked_against": {
+    "train_mining": 200,
+    "validation": 50,
+    "test_id": 150,
+    "test_ood": 150,
+    "data/warmup/dose100.records.jsonl": 100,
+    "data/stage4/B1/records.jsonl": 100,
+    "data/stage4/C1/records.jsonl": 100,
+    "data/stage4/D1/records.jsonl": 100,
+    "data/stage4/B2/records.jsonl": 100,
+    "data/stage4/C2/records.jsonl": 100,
+    "data/stage4/D2/records.jsonl": 100,
+    "data/stage4/B3/records.jsonl": 100,
+    "data/stage4/C3/records.jsonl": 100,
+    "data/stage4/D3/records.jsonl": 100
+  },
+  "splits": {
+    "test_hard": {
+      "n": 150,
+      "public_sha256": "56f6b56b1aac9a0bf9b3da96542658811d1ea98592bd12b1f4db401e09d0258f",
+      "private_sha256": "1a098ff2fc6546477bdeec7fee3427040eb78193e0098a03b43ef6195f2aac37",
+      "reference_turns": {
+        "9": 150
+      },
+      "tasks_sharing_a_resource_id_with_trained_tasks": 115
+    },
+    "calib_hard": {
+      "n": 50,
+      "public_sha256": "30ca74bd1949331afd035a7e8149fed81066a0f647f0bcb04c165b2ab54928e1",
+      "private_sha256": "0dddca5a481907d56bd2377e325cdcf1a62c1238233b678333a531a6891f3fe8",
+      "reference_turns": {
+        "9": 50
+      },
+      "tasks_sharing_a_resource_id_with_trained_tasks": 38
+    }
+  },
+  "reproducibility": "data/ 不进版本库；题目由生成器确定性生成，el stage5 freeze 重新生成后哈希应与这里一致。test_hard 在阶段五的训练全部结束之前保持密封；calib_hard 只用于难度检查。"
+}

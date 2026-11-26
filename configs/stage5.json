@@ -1,0 +1,328 @@
+{
+  "decision": "D16",
+  "generator_version": "gen-0.2.1",
+  "env_version": "env-0.2.1",
+  "verifier_version": "ver-0.1.6",
+  "start": "W25（D13）",
+  "arms": {
+    "C": "阶段四训好的 C：只做 SFT",
+    "P": "只做 DPO：在 W25 上新建 LoRA",
+    "CP": "SFT 之后接 DPO：C 合并进 W25，再新建 LoRA，偏好对和 P 相同"
+  },
+  "n_tasks": 100,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "source": {
+    "source": "scripted",
+    "modes": [
+      "no_convert",
+      "partial_convert",
+      "reverse_convert",
+      "skip_filter",
+      "old_version",
+      "wrong_cite",
+      "wrong_dataset",
+      "no_save_claim",
+      "two_drafts",
+      "publish",
+      "fake_notes",
+      "fake_notes_wrong",
+      "round_coarse",
+      "transcribe_wrong",
+      "guess_version",
+      "extra_wrong_stat",
+      "all_stats",
+      "keep_only_ok",
+      "inverted_filter"
+    ]
+  },
+  "pairs_rule": "每个种子取 C 对齐后样本数的一半（向下取整）；每道题的候选对按固定随机顺序，按题轮转取满",
+  "training": {
+    "lr": 0.0001,
+    "epochs": 1,
+    "rank": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "grad_accum": 8,
+    "warmup_steps": 5,
+    "max_len": 8192,
+    "max_steps": 0,
+    "fp32": false,
+    "gradient_checkpointing": true,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "beta": 0.1
+  },
+  "gate": {
+    "split": "calib_hard",
+    "rows": "C",
+    "success_range": [
+      0.2,
+      0.9
+    ]
+  },
+  "mining": {
+    "success": 131,
+    "n": 200,
+    "shift": 0.159295,
+    "groups": {
+      "all_V|F1": {
+        "success": 30,
+        "n": 31
+      },
+      "all_V|F2": {
+        "success": 31,
+        "n": 35
+      },
+      "all_mV|F1": {
+        "success": 18,
+        "n": 34
+      },
+      "all_mV|F2": {
+        "success": 14,
+        "n": 36
+      },
+      "mixed|F1": {
+        "success": 21,
+        "n": 36
+      },
+      "mixed|F2": {
+        "success": 17,
+        "n": 28
+      }
+    }
+  },
+  "excluded_from": {
+    "train_mining": 200,
+    "validation": 50,
+    "test_id": 150,
+    "test_ood": 150,
+    "test_hard": 150,
+    "calib_hard": 50,
+    "warmup": 100
+  },
+  "hard_splits": {
+    "test_hard": {
+      "n": 150,
+      "public_sha256": "56f6b56b1aac9a0bf9b3da96542658811d1ea98592bd12b1f4db401e09d0258f"
+    },
+    "calib_hard": {
+      "n": 50,
+      "public_sha256": "30ca74bd1949331afd035a7e8149fed81066a0f647f0bcb04c165b2ab54928e1"
+    }
+  },
+  "per_seed": {
+    "1": {
+      "c_trl_sha256": "a4bfc983596ca123e5c3e9c48a393455960b4e52c68ec5de6131f26bd81727f8",
+      "c_samples": 814,
+      "tasks": 100,
+      "attempts": 1900,
+      "passed_gate": 434,
+      "candidate_pairs": 1372,
+      "reject_counts": {},
+      "pairs": 407,
+      "sequences": 814,
+      "optimizer_steps": 51,
+      "pairs_per_task": {
+        "4": 93,
+        "5": 7
+      },
+      "tasks_with_pairs": 100,
+      "composition": {
+        "by_label": {
+          "extra_wrong_stat": 23,
+          "guess_version": 25,
+          "inverted_filter": 30,
+          "keep_only_ok": 31,
+          "no_convert": 27,
+          "no_save_claim": 29,
+          "old_version": 6,
+          "publish": 25,
+          "reverse_convert": 32,
+          "round_coarse": 35,
+          "skip_filter": 26,
+          "transcribe_wrong": 31,
+          "two_drafts": 37,
+          "wrong_cite": 14,
+          "wrong_dataset": 36
+        },
+        "by_rejected_status": {
+          "failed:calculation_error": 66,
+          "failed:dependency_error": 45,
+          "failed:duplicate_write": 37,
+          "failed:filter_error": 87,
+          "failed:source_version_error": 31,
+          "failed:unauthorized_write": 25,
+          "failed:unit_error": 57,
+          "failed:unknown": 2,
+          "failed:unsupported_claim": 29,
+          "failed:unsupported_number": 23,
+          "ungrounded": 5
+        },
+        "by_turn": {
+          "1": 25,
+          "2": 6,
+          "3": 30,
+          "4": 44,
+          "5": 83,
+          "6": 34,
+          "7": 77,
+          "8": 82,
+          "9": 26
+        }
+      },
+      "supervised_chars": {
+        "chosen": 87841,
+        "rejected": 88531
+      },
+      "trl_sha256": "0f9b2c61ea864693fb12ac73fe74e9ab51d538bbaf9b790d4e667ca7faf7d29c"
+    },
+    "2": {
+      "c_trl_sha256": "d35b3d57e1a24ee3da9e8f5ce4c87ff72ea39b012e1e0d036315d69f8315fe8f",
+      "c_samples": 818,
+      "tasks": 100,
+      "attempts": 1900,
+      "passed_gate": 398,
+      "candidate_pairs": 1405,
+      "reject_counts": {},
+      "pairs": 409,
+      "sequences": 818,
+      "optimizer_steps": 52,
+      "pairs_per_task": {
+        "4": 91,
+        "5": 9
+      },
+      "tasks_with_pairs": 100,
+      "composition": {
+        "by_label": {
+          "extra_wrong_stat": 26,
+          "guess_version": 26,
+          "inverted_filter": 25,
+          "keep_only_ok": 31,
+          "no_convert": 37,
+          "no_save_claim": 29,
+          "old_version": 15,
+          "publish": 27,
+          "reverse_convert": 25,
+          "round_coarse": 27,
+          "skip_filter": 33,
+          "transcribe_wrong": 31,
+          "two_drafts": 28,
+          "wrong_cite": 23,
+          "wrong_dataset": 26
+        },
+        "by_rejected_status": {
+          "failed:calculation_error": 58,
+          "failed:dependency_error": 35,
+          "failed:duplicate_write": 28,
+          "failed:filter_error": 89,
+          "failed:source_version_error": 50,
+          "failed:unauthorized_write": 27,
+          "failed:unit_error": 61,
+          "failed:unknown": 1,
+          "failed:unsupported_claim": 29,
+          "failed:unsupported_number": 26,
+          "ungrounded": 5
+        },
+        "by_turn": {
+          "1": 26,
+          "2": 15,
+          "3": 25,
+          "4": 31,
+          "5": 85,
+          "6": 42,
+          "7": 64,
+          "8": 88,
+          "9": 33
+        }
+      },
+      "supervised_chars": {
+        "chosen": 89433,
+        "rejected": 88354
+      },
+      "trl_sha256": "57a699c6df404479bee91dca03576bac15c07beb7c403c441bf94196fb55278e"
+    },
+    "3": {
+      "c_trl_sha256": "f36742975b77cd46eb81b9d5eb471a49f7ee19c0d80e2655f939fe17436246bc",
+      "c_samples": 815,
+      "tasks": 100,
+      "attempts": 1900,
+      "passed_gate": 426,
+      "candidate_pairs": 1380,
+      "reject_counts": {},
+      "pairs": 407,
+      "sequences": 814,
+      "optimizer_steps": 51,
+      "pairs_per_task": {
+        "4": 93,
+        "5": 7
+      },
+      "tasks_with_pairs": 100,
+      "composition": {
+        "by_label": {
+          "extra_wrong_stat": 27,
+          "guess_version": 30,
+          "inverted_filter": 22,
+          "keep_only_ok": 39,
+          "no_convert": 38,
+          "no_save_claim": 31,
+          "old_version": 16,
+          "publish": 34,
+          "reverse_convert": 28,
+          "round_coarse": 27,
+          "skip_filter": 25,
+          "transcribe_wrong": 30,
+          "two_drafts": 25,
+          "wrong_cite": 13,
+          "wrong_dataset": 22
+        },
+        "by_rejected_status": {
+          "failed:calculation_error": 57,
+          "failed:dependency_error": 37,
+          "failed:duplicate_write": 25,
+          "failed:filter_error": 86,
+          "failed:source_version_error": 39,
+          "failed:unauthorized_write": 34,
+          "failed:unit_error": 65,
+          "failed:unknown": 1,
+          "failed:unsupported_claim": 31,
+          "failed:unsupported_number": 27,
+          "ungrounded": 5
+        },
+        "by_turn": {
+          "1": 30,
+          "2": 16,
+          "3": 15,
+          "4": 43,
+          "5": 71,
+          "6": 54,
+          "7": 53,
+          "8": 93,
+          "9": 32
+        }
+      },
+      "supervised_chars": {
+        "chosen": 87755,
+        "rejected": 86144
+      },
+      "trl_sha256": "be0468a919b4d1398b524eec6e988dc9b74beada2daa6ff20f4ee1ab59ce669d"
+    }
+  },
+  "eval_files": {
+    "eval.public.jsonl": {
+      "tasks": 300,
+      "sha256": "329e4b9c7278e3c20aa31a152b02e147d2bbf56066d3b9a4d95387975e4d4474"
+    }
+  },
+  "reproducibility": "data/ 不进版本库；el stage5 build 由生成器、参考解法、脚本错误做法和 W25 在 train_mining 上的分组结果确定性生成，重新运行后哈希应与这里一致。"
+}

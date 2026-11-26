@@ -19,7 +19,7 @@ import random
 from collections.abc import Callable
 from typing import Any
 
-from evidenceloop.common import GENERATOR_VERSION, VERIFIER_VERSION, canonical_json, content_hash
+from evidenceloop.common import GENERATOR_VERSION, VERIFIER_VERSION, canonical_json, content_hash, sha256_text
 
 EOS = "<|im_end|>"
 Render = Callable[[list[dict[str, Any]], list[dict[str, Any]], bool], str]
@@ -111,3 +111,8 @@ def write_jsonl(path: str, rows: list[dict[str, Any]]) -> None:
     with open(path, "w", encoding="utf-8") as fh:
         for row in rows:
             fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def jsonl_sha256(rows: list[dict[str, Any]]) -> str:
+    """The sha256 of the file write_jsonl would write for these rows (the hash the config records keep)."""
+    return sha256_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows))

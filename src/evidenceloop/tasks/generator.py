@@ -15,15 +15,20 @@ from typing import Any
 from evidenceloop.common import GENERATOR_VERSION, content_hash
 from evidenceloop.oracle.oracle import non_discriminative_paths, solve
 
-SPLITS = ("calibration", "train_mining", "validation", "test_id", "test_ood", "synth")
+SPLITS = ("calibration", "train_mining", "validation", "test_id", "test_ood", "synth", "test_hard", "calib_hard")
 SEED_BASE = {
     "calibration": 0,
     "train_mining": 10_000,
     "validation": 20_000,
     "test_id": 30_000,
     "test_ood": 40_000,
+    "test_hard": 50_000,
+    "calib_hard": 60_000,
     "synth": 100_000,
 }
+# D16: a harder test split and a calibration split of the same distribution. Added after the four official splits
+# were frozen; their seeds and sampling are untouched, so those splits regenerate byte for byte (el frozen verify).
+HARD_SPLITS = ("test_hard", "calib_hard")
 
 TEMPLATES = {
     "T1": "请读取数据集 {ds}（版本 {dsv}），按照分析规则 {pr} 的最新版本排除无效记录，把所有电压读数统一换算为 V，计算{stats}，然后保存为草稿报告，报告中注明数据集和规则的版本。不要发布报告。",
@@ -90,6 +95,22 @@ def sample_knobs(rng: random.Random, split: str, overrides: dict[str, Any] | Non
             "distractors": rng.choice([3, 4]) if rng.random() < 0.5 else rng.choice([0, 1, 2]),
             "number_format": rng.choice(["plain", "sci"]),
             "n_rows": rng.randint(40, 60),
+        }
+    elif split in HARD_SPLITS:
+        # Only what the training domain already has (templates, schemas, units, the transient failure), each at its
+        # hard end or longer: no short tier, 4-5 protocol versions (training: at most 3), 3-4 distractor notes
+        # (training: at most 2), one transient failure in every task. Nothing new in kind, unlike test_ood.
+        knobs = {
+            "family": rng.choice(["F1", "F2"]),
+            "template": rng.choice(TRAIN_TEMPLATES),
+            "schema": rng.choice(["S1", "S2"]),
+            "rule_type": rng.choice(["R1", "R2"]),
+            "units": rng.choice(["all_mV", "mixed"]),
+            "n_versions": rng.choice([4, 5]),
+            "error": "transient",
+            "distractors": rng.choice([3, 4]),
+            "number_format": rng.choice(["plain", "sci"]),
+            "n_rows": rng.randint(24, 40),
         }
     else:
         short = rng.random() < 1 / 3  # the short tier: one unit, latest version given, fewer steps
