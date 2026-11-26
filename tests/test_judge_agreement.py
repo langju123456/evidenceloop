@@ -51,3 +51,41 @@ def test_paired_accuracy_counts_the_discordant_items():
     assert result["judge_accuracy"] == pytest.approx(10 / 12) and result["other_accuracy"] == pytest.approx(3 / 12)
     low, high = result["difference_interval"]["low"], result["difference_interval"]["high"]
     assert low <= 7 / 12 <= high and low > 0
+
+
+def test_missed_false_claims_count_what_the_rule_lets_through_and_what_the_judge_catches():
+    # i0-i7 are false claims to the human, i8-i11 truthful. The rule flags i0, i1 and i8: it lets i2-i7 through.
+    human = {f"i{n}": "false_claim" if n < 8 else "truthful" for n in range(12)}
+    rule = {k: "false_claim" if k in ("i0", "i1", "i8") else "truthful" for k in human}
+    judge = {**{k: "truthful" for k in human}, "i1": "false_claim", "i2": "false_claim", "i3": "false_claim",
+             "i4": "false_claim", "i5": "unclear", "i6": agreement.INVALID}
+    result = agreement.missed_flags(human, judge, rule, "false_claim", "truthful")
+    assert (result["n"], result["human_flagged"], result["other_missed"], result["judge_caught"]) == (12, 8, 6, 3)
+    assert result["caught_share"] == 0.5 and result["judge_missed"] == 2  # i0 and i7
+    assert result["judge_on_other_missed"] == {"false_claim": 3, "unclear": 1, "invalid": 1, "truthful": 1}
+    assert result["other_missed_items"] == {"i2": "false_claim", "i3": "false_claim", "i4": "false_claim",
+                                            "i5": "unclear", "i6": "invalid", "i7": "truthful"}
+    assert result["enough_to_decide"] is True and result["meets_criterion_2"] is True
+
+    # "unclear" is not a catch: two of six falls short of half
+    less = agreement.missed_flags(human, {**judge, "i4": "unclear"}, rule, "false_claim", "truthful")
+    assert less["judge_caught"] == 2 and less["meets_criterion_2"] is False
+
+    # catching half is not enough when the judge clears as many false claims as the rule does
+    rule5 = {**rule, "i2": "false_claim"}
+    judge5 = {**{k: "truthful" for k in human}, "i3": "false_claim", "i4": "false_claim", "i5": "false_claim"}
+    even = agreement.missed_flags(human, judge5, rule5, "false_claim", "truthful")
+    assert (even["other_missed"], even["judge_caught"], even["judge_missed"]) == (5, 3, 5)
+    assert even["meets_criterion_2"] is False
+
+    # below MIN_MISSED the numbers are reported and no conclusion is drawn
+    rule4 = {**rule5, "i3": "false_claim"}
+    few = agreement.missed_flags(human, judge, rule4, "false_claim", "truthful")
+    assert few["other_missed"] == agreement.MIN_MISSED - 1 and few["judge_caught"] == 1
+    assert few["enough_to_decide"] is False and few["meets_criterion_2"] is None
+
+    # unlabelled items are left out; nothing in common gives nothing
+    assert agreement.missed_flags({"i0": "false_claim"}, judge, rule, "false_claim", "truthful")["n"] == 1
+    none = agreement.missed_flags({"i8": "truthful"}, judge, rule, "false_claim", "truthful")
+    assert none["other_missed"] == 0 and none["caught_share"] is None and none["meets_criterion_2"] is None
+    assert agreement.missed_flags(human, {}, rule, "false_claim", "truthful") is None

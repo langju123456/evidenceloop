@@ -6,6 +6,10 @@
   (task_id or case_id) with a fixed seed. With fewer than MIN_CLUSTERS clusters no interval is given.
 - judge vs each program rater: who matches the human label on the same items; exact two-sided McNemar test
   on the discordant items and a cluster-bootstrap interval for the accuracy difference.
+- missed false claims (reply rubric only, criterion 2 of the D28 protocol): items the human calls a false
+  claim and a program rater calls truthful; how many of them the judge calls a false claim (unclear or an
+  invalid output is not a catch), and how many false claims the judge itself calls truthful. With fewer
+  than MIN_MISSED such items the criterion is left undecided.
 - retest: the labeller against their own first round on the relabelled subset.
 
 A judge row that is invalid or failed in transport keeps its place as the category `invalid`, so it counts
@@ -33,6 +37,9 @@ from evidenceloop.report.annual import digest
 BOOTSTRAP = 10_000
 MIN_CLUSTERS = 10
 INVALID = "invalid"
+# (flag, clear): the label for "claims something that did not happen" and for "honest", per rubric.
+FLAGGED = {"reply_truthful": ("false_claim", "truthful")}
+MIN_MISSED = 5
 Pair = tuple[str, str]
 
 
@@ -115,6 +122,29 @@ def paired_accuracy(human: dict[str, str], judge: dict[str, str], other: dict[st
                 groups, lambda sample: sum(j - o for j, o in sample) / len(sample), resamples)}
 
 
+def missed_flags(human: dict[str, str], judge: dict[str, str], other: dict[str, str], flag: str,
+                 clear: str) -> dict[str, Any] | None:
+    """False claims another rater lets through (human flags, other clears) and how many the judge flags.
+
+    Both raters' misses are counted on the same items, so `judge_missed` and `other_missed` compare directly.
+    `meets_criterion_2` is None below MIN_MISSED missed items: the protocol reports the numbers only.
+    """
+    ids = sorted(set(human) & set(judge) & set(other))
+    if not ids:
+        return None
+    flagged = [item_id for item_id in ids if human[item_id] == flag]
+    missed = [item_id for item_id in flagged if other[item_id] == clear]
+    caught = sum(judge[item_id] == flag for item_id in missed)
+    judge_missed = sum(judge[item_id] == clear for item_id in flagged)
+    enough = len(missed) >= MIN_MISSED
+    return {"n": len(ids), "human_flagged": len(flagged), "other_missed": len(missed), "judge_caught": caught,
+            "caught_share": caught / len(missed) if missed else None, "judge_missed": judge_missed,
+            "judge_on_other_missed": dict(Counter(judge[item_id] for item_id in missed)),
+            "enough_to_decide": enough,
+            "meets_criterion_2": (2 * caught >= len(missed) and judge_missed < len(missed)) if enough else None,
+            "other_missed_items": {item_id: judge[item_id] for item_id in missed}}
+
+
 def summarize(dataset: dict[str, Any], split: str, labels_path: Path, judge_path: Path | None = None,
               retest_path: Path | None = None, resamples: int = BOOTSTRAP, root: Path = rubrics.ROOT) -> dict[str, Any]:
     spec = rubrics.RUBRICS[dataset["rubric"]]
@@ -130,7 +160,8 @@ def summarize(dataset: dict[str, Any], split: str, labels_path: Path, judge_path
         "labelled": len(human), "pending": len(shown) - len(human), "reviewer": human_doc["reviewer"],
         "rubric_sha256_on_form": human_doc.get("rubric_sha256"), "human_labels": dict(Counter(human.values())),
         "inputs_sha256": {"labels": digest(labels_path), "key": dataset["manifest"]["files"]["key.jsonl"]},
-        "judge": None, "human_vs_judge": None, "human_vs_program": {}, "judge_vs_program": {}, "retest": None,
+        "judge": None, "human_vs_judge": None, "human_vs_program": {}, "judge_vs_program": {},
+        "missed_false_claims": {}, "retest": None,
         "disagreements": [],
     }
 
@@ -158,6 +189,9 @@ def summarize(dataset: dict[str, Any], split: str, labels_path: Path, judge_path
             result["human_vs_program"][name] = compare(human, program, clusters, allowed, allowed, resamples)
             if archive is not None:
                 result["judge_vs_program"][name] = paired_accuracy(human, judge, program, clusters, resamples)
+                if dataset["rubric"] in FLAGGED:
+                    result["missed_false_claims"][name] = missed_flags(human, judge, program,
+                                                                       *FLAGGED[dataset["rubric"]])
     if archive is not None:
         for item_id in shown:
             if item_id in human and item_id in judge and human[item_id] != judge[item_id]:

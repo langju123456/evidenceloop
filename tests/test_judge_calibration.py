@@ -277,6 +277,10 @@ def test_dev_agreement_puts_the_judge_and_the_keyword_rule_against_the_same_labe
     paired = result["judge_vs_program"]["keyword_rule"]
     assert (paired["judge_only_right"], paired["other_only_right"], paired["both_right"]) == (2, 0, 6)
     assert paired["mcnemar_exact_p"] == 0.5
+    missed = result["missed_false_claims"]["keyword_rule"]
+    assert (missed["human_flagged"], missed["other_missed"], missed["judge_caught"], missed["judge_missed"]) == (4, 2, 2, 0)
+    assert set(missed["other_missed_items"].values()) == {"false_claim"}
+    assert missed["enough_to_decide"] is False and missed["meets_criterion_2"] is None
     assert result["judge"]["model"] == ["qwen3:8b", "d" * 64, "0.0-test"] and result["judge"]["freeze_commit"] is None
     assert result["judge"]["same_rubric_text_as_labels"] is True
 
@@ -325,6 +329,9 @@ def test_test_split_needs_the_freeze_commit_and_complete_labels_and_runs_once(fr
     assert report["human_vs_judge"]["kappa_interval"]["clusters"] >= agreement.MIN_CLUSTERS
     assert report["judge_vs_program"]["keyword_rule"]["judge_only_right"] == 6
     assert report["judge_vs_program"]["keyword_rule"]["mcnemar_exact_p"] == pytest.approx(2 / 64)
+    missed = report["missed_false_claims"]["keyword_rule"]
+    assert (missed["other_missed"], missed["judge_caught"], missed["judge_missed"]) == (6, 6, 0)
+    assert missed["enough_to_decide"] is True and missed["meets_criterion_2"] is True
     retest = report["retest"]
     assert retest["n"] == 6 and 0 < retest["agreement"] < 1
     assert sum(retest["matrix"]["false_claim"].values()) + sum(retest["matrix"]["truthful"].values()) == 6
@@ -350,6 +357,7 @@ def test_before_the_judge_runs_a_test_split_only_reports_the_retest(dataset, tmp
     report = agreement.summarize(dataset, "test", done, None, again, resamples=50)
     assert report["retest"]["agreement"] == 1.0 and report["retest"]["n"] == 6
     assert report["human_vs_program"] == {} and report["human_vs_judge"] is None and report["judge"] is None
+    assert report["missed_false_claims"] == {}, "no peek at the rule on the test side before the judge runs"
     early = agreement.summarize(dataset, "dev", label_file(tmp_path / "labels-dev.json", dataset, "dev"), resamples=50)
     assert early["human_vs_program"]["keyword_rule"]["n"] == 8
     with pytest.raises(ValueError, match="测试集"):
@@ -450,3 +458,4 @@ def test_annual_three_state_goes_through_the_same_run_and_agreement_code(tmp_pat
     paired = report["judge_vs_program"]["program"]
     assert (paired["n"], paired["both_right"], paired["other_only_right"], paired["judge_only_right"]) == (26, 9, 15, 0)
     assert report["judge_vs_program"]["dev_label"]["n"] == 14
+    assert report["missed_false_claims"] == {}, "only the reply rubric has a false-claim label"
