@@ -1,0 +1,160 @@
+{
+  "schema": "judge-calib/1",
+  "rubric": "reply_truthful",
+  "seed": "judge-calib-v1",
+  "sizes": {
+    "dev": 40,
+    "test": 80,
+    "retest": 20
+  },
+  "splits": [
+    "dev",
+    "test"
+  ],
+  "include_mock": false,
+  "keyword_rule": "verify.verifier.reply_check（ver-0.1.6），抽样时对每条轨迹重新算",
+  "pool": {
+    "eligible": 634,
+    "skipped": {
+      "duplicate": 23,
+      "no_reply": 119
+    },
+    "runs": [
+      {
+        "run": "calib_qwen3-0.6b",
+        "traces": 60,
+        "traces_sha256": "3cdcd686d794c105283da91ea03f30d848f1263b6d0140c8b9908e1531e10171",
+        "evals_sha256": "931dac81817a18d060d7f132ac2c3d6f5dfca8588e79d04e39aeee6a6728a419"
+      },
+      {
+        "run": "calib_qwen3-0.6b_env-0.1.1",
+        "traces": 60,
+        "traces_sha256": "2e5d3ce7d4d3a47747f3f3a3898807bc26fe0551d7e04b6fdb4eb1674887d4d0",
+        "evals_sha256": "87fb06ae6da5f8a248beabebd20fa3999892d430f060a5424b33706f14b1380c"
+      },
+      {
+        "run": "calib_qwen3-0.6b_env-0.2.0",
+        "traces": 60,
+        "traces_sha256": "8d91577a39ef2f0fb92da6b89a6626e8516d6a5d1cee3e025e4cc0ed9955c108",
+        "evals_sha256": "c1a70cb69f189348323c9cac96f2765f98c41d4a7150640efc32600555ca2f8d"
+      },
+      {
+        "run": "calib_qwen3-1.7b",
+        "traces": 1,
+        "traces_sha256": "eb9c7631c5922994d51da081de571961d7b7cfe2710658d4514a4700cb141b1e",
+        "evals_sha256": null
+      },
+      {
+        "run": "calib_qwen3-1.7b_env-0.1.1",
+        "traces": 60,
+        "traces_sha256": "4f3bfd6523a008296118d8df707b4b303fb9318b4bb36af7ee753e63fef8ac22",
+        "evals_sha256": "5f58d06135ee7abbca82cf4024c10d62b632c334e7cba11f56cbb51cd15ddb2c"
+      },
+      {
+        "run": "calib_qwen3-1.7b_env-0.2.0",
+        "traces": 60,
+        "traces_sha256": "c7d051157b0c6f5d495f3ce3cd8904d0e6fd32cc14465e3694e29d54236f9de2",
+        "evals_sha256": "5b4df2eb8c6964591d011939e785eb0b5af158f115d8afc53a9162d7e56adb4f"
+      },
+      {
+        "run": "calib_qwen3-1.7b_env-0.2.1",
+        "traces": 60,
+        "traces_sha256": "275b60731a32bf4195c890fd6189559e2a4074e9399eac9aec118aec6e377723",
+        "evals_sha256": "74cc9a479bbeac60c5c8a69a6332bad1860ee2cdf9bf31b798252a63213e769c"
+      },
+      {
+        "run": "calib_qwen3-4b_env-0.2.1",
+        "traces": 60,
+        "traces_sha256": "a149b6fb736379bd026542fb6df97a0bca8a28390ef6ef06ec5055a89811f3ca",
+        "evals_sha256": "46fafcfc6257d27608e01c3abc0f69763cc3cebdfd2ff444101ab0f3c2890f0f"
+      },
+      {
+        "run": "smoke_mlx",
+        "traces": 5,
+        "traces_sha256": "80def917615bde644da7470654adb6bae88453c5af8eb1fc83e78952b544fa4c",
+        "evals_sha256": "a0a1d61b85ee208103bfb8808251c70bcdbaef4144106d770e13d75c4a152639"
+      },
+      {
+        "run": "train_mining_qwen3-1.7b_env-0.2.1",
+        "traces": 200,
+        "traces_sha256": "1f0a2673297aa52698fee1618ed2055ab7878869f243479c82b083419caab7b8",
+        "evals_sha256": "ada9c4243f679168149f6b287f6ca4299d235da865d2fa0762c4b741641c7d0f"
+      },
+      {
+        "run": "validation_qwen3-0.6b_env-0.2.1",
+        "traces": 50,
+        "traces_sha256": "f917b6a292dc97e348249e8997dd06ebb963a97b988212548bc8ee6cf78c1f1d",
+        "evals_sha256": "df370679565413143c519a93032307f631970b344b21d056663c93e5f28dcdf7"
+      },
+      {
+        "run": "validation_qwen3-1.7b_env-0.2.1",
+        "traces": 50,
+        "traces_sha256": "f20da2173b711eda90766542b6f5bd9e2d9552cee679f2ccb96379d3b44c131b",
+        "evals_sha256": "0af1fa9bbf379a34c8d02d700e8ed42ded721cb65346a8c2b86fe2ca77086e90"
+      },
+      {
+        "run": "validation_qwen3-4b_env-0.2.1",
+        "traces": 50,
+        "traces_sha256": "169f5a4a73d5df289be0508a80c691206df2a41889e0d8717bb9b5734cf7ea29",
+        "evals_sha256": "50af1db35d87305b06e624f5275d7bb02560293dd182e4df7ba265936c912363"
+      }
+    ],
+    "without_eval": 1,
+    "tasks": {
+      "dev": 110,
+      "test": 219
+    }
+  },
+  "strata": {
+    "Qwen/Qwen3-0.6B|consistent": {
+      "dev_pool": 46,
+      "test_pool": 74,
+      "dev": 6,
+      "test": 12
+    },
+    "Qwen/Qwen3-0.6B|false_claim": {
+      "dev_pool": 30,
+      "test_pool": 61,
+      "dev": 6,
+      "test": 12
+    },
+    "Qwen/Qwen3-0.6B|unreported": {
+      "dev_pool": 4,
+      "test_pool": 8,
+      "dev": 4,
+      "test": 8
+    },
+    "Qwen/Qwen3-1.7B|consistent": {
+      "dev_pool": 33,
+      "test_pool": 53,
+      "dev": 6,
+      "test": 12
+    },
+    "Qwen/Qwen3-1.7B|unreported": {
+      "dev_pool": 72,
+      "test_pool": 157,
+      "dev": 6,
+      "test": 12
+    },
+    "Qwen/Qwen3-4B|consistent": {
+      "dev_pool": 12,
+      "test_pool": 27,
+      "dev": 6,
+      "test": 12
+    },
+    "Qwen/Qwen3-4B|unreported": {
+      "dev_pool": 15,
+      "test_pool": 42,
+      "dev": 6,
+      "test": 12
+    }
+  },
+  "split_rule": "先按 task_id 的哈希把题切成开发和测试两侧，同一道题的所有回复在同一侧",
+  "allocation": "每一侧按 模型|关键词判定结果 分层，各层轮流取；少见的层被有意多取，样本里的比例不是轨迹池里的比例",
+  "retest_rule": "重标子集从测试集里同样分层轮流取",
+  "files": {
+    "items-dev.jsonl": "3653748e0cf6e7b1def757c7925b694be05a0a3d9af2583f3c884d586a53bd8d",
+    "items-test.jsonl": "24b4dc93c02dab6e4213f26d4c4fd421df06f4bae87848dde2d2091008859b13",
+    "key.jsonl": "b03ca458d675a4dedbcf4ced91b4b291e0b0a76c9093b39bcdebc348da467d65"
+  }
+}
