@@ -8,5 +8,5 @@
 | 2026-11-26 | 在 decisions.md 写下 D17 | 缩减如实记下：只训 P1、CP1；H4–H6 照 D16 的规则全部"不判定"，只作描述。 |
 | 2026-11-26 | 脚本加两个开关（a3ea9a9） | `STAGE5_DPO_SEEDS=1`：P、CP、WC 只跑种子 1，C1–C3 的难度检查和 test_hard 不变；`STAGE5_GATE_ONLY=1`：核对和难度检查做完就打包停下。在 CPU 上预演两遍（参考策略，不合并、不训练）：只做难度检查的一遍在检查后停下；拿它的输出当输入再跑一遍，难度检查的评测直接恢复，只训 P1、CP1，对比报告里 H4–H6 显示"不判定：两边都完整的种子只有 1 个"。 |
 | 2026-11-26 | 建 Kaggle notebook，开跑难度检查 | 私有 notebook `billina/evidenceloop-stage5` 第 1 版：GPU T4，联网，输入是 `billina/evidenceloop-stage4` 的输出（核对过里面有 W25、C1–C3 的 adapter 和训练日志、W25 在 train_mining 上的评测），运行上限 2 小时。命令：`STAGE5_DPO_SEEDS=1 STAGE5_GATE_ONLY=1 bash scripts/kaggle_stage5.sh`，代码是 stage5-dpo 分支。 |
-| | 难度检查的结果 | 跑着，还没出结果 |
-| | 估算训练和评测的 GPU 时长 | 还没做 |
+| 2026-11-26 | 难度检查的结果：**不通过，停下，没有训练** | 开跑前的核对全部通过：环境和 D13 一样（vllm 0.31.0、torch 2.13.0+cu130、transformers 5.17.0、peft 0.21.2，Tesla T4）；四个旧划分、预热数据、`configs/stage4.json`、`configs/frozen_hard.json`（test_hard 56f6b56b1aac，calib_hard 30ca74bd1949）、`configs/stage5.json`（偏好对 407 / 409 / 407 对）的哈希都一致；W25 重新合并的指纹 b62475b2ae2ffdac 和训练时一致；真实模板下三个种子的偏好对全部通过；C1–C3 就是阶段四训好的那三个。难度检查：C1 50/50，C2 50/50，C3 46/50，合计 146/150（97.3%），高于 D16 定死的 90% 上限，照 D16 停下，不训练 P、CP。C3 错的 4 道都是用满 12 轮没交报告（budget_exhausted），主类别 dependency_error。整次运行 08:38–09:05（UTC），约 27 分钟。结果在 notebook `billina/evidenceloop-stage5` 第 1 版的输出 `stage5_results.zip`（`reports/stage5_gate.md`）。 |
+| | 估算训练和评测的 GPU 时长 | 没做：难度检查没通过，按要求先停下。照 D16，要另记决策重新定难度，再重做难度检查。 |
